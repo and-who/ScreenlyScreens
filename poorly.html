@@ -1,0 +1,25 @@
+<html>
+  <body style="margin: 0; background-color: black;">
+
+    <script>
+      fetch('https://rss.app/feeds/oNIyrYwcVwzjwhSM.xml')
+        .then(response => response.text())
+        .then(str => new window.DOMParser().parseFromString(str, "text/xml"))
+        .then(data => {
+          console.log(data);
+          const items = data.querySelectorAll("item");
+          let imageUrls = [];
+          items.forEach(el => {
+            imageUrls.push(el.querySelector("pubDate").nextSibling.getAttribute('url'))
+          });
+          var imageUrl = imageUrls[Math.floor(Math.random() * imageUrls.length)];
+          html = `
+              <article style="display:flex; align-items:center; justify-content:center; width:100%; height:100%">
+                <img src="${imageUrl}" alt="">
+              </article>
+            `;
+          document.body.insertAdjacentHTML("beforeend", html);
+        });
+    </script>
+  </body>
+</html>

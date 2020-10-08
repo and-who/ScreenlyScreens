@@ -1,0 +1,25 @@
+<html>
+  <body style="margin: 0; background-color: black;">
+    <div id='browserInfo'></div>
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+    <video id="video" controls style="width:100%; height:100%" muted autoplay></video>
+    <script>
+      var videoSrc = 'https://cdn.livespotting.com/vpu/snvfy5ws/8o4b2fw4.m3u8';
+      var video = document.getElementById('video');
+      window.video = video;
+    if(false && Hls.isSupported())
+    {
+        var hls = new Hls();
+        hls.loadSource(videoSrc);
+        hls.attachMedia(video);
+
+    }
+    else if (true)
+    {
+      console.log('alternative')
+        video.src = videoSrc;
+        window.video = video;
+    }
+    </script>
+  </body>
+</html>

@@ -1,9 +1,16 @@
 <html>
-  <body style="margin: 0; background-color: black;">
+  <body style="margin: 0">
     <div id='browserInfo'></div>
     <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
     <video id="video" controls style="width:100%; height:100%" muted autoplay></video>
     <script>
+      txt = "<p>Browser CodeName: " + navigator.appCodeName + "</p>";
+      txt+= "<p>Browser Name: " + navigator.appName + "</p>";
+      txt+= "<p>Browser Version: " + navigator.appVersion + "</p>";
+      txt+= "<p>Cookies Enabled: " + navigator.cookieEnabled + "</p>";
+      txt+= "<p>Platform: " + navigator.platform + "</p>";
+      txt+= "<p>User-agent header: " + navigator.userAgent + "</p>";
+      document.querySelector('#browserInfo').innerHTML=txt;
       var videoSrc = 'https://cdn.livespotting.com/vpu/8p96b3b9/l2mucuq9.m3u8';
       var video = document.getElementById('video');
       window.video = video;

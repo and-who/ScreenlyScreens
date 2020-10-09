@@ -1,0 +1,73 @@
+<html>
+  <head>
+    <style>
+      #newsContainer {
+        display:flex;
+        flex-wrap: wrap;
+        padding: 10px
+      }
+
+      .article {
+        font-family: Arial, Helvetica, sans-serif;
+        width: 22vw;
+        height: 50vh;
+        padding: 20px;
+        color:white;
+      }
+
+      .image {
+        width: 100%;
+      }
+
+      .headline {
+
+      }
+
+      .description {
+
+      }
+
+    </style>
+  </head>
+  <body style="margin: 0; background-color: black;">
+    <div id="newsContainer"></div>
+
+    <script>
+      function shuffle(a) {
+          var j, x, i;
+          for (i = a.length - 1; i > 0; i--) {
+              j = Math.floor(Math.random() * (i + 1));
+              x = a[i];
+              a[i] = a[j];
+              a[j] = x;
+          }
+          return a;
+      }
+      fetch('https://www.ndr.de/nachrichten/hamburg/index-rss.xml')
+        .then(response => response.text())
+        .then(str => new window.DOMParser().parseFromString(str, "text/xml"))
+        .then(data => {
+          console.log(data);
+          const container = document.querySelector('#newsContainer');
+          let items = data.querySelectorAll("item");
+          let imageUrls = [];
+          let articles = [];
+          items.forEach(item => {
+            images = item.getElementsByTagNameNS('http://www.tagesschau.de/rss/1.0/modules/metaplus/1.2.0/', 'data');
+            if(images.length >=0 && images[0]) {
+              html = `
+              <article class="article">
+                <img class="image" src="${images[0] && images[0].innerHTML}" alt="">
+                <h2 class="headline"">${item.querySelector('title').innerHTML}</h2>
+                <p class="description"">${item.querySelector('description').innerHTML}</p>
+              </article>
+            `;
+            articles.push(html)
+            }
+          });
+          articles = shuffle(articles);
+          articles.forEach(article => {container.insertAdjacentHTML("beforeend", article);});
+        });
+    </script>
+  </body>
+</html>

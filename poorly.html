@@ -14,7 +14,7 @@
           var imageUrl = imageUrls[Math.floor(Math.random() * imageUrls.length)];
           html = `
               <article style="display:flex; align-items:center; justify-content:center; width:100%; height:100%">
-                <img src="${imageUrl}" alt="">
+                <img src="https://images.weserv.nl/?url=${encodeURIComponent(imageUrl)}" alt="">
               </article>
             `;
           document.body.insertAdjacentHTML("beforeend", html);

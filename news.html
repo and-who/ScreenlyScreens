@@ -9,22 +9,44 @@
 
       .article {
         font-family: Arial, Helvetica, sans-serif;
-        width: 22vw;
-        height: 50vh;
-        padding: 20px;
+        width: 46vw;
+        height: 46vh;
+        margin: 15px;
         color:white;
+        border: 4px solid white;
+      }
+      .article:nth-child(3n) {  
+        border-color: #e6007e;
+      }
+      .article:nth-child(3n+1) {  
+        border-color: rgb(195, 168, 21);
+      }
+      .article:nth-child(3n+2) {  
+        border-color: #009fe3;
       }
 
       .image {
-        width: 100%;
+        position: relative;
+        height: 100%;
+        background-position: center; /* Center the image */
+        background-repeat: no-repeat; /* Do not repeat the image */
+        background-size: cover; /* Resize the background image to cover the entire container */
       }
 
       .headline {
-
+        padding: 5px 40px;
+        margin-top: 0;
+        font-size: 40px;
+        background-color: rgba(0,0,0,0.7);
       }
 
       .description {
-
+        padding: 5px 40px;
+        font-size: 27px;
+        position: absolute;
+        bottom: 0px;
+        background-color: rgba(0,0,0,0.7);
+        margin-bottom: 0px;
       }
 
     </style>
@@ -57,9 +79,10 @@
             if(images.length >=0 && images[0]) {
               html = `
               <article class="article">
-                <img class="image" src="${images[0] && images[0].innerHTML}" alt="">
-                <h2 class="headline"">${item.querySelector('title').innerHTML}</h2>
-                <p class="description"">${item.querySelector('description').innerHTML}</p>
+                <div class="image" style="background-image: url(${images[0] && images[0].innerHTML});" alt="">
+                  <h2 class="headline"">${item.querySelector('title').innerHTML}</h2>
+                  <p class="description"">${item.querySelector('description').innerHTML}</p>
+                </div>
               </article>
             `;
             articles.push(html)
@@ -68,6 +91,12 @@
           articles = shuffle(articles);
           articles.forEach(article => {container.insertAdjacentHTML("beforeend", article);});
         });
+
+        function pageScroll() {
+            window.scrollBy(0,1);
+            scrolldelay = setTimeout(pageScroll,40);
+        }
+        pageScroll();
     </script>
   </body>
 </html>

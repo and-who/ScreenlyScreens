@@ -2,15 +2,14 @@
   <body style="margin: 0; background-color: black;">
 
     <script>
-      fetch('https://rss.app/feeds/oNIyrYwcVwzjwhSM.xml')
-        .then(response => response.text())
-        .then(str => new window.DOMParser().parseFromString(str, "text/xml"))
+      fetch('https://api.rss2json.com/v1/api.json?rss_url=http%3A%2F%2Ffeeds.feedburner.com%2FPoorlyDrawnLines%3Fformat%3Dxml')
+        .then(response => response.json())
         .then(data => {
           console.log(data);
-          const items = data.querySelectorAll("item");
+          const items = data.items;
           let imageUrls = [];
           items.forEach(el => {
-            imageUrls.push(el.querySelector("pubDate").nextSibling.getAttribute('url'))
+            imageUrls.push(el.thumbnail)
           });
           var imageUrl = imageUrls[Math.floor(Math.random() * imageUrls.length)];
           html = `

@@ -25120,7 +25120,53 @@ $RefreshReg$(_c, "App");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","1e11a9fa9178c97f":"fRDkM","./components/employee-card":"4owhe"}],"gkKU3":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","./components/employee-card":"4owhe","1e11a9fa9178c97f":"fRDkM","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"4owhe":[function(require,module,exports) {
+var $parcel$ReactRefreshHelpers$4d5c = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+$parcel$ReactRefreshHelpers$4d5c.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "EmployeeCard", ()=>EmployeeCard
+);
+var _jsxDevRuntime = require("react/jsx-dev-runtime");
+const EmployeeCard = (props)=>{
+    const { name , image  } = props;
+    return /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
+        children: [
+            /*#__PURE__*/ _jsxDevRuntime.jsxDEV("h2", {
+                children: name
+            }, void 0, false, {
+                fileName: "src/components/employee-card.tsx",
+                lineNumber: 10,
+                columnNumber: 5
+            }, undefined),
+            /*#__PURE__*/ _jsxDevRuntime.jsxDEV("img", {
+                src: image
+            }, void 0, false, {
+                fileName: "src/components/employee-card.tsx",
+                lineNumber: 11,
+                columnNumber: 5
+            }, undefined)
+        ]
+    }, void 0, true, {
+        fileName: "src/components/employee-card.tsx",
+        lineNumber: 9,
+        columnNumber: 10
+    }, undefined);
+};
+_c = EmployeeCard;
+var _c;
+$RefreshReg$(_c, "EmployeeCard");
+
+  $parcel$ReactRefreshHelpers$4d5c.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-dev-runtime":"iTorj","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"gkKU3":[function(require,module,exports) {
 exports.interopDefault = function(a) {
     return a && a.__esModule ? a : {
         default: a
@@ -25307,52 +25353,6 @@ exports.getBundleURL = getBundleURLCached;
 exports.getBaseURL = getBaseURL;
 exports.getOrigin = getOrigin;
 
-},{}],"4owhe":[function(require,module,exports) {
-var $parcel$ReactRefreshHelpers$4d5c = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
-var prevRefreshReg = window.$RefreshReg$;
-var prevRefreshSig = window.$RefreshSig$;
-$parcel$ReactRefreshHelpers$4d5c.prelude(module);
-
-try {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "EmployeeCard", ()=>EmployeeCard
-);
-var _jsxDevRuntime = require("react/jsx-dev-runtime");
-const EmployeeCard = (props)=>{
-    const { name , image  } = props;
-    return /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
-        children: [
-            /*#__PURE__*/ _jsxDevRuntime.jsxDEV("h2", {
-                children: name
-            }, void 0, false, {
-                fileName: "src/components/employee-card.tsx",
-                lineNumber: 10,
-                columnNumber: 5
-            }, undefined),
-            /*#__PURE__*/ _jsxDevRuntime.jsxDEV("img", {
-                src: image
-            }, void 0, false, {
-                fileName: "src/components/employee-card.tsx",
-                lineNumber: 11,
-                columnNumber: 5
-            }, undefined)
-        ]
-    }, void 0, true, {
-        fileName: "src/components/employee-card.tsx",
-        lineNumber: 9,
-        columnNumber: 10
-    }, undefined);
-};
-_c = EmployeeCard;
-var _c;
-$RefreshReg$(_c, "EmployeeCard");
-
-  $parcel$ReactRefreshHelpers$4d5c.postlude(module);
-} finally {
-  window.$RefreshReg$ = prevRefreshReg;
-  window.$RefreshSig$ = prevRefreshSig;
-}
-},{"react/jsx-dev-runtime":"iTorj","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}]},["kn9T2","7fmqN","8lqZg"], "8lqZg", "parcelRequire2037")
+},{}]},["kn9T2","7fmqN","8lqZg"], "8lqZg", "parcelRequire2037")
 
 //# sourceMappingURL=index.975ef6c8.js.map

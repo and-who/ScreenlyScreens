@@ -1,0 +1,28 @@
+@keyframes fall-down-animation {
+  from {
+      transform: translateY(-100vh);
+}
+
+  to {
+      transform : translateY(300vh);
+  }
+}
+
+.falling-elements {
+  position: absolute;
+  top:0;
+  left:0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+
+  &__leaf {
+    top: -10rem;
+    position: absolute;
+    animation: fall-down-animation 6s linear forwards;
+  }
+
+  &__leaf-content {
+    
+  }
+}

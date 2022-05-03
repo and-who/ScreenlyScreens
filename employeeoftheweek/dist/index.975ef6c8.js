@@ -25079,35 +25079,92 @@ parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "App", ()=>App
 );
 var _jsxDevRuntime = require("react/jsx-dev-runtime");
-var _employeeCard = require("./components/employee-card");
-const employees = [
-    {
-        id: "1",
-        name: "Julia",
-        image: new URL(require("1e11a9fa9178c97f"))
-    }
-];
+var _background = require("./components/background/background");
+var _confetti = require("./components/confetti/confetti");
+var _employeeCard = require("./components/employee-card/employee-card");
+var _fallingElements = require("./components/falling-elements/falling-elements");
+var _title = require("./components/title/title");
+var _winningElement = require("./components/winning-element/winning-element");
+var _employees = require("./data/employees");
+var _seedrandom = require("seedrandom");
+var _seedrandomDefault = parcelHelpers.interopDefault(_seedrandom);
+var _feedback = require("./components/feedback/feedback");
 const App = ()=>{
+    // Returns the ISO week of the date.
+    const getWeek = function() {
+        var date = new Date();
+        date.setHours(0, 0, 0, 0);
+        // Thursday in current week decides the year.
+        date.setDate(date.getDate() + 3 - (date.getDay() + 6) % 7);
+        // January 4 is always in week 1.
+        var week1 = new Date(date.getFullYear(), 0, 4);
+        // Adjust to Thursday in week 1 and count number of weeks from date to week1.
+        return 1 + Math.round(((date.getTime() - week1.getTime()) / 86400000 - 3 + (week1.getDay() + 6) % 7) / 7);
+    };
+    // Returns the four-digit year corresponding to the ISO week of the date.
+    const getWeekYear = function() {
+        var date = new Date();
+        date.setDate(date.getDate() + 3 - (date.getDay() + 6) % 7);
+        return date.getFullYear();
+    };
+    const rng = _seedrandomDefault.default(getWeekYear() * 100 + getWeek());
+    const employeeOfTheWeek = _employees.employees[Math.floor(rng() * _employees.employees.length)];
     return /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
         children: [
-            /*#__PURE__*/ _jsxDevRuntime.jsxDEV("h1", {
-                children: "Employee of the Week"
-            }, void 0, false, {
+            /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_background.Background, {}, void 0, false, {
                 fileName: "src/app.tsx",
-                lineNumber: 13,
+                lineNumber: 39,
                 columnNumber: 7
             }, undefined),
-            /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_employeeCard.EmployeeCard, {
-                ...employees[0]
+            /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_confetti.Confetti, {
+                confettiCharacters: employeeOfTheWeek.confetti
             }, void 0, false, {
                 fileName: "src/app.tsx",
-                lineNumber: 14,
+                lineNumber: 40,
+                columnNumber: 7
+            }, undefined),
+            /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_winningElement.WinningElement, {
+                element: /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_employeeCard.EmployeeCard, {
+                    ...employeeOfTheWeek
+                }, void 0, false, void 0, void 0)
+            }, void 0, false, {
+                fileName: "src/app.tsx",
+                lineNumber: 41,
+                columnNumber: 7
+            }, undefined),
+            /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_feedback.Feedback, {
+                seed: rng(),
+                employee: employeeOfTheWeek
+            }, void 0, false, {
+                fileName: "src/app.tsx",
+                lineNumber: 42,
+                columnNumber: 7
+            }, undefined),
+            /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_fallingElements.FallingElements, {
+                elements: [
+                    ..._employees.employees,
+                    ..._employees.employees
+                ].map((employee, index)=>/*#__PURE__*/ _jsxDevRuntime.jsxDEV(_employeeCard.EmployeeCard, {
+                        ...employee
+                    }, index, false, void 0, void 0)
+                ),
+                seed: rng()
+            }, void 0, false, {
+                fileName: "src/app.tsx",
+                lineNumber: 43,
+                columnNumber: 7
+            }, undefined),
+            /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_title.Title, {
+                children: "Employee of the Week:"
+            }, void 0, false, {
+                fileName: "src/app.tsx",
+                lineNumber: 44,
                 columnNumber: 7
             }, undefined)
         ]
     }, void 0, true, {
         fileName: "src/app.tsx",
-        lineNumber: 12,
+        lineNumber: 38,
         columnNumber: 5
     }, undefined);
 };
@@ -25120,53 +25177,7 @@ $RefreshReg$(_c, "App");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","./components/employee-card":"4owhe","1e11a9fa9178c97f":"fRDkM","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"4owhe":[function(require,module,exports) {
-var $parcel$ReactRefreshHelpers$4d5c = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
-var prevRefreshReg = window.$RefreshReg$;
-var prevRefreshSig = window.$RefreshSig$;
-$parcel$ReactRefreshHelpers$4d5c.prelude(module);
-
-try {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "EmployeeCard", ()=>EmployeeCard
-);
-var _jsxDevRuntime = require("react/jsx-dev-runtime");
-const EmployeeCard = (props)=>{
-    const { name , image  } = props;
-    return /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
-        children: [
-            /*#__PURE__*/ _jsxDevRuntime.jsxDEV("h2", {
-                children: name
-            }, void 0, false, {
-                fileName: "src/components/employee-card.tsx",
-                lineNumber: 10,
-                columnNumber: 5
-            }, undefined),
-            /*#__PURE__*/ _jsxDevRuntime.jsxDEV("img", {
-                src: image
-            }, void 0, false, {
-                fileName: "src/components/employee-card.tsx",
-                lineNumber: 11,
-                columnNumber: 5
-            }, undefined)
-        ]
-    }, void 0, true, {
-        fileName: "src/components/employee-card.tsx",
-        lineNumber: 9,
-        columnNumber: 10
-    }, undefined);
-};
-_c = EmployeeCard;
-var _c;
-$RefreshReg$(_c, "EmployeeCard");
-
-  $parcel$ReactRefreshHelpers$4d5c.postlude(module);
-} finally {
-  window.$RefreshReg$ = prevRefreshReg;
-  window.$RefreshSig$ = prevRefreshSig;
-}
-},{"react/jsx-dev-runtime":"iTorj","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"gkKU3":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","./components/employee-card/employee-card":"i06vG","./components/background/background":"1xj6i","./components/falling-elements/falling-elements":"iL8Ng","./components/winning-element/winning-element":"kB4dJ","./data/employees":"8HsNm","./components/title/title":"9kiBP","./components/confetti/confetti":"8NBDM","seedrandom":"acqQZ","./components/feedback/feedback":"5Tzuk"}],"gkKU3":[function(require,module,exports) {
 exports.interopDefault = function(a) {
     return a && a.__esModule ? a : {
         default: a
@@ -25316,10 +25327,10686 @@ function registerExportsForReactRefresh(module) {
     }
 }
 
-},{"react-refresh/runtime":"786KC"}],"fRDkM":[function(require,module,exports) {
-module.exports = require('./helpers/bundle-url').getBundleURL('bLxZJ') + "julia.56b59f29.webp" + "?" + Date.now();
+},{"react-refresh/runtime":"786KC"}],"i06vG":[function(require,module,exports) {
+var $parcel$ReactRefreshHelpers$b70e = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+$parcel$ReactRefreshHelpers$b70e.prelude(module);
 
-},{"./helpers/bundle-url":"lgJ39"}],"lgJ39":[function(require,module,exports) {
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "EmployeeCard", ()=>EmployeeCard
+);
+var _jsxDevRuntime = require("react/jsx-dev-runtime");
+var _employeeCardScss = require("./employee-card.scss");
+var _seedrandom = require("seedrandom");
+var _seedrandomDefault = parcelHelpers.interopDefault(_seedrandom);
+const fontFamilys = [
+    'Amatic SC',
+    'Babylonica',
+    'Dawning of a New Day',
+    'Grape Nuts',
+    'Nothing You Could Do',
+    'Reenie Beanie',
+    'Square Peg', 
+];
+const EmployeeCard = (props)=>{
+    const { id , name , image  } = props;
+    const rng = _seedrandomDefault.default(id);
+    const turn = rng() * 30 - 10;
+    return /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
+        className: "employee-card",
+        children: [
+            /*#__PURE__*/ _jsxDevRuntime.jsxDEV("img", {
+                className: "employee-card__image",
+                src: image
+            }, void 0, false, {
+                fileName: "src/components/employee-card/employee-card.tsx",
+                lineNumber: 29,
+                columnNumber: 5
+            }, undefined),
+            /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
+                className: "employee-card__name-container",
+                children: /*#__PURE__*/ _jsxDevRuntime.jsxDEV("h2", {
+                    style: {
+                        fontFamily: fontFamilys[Math.floor(rng() * fontFamilys.length)],
+                        transform: `rotate(${turn}deg)`
+                    },
+                    className: "employee-card__name",
+                    children: name
+                }, void 0, false, {
+                    fileName: "src/components/employee-card/employee-card.tsx",
+                    lineNumber: 31,
+                    columnNumber: 7
+                }, undefined)
+            }, void 0, false, {
+                fileName: "src/components/employee-card/employee-card.tsx",
+                lineNumber: 30,
+                columnNumber: 5
+            }, undefined)
+        ]
+    }, void 0, true, {
+        fileName: "src/components/employee-card/employee-card.tsx",
+        lineNumber: 28,
+        columnNumber: 10
+    }, undefined);
+};
+_c = EmployeeCard;
+var _c;
+$RefreshReg$(_c, "EmployeeCard");
+
+  $parcel$ReactRefreshHelpers$b70e.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-dev-runtime":"iTorj","./employee-card.scss":"f5ngU","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","seedrandom":"acqQZ"}],"f5ngU":[function() {},{}],"acqQZ":[function(require,module,exports) {
+// A library of seedable RNGs implemented in Javascript.
+//
+// Usage:
+//
+// var seedrandom = require('seedrandom');
+// var random = seedrandom(1); // or any seed.
+// var x = random();       // 0 <= x < 1.  Every bit is random.
+// var x = random.quick(); // 0 <= x < 1.  32 bits of randomness.
+// alea, a 53-bit multiply-with-carry generator by Johannes Baagøe.
+// Period: ~2^116
+// Reported to pass all BigCrush tests.
+var alea = require('./lib/alea');
+// xor128, a pure xor-shift generator by George Marsaglia.
+// Period: 2^128-1.
+// Reported to fail: MatrixRank and LinearComp.
+var xor128 = require('./lib/xor128');
+// xorwow, George Marsaglia's 160-bit xor-shift combined plus weyl.
+// Period: 2^192-2^32
+// Reported to fail: CollisionOver, SimpPoker, and LinearComp.
+var xorwow = require('./lib/xorwow');
+// xorshift7, by François Panneton and Pierre L'ecuyer, takes
+// a different approach: it adds robustness by allowing more shifts
+// than Marsaglia's original three.  It is a 7-shift generator
+// with 256 bits, that passes BigCrush with no systmatic failures.
+// Period 2^256-1.
+// No systematic BigCrush failures reported.
+var xorshift7 = require('./lib/xorshift7');
+// xor4096, by Richard Brent, is a 4096-bit xor-shift with a
+// very long period that also adds a Weyl generator. It also passes
+// BigCrush with no systematic failures.  Its long period may
+// be useful if you have many generators and need to avoid
+// collisions.
+// Period: 2^4128-2^32.
+// No systematic BigCrush failures reported.
+var xor4096 = require('./lib/xor4096');
+// Tyche-i, by Samuel Neves and Filipe Araujo, is a bit-shifting random
+// number generator derived from ChaCha, a modern stream cipher.
+// https://eden.dei.uc.pt/~sneves/pubs/2011-snfa2.pdf
+// Period: ~2^127
+// No systematic BigCrush failures reported.
+var tychei = require('./lib/tychei');
+// The original ARC4-based prng included in this library.
+// Period: ~2^1600
+var sr = require('./seedrandom');
+sr.alea = alea;
+sr.xor128 = xor128;
+sr.xorwow = xorwow;
+sr.xorshift7 = xorshift7;
+sr.xor4096 = xor4096;
+sr.tychei = tychei;
+module.exports = sr;
+
+},{"./lib/alea":"b8TZ2","./lib/xor128":"3Rxxq","./lib/xorwow":"1Ri3g","./lib/xorshift7":"eF8eN","./lib/xor4096":"2wdfl","./lib/tychei":"anavj","./seedrandom":"i1vhZ"}],"b8TZ2":[function(require,module,exports) {
+// A port of an algorithm by Johannes Baagøe <baagoe@baagoe.com>, 2010
+// http://baagoe.com/en/RandomMusings/javascript/
+// https://github.com/nquinlan/better-random-numbers-for-javascript-mirror
+// Original work is under MIT license -
+// Copyright (C) 2010 by Johannes Baagøe <baagoe@baagoe.org>
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+// THE SOFTWARE.
+(function(global, module, define) {
+    function Alea(seed) {
+        var me = this, mash = Mash();
+        me.next = function() {
+            var t = 2091639 * me.s0 + me.c * 2.3283064365386963e-10; // 2^-32
+            me.s0 = me.s1;
+            me.s1 = me.s2;
+            return me.s2 = t - (me.c = t | 0);
+        };
+        // Apply the seeding algorithm from Baagoe.
+        me.c = 1;
+        me.s0 = mash(' ');
+        me.s1 = mash(' ');
+        me.s2 = mash(' ');
+        me.s0 -= mash(seed);
+        if (me.s0 < 0) me.s0 += 1;
+        me.s1 -= mash(seed);
+        if (me.s1 < 0) me.s1 += 1;
+        me.s2 -= mash(seed);
+        if (me.s2 < 0) me.s2 += 1;
+        mash = null;
+    }
+    function copy(f, t) {
+        t.c = f.c;
+        t.s0 = f.s0;
+        t.s1 = f.s1;
+        t.s2 = f.s2;
+        return t;
+    }
+    function impl(seed, opts) {
+        var xg = new Alea(seed), state = opts && opts.state, prng = xg.next;
+        prng.int32 = function() {
+            return xg.next() * 0x100000000 | 0;
+        };
+        prng.double = function() {
+            return prng() + (prng() * 0x200000 | 0) * 1.1102230246251565e-16; // 2^-53
+        };
+        prng.quick = prng;
+        if (state) {
+            if (typeof state == 'object') copy(state, xg);
+            prng.state = function() {
+                return copy(xg, {});
+            };
+        }
+        return prng;
+    }
+    function Mash() {
+        var n = 0xefc8249d;
+        var mash = function(data) {
+            data = String(data);
+            for(var i = 0; i < data.length; i++){
+                n += data.charCodeAt(i);
+                var h = 0.02519603282416938 * n;
+                n = h >>> 0;
+                h -= n;
+                h *= n;
+                n = h >>> 0;
+                h -= n;
+                n += h * 0x100000000; // 2^32
+            }
+            return (n >>> 0) * 2.3283064365386963e-10; // 2^-32
+        };
+        return mash;
+    }
+    if (module && module.exports) module.exports = impl;
+    else if (define && define.amd) define(function() {
+        return impl;
+    });
+    else this.alea = impl;
+})(this, module, typeof define == 'function' && define // present with an AMD loader
+);
+
+},{}],"3Rxxq":[function(require,module,exports) {
+// A Javascript implementaion of the "xor128" prng algorithm by
+// George Marsaglia.  See http://www.jstatsoft.org/v08/i14/paper
+(function(global, module, define) {
+    function XorGen(seed) {
+        var me = this, strseed = '';
+        me.x = 0;
+        me.y = 0;
+        me.z = 0;
+        me.w = 0;
+        // Set up generator function.
+        me.next = function() {
+            var t = me.x ^ me.x << 11;
+            me.x = me.y;
+            me.y = me.z;
+            me.z = me.w;
+            return me.w ^= me.w >>> 19 ^ t ^ t >>> 8;
+        };
+        if (seed === (seed | 0)) // Integer seed.
+        me.x = seed;
+        else // String seed.
+        strseed += seed;
+        // Mix in string seed, then discard an initial batch of 64 values.
+        for(var k = 0; k < strseed.length + 64; k++){
+            me.x ^= strseed.charCodeAt(k) | 0;
+            me.next();
+        }
+    }
+    function copy(f, t) {
+        t.x = f.x;
+        t.y = f.y;
+        t.z = f.z;
+        t.w = f.w;
+        return t;
+    }
+    function impl(seed, opts) {
+        var xg = new XorGen(seed), state = opts && opts.state, prng = function() {
+            return (xg.next() >>> 0) / 0x100000000;
+        };
+        prng.double = function() {
+            do var top = xg.next() >>> 11, bot = (xg.next() >>> 0) / 0x100000000, result = (top + bot) / 2097152;
+            while (result === 0)
+            return result;
+        };
+        prng.int32 = xg.next;
+        prng.quick = prng;
+        if (state) {
+            if (typeof state == 'object') copy(state, xg);
+            prng.state = function() {
+                return copy(xg, {});
+            };
+        }
+        return prng;
+    }
+    if (module && module.exports) module.exports = impl;
+    else if (define && define.amd) define(function() {
+        return impl;
+    });
+    else this.xor128 = impl;
+})(this, module, typeof define == 'function' && define // present with an AMD loader
+);
+
+},{}],"1Ri3g":[function(require,module,exports) {
+// A Javascript implementaion of the "xorwow" prng algorithm by
+// George Marsaglia.  See http://www.jstatsoft.org/v08/i14/paper
+(function(global, module, define) {
+    function XorGen(seed) {
+        var me = this, strseed = '';
+        // Set up generator function.
+        me.next = function() {
+            var t = me.x ^ me.x >>> 2;
+            me.x = me.y;
+            me.y = me.z;
+            me.z = me.w;
+            me.w = me.v;
+            return (me.d = me.d + 362437 | 0) + (me.v = me.v ^ me.v << 4 ^ (t ^ t << 1)) | 0;
+        };
+        me.x = 0;
+        me.y = 0;
+        me.z = 0;
+        me.w = 0;
+        me.v = 0;
+        if (seed === (seed | 0)) // Integer seed.
+        me.x = seed;
+        else // String seed.
+        strseed += seed;
+        // Mix in string seed, then discard an initial batch of 64 values.
+        for(var k = 0; k < strseed.length + 64; k++){
+            me.x ^= strseed.charCodeAt(k) | 0;
+            if (k == strseed.length) me.d = me.x << 10 ^ me.x >>> 4;
+            me.next();
+        }
+    }
+    function copy(f, t) {
+        t.x = f.x;
+        t.y = f.y;
+        t.z = f.z;
+        t.w = f.w;
+        t.v = f.v;
+        t.d = f.d;
+        return t;
+    }
+    function impl(seed, opts) {
+        var xg = new XorGen(seed), state = opts && opts.state, prng = function() {
+            return (xg.next() >>> 0) / 0x100000000;
+        };
+        prng.double = function() {
+            do var top = xg.next() >>> 11, bot = (xg.next() >>> 0) / 0x100000000, result = (top + bot) / 2097152;
+            while (result === 0)
+            return result;
+        };
+        prng.int32 = xg.next;
+        prng.quick = prng;
+        if (state) {
+            if (typeof state == 'object') copy(state, xg);
+            prng.state = function() {
+                return copy(xg, {});
+            };
+        }
+        return prng;
+    }
+    if (module && module.exports) module.exports = impl;
+    else if (define && define.amd) define(function() {
+        return impl;
+    });
+    else this.xorwow = impl;
+})(this, module, typeof define == 'function' && define // present with an AMD loader
+);
+
+},{}],"eF8eN":[function(require,module,exports) {
+// A Javascript implementaion of the "xorshift7" algorithm by
+// François Panneton and Pierre L'ecuyer:
+// "On the Xorgshift Random Number Generators"
+// http://saluc.engr.uconn.edu/refs/crypto/rng/panneton05onthexorshift.pdf
+(function(global, module, define) {
+    function XorGen(seed1) {
+        var me1 = this;
+        // Set up generator function.
+        me1.next = function() {
+            // Update xor generator.
+            var X = me1.x, i = me1.i, t, v, w;
+            t = X[i];
+            t ^= t >>> 7;
+            v = t ^ t << 24;
+            t = X[i + 1 & 7];
+            v ^= t ^ t >>> 10;
+            t = X[i + 3 & 7];
+            v ^= t ^ t >>> 3;
+            t = X[i + 4 & 7];
+            v ^= t ^ t << 7;
+            t = X[i + 7 & 7];
+            t = t ^ t << 13;
+            v ^= t ^ t << 9;
+            X[i] = v;
+            me1.i = i + 1 & 7;
+            return v;
+        };
+        function init(me, seed) {
+            var j, w, X = [];
+            if (seed === (seed | 0)) // Seed state array using a 32-bit integer.
+            w = X[0] = seed;
+            else {
+                // Seed state using a string.
+                seed = '' + seed;
+                for(j = 0; j < seed.length; ++j)X[j & 7] = X[j & 7] << 15 ^ seed.charCodeAt(j) + X[j + 1 & 7] << 13;
+            }
+            // Enforce an array length of 8, not all zeroes.
+            while(X.length < 8)X.push(0);
+            for(j = 0; j < 8 && X[j] === 0; ++j);
+            if (j == 8) w = X[7] = -1;
+            else w = X[j];
+            me.x = X;
+            me.i = 0;
+            // Discard an initial 256 values.
+            for(j = 256; j > 0; --j)me.next();
+        }
+        init(me1, seed1);
+    }
+    function copy(f, t) {
+        t.x = f.x.slice();
+        t.i = f.i;
+        return t;
+    }
+    function impl(seed, opts) {
+        if (seed == null) seed = +new Date;
+        var xg = new XorGen(seed), state = opts && opts.state, prng = function() {
+            return (xg.next() >>> 0) / 0x100000000;
+        };
+        prng.double = function() {
+            do var top = xg.next() >>> 11, bot = (xg.next() >>> 0) / 0x100000000, result = (top + bot) / 2097152;
+            while (result === 0)
+            return result;
+        };
+        prng.int32 = xg.next;
+        prng.quick = prng;
+        if (state) {
+            if (state.x) copy(state, xg);
+            prng.state = function() {
+                return copy(xg, {});
+            };
+        }
+        return prng;
+    }
+    if (module && module.exports) module.exports = impl;
+    else if (define && define.amd) define(function() {
+        return impl;
+    });
+    else this.xorshift7 = impl;
+})(this, module, typeof define == 'function' && define // present with an AMD loader
+);
+
+},{}],"2wdfl":[function(require,module,exports) {
+// A Javascript implementaion of Richard Brent's Xorgens xor4096 algorithm.
+//
+// This fast non-cryptographic random number generator is designed for
+// use in Monte-Carlo algorithms. It combines a long-period xorshift
+// generator with a Weyl generator, and it passes all common batteries
+// of stasticial tests for randomness while consuming only a few nanoseconds
+// for each prng generated.  For background on the generator, see Brent's
+// paper: "Some long-period random number generators using shifts and xors."
+// http://arxiv.org/pdf/1004.3115v1.pdf
+//
+// Usage:
+//
+// var xor4096 = require('xor4096');
+// random = xor4096(1);                        // Seed with int32 or string.
+// assert.equal(random(), 0.1520436450538547); // (0, 1) range, 53 bits.
+// assert.equal(random.int32(), 1806534897);   // signed int32, 32 bits.
+//
+// For nonzero numeric keys, this impelementation provides a sequence
+// identical to that by Brent's xorgens 3 implementaion in C.  This
+// implementation also provides for initalizing the generator with
+// string seeds, or for saving and restoring the state of the generator.
+//
+// On Chrome, this prng benchmarks about 2.1 times slower than
+// Javascript's built-in Math.random().
+(function(global, module, define) {
+    function XorGen(seed1) {
+        var me1 = this;
+        // Set up generator function.
+        me1.next = function() {
+            var w = me1.w, X = me1.X, i = me1.i, t, v;
+            // Update Weyl generator.
+            me1.w = w = w + 0x61c88647 | 0;
+            // Update xor generator.
+            v = X[i + 34 & 127];
+            t = X[i = i + 1 & 127];
+            v ^= v << 13;
+            t ^= t << 17;
+            v ^= v >>> 15;
+            t ^= t >>> 12;
+            // Update Xor generator array state.
+            v = X[i] = v ^ t;
+            me1.i = i;
+            // Result is the combination.
+            return v + (w ^ w >>> 16) | 0;
+        };
+        function init(me, seed) {
+            var t, v, i, j, w, X = [], limit = 128;
+            if (seed === (seed | 0)) {
+                // Numeric seeds initialize v, which is used to generates X.
+                v = seed;
+                seed = null;
+            } else {
+                // String seeds are mixed into v and X one character at a time.
+                seed = seed + '\0';
+                v = 0;
+                limit = Math.max(limit, seed.length);
+            }
+            // Initialize circular array and weyl value.
+            for(i = 0, j = -32; j < limit; ++j){
+                // Put the unicode characters into the array, and shuffle them.
+                if (seed) v ^= seed.charCodeAt((j + 32) % seed.length);
+                // After 32 shuffles, take v as the starting w value.
+                if (j === 0) w = v;
+                v ^= v << 10;
+                v ^= v >>> 15;
+                v ^= v << 4;
+                v ^= v >>> 13;
+                if (j >= 0) {
+                    w = w + 0x61c88647 | 0; // Weyl.
+                    t = X[j & 127] ^= v + w; // Combine xor and weyl to init array.
+                    i = 0 == t ? i + 1 : 0; // Count zeroes.
+                }
+            }
+            // We have detected all zeroes; make the key nonzero.
+            if (i >= 128) X[(seed && seed.length || 0) & 127] = -1;
+            // Run the generator 512 times to further mix the state before using it.
+            // Factoring this as a function slows the main generator, so it is just
+            // unrolled here.  The weyl generator is not advanced while warming up.
+            i = 127;
+            for(j = 512; j > 0; --j){
+                v = X[i + 34 & 127];
+                t = X[i = i + 1 & 127];
+                v ^= v << 13;
+                t ^= t << 17;
+                v ^= v >>> 15;
+                t ^= t >>> 12;
+                X[i] = v ^ t;
+            }
+            // Storing state as object members is faster than using closure variables.
+            me.w = w;
+            me.X = X;
+            me.i = i;
+        }
+        init(me1, seed1);
+    }
+    function copy(f, t) {
+        t.i = f.i;
+        t.w = f.w;
+        t.X = f.X.slice();
+        return t;
+    }
+    function impl(seed, opts) {
+        if (seed == null) seed = +new Date;
+        var xg = new XorGen(seed), state = opts && opts.state, prng = function() {
+            return (xg.next() >>> 0) / 0x100000000;
+        };
+        prng.double = function() {
+            do var top = xg.next() >>> 11, bot = (xg.next() >>> 0) / 0x100000000, result = (top + bot) / 2097152;
+            while (result === 0)
+            return result;
+        };
+        prng.int32 = xg.next;
+        prng.quick = prng;
+        if (state) {
+            if (state.X) copy(state, xg);
+            prng.state = function() {
+                return copy(xg, {});
+            };
+        }
+        return prng;
+    }
+    if (module && module.exports) module.exports = impl;
+    else if (define && define.amd) define(function() {
+        return impl;
+    });
+    else this.xor4096 = impl;
+})(this, module, typeof define == 'function' && define // present with an AMD loader
+);
+
+},{}],"anavj":[function(require,module,exports) {
+// A Javascript implementaion of the "Tyche-i" prng algorithm by
+// Samuel Neves and Filipe Araujo.
+// See https://eden.dei.uc.pt/~sneves/pubs/2011-snfa2.pdf
+(function(global, module, define) {
+    function XorGen(seed) {
+        var me = this, strseed = '';
+        // Set up generator function.
+        me.next = function() {
+            var b = me.b, c = me.c, d = me.d, a = me.a;
+            b = b << 25 ^ b >>> 7 ^ c;
+            c = c - d | 0;
+            d = d << 24 ^ d >>> 8 ^ a;
+            a = a - b | 0;
+            me.b = b = b << 20 ^ b >>> 12 ^ c;
+            me.c = c = c - d | 0;
+            me.d = d << 16 ^ c >>> 16 ^ a;
+            return me.a = a - b | 0;
+        };
+        /* The following is non-inverted tyche, which has better internal
+   * bit diffusion, but which is about 25% slower than tyche-i in JS.
+  me.next = function() {
+    var a = me.a, b = me.b, c = me.c, d = me.d;
+    a = (me.a + me.b | 0) >>> 0;
+    d = me.d ^ a; d = d << 16 ^ d >>> 16;
+    c = me.c + d | 0;
+    b = me.b ^ c; b = b << 12 ^ d >>> 20;
+    me.a = a = a + b | 0;
+    d = d ^ a; me.d = d = d << 8 ^ d >>> 24;
+    me.c = c = c + d | 0;
+    b = b ^ c;
+    return me.b = (b << 7 ^ b >>> 25);
+  }
+  */ me.a = 0;
+        me.b = 0;
+        me.c = -1640531527;
+        me.d = 1367130551;
+        if (seed === Math.floor(seed)) {
+            // Integer seed.
+            me.a = seed / 0x100000000 | 0;
+            me.b = seed | 0;
+        } else // String seed.
+        strseed += seed;
+        // Mix in string seed, then discard an initial batch of 64 values.
+        for(var k = 0; k < strseed.length + 20; k++){
+            me.b ^= strseed.charCodeAt(k) | 0;
+            me.next();
+        }
+    }
+    function copy(f, t) {
+        t.a = f.a;
+        t.b = f.b;
+        t.c = f.c;
+        t.d = f.d;
+        return t;
+    }
+    function impl(seed, opts) {
+        var xg = new XorGen(seed), state = opts && opts.state, prng = function() {
+            return (xg.next() >>> 0) / 0x100000000;
+        };
+        prng.double = function() {
+            do var top = xg.next() >>> 11, bot = (xg.next() >>> 0) / 0x100000000, result = (top + bot) / 2097152;
+            while (result === 0)
+            return result;
+        };
+        prng.int32 = xg.next;
+        prng.quick = prng;
+        if (state) {
+            if (typeof state == 'object') copy(state, xg);
+            prng.state = function() {
+                return copy(xg, {});
+            };
+        }
+        return prng;
+    }
+    if (module && module.exports) module.exports = impl;
+    else if (define && define.amd) define(function() {
+        return impl;
+    });
+    else this.tychei = impl;
+})(this, module, typeof define == 'function' && define // present with an AMD loader
+);
+
+},{}],"i1vhZ":[function(require,module,exports) {
+/*
+Copyright 2019 David Bau.
+
+Permission is hereby granted, free of charge, to any person obtaining
+a copy of this software and associated documentation files (the
+"Software"), to deal in the Software without restriction, including
+without limitation the rights to use, copy, modify, merge, publish,
+distribute, sublicense, and/or sell copies of the Software, and to
+permit persons to whom the Software is furnished to do so, subject to
+the following conditions:
+
+The above copyright notice and this permission notice shall be
+included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+*/ (function(global, pool, math) {
+    //
+    // The following constants are related to IEEE 754 limits.
+    //
+    var width = 256, chunks = 6, digits = 52, rngname = 'random', startdenom = math.pow(width, chunks), significance = math.pow(2, digits), overflow = significance * 2, mask = width - 1, nodecrypto; // node.js crypto module, initialized at the bottom.
+    //
+    // seedrandom()
+    // This is the seedrandom function described above.
+    //
+    function seedrandom(seed1, options, callback) {
+        var key = [];
+        options = options == true ? {
+            entropy: true
+        } : options || {};
+        // Flatten the seed string or build one from local entropy if needed.
+        var shortseed = mixkey(flatten(options.entropy ? [
+            seed1,
+            tostring(pool)
+        ] : seed1 == null ? autoseed() : seed1, 3), key);
+        // Use the seed to initialize an ARC4 generator.
+        var arc4 = new ARC4(key);
+        // This function returns a random double in [0, 1) that contains
+        // randomness in every bit of the mantissa of the IEEE 754 value.
+        var prng1 = function() {
+            var n = arc4.g(chunks), d = startdenom, x = 0; //   and no 'extra last byte'.
+            while(n < significance){
+                n = (n + x) * width; //   shifting numerator and
+                d *= width; //   denominator and generating a
+                x = arc4.g(1); //   new least-significant-byte.
+            }
+            while(n >= overflow){
+                n /= 2; //   last byte, shift everything
+                d /= 2; //   right using integer math until
+                x >>>= 1; //   we have exactly the desired bits.
+            }
+            return (n + x) / d; // Form the number within [0, 1).
+        };
+        prng1.int32 = function() {
+            return arc4.g(4) | 0;
+        };
+        prng1.quick = function() {
+            return arc4.g(4) / 0x100000000;
+        };
+        prng1.double = prng1;
+        // Mix the randomness into accumulated entropy.
+        mixkey(tostring(arc4.S), pool);
+        // Calling convention: what to return as a function of prng, seed, is_math.
+        return (options.pass || callback || function(prng, seed, is_math_call, state) {
+            if (state) {
+                // Load the arc4 state from the given state if it has an S array.
+                if (state.S) copy(state, arc4);
+                // Only provide the .state method if requested via options.state.
+                prng.state = function() {
+                    return copy(arc4, {});
+                };
+            }
+            // If called as a method of Math (Math.seedrandom()), mutate
+            // Math.random because that is how seedrandom.js has worked since v1.0.
+            if (is_math_call) {
+                math[rngname] = prng;
+                return seed;
+            } else return prng;
+        })(prng1, shortseed, 'global' in options ? options.global : this == math, options.state);
+    }
+    //
+    // ARC4
+    //
+    // An ARC4 implementation.  The constructor takes a key in the form of
+    // an array of at most (width) integers that should be 0 <= x < (width).
+    //
+    // The g(count) method returns a pseudorandom integer that concatenates
+    // the next (count) outputs from ARC4.  Its return value is a number x
+    // that is in the range 0 <= x < (width ^ count).
+    //
+    function ARC4(key) {
+        var t1, keylen = key.length, me = this, i1 = 0, j1 = me.i = me.j = 0, s1 = me.S = [];
+        // The empty key [] is treated as [0].
+        if (!keylen) key = [
+            keylen++
+        ];
+        // Set up S using the standard key scheduling algorithm.
+        while(i1 < width)s1[i1] = i1++;
+        for(i1 = 0; i1 < width; i1++){
+            s1[i1] = s1[j1 = mask & j1 + key[i1 % keylen] + (t1 = s1[i1])];
+            s1[j1] = t1;
+        }
+        // The "g" method returns the next (count) outputs as one number.
+        (me.g = function(count) {
+            // Using instance members instead of closure state nearly doubles speed.
+            var t, r = 0, i = me.i, j = me.j, s = me.S;
+            while(count--){
+                t = s[i = mask & i + 1];
+                r = r * width + s[mask & (s[i] = s[j = mask & j + t]) + (s[j] = t)];
+            }
+            me.i = i;
+            me.j = j;
+            return r;
+        // For robust unpredictability, the function call below automatically
+        // discards an initial batch of values.  This is called RC4-drop[256].
+        // See http://google.com/search?q=rsa+fluhrer+response&btnI
+        })(width);
+    }
+    //
+    // copy()
+    // Copies internal state of ARC4 to or from a plain object.
+    //
+    function copy(f, t) {
+        t.i = f.i;
+        t.j = f.j;
+        t.S = f.S.slice();
+        return t;
+    }
+    //
+    // flatten()
+    // Converts an object tree to nested arrays of strings.
+    //
+    function flatten(obj, depth) {
+        var result = [], typ = typeof obj, prop;
+        if (depth && typ == 'object') {
+            for(prop in obj)try {
+                result.push(flatten(obj[prop], depth - 1));
+            } catch (e) {}
+        }
+        return result.length ? result : typ == 'string' ? obj : obj + '\0';
+    }
+    //
+    // mixkey()
+    // Mixes a string seed into a key that is an array of integers, and
+    // returns a shortened string seed that is equivalent to the result key.
+    //
+    function mixkey(seed, key) {
+        var stringseed = seed + '', smear, j = 0;
+        while(j < stringseed.length)key[mask & j] = mask & (smear ^= key[mask & j] * 19) + stringseed.charCodeAt(j++);
+        return tostring(key);
+    }
+    //
+    // autoseed()
+    // Returns an object for autoseeding, using window.crypto and Node crypto
+    // module if available.
+    //
+    function autoseed() {
+        try {
+            var out;
+            if (nodecrypto && (out = nodecrypto.randomBytes)) // The use of 'out' to remember randomBytes makes tight minified code.
+            out = out(width);
+            else {
+                out = new Uint8Array(width);
+                (global.crypto || global.msCrypto).getRandomValues(out);
+            }
+            return tostring(out);
+        } catch (e) {
+            var browser = global.navigator, plugins = browser && browser.plugins;
+            return [
+                +new Date,
+                global,
+                plugins,
+                global.screen,
+                tostring(pool)
+            ];
+        }
+    }
+    //
+    // tostring()
+    // Converts an array of charcodes to a string
+    //
+    function tostring(a) {
+        return String.fromCharCode.apply(0, a);
+    }
+    //
+    // When seedrandom.js is loaded, we immediately mix a few bits
+    // from the built-in RNG into the entropy pool.  Because we do
+    // not want to interfere with deterministic PRNG state later,
+    // seedrandom will not call math.random on its own again after
+    // initialization.
+    //
+    mixkey(math.random(), pool);
+    //
+    // Nodejs and AMD support: export the implementation as a module using
+    // either convention.
+    //
+    if (module.exports) {
+        module.exports = seedrandom;
+        // When in node.js, try using crypto package for autoseeding.
+        try {
+            nodecrypto = require('crypto');
+        } catch (ex) {}
+    } else if (typeof define == 'function' && define.amd) define(function() {
+        return seedrandom;
+    });
+    else // When included as a plain script, set up Math.seedrandom global.
+    math['seed' + rngname] = seedrandom;
+// End anonymous scope, and pass initial values.
+})(// global: `self` in browsers (including strict mode and web workers),
+// otherwise `this` in Node and other environments
+typeof self !== 'undefined' ? self : this, [], Math // math: package containing random, pow, and seedrandom
+);
+
+},{"crypto":"jhUEF"}],"jhUEF":[function(require,module,exports) {
+"use strict";
+
+},{}],"1xj6i":[function(require,module,exports) {
+var $parcel$ReactRefreshHelpers$4102 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+$parcel$ReactRefreshHelpers$4102.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "Background", ()=>Background
+);
+var _jsxDevRuntime = require("react/jsx-dev-runtime");
+var _react = require("react");
+var _reactDefault = parcelHelpers.interopDefault(_react);
+var _reactTsparticles = require("react-tsparticles");
+var _reactTsparticlesDefault = parcelHelpers.interopDefault(_reactTsparticles);
+var _tsparticles = require("tsparticles");
+var _backgroundScss = require("./background.scss");
+var _s = $RefreshSig$();
+const Background = ()=>{
+    _s();
+    const [backgroundContainer, setBackgroundContainer] = _reactDefault.default.useState();
+    const particlesInit = async (main)=>{
+        // you can initialize the tsParticles instance (main) here, adding custom shapes or presets
+        // this loads the tsparticles package bundle, it's the easiest method for getting everything ready
+        // starting from v2 you can add only the features you need reducing the bundle size
+        await _tsparticles.loadFull(main);
+    };
+    const particlesLoaded = (container)=>{
+        if (!backgroundContainer) {
+            setBackgroundContainer(container);
+            setTimeout(()=>{
+                console.log('StopBackground');
+                container.stop();
+            }, 4000);
+        }
+    };
+    return /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
+        className: "background",
+        children: /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_reactTsparticlesDefault.default, {
+            id: "background-particles",
+            init: particlesInit,
+            loaded: particlesLoaded,
+            options: {
+                duration: 5000,
+                fpsLimit: 60,
+                interactivity: {
+                    events: {
+                        resize: true
+                    },
+                    modes: {
+                        push: {
+                            quantity: 4
+                        },
+                        repulse: {
+                            distance: 200,
+                            duration: 0.4
+                        }
+                    }
+                },
+                particles: {
+                    color: {
+                        value: "#ffffff"
+                    },
+                    collisions: {
+                        enable: false
+                    },
+                    move: {
+                        direction: "down",
+                        enable: true,
+                        outModes: {
+                            default: "bounce"
+                        },
+                        random: false,
+                        speed: 4,
+                        straight: false
+                    },
+                    number: {
+                        density: {
+                            enable: true,
+                            area: 800
+                        },
+                        value: 80
+                    },
+                    opacity: {
+                        value: 0.5
+                    },
+                    shape: {
+                        type: "circle"
+                    },
+                    size: {
+                        value: {
+                            min: 1,
+                            max: 5
+                        }
+                    }
+                },
+                detectRetina: true
+            }
+        }, void 0, false, {
+            fileName: "src/components/background/background.tsx",
+            lineNumber: 27,
+            columnNumber: 5
+        }, undefined)
+    }, void 0, false, {
+        fileName: "src/components/background/background.tsx",
+        lineNumber: 26,
+        columnNumber: 5
+    }, undefined);
+};
+_s(Background, "Eekb8qjIUnBXhdmBgUycz5h+cEA=");
+_c = Background;
+var _c;
+$RefreshReg$(_c, "Background");
+
+  $parcel$ReactRefreshHelpers$4102.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","./background.scss":"2DbMK","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","react-tsparticles":"6yNHG","tsparticles":"9YC3G"}],"2DbMK":[function() {},{}],"6yNHG":[function(require,module,exports) {
+const ReactParticles = require("./cjs/particles");
+for(let key in ReactParticles)ReactParticles.default[key] = ReactParticles[key];
+module.exports = ReactParticles.default;
+
+},{"./cjs/particles":"2Ul3B"}],"2Ul3B":[function(require,module,exports) {
+(()=>{
+    var t1 = {
+        757: (t, e, r)=>{
+            t.exports = r(666);
+        },
+        666: (t2)=>{
+            var e2 = function(t3) {
+                var e3, r2 = Object.prototype, n2 = r2.hasOwnProperty, o2 = "function" == typeof Symbol ? Symbol : {}, i2 = o2.iterator || "@@iterator", a1 = o2.asyncIterator || "@@asyncIterator", c1 = o2.toStringTag || "@@toStringTag";
+                function u1(t, e, r) {
+                    return Object.defineProperty(t, e, {
+                        value: r,
+                        enumerable: !0,
+                        configurable: !0,
+                        writable: !0
+                    }), t[e];
+                }
+                try {
+                    u1({}, "");
+                } catch (t4) {
+                    u1 = function(t, e, r) {
+                        return t[e] = r;
+                    };
+                }
+                function s1(t5, e4, r3, n3) {
+                    var o3 = e4 && e4.prototype instanceof v ? e4 : v, i3 = Object.create(o3.prototype), a2 = new L(n3 || []);
+                    return i3._invoke = function(t, e, r) {
+                        var n = l1;
+                        return function(o, i) {
+                            if (n === p) throw new Error("Generator is already running");
+                            if (n === y) {
+                                if ("throw" === o) throw i;
+                                return N();
+                            }
+                            for(r.method = o, r.arg = i;;){
+                                var a = r.delegate;
+                                if (a) {
+                                    var c = P(a, r);
+                                    if (c) {
+                                        if (c === d) continue;
+                                        return c;
+                                    }
+                                }
+                                if ("next" === r.method) r.sent = r._sent = r.arg;
+                                else if ("throw" === r.method) {
+                                    if (n === l1) throw n = y, r.arg;
+                                    r.dispatchException(r.arg);
+                                } else "return" === r.method && r.abrupt("return", r.arg);
+                                n = p;
+                                var u = f(t, e, r);
+                                if ("normal" === u.type) {
+                                    if (n = r.done ? y : h, u.arg === d) continue;
+                                    return {
+                                        value: u.arg,
+                                        done: r.done
+                                    };
+                                }
+                                "throw" === u.type && (n = y, r.method = "throw", r.arg = u.arg);
+                            }
+                        };
+                    }(t5, r3, a2), i3;
+                }
+                function f(t, e, r) {
+                    try {
+                        return {
+                            type: "normal",
+                            arg: t.call(e, r)
+                        };
+                    } catch (t6) {
+                        return {
+                            type: "throw",
+                            arg: t6
+                        };
+                    }
+                }
+                t3.wrap = s1;
+                var l1 = "suspendedStart", h = "suspendedYield", p = "executing", y = "completed", d = {};
+                function v() {}
+                function m() {}
+                function g() {}
+                var w = {};
+                w[i2] = function() {
+                    return this;
+                };
+                var b = Object.getPrototypeOf, x = b && b(b(S([])));
+                x && x !== r2 && n2.call(x, i2) && (w = x);
+                var O = g.prototype = v.prototype = Object.create(w);
+                function _(t7) {
+                    [
+                        "next",
+                        "throw",
+                        "return"
+                    ].forEach(function(e) {
+                        u1(t7, e, function(t) {
+                            return this._invoke(e, t);
+                        });
+                    });
+                }
+                function j(t8, e5) {
+                    function r(o, i, a, c) {
+                        var u = f(t8[o], t8, i);
+                        if ("throw" !== u.type) {
+                            var s = u.arg, l = s.value;
+                            return l && "object" == typeof l && n2.call(l, "__await") ? e5.resolve(l.__await).then(function(t) {
+                                r("next", t, a, c);
+                            }, function(t) {
+                                r("throw", t, a, c);
+                            }) : e5.resolve(l).then(function(t) {
+                                s.value = t, a(s);
+                            }, function(t) {
+                                return r("throw", t, a, c);
+                            });
+                        }
+                        c(u.arg);
+                    }
+                    var o4;
+                    this._invoke = function(t, n) {
+                        function i() {
+                            return new e5(function(e, o) {
+                                r(t, n, e, o);
+                            });
+                        }
+                        return o4 = o4 ? o4.then(i, i) : i();
+                    };
+                }
+                function P(t, r) {
+                    var n = t.iterator[r.method];
+                    if (n === e3) {
+                        if (r.delegate = null, "throw" === r.method) {
+                            if (t.iterator.return && (r.method = "return", r.arg = e3, P(t, r), "throw" === r.method)) return d;
+                            r.method = "throw", r.arg = new TypeError("The iterator does not provide a 'throw' method");
+                        }
+                        return d;
+                    }
+                    var o = f(n, t.iterator, r.arg);
+                    if ("throw" === o.type) return r.method = "throw", r.arg = o.arg, r.delegate = null, d;
+                    var i = o.arg;
+                    return i ? i.done ? (r[t.resultName] = i.value, r.next = t.nextLoc, "return" !== r.method && (r.method = "next", r.arg = e3), r.delegate = null, d) : i : (r.method = "throw", r.arg = new TypeError("iterator result is not an object"), r.delegate = null, d);
+                }
+                function k(t) {
+                    var e = {
+                        tryLoc: t[0]
+                    };
+                    1 in t && (e.catchLoc = t[1]), 2 in t && (e.finallyLoc = t[2], e.afterLoc = t[3]), this.tryEntries.push(e);
+                }
+                function E(t) {
+                    var e = t.completion || {};
+                    e.type = "normal", delete e.arg, t.completion = e;
+                }
+                function L(t) {
+                    this.tryEntries = [
+                        {
+                            tryLoc: "root"
+                        }
+                    ], t.forEach(k, this), this.reset(!0);
+                }
+                function S(t) {
+                    if (t) {
+                        var r4 = t[i2];
+                        if (r4) return r4.call(t);
+                        if ("function" == typeof t.next) return t;
+                        if (!isNaN(t.length)) {
+                            var o = -1, a = function r() {
+                                for(; ++o < t.length;)if (n2.call(t, o)) return r.value = t[o], r.done = !1, r;
+                                return r.value = e3, r.done = !0, r;
+                            };
+                            return a.next = a;
+                        }
+                    }
+                    return {
+                        next: N
+                    };
+                }
+                function N() {
+                    return {
+                        value: e3,
+                        done: !0
+                    };
+                }
+                return m.prototype = O.constructor = g, g.constructor = m, m.displayName = u1(g, c1, "GeneratorFunction"), t3.isGeneratorFunction = function(t) {
+                    var e = "function" == typeof t && t.constructor;
+                    return !!e && (e === m || "GeneratorFunction" === (e.displayName || e.name));
+                }, t3.mark = function(t) {
+                    return Object.setPrototypeOf ? Object.setPrototypeOf(t, g) : (t.__proto__ = g, u1(t, c1, "GeneratorFunction")), t.prototype = Object.create(O), t;
+                }, t3.awrap = function(t) {
+                    return {
+                        __await: t
+                    };
+                }, _(j.prototype), j.prototype[a1] = function() {
+                    return this;
+                }, t3.AsyncIterator = j, t3.async = function(e, r, n, o, i) {
+                    void 0 === i && (i = Promise);
+                    var a = new j(s1(e, r, n, o), i);
+                    return t3.isGeneratorFunction(r) ? a : a.next().then(function(t) {
+                        return t.done ? t.value : a.next();
+                    });
+                }, _(O), u1(O, c1, "Generator"), O[i2] = function() {
+                    return this;
+                }, O.toString = function() {
+                    return "[object Generator]";
+                }, t3.keys = function(t) {
+                    var e = [];
+                    for(var r6 in t)e.push(r6);
+                    return e.reverse(), function r() {
+                        for(; e.length;){
+                            var n = e.pop();
+                            if (n in t) return r.value = n, r.done = !1, r;
+                        }
+                        return r.done = !0, r;
+                    };
+                }, t3.values = S, L.prototype = {
+                    constructor: L,
+                    reset: function(t) {
+                        if (this.prev = 0, this.next = 0, this.sent = this._sent = e3, this.done = !1, this.delegate = null, this.method = "next", this.arg = e3, this.tryEntries.forEach(E), !t) for(var r in this)"t" === r.charAt(0) && n2.call(this, r) && !isNaN(+r.slice(1)) && (this[r] = e3);
+                    },
+                    stop: function() {
+                        this.done = !0;
+                        var t = this.tryEntries[0].completion;
+                        if ("throw" === t.type) throw t.arg;
+                        return this.rval;
+                    },
+                    dispatchException: function(t) {
+                        if (this.done) throw t;
+                        var r = this;
+                        function o5(n, o) {
+                            return c.type = "throw", c.arg = t, r.next = n, o && (r.method = "next", r.arg = e3), !!o;
+                        }
+                        for(var i = this.tryEntries.length - 1; i >= 0; --i){
+                            var a = this.tryEntries[i], c = a.completion;
+                            if ("root" === a.tryLoc) return o5("end");
+                            if (a.tryLoc <= this.prev) {
+                                var u = n2.call(a, "catchLoc"), s = n2.call(a, "finallyLoc");
+                                if (u && s) {
+                                    if (this.prev < a.catchLoc) return o5(a.catchLoc, !0);
+                                    if (this.prev < a.finallyLoc) return o5(a.finallyLoc);
+                                } else if (u) {
+                                    if (this.prev < a.catchLoc) return o5(a.catchLoc, !0);
+                                } else {
+                                    if (!s) throw new Error("try statement without catch or finally");
+                                    if (this.prev < a.finallyLoc) return o5(a.finallyLoc);
+                                }
+                            }
+                        }
+                    },
+                    abrupt: function(t, e) {
+                        for(var r = this.tryEntries.length - 1; r >= 0; --r){
+                            var o = this.tryEntries[r];
+                            if (o.tryLoc <= this.prev && n2.call(o, "finallyLoc") && this.prev < o.finallyLoc) {
+                                var i = o;
+                                break;
+                            }
+                        }
+                        i && ("break" === t || "continue" === t) && i.tryLoc <= e && e <= i.finallyLoc && (i = null);
+                        var a = i ? i.completion : {};
+                        return a.type = t, a.arg = e, i ? (this.method = "next", this.next = i.finallyLoc, d) : this.complete(a);
+                    },
+                    complete: function(t, e) {
+                        if ("throw" === t.type) throw t.arg;
+                        return "break" === t.type || "continue" === t.type ? this.next = t.arg : "return" === t.type ? (this.rval = this.arg = t.arg, this.method = "return", this.next = "end") : "normal" === t.type && e && (this.next = e), d;
+                    },
+                    finish: function(t) {
+                        for(var e = this.tryEntries.length - 1; e >= 0; --e){
+                            var r = this.tryEntries[e];
+                            if (r.finallyLoc === t) return this.complete(r.completion, r.afterLoc), E(r), d;
+                        }
+                    },
+                    catch: function(t) {
+                        for(var e = this.tryEntries.length - 1; e >= 0; --e){
+                            var r = this.tryEntries[e];
+                            if (r.tryLoc === t) {
+                                var n = r.completion;
+                                if ("throw" === n.type) {
+                                    var o = n.arg;
+                                    E(r);
+                                }
+                                return o;
+                            }
+                        }
+                        throw new Error("illegal catch attempt");
+                    },
+                    delegateYield: function(t, r, n) {
+                        return this.delegate = {
+                            iterator: S(t),
+                            resultName: r,
+                            nextLoc: n
+                        }, "next" === this.method && (this.arg = e3), d;
+                    }
+                }, t3;
+            }(t2.exports);
+            try {
+                regeneratorRuntime = e2;
+            } catch (t) {
+                Function("r", "regeneratorRuntime = r")(e2);
+            }
+        }
+    }, e1 = {};
+    function r1(n) {
+        var o = e1[n];
+        if (void 0 !== o) return o.exports;
+        var i = e1[n] = {
+            exports: {}
+        };
+        return t1[n](i, i.exports, r1), i.exports;
+    }
+    r1.n = (t)=>{
+        var e = t && t.__esModule ? ()=>t.default
+         : ()=>t
+        ;
+        return r1.d(e, {
+            a: e
+        }), e;
+    }, r1.d = (t, e)=>{
+        for(var n in e)r1.o(e, n) && !r1.o(t, n) && Object.defineProperty(t, n, {
+            enumerable: !0,
+            get: e[n]
+        });
+    }, r1.o = (t, e)=>Object.prototype.hasOwnProperty.call(t, e)
+    , r1.r = (t)=>{
+        "undefined" != typeof Symbol && Symbol.toStringTag && Object.defineProperty(t, Symbol.toStringTag, {
+            value: "Module"
+        }), Object.defineProperty(t, "__esModule", {
+            value: !0
+        });
+    };
+    var n1 = {};
+    (()=>{
+        function t9(t, e) {
+            for(var r = 0; r < e.length; r++){
+                var n = e[r];
+                n.enumerable = n.enumerable || !1, n.configurable = !0, "value" in n && (n.writable = !0), Object.defineProperty(t, n.key, n);
+            }
+        }
+        function e6(t10) {
+            return (e6 = Object.setPrototypeOf ? Object.getPrototypeOf : function(t) {
+                return t.__proto__ || Object.getPrototypeOf(t);
+            })(t10);
+        }
+        function o6(t, r) {
+            for(; !Object.prototype.hasOwnProperty.call(t, r) && null !== (t = e6(t)););
+            return t;
+        }
+        function i4() {
+            return (i4 = "undefined" != typeof Reflect && Reflect.get ? Reflect.get : function(t, e, r) {
+                var n = o6(t, e);
+                if (n) {
+                    var i = Object.getOwnPropertyDescriptor(n, e);
+                    return i.get ? i.get.call(arguments.length < 3 ? t : r) : i.value;
+                }
+            }).apply(this, arguments);
+        }
+        function a3(t11, e7) {
+            return (a3 = Object.setPrototypeOf || function(t, e) {
+                return t.__proto__ = e, t;
+            })(t11, e7);
+        }
+        function c2(t12) {
+            return (c2 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(t) {
+                return typeof t;
+            } : function(t) {
+                return t && "function" == typeof Symbol && t.constructor === Symbol && t !== Symbol.prototype ? "symbol" : typeof t;
+            })(t12);
+        }
+        function u2(t13, e) {
+            if (e && ("object" === c2(e) || "function" == typeof e)) return e;
+            if (void 0 !== e) throw new TypeError("Derived constructors may only return object or undefined");
+            return function(t) {
+                if (void 0 === t) throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+                return t;
+            }(t13);
+        }
+        r1.r(n1), r1.d(n1, {
+            Particles: ()=>m
+            ,
+            default: ()=>g
+        });
+        var s2 = r1(757), f = r1.n(s2);
+        const l2 = require("react");
+        var h = r1.n(l2);
+        const p = require("tsparticles-engine"), y1 = require("fast-deep-equal/react");
+        var d = r1.n(y1);
+        var v = function(t14, e8, r, n) {
+            return new (r || (r = Promise))(function(o, i) {
+                function a(t) {
+                    try {
+                        u(n.next(t));
+                    } catch (t15) {
+                        i(t15);
+                    }
+                }
+                function c(t) {
+                    try {
+                        u(n.throw(t));
+                    } catch (t16) {
+                        i(t16);
+                    }
+                }
+                function u(t17) {
+                    var e;
+                    t17.done ? o(t17.value) : (e = t17.value, e instanceof r ? e : new r(function(t) {
+                        t(e);
+                    })).then(a, c);
+                }
+                u((n = n.apply(t14, e8 || [])).next());
+            });
+        }, m = function(r7) {
+            !function(t, e) {
+                if ("function" != typeof e && null !== e) throw new TypeError("Super expression must either be null or a function");
+                Object.defineProperty(t, "prototype", {
+                    value: Object.create(e && e.prototype, {
+                        constructor: {
+                            value: t,
+                            writable: !0,
+                            configurable: !0
+                        }
+                    }),
+                    writable: !1
+                }), e && a3(t, e);
+            }(y, r7);
+            var n4, o7, c, s, l = (c = y, s = function() {
+                if ("undefined" == typeof Reflect || !Reflect.construct) return !1;
+                if (Reflect.construct.sham) return !1;
+                if ("function" == typeof Proxy) return !0;
+                try {
+                    return Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function() {})), !0;
+                } catch (t) {
+                    return !1;
+                }
+            }(), function() {
+                var t, r = e6(c);
+                if (s) {
+                    var n = e6(this).constructor;
+                    t = Reflect.construct(r, arguments, n);
+                } else t = r.apply(this, arguments);
+                return u2(this, t);
+            });
+            function y(t18) {
+                var e9;
+                return function(t, e) {
+                    if (!(t instanceof e)) throw new TypeError("Cannot call a class as a function");
+                }(this, y), (e9 = l.call(this, t18)).state = {
+                    init: !1,
+                    library: void 0
+                }, e9;
+            }
+            return n4 = y, o7 = [
+                {
+                    key: "destroy",
+                    value: function() {
+                        this.state.library && (this.state.library.destroy(), this.setState({
+                            library: void 0
+                        }));
+                    }
+                },
+                {
+                    key: "shouldComponentUpdate",
+                    value: function(t) {
+                        return !d()(t, this.props);
+                    }
+                },
+                {
+                    key: "componentDidUpdate",
+                    value: function() {
+                        this.refresh();
+                    }
+                },
+                {
+                    key: "forceUpdate",
+                    value: function() {
+                        var t = this;
+                        this.refresh().then(function() {
+                            i4(e6(y.prototype), "forceUpdate", t).call(t);
+                        });
+                    }
+                },
+                {
+                    key: "componentDidMount",
+                    value: function() {
+                        v(this, void 0, void 0, f().mark(function t19() {
+                            var e = this;
+                            return f().wrap(function(t20) {
+                                for(;;)switch(t20.prev = t20.next){
+                                    case 0:
+                                        if (!this.props.init) {
+                                            t20.next = 3;
+                                            break;
+                                        }
+                                        return t20.next = 3, this.props.init(p.tsParticles);
+                                    case 3:
+                                        this.setState({
+                                            init: !0
+                                        }, function() {
+                                            return v(e, void 0, void 0, f().mark(function t21() {
+                                                return f().wrap(function(t) {
+                                                    for(;;)switch(t.prev = t.next){
+                                                        case 0:
+                                                            return t.next = 2, this.loadParticles();
+                                                        case 2:
+                                                        case "end":
+                                                            return t.stop();
+                                                    }
+                                                }, t21, this);
+                                            }));
+                                        });
+                                    case 4:
+                                    case "end":
+                                        return t20.stop();
+                                }
+                            }, t19, this);
+                        }));
+                    }
+                },
+                {
+                    key: "componentWillUnmount",
+                    value: function() {
+                        this.destroy();
+                    }
+                },
+                {
+                    key: "render",
+                    value: function() {
+                        var t = this.props, e = t.width, r = t.height, n = t.className, o = t.canvasClassName, i = t.id;
+                        return h().createElement("div", {
+                            className: n,
+                            id: i
+                        }, h().createElement("canvas", {
+                            className: o,
+                            style: Object.assign(Object.assign({}, this.props.style), {
+                                width: e,
+                                height: r
+                            })
+                        }));
+                    }
+                },
+                {
+                    key: "refresh",
+                    value: function() {
+                        return v(this, void 0, void 0, f().mark(function t22() {
+                            return f().wrap(function(t) {
+                                for(;;)switch(t.prev = t.next){
+                                    case 0:
+                                        return this.destroy(), t.next = 3, this.loadParticles();
+                                    case 3:
+                                    case "end":
+                                        return t.stop();
+                                }
+                            }, t22, this);
+                        }));
+                    }
+                },
+                {
+                    key: "loadParticles",
+                    value: function() {
+                        var t23;
+                        return v(this, void 0, void 0, f().mark(function e10() {
+                            var r, n, o = this;
+                            return f().wrap(function(e11) {
+                                for(;;)switch(e11.prev = e11.next){
+                                    case 0:
+                                        if (this.state.init) {
+                                            e11.next = 2;
+                                            break;
+                                        }
+                                        return e11.abrupt("return");
+                                    case 2:
+                                        if (r = function(t) {
+                                            return v(o, void 0, void 0, f().mark(function e12() {
+                                                return f().wrap(function(e) {
+                                                    for(;;)switch(e.prev = e.next){
+                                                        case 0:
+                                                            if (this.props.container && (this.props.container.current = t), this.setState({
+                                                                library: t
+                                                            }), !this.props.loaded) {
+                                                                e.next = 5;
+                                                                break;
+                                                            }
+                                                            return e.next = 5, this.props.loaded(t);
+                                                        case 5:
+                                                        case "end":
+                                                            return e.stop();
+                                                    }
+                                                }, e12, this);
+                                            }));
+                                        }, !this.props.url) {
+                                            e11.next = 9;
+                                            break;
+                                        }
+                                        return e11.next = 6, p.tsParticles.loadJSON(this.props.id, this.props.url);
+                                    case 6:
+                                        e11.t0 = e11.sent, e11.next = 12;
+                                        break;
+                                    case 9:
+                                        return e11.next = 11, p.tsParticles.load(this.props.id, null !== (t23 = this.props.params) && void 0 !== t23 ? t23 : this.props.options);
+                                    case 11:
+                                        e11.t0 = e11.sent;
+                                    case 12:
+                                        return n = e11.t0, e11.next = 15, r(n);
+                                    case 15:
+                                    case "end":
+                                        return e11.stop();
+                                }
+                            }, e10, this);
+                        }));
+                    }
+                }
+            ], t9(n4.prototype, o7), Object.defineProperty(n4, "prototype", {
+                writable: !1
+            }), y;
+        }(l2.Component);
+        m.defaultProps = {
+            width: "100%",
+            height: "100%",
+            options: {},
+            style: {},
+            url: void 0,
+            id: "tsparticles"
+        };
+        const g = m;
+    })();
+    var o1 = exports;
+    for(var i1 in n1)o1[i1] = n1[i1];
+    n1.__esModule && Object.defineProperty(o1, "__esModule", {
+        value: !0
+    });
+})();
+
+},{"react":"21dqq","tsparticles-engine":"9BizU","fast-deep-equal/react":"kNe9Z"}],"9BizU":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "Engine", ()=>_engine.Engine
+);
+parcelHelpers.export(exports, "Main", ()=>_engine.Engine
+);
+parcelHelpers.export(exports, "tsParticles", ()=>tsParticles
+);
+var _engine = require("./engine");
+var _colors = require("./Core/Interfaces/Colors");
+parcelHelpers.exportAll(_colors, exports);
+var _gradients = require("./Core/Interfaces/Gradients");
+parcelHelpers.exportAll(_gradients, exports);
+var _ibounds = require("./Core/Interfaces/IBounds");
+parcelHelpers.exportAll(_ibounds, exports);
+var _ibubbleParticleData = require("./Core/Interfaces/IBubbleParticleData");
+parcelHelpers.exportAll(_ibubbleParticleData, exports);
+var _icircleBouncer = require("./Core/Interfaces/ICircleBouncer");
+parcelHelpers.exportAll(_icircleBouncer, exports);
+var _icontainerInteractivity = require("./Core/Interfaces/IContainerInteractivity");
+parcelHelpers.exportAll(_icontainerInteractivity, exports);
+var _icontainerPlugin = require("./Core/Interfaces/IContainerPlugin");
+parcelHelpers.exportAll(_icontainerPlugin, exports);
+var _icoordinates = require("./Core/Interfaces/ICoordinates");
+parcelHelpers.exportAll(_icoordinates, exports);
+var _idelta = require("./Core/Interfaces/IDelta");
+parcelHelpers.exportAll(_idelta, exports);
+var _idimension = require("./Core/Interfaces/IDimension");
+parcelHelpers.exportAll(_idimension, exports);
+var _idistance = require("./Core/Interfaces/IDistance");
+parcelHelpers.exportAll(_idistance, exports);
+var _iexternalInteractor = require("./Core/Interfaces/IExternalInteractor");
+parcelHelpers.exportAll(_iexternalInteractor, exports);
+var _iinteractor = require("./Core/Interfaces/IInteractor");
+parcelHelpers.exportAll(_iinteractor, exports);
+var _imouseData = require("./Core/Interfaces/IMouseData");
+parcelHelpers.exportAll(_imouseData, exports);
+var _imovePathGenerator = require("./Core/Interfaces/IMovePathGenerator");
+parcelHelpers.exportAll(_imovePathGenerator, exports);
+var _iparticle = require("./Core/Interfaces/IParticle");
+parcelHelpers.exportAll(_iparticle, exports);
+var _iparticleColorStyle = require("./Core/Interfaces/IParticleColorStyle");
+parcelHelpers.exportAll(_iparticleColorStyle, exports);
+var _iparticleGravity = require("./Core/Interfaces/IParticleGravity");
+parcelHelpers.exportAll(_iparticleGravity, exports);
+var _iparticleHslAnimation = require("./Core/Interfaces/IParticleHslAnimation");
+parcelHelpers.exportAll(_iparticleHslAnimation, exports);
+var _iparticlesInteractor = require("./Core/Interfaces/IParticlesInteractor");
+parcelHelpers.exportAll(_iparticlesInteractor, exports);
+var _iparticleLife = require("./Core/Interfaces/IParticleLife");
+parcelHelpers.exportAll(_iparticleLife, exports);
+var _iparticleLoops = require("./Core/Interfaces/IParticleLoops");
+parcelHelpers.exportAll(_iparticleLoops, exports);
+var _iparticleRetinaProps = require("./Core/Interfaces/IParticleRetinaProps");
+parcelHelpers.exportAll(_iparticleRetinaProps, exports);
+var _iparticleRoll = require("./Core/Interfaces/IParticleRoll");
+parcelHelpers.exportAll(_iparticleRoll, exports);
+var _iparticleUpdater = require("./Core/Interfaces/IParticleUpdater");
+parcelHelpers.exportAll(_iparticleUpdater, exports);
+var _iparticleValueAnimation = require("./Core/Interfaces/IParticleValueAnimation");
+parcelHelpers.exportAll(_iparticleValueAnimation, exports);
+var _iparticleWobble = require("./Core/Interfaces/IParticleWobble");
+parcelHelpers.exportAll(_iparticleWobble, exports);
+var _iparticlesMover = require("./Core/Interfaces/IParticlesMover");
+parcelHelpers.exportAll(_iparticlesMover, exports);
+var _iplugin = require("./Core/Interfaces/IPlugin");
+parcelHelpers.exportAll(_iplugin, exports);
+var _irangeValue = require("./Core/Interfaces/IRangeValue");
+parcelHelpers.exportAll(_irangeValue, exports);
+var _irectSideResult = require("./Core/Interfaces/IRectSideResult");
+parcelHelpers.exportAll(_irectSideResult, exports);
+var _ishapeDrawer = require("./Core/Interfaces/IShapeDrawer");
+parcelHelpers.exportAll(_ishapeDrawer, exports);
+var _ishapeValues = require("./Core/Interfaces/IShapeValues");
+parcelHelpers.exportAll(_ishapeValues, exports);
+var _circle = require("./Core/Utils/Circle");
+parcelHelpers.exportAll(_circle, exports);
+var _circleWarp = require("./Core/Utils/CircleWarp");
+parcelHelpers.exportAll(_circleWarp, exports);
+var _constants = require("./Core/Utils/Constants");
+parcelHelpers.exportAll(_constants, exports);
+var _eventListeners = require("./Core/Utils/EventListeners");
+parcelHelpers.exportAll(_eventListeners, exports);
+var _externalInteractorBase = require("./Core/Utils/ExternalInteractorBase");
+parcelHelpers.exportAll(_externalInteractorBase, exports);
+var _frameManager = require("./Core/Utils/FrameManager");
+parcelHelpers.exportAll(_frameManager, exports);
+var _interactionManager = require("./Core/Utils/InteractionManager");
+parcelHelpers.exportAll(_interactionManager, exports);
+var _particlesInteractorBase = require("./Core/Utils/ParticlesInteractorBase");
+parcelHelpers.exportAll(_particlesInteractorBase, exports);
+var _plugins = require("./Core/Utils/Plugins");
+parcelHelpers.exportAll(_plugins, exports);
+var _point = require("./Core/Utils/Point");
+parcelHelpers.exportAll(_point, exports);
+var _quadTree = require("./Core/Utils/QuadTree");
+parcelHelpers.exportAll(_quadTree, exports);
+var _range = require("./Core/Utils/Range");
+parcelHelpers.exportAll(_range, exports);
+var _rectangle = require("./Core/Utils/Rectangle");
+parcelHelpers.exportAll(_rectangle, exports);
+var _vector = require("./Core/Utils/Vector");
+parcelHelpers.exportAll(_vector, exports);
+var _vector3D = require("./Core/Utils/Vector3d");
+parcelHelpers.exportAll(_vector3D, exports);
+var _canvas = require("./Core/Canvas");
+parcelHelpers.exportAll(_canvas, exports);
+var _container = require("./Core/Container");
+parcelHelpers.exportAll(_container, exports);
+var _loader = require("./Core/Loader");
+parcelHelpers.exportAll(_loader, exports);
+var _particle = require("./Core/Particle");
+parcelHelpers.exportAll(_particle, exports);
+var _particles = require("./Core/Particles");
+parcelHelpers.exportAll(_particles, exports);
+var _retina = require("./Core/Retina");
+parcelHelpers.exportAll(_retina, exports);
+var _moveDirection = require("./Enums/Directions/MoveDirection");
+parcelHelpers.exportAll(_moveDirection, exports);
+var _rotateDirection = require("./Enums/Directions/RotateDirection");
+parcelHelpers.exportAll(_rotateDirection, exports);
+var _outModeDirection = require("./Enums/Directions/OutModeDirection");
+parcelHelpers.exportAll(_outModeDirection, exports);
+var _tiltDirection = require("./Enums/Directions/TiltDirection");
+parcelHelpers.exportAll(_tiltDirection, exports);
+var _clickMode = require("./Enums/Modes/ClickMode");
+parcelHelpers.exportAll(_clickMode, exports);
+var _destroyMode = require("./Enums/Modes/DestroyMode");
+parcelHelpers.exportAll(_destroyMode, exports);
+var _divMode = require("./Enums/Modes/DivMode");
+parcelHelpers.exportAll(_divMode, exports);
+var _hoverMode = require("./Enums/Modes/HoverMode");
+parcelHelpers.exportAll(_hoverMode, exports);
+var _collisionMode = require("./Enums/Modes/CollisionMode");
+parcelHelpers.exportAll(_collisionMode, exports);
+var _outMode = require("./Enums/Modes/OutMode");
+parcelHelpers.exportAll(_outMode, exports);
+var _rollMode = require("./Enums/Modes/RollMode");
+parcelHelpers.exportAll(_rollMode, exports);
+var _sizeMode = require("./Enums/Modes/SizeMode");
+parcelHelpers.exportAll(_sizeMode, exports);
+var _themeMode = require("./Enums/Modes/ThemeMode");
+parcelHelpers.exportAll(_themeMode, exports);
+var _responsiveMode = require("./Enums/Modes/ResponsiveMode");
+parcelHelpers.exportAll(_responsiveMode, exports);
+var _alterType = require("./Enums/Types/AlterType");
+parcelHelpers.exportAll(_alterType, exports);
+var _destroyType = require("./Enums/Types/DestroyType");
+parcelHelpers.exportAll(_destroyType, exports);
+var _gradientType = require("./Enums/Types/GradientType");
+parcelHelpers.exportAll(_gradientType, exports);
+var _interactorType = require("./Enums/Types/InteractorType");
+parcelHelpers.exportAll(_interactorType, exports);
+var _particleOutType = require("./Enums/Types/ParticleOutType");
+parcelHelpers.exportAll(_particleOutType, exports);
+var _startValueType = require("./Enums/Types/StartValueType");
+parcelHelpers.exportAll(_startValueType, exports);
+var _divType = require("./Enums/Types/DivType");
+parcelHelpers.exportAll(_divType, exports);
+var _easingType = require("./Enums/Types/EasingType");
+parcelHelpers.exportAll(_easingType, exports);
+var _animationStatus = require("./Enums/AnimationStatus");
+parcelHelpers.exportAll(_animationStatus, exports);
+var _interactivityDetect = require("./Enums/InteractivityDetect");
+parcelHelpers.exportAll(_interactivityDetect, exports);
+var _animatableColor = require("./Options/Classes/AnimatableColor");
+parcelHelpers.exportAll(_animatableColor, exports);
+var _animatableGradient = require("./Options/Classes/AnimatableGradient");
+parcelHelpers.exportAll(_animatableGradient, exports);
+var _animationOptions = require("./Options/Classes/AnimationOptions");
+parcelHelpers.exportAll(_animationOptions, exports);
+var _background = require("./Options/Classes/Background/Background");
+parcelHelpers.exportAll(_background, exports);
+var _backgroundMask = require("./Options/Classes/BackgroundMask/BackgroundMask");
+parcelHelpers.exportAll(_backgroundMask, exports);
+var _backgroundMaskCover = require("./Options/Classes/BackgroundMask/BackgroundMaskCover");
+parcelHelpers.exportAll(_backgroundMaskCover, exports);
+var _colorAnimation = require("./Options/Classes/ColorAnimation");
+parcelHelpers.exportAll(_colorAnimation, exports);
+var _fullScreen = require("./Options/Classes/FullScreen/FullScreen");
+parcelHelpers.exportAll(_fullScreen, exports);
+var _hslAnimation = require("./Options/Classes/HslAnimation");
+parcelHelpers.exportAll(_hslAnimation, exports);
+var _clickEvent = require("./Options/Classes/Interactivity/Events/ClickEvent");
+parcelHelpers.exportAll(_clickEvent, exports);
+var _divEvent = require("./Options/Classes/Interactivity/Events/DivEvent");
+parcelHelpers.exportAll(_divEvent, exports);
+parcelHelpers.exportAll(_clickEvent, exports);
+parcelHelpers.exportAll(_divEvent, exports);
+var _events = require("./Options/Classes/Interactivity/Events/Events");
+parcelHelpers.exportAll(_events, exports);
+var _hoverEvent = require("./Options/Classes/Interactivity/Events/HoverEvent");
+parcelHelpers.exportAll(_hoverEvent, exports);
+var _parallax = require("./Options/Classes/Interactivity/Events/Parallax");
+parcelHelpers.exportAll(_parallax, exports);
+var _interactivity = require("./Options/Classes/Interactivity/Interactivity");
+parcelHelpers.exportAll(_interactivity, exports);
+var _attract = require("./Options/Classes/Interactivity/Modes/Attract");
+parcelHelpers.exportAll(_attract, exports);
+var _bounce = require("./Options/Classes/Interactivity/Modes/Bounce");
+parcelHelpers.exportAll(_bounce, exports);
+var _bubble = require("./Options/Classes/Interactivity/Modes/Bubble");
+parcelHelpers.exportAll(_bubble, exports);
+var _bubbleBase = require("./Options/Classes/Interactivity/Modes/BubbleBase");
+parcelHelpers.exportAll(_bubbleBase, exports);
+var _bubbleDiv = require("./Options/Classes/Interactivity/Modes/BubbleDiv");
+parcelHelpers.exportAll(_bubbleDiv, exports);
+var _connect = require("./Options/Classes/Interactivity/Modes/Connect");
+parcelHelpers.exportAll(_connect, exports);
+var _connectLinks = require("./Options/Classes/Interactivity/Modes/ConnectLinks");
+parcelHelpers.exportAll(_connectLinks, exports);
+var _grab = require("./Options/Classes/Interactivity/Modes/Grab");
+parcelHelpers.exportAll(_grab, exports);
+var _grabLinks = require("./Options/Classes/Interactivity/Modes/GrabLinks");
+parcelHelpers.exportAll(_grabLinks, exports);
+var _light = require("./Options/Classes/Interactivity/Modes/Light");
+parcelHelpers.exportAll(_light, exports);
+var _lightArea = require("./Options/Classes/Interactivity/Modes/LightArea");
+parcelHelpers.exportAll(_lightArea, exports);
+var _lightGradient = require("./Options/Classes/Interactivity/Modes/LightGradient");
+parcelHelpers.exportAll(_lightGradient, exports);
+var _lightShadow = require("./Options/Classes/Interactivity/Modes/LightShadow");
+parcelHelpers.exportAll(_lightShadow, exports);
+var _modes = require("./Options/Classes/Interactivity/Modes/Modes");
+parcelHelpers.exportAll(_modes, exports);
+var _push = require("./Options/Classes/Interactivity/Modes/Push");
+parcelHelpers.exportAll(_push, exports);
+var _remove = require("./Options/Classes/Interactivity/Modes/Remove");
+parcelHelpers.exportAll(_remove, exports);
+var _repulse = require("./Options/Classes/Interactivity/Modes/Repulse");
+parcelHelpers.exportAll(_repulse, exports);
+var _repulseBase = require("./Options/Classes/Interactivity/Modes/RepulseBase");
+parcelHelpers.exportAll(_repulseBase, exports);
+var _repulseDiv = require("./Options/Classes/Interactivity/Modes/RepulseDiv");
+parcelHelpers.exportAll(_repulseDiv, exports);
+var _slow = require("./Options/Classes/Interactivity/Modes/Slow");
+parcelHelpers.exportAll(_slow, exports);
+var _trail = require("./Options/Classes/Interactivity/Modes/Trail");
+parcelHelpers.exportAll(_trail, exports);
+var _manualParticle = require("./Options/Classes/ManualParticle");
+parcelHelpers.exportAll(_manualParticle, exports);
+var _motion = require("./Options/Classes/Motion/Motion");
+parcelHelpers.exportAll(_motion, exports);
+var _motionReduce = require("./Options/Classes/Motion/MotionReduce");
+parcelHelpers.exportAll(_motionReduce, exports);
+var _options = require("./Options/Classes/Options");
+parcelHelpers.exportAll(_options, exports);
+var _optionsColor = require("./Options/Classes/OptionsColor");
+parcelHelpers.exportAll(_optionsColor, exports);
+var _particlesBounce = require("./Options/Classes/Particles/Bounce/ParticlesBounce");
+parcelHelpers.exportAll(_particlesBounce, exports);
+var _particlesBounceFactor = require("./Options/Classes/Particles/Bounce/ParticlesBounceFactor");
+parcelHelpers.exportAll(_particlesBounceFactor, exports);
+var _collisions = require("./Options/Classes/Particles/Collisions/Collisions");
+parcelHelpers.exportAll(_collisions, exports);
+var _collisionsOverlap = require("./Options/Classes/Particles/Collisions/CollisionsOverlap");
+parcelHelpers.exportAll(_collisionsOverlap, exports);
+var _destroy = require("./Options/Classes/Particles/Destroy/Destroy");
+parcelHelpers.exportAll(_destroy, exports);
+var _split = require("./Options/Classes/Particles/Destroy/Split");
+parcelHelpers.exportAll(_split, exports);
+var _splitFactor = require("./Options/Classes/Particles/Destroy/SplitFactor");
+parcelHelpers.exportAll(_splitFactor, exports);
+var _splitRate = require("./Options/Classes/Particles/Destroy/SplitRate");
+parcelHelpers.exportAll(_splitRate, exports);
+var _particlesOptions = require("./Options/Classes/Particles/ParticlesOptions");
+parcelHelpers.exportAll(_particlesOptions, exports);
+var _shadow = require("./Options/Classes/Particles/Shadow");
+parcelHelpers.exportAll(_shadow, exports);
+var _stroke = require("./Options/Classes/Particles/Stroke");
+parcelHelpers.exportAll(_stroke, exports);
+var _life = require("./Options/Classes/Particles/Life/Life");
+parcelHelpers.exportAll(_life, exports);
+var _lifeDelay = require("./Options/Classes/Particles/Life/LifeDelay");
+parcelHelpers.exportAll(_lifeDelay, exports);
+var _lifeDuration = require("./Options/Classes/Particles/Life/LifeDuration");
+parcelHelpers.exportAll(_lifeDuration, exports);
+var _links = require("./Options/Classes/Particles/Links/Links");
+parcelHelpers.exportAll(_links, exports);
+var _linksShadow = require("./Options/Classes/Particles/Links/LinksShadow");
+parcelHelpers.exportAll(_linksShadow, exports);
+var _linksTriangle = require("./Options/Classes/Particles/Links/LinksTriangle");
+parcelHelpers.exportAll(_linksTriangle, exports);
+var _moveAttract = require("./Options/Classes/Particles/Move/MoveAttract");
+parcelHelpers.exportAll(_moveAttract, exports);
+var _move = require("./Options/Classes/Particles/Move/Move");
+parcelHelpers.exportAll(_move, exports);
+var _moveAngle = require("./Options/Classes/Particles/Move/MoveAngle");
+parcelHelpers.exportAll(_moveAngle, exports);
+var _moveGravity = require("./Options/Classes/Particles/Move/MoveGravity");
+parcelHelpers.exportAll(_moveGravity, exports);
+var _outModes = require("./Options/Classes/Particles/Move/OutModes");
+parcelHelpers.exportAll(_outModes, exports);
+var _movePath = require("./Options/Classes/Particles/Move/Path/MovePath");
+parcelHelpers.exportAll(_movePath, exports);
+var _movePathDelay = require("./Options/Classes/Particles/Move/Path/MovePathDelay");
+parcelHelpers.exportAll(_movePathDelay, exports);
+var _spin = require("./Options/Classes/Particles/Move/Spin");
+parcelHelpers.exportAll(_spin, exports);
+var _moveTrail = require("./Options/Classes/Particles/Move/MoveTrail");
+parcelHelpers.exportAll(_moveTrail, exports);
+var _particlesNumber = require("./Options/Classes/Particles/Number/ParticlesNumber");
+parcelHelpers.exportAll(_particlesNumber, exports);
+var _particlesDensity = require("./Options/Classes/Particles/Number/ParticlesDensity");
+parcelHelpers.exportAll(_particlesDensity, exports);
+var _opacity = require("./Options/Classes/Particles/Opacity/Opacity");
+parcelHelpers.exportAll(_opacity, exports);
+var _opacityAnimation = require("./Options/Classes/Particles/Opacity/OpacityAnimation");
+parcelHelpers.exportAll(_opacityAnimation, exports);
+var _orbit = require("./Options/Classes/Particles/Orbit/Orbit");
+parcelHelpers.exportAll(_orbit, exports);
+var _orbitRotation = require("./Options/Classes/Particles/Orbit/OrbitRotation");
+parcelHelpers.exportAll(_orbitRotation, exports);
+var _particlesRepulse = require("./Options/Classes/Particles/Repulse/ParticlesRepulse");
+parcelHelpers.exportAll(_particlesRepulse, exports);
+var _roll = require("./Options/Classes/Particles/Roll/Roll");
+parcelHelpers.exportAll(_roll, exports);
+var _rollLight = require("./Options/Classes/Particles/Roll/RollLight");
+parcelHelpers.exportAll(_rollLight, exports);
+var _rotate = require("./Options/Classes/Particles/Rotate/Rotate");
+parcelHelpers.exportAll(_rotate, exports);
+var _rotateAnimation = require("./Options/Classes/Particles/Rotate/RotateAnimation");
+parcelHelpers.exportAll(_rotateAnimation, exports);
+var _shape = require("./Options/Classes/Particles/Shape/Shape");
+parcelHelpers.exportAll(_shape, exports);
+var _size = require("./Options/Classes/Particles/Size/Size");
+parcelHelpers.exportAll(_size, exports);
+var _sizeAnimation = require("./Options/Classes/Particles/Size/SizeAnimation");
+parcelHelpers.exportAll(_sizeAnimation, exports);
+var _tilt = require("./Options/Classes/Particles/Tilt/Tilt");
+parcelHelpers.exportAll(_tilt, exports);
+var _tiltAnimation = require("./Options/Classes/Particles/Tilt/TiltAnimation");
+parcelHelpers.exportAll(_tiltAnimation, exports);
+var _twinkle = require("./Options/Classes/Particles/Twinkle/Twinkle");
+parcelHelpers.exportAll(_twinkle, exports);
+var _twinkleValues = require("./Options/Classes/Particles/Twinkle/TwinkleValues");
+parcelHelpers.exportAll(_twinkleValues, exports);
+var _wobble = require("./Options/Classes/Particles/Wobble/Wobble");
+parcelHelpers.exportAll(_wobble, exports);
+var _zindex = require("./Options/Classes/Particles/ZIndex/ZIndex");
+parcelHelpers.exportAll(_zindex, exports);
+var _responsive = require("./Options/Classes/Responsive");
+parcelHelpers.exportAll(_responsive, exports);
+var _theme = require("./Options/Classes/Theme/Theme");
+parcelHelpers.exportAll(_theme, exports);
+var _themeDefault = require("./Options/Classes/Theme/ThemeDefault");
+parcelHelpers.exportAll(_themeDefault, exports);
+var _valueWithRandom = require("./Options/Classes/ValueWithRandom");
+parcelHelpers.exportAll(_valueWithRandom, exports);
+var _ibackground = require("./Options/Interfaces/Background/IBackground");
+parcelHelpers.exportAll(_ibackground, exports);
+var _ibackgroundMask = require("./Options/Interfaces/BackgroundMask/IBackgroundMask");
+parcelHelpers.exportAll(_ibackgroundMask, exports);
+var _ibackgroundMaskCover = require("./Options/Interfaces/BackgroundMask/IBackgroundMaskCover");
+parcelHelpers.exportAll(_ibackgroundMaskCover, exports);
+var _ifullScreen = require("./Options/Interfaces/FullScreen/IFullScreen");
+parcelHelpers.exportAll(_ifullScreen, exports);
+var _ianimatable = require("./Options/Interfaces/IAnimatable");
+parcelHelpers.exportAll(_ianimatable, exports);
+var _ianimatableColor = require("./Options/Interfaces/IAnimatableColor");
+parcelHelpers.exportAll(_ianimatableColor, exports);
+var _ianimatableGradient = require("./Options/Interfaces/IAnimatableGradient");
+parcelHelpers.exportAll(_ianimatableGradient, exports);
+var _ianimation = require("./Options/Interfaces/IAnimation");
+parcelHelpers.exportAll(_ianimation, exports);
+var _icolorAnimation = require("./Options/Interfaces/IColorAnimation");
+parcelHelpers.exportAll(_icolorAnimation, exports);
+var _ihslAnimation = require("./Options/Interfaces/IHslAnimation");
+parcelHelpers.exportAll(_ihslAnimation, exports);
+var _imanualParticle = require("./Options/Interfaces/IManualParticle");
+parcelHelpers.exportAll(_imanualParticle, exports);
+var _ioptionLoader = require("./Options/Interfaces/IOptionLoader");
+parcelHelpers.exportAll(_ioptionLoader, exports);
+var _ioptions = require("./Options/Interfaces/IOptions");
+parcelHelpers.exportAll(_ioptions, exports);
+var _ioptionsColor = require("./Options/Interfaces/IOptionsColor");
+parcelHelpers.exportAll(_ioptionsColor, exports);
+var _ioptionsGradient = require("./Options/Interfaces/IOptionsGradient");
+parcelHelpers.exportAll(_ioptionsGradient, exports);
+var _iresponsive = require("./Options/Interfaces/IResponsive");
+parcelHelpers.exportAll(_iresponsive, exports);
+var _ivalueWithRandom = require("./Options/Interfaces/IValueWithRandom");
+parcelHelpers.exportAll(_ivalueWithRandom, exports);
+var _iclickEvent = require("./Options/Interfaces/Interactivity/Events/IClickEvent");
+parcelHelpers.exportAll(_iclickEvent, exports);
+var _idivEvent = require("./Options/Interfaces/Interactivity/Events/IDivEvent");
+parcelHelpers.exportAll(_idivEvent, exports);
+var _ievents = require("./Options/Interfaces/Interactivity/Events/IEvents");
+parcelHelpers.exportAll(_ievents, exports);
+var _ihoverEvent = require("./Options/Interfaces/Interactivity/Events/IHoverEvent");
+parcelHelpers.exportAll(_ihoverEvent, exports);
+var _iparallax = require("./Options/Interfaces/Interactivity/Events/IParallax");
+parcelHelpers.exportAll(_iparallax, exports);
+var _iattract = require("./Options/Interfaces/Interactivity/Modes/IAttract");
+parcelHelpers.exportAll(_iattract, exports);
+var _ibounce = require("./Options/Interfaces/Interactivity/Modes/IBounce");
+parcelHelpers.exportAll(_ibounce, exports);
+var _ibubble = require("./Options/Interfaces/Interactivity/Modes/IBubble");
+parcelHelpers.exportAll(_ibubble, exports);
+var _ibubbleBase = require("./Options/Interfaces/Interactivity/Modes/IBubbleBase");
+parcelHelpers.exportAll(_ibubbleBase, exports);
+var _ibubbleDiv = require("./Options/Interfaces/Interactivity/Modes/IBubbleDiv");
+parcelHelpers.exportAll(_ibubbleDiv, exports);
+var _iconnect = require("./Options/Interfaces/Interactivity/Modes/IConnect");
+parcelHelpers.exportAll(_iconnect, exports);
+var _iconnectLinks = require("./Options/Interfaces/Interactivity/Modes/IConnectLinks");
+parcelHelpers.exportAll(_iconnectLinks, exports);
+var _igrab = require("./Options/Interfaces/Interactivity/Modes/IGrab");
+parcelHelpers.exportAll(_igrab, exports);
+var _igrabLinks = require("./Options/Interfaces/Interactivity/Modes/IGrabLinks");
+parcelHelpers.exportAll(_igrabLinks, exports);
+var _ilight = require("./Options/Interfaces/Interactivity/Modes/ILight");
+parcelHelpers.exportAll(_ilight, exports);
+var _ilightArea = require("./Options/Interfaces/Interactivity/Modes/ILightArea");
+parcelHelpers.exportAll(_ilightArea, exports);
+var _ilightGradient = require("./Options/Interfaces/Interactivity/Modes/ILightGradient");
+parcelHelpers.exportAll(_ilightGradient, exports);
+var _ilightShadow = require("./Options/Interfaces/Interactivity/Modes/ILightShadow");
+parcelHelpers.exportAll(_ilightShadow, exports);
+var _imodeDiv = require("./Options/Interfaces/Interactivity/Modes/IModeDiv");
+parcelHelpers.exportAll(_imodeDiv, exports);
+var _imodes = require("./Options/Interfaces/Interactivity/Modes/IModes");
+parcelHelpers.exportAll(_imodes, exports);
+var _ipush = require("./Options/Interfaces/Interactivity/Modes/IPush");
+parcelHelpers.exportAll(_ipush, exports);
+var _iremove = require("./Options/Interfaces/Interactivity/Modes/IRemove");
+parcelHelpers.exportAll(_iremove, exports);
+var _irepulse = require("./Options/Interfaces/Interactivity/Modes/IRepulse");
+parcelHelpers.exportAll(_irepulse, exports);
+var _irepulseBase = require("./Options/Interfaces/Interactivity/Modes/IRepulseBase");
+parcelHelpers.exportAll(_irepulseBase, exports);
+var _irepulseDiv = require("./Options/Interfaces/Interactivity/Modes/IRepulseDiv");
+parcelHelpers.exportAll(_irepulseDiv, exports);
+var _islow = require("./Options/Interfaces/Interactivity/Modes/ISlow");
+parcelHelpers.exportAll(_islow, exports);
+var _itrail = require("./Options/Interfaces/Interactivity/Modes/ITrail");
+parcelHelpers.exportAll(_itrail, exports);
+var _iinteractivity = require("./Options/Interfaces/Interactivity/IInteractivity");
+parcelHelpers.exportAll(_iinteractivity, exports);
+var _imotion = require("./Options/Interfaces/Motion/IMotion");
+parcelHelpers.exportAll(_imotion, exports);
+var _imotionReduce = require("./Options/Interfaces/Motion/IMotionReduce");
+parcelHelpers.exportAll(_imotionReduce, exports);
+var _iparticlesBounce = require("./Options/Interfaces/Particles/Bounce/IParticlesBounce");
+parcelHelpers.exportAll(_iparticlesBounce, exports);
+var _icollisions = require("./Options/Interfaces/Particles/Collisions/ICollisions");
+parcelHelpers.exportAll(_icollisions, exports);
+var _icollisionsOverlap = require("./Options/Interfaces/Particles/Collisions/ICollisionsOverlap");
+parcelHelpers.exportAll(_icollisionsOverlap, exports);
+var _idestroy = require("./Options/Interfaces/Particles/Destroy/IDestroy");
+parcelHelpers.exportAll(_idestroy, exports);
+var _isplit = require("./Options/Interfaces/Particles/Destroy/ISplit");
+parcelHelpers.exportAll(_isplit, exports);
+var _iparticlesOptions = require("./Options/Interfaces/Particles/IParticlesOptions");
+parcelHelpers.exportAll(_iparticlesOptions, exports);
+var _ishadow = require("./Options/Interfaces/Particles/IShadow");
+parcelHelpers.exportAll(_ishadow, exports);
+var _istroke = require("./Options/Interfaces/Particles/IStroke");
+parcelHelpers.exportAll(_istroke, exports);
+var _ilife = require("./Options/Interfaces/Particles/Life/ILife");
+parcelHelpers.exportAll(_ilife, exports);
+var _ilifeDelay = require("./Options/Interfaces/Particles/Life/ILifeDelay");
+parcelHelpers.exportAll(_ilifeDelay, exports);
+var _ilifeDuration = require("./Options/Interfaces/Particles/Life/ILifeDuration");
+parcelHelpers.exportAll(_ilifeDuration, exports);
+var _ilinks = require("./Options/Interfaces/Particles/Links/ILinks");
+parcelHelpers.exportAll(_ilinks, exports);
+var _ilinksShadow = require("./Options/Interfaces/Particles/Links/ILinksShadow");
+parcelHelpers.exportAll(_ilinksShadow, exports);
+var _ilinksTriangle = require("./Options/Interfaces/Particles/Links/ILinksTriangle");
+parcelHelpers.exportAll(_ilinksTriangle, exports);
+var _imoveAttract = require("./Options/Interfaces/Particles/Move/IMoveAttract");
+parcelHelpers.exportAll(_imoveAttract, exports);
+var _imove = require("./Options/Interfaces/Particles/Move/IMove");
+parcelHelpers.exportAll(_imove, exports);
+var _imoveAngle = require("./Options/Interfaces/Particles/Move/IMoveAngle");
+parcelHelpers.exportAll(_imoveAngle, exports);
+var _imoveGravity = require("./Options/Interfaces/Particles/Move/IMoveGravity");
+parcelHelpers.exportAll(_imoveGravity, exports);
+var _imovePath = require("./Options/Interfaces/Particles/Move/Path/IMovePath");
+parcelHelpers.exportAll(_imovePath, exports);
+var _ioutModes = require("./Options/Interfaces/Particles/Move/IOutModes");
+parcelHelpers.exportAll(_ioutModes, exports);
+var _ispin = require("./Options/Interfaces/Particles/Move/ISpin");
+parcelHelpers.exportAll(_ispin, exports);
+var _imoveTrail = require("./Options/Interfaces/Particles/Move/IMoveTrail");
+parcelHelpers.exportAll(_imoveTrail, exports);
+var _iparticlesDensity = require("./Options/Interfaces/Particles/Number/IParticlesDensity");
+parcelHelpers.exportAll(_iparticlesDensity, exports);
+var _iparticlesNumber = require("./Options/Interfaces/Particles/Number/IParticlesNumber");
+parcelHelpers.exportAll(_iparticlesNumber, exports);
+var _iopacity = require("./Options/Interfaces/Particles/Opacity/IOpacity");
+parcelHelpers.exportAll(_iopacity, exports);
+var _iopacityAnimation = require("./Options/Interfaces/Particles/Opacity/IOpacityAnimation");
+parcelHelpers.exportAll(_iopacityAnimation, exports);
+var _iorbit = require("./Options/Interfaces/Particles/Orbit/IOrbit");
+parcelHelpers.exportAll(_iorbit, exports);
+var _iparticlesRepulse = require("./Options/Interfaces/Particles/Repulse/IParticlesRepulse");
+parcelHelpers.exportAll(_iparticlesRepulse, exports);
+var _iroll = require("./Options/Interfaces/Particles/Roll/IRoll");
+parcelHelpers.exportAll(_iroll, exports);
+var _irollLight = require("./Options/Interfaces/Particles/Roll/IRollLight");
+parcelHelpers.exportAll(_irollLight, exports);
+var _irotate = require("./Options/Interfaces/Particles/Rotate/IRotate");
+parcelHelpers.exportAll(_irotate, exports);
+var _irotateAnimation = require("./Options/Interfaces/Particles/Rotate/IRotateAnimation");
+parcelHelpers.exportAll(_irotateAnimation, exports);
+var _icharacterShape = require("./Options/Interfaces/Particles/Shape/ICharacterShape");
+parcelHelpers.exportAll(_icharacterShape, exports);
+var _iimageShape = require("./Options/Interfaces/Particles/Shape/IImageShape");
+parcelHelpers.exportAll(_iimageShape, exports);
+var _ipolygonShape = require("./Options/Interfaces/Particles/Shape/IPolygonShape");
+parcelHelpers.exportAll(_ipolygonShape, exports);
+var _ishape = require("./Options/Interfaces/Particles/Shape/IShape");
+parcelHelpers.exportAll(_ishape, exports);
+var _ishapeValues1 = require("./Options/Interfaces/Particles/Shape/IShapeValues");
+parcelHelpers.exportAll(_ishapeValues1, exports);
+var _istarShape = require("./Options/Interfaces/Particles/Shape/IStarShape");
+parcelHelpers.exportAll(_istarShape, exports);
+var _isize = require("./Options/Interfaces/Particles/Size/ISize");
+parcelHelpers.exportAll(_isize, exports);
+var _isizeAnimation = require("./Options/Interfaces/Particles/Size/ISizeAnimation");
+parcelHelpers.exportAll(_isizeAnimation, exports);
+var _itilt = require("./Options/Interfaces/Particles/Tilt/ITilt");
+parcelHelpers.exportAll(_itilt, exports);
+var _itiltAnimation = require("./Options/Interfaces/Particles/Tilt/ITiltAnimation");
+parcelHelpers.exportAll(_itiltAnimation, exports);
+var _itwinkle = require("./Options/Interfaces/Particles/Twinkle/ITwinkle");
+parcelHelpers.exportAll(_itwinkle, exports);
+var _itwinkleValues = require("./Options/Interfaces/Particles/Twinkle/ITwinkleValues");
+parcelHelpers.exportAll(_itwinkleValues, exports);
+var _iwobble = require("./Options/Interfaces/Particles/Wobble/IWobble");
+parcelHelpers.exportAll(_iwobble, exports);
+var _izindex = require("./Options/Interfaces/Particles/ZIndex/IZIndex");
+parcelHelpers.exportAll(_izindex, exports);
+var _itheme = require("./Options/Interfaces/Theme/ITheme");
+parcelHelpers.exportAll(_itheme, exports);
+var _ithemeDefault = require("./Options/Interfaces/Theme/IThemeDefault");
+parcelHelpers.exportAll(_ithemeDefault, exports);
+var _rangeValue = require("./Types/RangeValue");
+parcelHelpers.exportAll(_rangeValue, exports);
+var _recursivePartial = require("./Types/RecursivePartial");
+parcelHelpers.exportAll(_recursivePartial, exports);
+var _shapeData = require("./Types/ShapeData");
+parcelHelpers.exportAll(_shapeData, exports);
+var _shapeDrawerFunctions = require("./Types/ShapeDrawerFunctions");
+parcelHelpers.exportAll(_shapeDrawerFunctions, exports);
+var _singleOrMultiple = require("./Types/SingleOrMultiple");
+parcelHelpers.exportAll(_singleOrMultiple, exports);
+var _pathOptions = require("./Types/PathOptions");
+parcelHelpers.exportAll(_pathOptions, exports);
+var _canvasUtils = require("./Utils/CanvasUtils");
+parcelHelpers.exportAll(_canvasUtils, exports);
+var _colorUtils = require("./Utils/ColorUtils");
+parcelHelpers.exportAll(_colorUtils, exports);
+var _numberUtils = require("./Utils/NumberUtils");
+parcelHelpers.exportAll(_numberUtils, exports);
+var _utils = require("./Utils/Utils");
+parcelHelpers.exportAll(_utils, exports);
+const tsParticles = new _engine.Engine();
+tsParticles.init();
+
+},{"./engine":"k1zuk","./Core/Interfaces/Colors":"hmNUx","./Core/Interfaces/Gradients":"d3tBN","./Core/Interfaces/IBounds":"7p19j","./Core/Interfaces/IBubbleParticleData":"hynso","./Core/Interfaces/ICircleBouncer":"2FoFV","./Core/Interfaces/IContainerInteractivity":"4BNk6","./Core/Interfaces/IContainerPlugin":"kaGMe","./Core/Interfaces/ICoordinates":"1aicF","./Core/Interfaces/IDelta":"5LpmO","./Core/Interfaces/IDimension":"eOVtk","./Core/Interfaces/IDistance":"fiHxJ","./Core/Interfaces/IExternalInteractor":"g6DyX","./Core/Interfaces/IInteractor":"cp2fX","./Core/Interfaces/IMouseData":"2lzmu","./Core/Interfaces/IMovePathGenerator":"a4dIo","./Core/Interfaces/IParticle":"UXmaE","./Core/Interfaces/IParticleColorStyle":"16VnX","./Core/Interfaces/IParticleGravity":"ft2uF","./Core/Interfaces/IParticleHslAnimation":"fvd91","./Core/Interfaces/IParticlesInteractor":"4fOWq","./Core/Interfaces/IParticleLife":"kZKll","./Core/Interfaces/IParticleLoops":"9D7A1","./Core/Interfaces/IParticleRetinaProps":"6sf5m","./Core/Interfaces/IParticleRoll":"hCaPF","./Core/Interfaces/IParticleUpdater":"aQfJq","./Core/Interfaces/IParticleValueAnimation":"ga60i","./Core/Interfaces/IParticleWobble":"iSCit","./Core/Interfaces/IParticlesMover":"9LhS9","./Core/Interfaces/IPlugin":"jVBIQ","./Core/Interfaces/IRangeValue":"bRPLy","./Core/Interfaces/IRectSideResult":"8tlf2","./Core/Interfaces/IShapeDrawer":"klDaR","./Core/Interfaces/IShapeValues":"kWFLo","./Core/Utils/Circle":"g0wDX","./Core/Utils/CircleWarp":"jD8tV","./Core/Utils/Constants":"kUBJ0","./Core/Utils/EventListeners":"4wX6U","./Core/Utils/ExternalInteractorBase":"7s0lE","./Core/Utils/FrameManager":"8DXh1","./Core/Utils/InteractionManager":"lgKbb","./Core/Utils/ParticlesInteractorBase":"9J8jG","./Core/Utils/Plugins":"9qxGZ","./Core/Utils/Point":"e0OMt","./Core/Utils/QuadTree":"i6Jjw","./Core/Utils/Range":"hPnz6","./Core/Utils/Rectangle":"19HhJ","./Core/Utils/Vector":"fzYYX","./Core/Utils/Vector3d":"dk2zG","./Core/Canvas":"fTHv9","./Core/Container":"lTeji","./Core/Loader":"cxsDi","./Core/Particle":"diom3","./Core/Particles":"4qz45","./Core/Retina":"jA44d","./Enums/Directions/MoveDirection":"3sfoz","./Enums/Directions/RotateDirection":"ZcRkY","./Enums/Directions/OutModeDirection":"7Xvow","./Enums/Directions/TiltDirection":"7K3pF","./Enums/Modes/ClickMode":"7nV7A","./Enums/Modes/DestroyMode":"cAxCj","./Enums/Modes/DivMode":"7C7Pb","./Enums/Modes/HoverMode":"b54VN","./Enums/Modes/CollisionMode":"4fvdr","./Enums/Modes/OutMode":"lqLzp","./Enums/Modes/RollMode":"jMfqB","./Enums/Modes/SizeMode":"gjBui","./Enums/Modes/ThemeMode":"jvNWw","./Enums/Modes/ResponsiveMode":"bzYGL","./Enums/Types/AlterType":"1tUic","./Enums/Types/DestroyType":"fbMq3","./Enums/Types/GradientType":"8Kzml","./Enums/Types/InteractorType":"7FmFs","./Enums/Types/ParticleOutType":"on8st","./Enums/Types/StartValueType":"3rwBZ","./Enums/Types/DivType":"cXTPj","./Enums/Types/EasingType":"kQ0QE","./Enums/AnimationStatus":"fZELz","./Enums/InteractivityDetect":"10ey7","./Options/Classes/AnimatableColor":"5TDzE","./Options/Classes/AnimatableGradient":"eVNFP","./Options/Classes/AnimationOptions":"3QF4A","./Options/Classes/Background/Background":"5HSxj","./Options/Classes/BackgroundMask/BackgroundMask":"i0570","./Options/Classes/BackgroundMask/BackgroundMaskCover":"7IhS9","./Options/Classes/ColorAnimation":"aF9LP","./Options/Classes/FullScreen/FullScreen":"dAp2r","./Options/Classes/HslAnimation":"3Ldxw","./Options/Classes/Interactivity/Events/ClickEvent":"i9nH5","./Options/Classes/Interactivity/Events/DivEvent":"kOVM1","./Options/Classes/Interactivity/Events/Events":"d2kAR","./Options/Classes/Interactivity/Events/HoverEvent":"9oAKZ","./Options/Classes/Interactivity/Events/Parallax":"6cuKp","./Options/Classes/Interactivity/Interactivity":"fWqAq","./Options/Classes/Interactivity/Modes/Attract":"2Pk1P","./Options/Classes/Interactivity/Modes/Bounce":"1usWC","./Options/Classes/Interactivity/Modes/Bubble":"8riJd","./Options/Classes/Interactivity/Modes/BubbleBase":"kbxLc","./Options/Classes/Interactivity/Modes/BubbleDiv":"3eRJc","./Options/Classes/Interactivity/Modes/Connect":"2Q1KB","./Options/Classes/Interactivity/Modes/ConnectLinks":"U1Vzi","./Options/Classes/Interactivity/Modes/Grab":"9vA1L","./Options/Classes/Interactivity/Modes/GrabLinks":"5q4Dk","./Options/Classes/Interactivity/Modes/Light":"8rmOb","./Options/Classes/Interactivity/Modes/LightArea":"d9Ex4","./Options/Classes/Interactivity/Modes/LightGradient":"fy3m6","./Options/Classes/Interactivity/Modes/LightShadow":"6mKab","./Options/Classes/Interactivity/Modes/Modes":"he8V2","./Options/Classes/Interactivity/Modes/Push":"6K8P4","./Options/Classes/Interactivity/Modes/Remove":"lPFOm","./Options/Classes/Interactivity/Modes/Repulse":"hF23l","./Options/Classes/Interactivity/Modes/RepulseBase":"aNdo0","./Options/Classes/Interactivity/Modes/RepulseDiv":"8P1aR","./Options/Classes/Interactivity/Modes/Slow":"jKemb","./Options/Classes/Interactivity/Modes/Trail":"AsxFZ","./Options/Classes/ManualParticle":"a0uQ8","./Options/Classes/Motion/Motion":"6SSGu","./Options/Classes/Motion/MotionReduce":"bDjM5","./Options/Classes/Options":"dlH2D","./Options/Classes/OptionsColor":"9IFHT","./Options/Classes/Particles/Bounce/ParticlesBounce":"cs8FZ","./Options/Classes/Particles/Bounce/ParticlesBounceFactor":"jh0V4","./Options/Classes/Particles/Collisions/Collisions":"2P9DX","./Options/Classes/Particles/Collisions/CollisionsOverlap":"jQmLv","./Options/Classes/Particles/Destroy/Destroy":"lC8ls","./Options/Classes/Particles/Destroy/Split":"78tx0","./Options/Classes/Particles/Destroy/SplitFactor":"ieT6W","./Options/Classes/Particles/Destroy/SplitRate":"dKbAT","./Options/Classes/Particles/ParticlesOptions":"axrcM","./Options/Classes/Particles/Shadow":"FYOwc","./Options/Classes/Particles/Stroke":"b2zNO","./Options/Classes/Particles/Life/Life":"k5OCm","./Options/Classes/Particles/Life/LifeDelay":"gEqZX","./Options/Classes/Particles/Life/LifeDuration":"20rVc","./Options/Classes/Particles/Links/Links":"l4Yb3","./Options/Classes/Particles/Links/LinksShadow":"2f4wg","./Options/Classes/Particles/Links/LinksTriangle":"9KTxN","./Options/Classes/Particles/Move/MoveAttract":"5uFdQ","./Options/Classes/Particles/Move/Move":"jq3RH","./Options/Classes/Particles/Move/MoveAngle":"elOHf","./Options/Classes/Particles/Move/MoveGravity":"1wBxF","./Options/Classes/Particles/Move/OutModes":"aGnlT","./Options/Classes/Particles/Move/Path/MovePath":"cUvzW","./Options/Classes/Particles/Move/Path/MovePathDelay":"95pO2","./Options/Classes/Particles/Move/Spin":"kpq95","./Options/Classes/Particles/Move/MoveTrail":"81ov1","./Options/Classes/Particles/Number/ParticlesNumber":"jc6iI","./Options/Classes/Particles/Number/ParticlesDensity":"8EwXQ","./Options/Classes/Particles/Opacity/Opacity":"gcec4","./Options/Classes/Particles/Opacity/OpacityAnimation":"2xxT3","./Options/Classes/Particles/Orbit/Orbit":"eM2lc","./Options/Classes/Particles/Orbit/OrbitRotation":"9UWLK","./Options/Classes/Particles/Repulse/ParticlesRepulse":"2FM3f","./Options/Classes/Particles/Roll/Roll":"cd7db","./Options/Classes/Particles/Roll/RollLight":"2g1W9","./Options/Classes/Particles/Rotate/Rotate":"eIgsE","./Options/Classes/Particles/Rotate/RotateAnimation":"dwCDL","./Options/Classes/Particles/Shape/Shape":"44IjP","./Options/Classes/Particles/Size/Size":"WG86G","./Options/Classes/Particles/Size/SizeAnimation":"57KRW","./Options/Classes/Particles/Tilt/Tilt":"hCPFH","./Options/Classes/Particles/Tilt/TiltAnimation":"4L4Ib","./Options/Classes/Particles/Twinkle/Twinkle":"1Y53F","./Options/Classes/Particles/Twinkle/TwinkleValues":"eGjGX","./Options/Classes/Particles/Wobble/Wobble":"7yEbC","./Options/Classes/Particles/ZIndex/ZIndex":"4J4Up","./Options/Classes/Responsive":"7u6Vz","./Options/Classes/Theme/Theme":"grKR5","./Options/Classes/Theme/ThemeDefault":"lXrEr","./Options/Classes/ValueWithRandom":"iQyOZ","./Options/Interfaces/Background/IBackground":"jtxV1","./Options/Interfaces/BackgroundMask/IBackgroundMask":"aVXbf","./Options/Interfaces/BackgroundMask/IBackgroundMaskCover":"5JAyj","./Options/Interfaces/FullScreen/IFullScreen":"80s7p","./Options/Interfaces/IAnimatable":"fYNmb","./Options/Interfaces/IAnimatableColor":"7AFkk","./Options/Interfaces/IAnimatableGradient":"lCLGF","./Options/Interfaces/IAnimation":"ewWCM","./Options/Interfaces/IColorAnimation":"gj4HK","./Options/Interfaces/IHslAnimation":"fB39n","./Options/Interfaces/IManualParticle":"49GFQ","./Options/Interfaces/IOptionLoader":"gQjvf","./Options/Interfaces/IOptions":"2M279","./Options/Interfaces/IOptionsColor":"0477f","./Options/Interfaces/IOptionsGradient":"8sZTU","./Options/Interfaces/IResponsive":"fj2yl","./Options/Interfaces/IValueWithRandom":"1IG6l","./Options/Interfaces/Interactivity/Events/IClickEvent":"gbKkq","./Options/Interfaces/Interactivity/Events/IDivEvent":"9NAIa","./Options/Interfaces/Interactivity/Events/IEvents":"ldAPG","./Options/Interfaces/Interactivity/Events/IHoverEvent":"QGV6p","./Options/Interfaces/Interactivity/Events/IParallax":"3KBIx","./Options/Interfaces/Interactivity/Modes/IAttract":"7bxxM","./Options/Interfaces/Interactivity/Modes/IBounce":"161eG","./Options/Interfaces/Interactivity/Modes/IBubble":"iy9jj","./Options/Interfaces/Interactivity/Modes/IBubbleBase":"jeLQa","./Options/Interfaces/Interactivity/Modes/IBubbleDiv":"jp7bY","./Options/Interfaces/Interactivity/Modes/IConnect":"aGlYy","./Options/Interfaces/Interactivity/Modes/IConnectLinks":"kBw5G","./Options/Interfaces/Interactivity/Modes/IGrab":"1HX6H","./Options/Interfaces/Interactivity/Modes/IGrabLinks":"daexo","./Options/Interfaces/Interactivity/Modes/ILight":"5At6C","./Options/Interfaces/Interactivity/Modes/ILightArea":"cylAm","./Options/Interfaces/Interactivity/Modes/ILightGradient":"74x8a","./Options/Interfaces/Interactivity/Modes/ILightShadow":"a4HRG","./Options/Interfaces/Interactivity/Modes/IModeDiv":"eFSsh","./Options/Interfaces/Interactivity/Modes/IModes":"gOCRK","./Options/Interfaces/Interactivity/Modes/IPush":"56dHs","./Options/Interfaces/Interactivity/Modes/IRemove":"i0hfc","./Options/Interfaces/Interactivity/Modes/IRepulse":"5jMB4","./Options/Interfaces/Interactivity/Modes/IRepulseBase":"jlaJH","./Options/Interfaces/Interactivity/Modes/IRepulseDiv":"7N4fO","./Options/Interfaces/Interactivity/Modes/ISlow":"klirE","./Options/Interfaces/Interactivity/Modes/ITrail":"gcVOA","./Options/Interfaces/Interactivity/IInteractivity":"9YEgz","./Options/Interfaces/Motion/IMotion":"ivtey","./Options/Interfaces/Motion/IMotionReduce":"gOAdU","./Options/Interfaces/Particles/Bounce/IParticlesBounce":"6ncrQ","./Options/Interfaces/Particles/Collisions/ICollisions":"7sgKM","./Options/Interfaces/Particles/Collisions/ICollisionsOverlap":"clO6q","./Options/Interfaces/Particles/Destroy/IDestroy":"4G8dV","./Options/Interfaces/Particles/Destroy/ISplit":"ftaxK","./Options/Interfaces/Particles/IParticlesOptions":"46uDD","./Options/Interfaces/Particles/IShadow":"2nI9v","./Options/Interfaces/Particles/IStroke":"84mIa","./Options/Interfaces/Particles/Life/ILife":"1TEat","./Options/Interfaces/Particles/Life/ILifeDelay":"6NKDz","./Options/Interfaces/Particles/Life/ILifeDuration":"9bctQ","./Options/Interfaces/Particles/Links/ILinks":"YZbJt","./Options/Interfaces/Particles/Links/ILinksShadow":"4JxSi","./Options/Interfaces/Particles/Links/ILinksTriangle":"e8fL3","./Options/Interfaces/Particles/Move/IMoveAttract":"iITKM","./Options/Interfaces/Particles/Move/IMove":"5cuRM","./Options/Interfaces/Particles/Move/IMoveAngle":"h4mCR","./Options/Interfaces/Particles/Move/IMoveGravity":"a8WiS","./Options/Interfaces/Particles/Move/Path/IMovePath":"2U2b3","./Options/Interfaces/Particles/Move/IOutModes":"cTnMy","./Options/Interfaces/Particles/Move/ISpin":"jtGQV","./Options/Interfaces/Particles/Move/IMoveTrail":"gjzNt","./Options/Interfaces/Particles/Number/IParticlesDensity":"7S9h2","./Options/Interfaces/Particles/Number/IParticlesNumber":"8PXle","./Options/Interfaces/Particles/Opacity/IOpacity":"6CufQ","./Options/Interfaces/Particles/Opacity/IOpacityAnimation":"jStOY","./Options/Interfaces/Particles/Orbit/IOrbit":"ewOrw","./Options/Interfaces/Particles/Repulse/IParticlesRepulse":"7FAGU","./Options/Interfaces/Particles/Roll/IRoll":"fL1U0","./Options/Interfaces/Particles/Roll/IRollLight":"70V3T","./Options/Interfaces/Particles/Rotate/IRotate":"5b7ar","./Options/Interfaces/Particles/Rotate/IRotateAnimation":"9orv0","./Options/Interfaces/Particles/Shape/ICharacterShape":"9TjDx","./Options/Interfaces/Particles/Shape/IImageShape":"9JZlu","./Options/Interfaces/Particles/Shape/IPolygonShape":"b3IeV","./Options/Interfaces/Particles/Shape/IShape":"jvHgf","./Options/Interfaces/Particles/Shape/IShapeValues":"gUrWN","./Options/Interfaces/Particles/Shape/IStarShape":"6m5ki","./Options/Interfaces/Particles/Size/ISize":"2JnSz","./Options/Interfaces/Particles/Size/ISizeAnimation":"h9lf4","./Options/Interfaces/Particles/Tilt/ITilt":"k2kzW","./Options/Interfaces/Particles/Tilt/ITiltAnimation":"brSyW","./Options/Interfaces/Particles/Twinkle/ITwinkle":"3pFI7","./Options/Interfaces/Particles/Twinkle/ITwinkleValues":"5jmDG","./Options/Interfaces/Particles/Wobble/IWobble":"5jrtj","./Options/Interfaces/Particles/ZIndex/IZIndex":"5zcLx","./Options/Interfaces/Theme/ITheme":"5JXUv","./Options/Interfaces/Theme/IThemeDefault":"5WYm8","./Types/RangeValue":"aOYBw","./Types/RecursivePartial":"f9JOj","./Types/ShapeData":"k7vaj","./Types/ShapeDrawerFunctions":"c4aXU","./Types/SingleOrMultiple":"eQSWE","./Types/PathOptions":"iiqB7","./Utils/CanvasUtils":"knoc1","./Utils/ColorUtils":"cYU1v","./Utils/NumberUtils":"4qdpK","./Utils/Utils":"cbRwi","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"k1zuk":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "Engine", ()=>Engine
+);
+var _eventDispatcher = require("./Utils/EventDispatcher");
+var _loader = require("./Core/Loader");
+var _plugins = require("./Core/Utils/Plugins");
+var __classPrivateFieldSet = undefined && undefined.__classPrivateFieldSet || function(receiver, state, value, kind, f) {
+    if (kind === "m") throw new TypeError("Private method is not writable");
+    if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a setter");
+    if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
+    return kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value), value;
+};
+var __classPrivateFieldGet = undefined && undefined.__classPrivateFieldGet || function(receiver, state, kind, f) {
+    if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a getter");
+    if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
+    return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
+};
+var _Engine_initialized, _Engine_loader;
+class Engine {
+    constructor(){
+        _Engine_initialized.set(this, void 0);
+        _Engine_loader.set(this, void 0);
+        this.domArray = [];
+        this.eventDispatcher = new _eventDispatcher.EventDispatcher();
+        __classPrivateFieldSet(this, _Engine_initialized, false, "f");
+        __classPrivateFieldSet(this, _Engine_loader, new _loader.Loader(this), "f");
+        this.plugins = new _plugins.Plugins(this);
+    }
+    init() {
+        if (!__classPrivateFieldGet(this, _Engine_initialized, "f")) __classPrivateFieldSet(this, _Engine_initialized, true, "f");
+    }
+    async loadFromArray(tagId, options, index) {
+        return __classPrivateFieldGet(this, _Engine_loader, "f").load(tagId, options, index);
+    }
+    async load(tagId, options) {
+        return __classPrivateFieldGet(this, _Engine_loader, "f").load(tagId, options);
+    }
+    async set(id, element, options) {
+        return __classPrivateFieldGet(this, _Engine_loader, "f").set(id, element, options);
+    }
+    async loadJSON(tagId, pathConfigJson, index) {
+        return __classPrivateFieldGet(this, _Engine_loader, "f").loadJSON(tagId, pathConfigJson, index);
+    }
+    async setJSON(id, element, pathConfigJson, index) {
+        return __classPrivateFieldGet(this, _Engine_loader, "f").setJSON(id, element, pathConfigJson, index);
+    }
+    setOnClickHandler(callback) {
+        __classPrivateFieldGet(this, _Engine_loader, "f").setOnClickHandler(callback);
+    }
+    dom() {
+        return __classPrivateFieldGet(this, _Engine_loader, "f").dom();
+    }
+    domItem(index) {
+        return __classPrivateFieldGet(this, _Engine_loader, "f").domItem(index);
+    }
+    async refresh() {
+        for (const instance of this.dom())await instance.refresh();
+    }
+    async addShape(shape, drawer, init, afterEffect, destroy) {
+        let customDrawer;
+        if (typeof drawer === "function") customDrawer = {
+            afterEffect: afterEffect,
+            destroy: destroy,
+            draw: drawer,
+            init: init
+        };
+        else customDrawer = drawer;
+        this.plugins.addShapeDrawer(shape, customDrawer);
+        await this.refresh();
+    }
+    async addPreset(preset, options, override = false) {
+        this.plugins.addPreset(preset, options, override);
+        await this.refresh();
+    }
+    async addPlugin(plugin) {
+        this.plugins.addPlugin(plugin);
+        await this.refresh();
+    }
+    async addPathGenerator(name, generator) {
+        this.plugins.addPathGenerator(name, generator);
+        await this.refresh();
+    }
+    async addInteractor(name, interactorInitializer) {
+        this.plugins.addInteractor(name, interactorInitializer);
+        await this.refresh();
+    }
+    async addMover(name, moverInitializer) {
+        this.plugins.addParticleMover(name, moverInitializer);
+        await this.refresh();
+    }
+    async addParticleUpdater(name, updaterInitializer) {
+        this.plugins.addParticleUpdater(name, updaterInitializer);
+        await this.refresh();
+    }
+    addEventListener(type, listener) {
+        __classPrivateFieldGet(this, _Engine_loader, "f").addEventListener(type, listener);
+    }
+    removeEventListener(type, listener) {
+        __classPrivateFieldGet(this, _Engine_loader, "f").removeEventListener(type, listener);
+    }
+    dispatchEvent(type, args) {
+        __classPrivateFieldGet(this, _Engine_loader, "f").dispatchEvent(type, args);
+    }
+}
+_Engine_initialized = new WeakMap(), _Engine_loader = new WeakMap();
+
+},{"./Utils/EventDispatcher":"cUYKe","./Core/Loader":"cxsDi","./Core/Utils/Plugins":"9qxGZ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"cUYKe":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "EventDispatcher", ()=>EventDispatcher
+);
+var __classPrivateFieldSet = undefined && undefined.__classPrivateFieldSet || function(receiver, state, value, kind, f) {
+    if (kind === "m") throw new TypeError("Private method is not writable");
+    if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a setter");
+    if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
+    return kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value), value;
+};
+var __classPrivateFieldGet = undefined && undefined.__classPrivateFieldGet || function(receiver, state, kind, f) {
+    if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a getter");
+    if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
+    return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
+};
+var _EventDispatcher_listeners;
+class EventDispatcher {
+    constructor(){
+        _EventDispatcher_listeners.set(this, void 0);
+        __classPrivateFieldSet(this, _EventDispatcher_listeners, new Map(), "f");
+    }
+    addEventListener(type, listener) {
+        var _a;
+        this.removeEventListener(type, listener);
+        if (!__classPrivateFieldGet(this, _EventDispatcher_listeners, "f").get(type)) __classPrivateFieldGet(this, _EventDispatcher_listeners, "f").set(type, []);
+        (_a = __classPrivateFieldGet(this, _EventDispatcher_listeners, "f").get(type)) === null || _a === void 0 || _a.push(listener);
+    }
+    removeEventListener(type, listener) {
+        const arr = __classPrivateFieldGet(this, _EventDispatcher_listeners, "f").get(type);
+        if (!arr) return;
+        const length = arr.length, idx = arr.indexOf(listener);
+        if (idx < 0) return;
+        if (length === 1) __classPrivateFieldGet(this, _EventDispatcher_listeners, "f").delete(type);
+        else arr.splice(idx, 1);
+    }
+    removeAllEventListeners(type) {
+        if (!type) __classPrivateFieldSet(this, _EventDispatcher_listeners, new Map(), "f");
+        else __classPrivateFieldGet(this, _EventDispatcher_listeners, "f").delete(type);
+    }
+    dispatchEvent(type, args) {
+        var _a;
+        (_a = __classPrivateFieldGet(this, _EventDispatcher_listeners, "f").get(type)) === null || _a === void 0 || _a.forEach((handler)=>handler(args)
+        );
+    }
+    hasEventListener(type) {
+        return !!__classPrivateFieldGet(this, _EventDispatcher_listeners, "f").get(type);
+    }
+}
+_EventDispatcher_listeners = new WeakMap();
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"cxsDi":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "Loader", ()=>Loader
+);
+var _container = require("./Container");
+var _constants = require("./Utils/Constants");
+var _utils = require("../Utils/Utils");
+var __classPrivateFieldSet = undefined && undefined.__classPrivateFieldSet || function(receiver, state, value, kind, f) {
+    if (kind === "m") throw new TypeError("Private method is not writable");
+    if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a setter");
+    if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
+    return kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value), value;
+};
+var __classPrivateFieldGet = undefined && undefined.__classPrivateFieldGet || function(receiver, state, kind, f) {
+    if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a getter");
+    if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
+    return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
+};
+var _Loader_engine;
+function fetchError(statusCode) {
+    console.error(`Error tsParticles - fetch status: ${statusCode}`);
+    console.error("Error tsParticles - File config not found");
+}
+class Loader {
+    constructor(engine){
+        _Loader_engine.set(this, void 0);
+        __classPrivateFieldSet(this, _Loader_engine, engine, "f");
+    }
+    dom() {
+        return __classPrivateFieldGet(this, _Loader_engine, "f").domArray;
+    }
+    domItem(index) {
+        const dom = this.dom();
+        const item = dom[index];
+        if (item && !item.destroyed) return item;
+        dom.splice(index, 1);
+    }
+    async loadOptions(params) {
+        var _a, _b, _c;
+        const tagId = (_a = params.tagId) !== null && _a !== void 0 ? _a : `tsparticles${Math.floor(Math.random() * 10000)}`, { options , index  } = params;
+        let domContainer = (_b = params.element) !== null && _b !== void 0 ? _b : document.getElementById(tagId);
+        if (!domContainer) {
+            domContainer = document.createElement("div");
+            domContainer.id = tagId;
+            (_c = document.querySelector("body")) === null || _c === void 0 || _c.append(domContainer);
+        }
+        const currentOptions = options instanceof Array ? _utils.itemFromArray(options, index) : options, dom = this.dom(), oldIndex = dom.findIndex((v)=>v.id === tagId
+        );
+        if (oldIndex >= 0) {
+            const old = this.domItem(oldIndex);
+            if (old && !old.destroyed) {
+                old.destroy();
+                dom.splice(oldIndex, 1);
+            }
+        }
+        let canvasEl;
+        if (domContainer.tagName.toLowerCase() === "canvas") {
+            canvasEl = domContainer;
+            canvasEl.dataset[_constants.generatedAttribute] = "false";
+        } else {
+            const existingCanvases = domContainer.getElementsByTagName("canvas");
+            if (existingCanvases.length) {
+                canvasEl = existingCanvases[0];
+                canvasEl.dataset[_constants.generatedAttribute] = "false";
+            } else {
+                canvasEl = document.createElement("canvas");
+                canvasEl.dataset[_constants.generatedAttribute] = "true";
+                canvasEl.style.width = "100%";
+                canvasEl.style.height = "100%";
+                domContainer.appendChild(canvasEl);
+            }
+        }
+        const newItem = new _container.Container(__classPrivateFieldGet(this, _Loader_engine, "f"), tagId, currentOptions);
+        if (oldIndex >= 0) dom.splice(oldIndex, 0, newItem);
+        else dom.push(newItem);
+        newItem.canvas.loadCanvas(canvasEl);
+        await newItem.start();
+        return newItem;
+    }
+    async loadRemoteOptions(params) {
+        const { url: jsonUrl , index  } = params, url = jsonUrl instanceof Array ? _utils.itemFromArray(jsonUrl, index) : jsonUrl;
+        if (!url) return;
+        const response = await fetch(url);
+        if (!response.ok) {
+            fetchError(response.status);
+            return;
+        }
+        const data = await response.json();
+        return this.loadOptions({
+            tagId: params.tagId,
+            element: params.element,
+            index,
+            options: data
+        });
+    }
+    load(tagId, options, index) {
+        const params = {
+            index
+        };
+        if (typeof tagId === "string") params.tagId = tagId;
+        else params.options = tagId;
+        if (typeof options === "number") params.index = options !== null && options !== void 0 ? options : params.index;
+        else params.options = options !== null && options !== void 0 ? options : params.options;
+        return this.loadOptions(params);
+    }
+    async set(id, domContainer, options, index) {
+        const params = {
+            index
+        };
+        if (typeof id === "string") params.tagId = id;
+        else params.element = id;
+        if (domContainer instanceof HTMLElement) params.element = domContainer;
+        else params.options = domContainer;
+        if (typeof options === "number") params.index = options;
+        else params.options = options !== null && options !== void 0 ? options : params.options;
+        return this.loadOptions(params);
+    }
+    async loadJSON(tagId, jsonUrl, index) {
+        let url, id;
+        if (typeof jsonUrl === "number" || jsonUrl === undefined) url = tagId;
+        else {
+            id = tagId;
+            url = jsonUrl;
+        }
+        return this.loadRemoteOptions({
+            tagId: id,
+            url,
+            index
+        });
+    }
+    async setJSON(id, domContainer, jsonUrl, index) {
+        let url, newId, newIndex, element;
+        if (id instanceof HTMLElement) {
+            element = id;
+            url = domContainer;
+            newIndex = jsonUrl;
+        } else {
+            newId = id;
+            element = domContainer;
+            url = jsonUrl;
+            newIndex = index;
+        }
+        return this.loadRemoteOptions({
+            tagId: newId,
+            url,
+            index: newIndex,
+            element
+        });
+    }
+    setOnClickHandler(callback) {
+        const dom = this.dom();
+        if (!dom.length) throw new Error("Can only set click handlers after calling tsParticles.load() or tsParticles.loadJSON()");
+        for (const domItem of dom)domItem.addClickHandler(callback);
+    }
+    addEventListener(type, listener) {
+        __classPrivateFieldGet(this, _Loader_engine, "f").eventDispatcher.addEventListener(type, listener);
+    }
+    removeEventListener(type, listener) {
+        __classPrivateFieldGet(this, _Loader_engine, "f").eventDispatcher.removeEventListener(type, listener);
+    }
+    dispatchEvent(type, args) {
+        __classPrivateFieldGet(this, _Loader_engine, "f").eventDispatcher.dispatchEvent(type, args);
+    }
+}
+_Loader_engine = new WeakMap();
+
+},{"./Container":"lTeji","./Utils/Constants":"kUBJ0","../Utils/Utils":"cbRwi","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"lTeji":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "Container", ()=>Container
+);
+var _utils = require("../Utils/Utils");
+var _canvas = require("./Canvas");
+var _eventListeners = require("./Utils/EventListeners");
+var _frameManager = require("./Utils/FrameManager");
+var _particles = require("./Particles");
+var _retina = require("./Retina");
+var _numberUtils = require("../Utils/NumberUtils");
+var __classPrivateFieldSet = undefined && undefined.__classPrivateFieldSet || function(receiver, state, value, kind, f) {
+    if (kind === "m") throw new TypeError("Private method is not writable");
+    if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a setter");
+    if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
+    return kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value), value;
+};
+var __classPrivateFieldGet = undefined && undefined.__classPrivateFieldGet || function(receiver, state, kind, f) {
+    if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a getter");
+    if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
+    return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
+};
+var _Container_engine;
+class Container {
+    constructor(engine, id, sourceOptions){
+        this.id = id;
+        _Container_engine.set(this, void 0);
+        __classPrivateFieldSet(this, _Container_engine, engine, "f");
+        this.fpsLimit = 120;
+        this.duration = 0;
+        this.lifeTime = 0;
+        this.firstStart = true;
+        this.started = false;
+        this.destroyed = false;
+        this.paused = true;
+        this.lastFrameTime = 0;
+        this.zLayers = 100;
+        this.pageHidden = false;
+        this._sourceOptions = sourceOptions;
+        this._initialSourceOptions = sourceOptions;
+        this.retina = new _retina.Retina(this);
+        this.canvas = new _canvas.Canvas(this);
+        this.particles = new _particles.Particles(__classPrivateFieldGet(this, _Container_engine, "f"), this);
+        this.drawer = new _frameManager.FrameManager(this);
+        this.pathGenerator = {
+            generate: (p)=>{
+                const v = p.velocity.copy();
+                v.angle += v.length * Math.PI / 180;
+                return v;
+            },
+            init: ()=>{},
+            update: ()=>{}
+        };
+        this.interactivity = {
+            mouse: {
+                clicking: false,
+                inside: false
+            }
+        };
+        this.plugins = new Map();
+        this.drawers = new Map();
+        this.density = 1;
+        this._options = _utils.loadContainerOptions(__classPrivateFieldGet(this, _Container_engine, "f"));
+        this.actualOptions = _utils.loadContainerOptions(__classPrivateFieldGet(this, _Container_engine, "f"));
+        this.eventListeners = new _eventListeners.EventListeners(this);
+        if (typeof IntersectionObserver !== "undefined" && IntersectionObserver) this.intersectionObserver = new IntersectionObserver((entries)=>this.intersectionManager(entries)
+        );
+        __classPrivateFieldGet(this, _Container_engine, "f").dispatchEvent("containerBuilt", {
+            container: this
+        });
+    }
+    get options() {
+        return this._options;
+    }
+    get sourceOptions() {
+        return this._sourceOptions;
+    }
+    play(force) {
+        const needsUpdate = this.paused || force;
+        if (this.firstStart && !this.actualOptions.autoPlay) {
+            this.firstStart = false;
+            return;
+        }
+        if (this.paused) this.paused = false;
+        if (needsUpdate) {
+            for (const [, plugin] of this.plugins)if (plugin.play) plugin.play();
+        }
+        __classPrivateFieldGet(this, _Container_engine, "f").dispatchEvent("containerPlay", {
+            container: this
+        });
+        this.draw(needsUpdate || false);
+    }
+    pause() {
+        if (this.drawAnimationFrame !== undefined) {
+            _utils.cancelAnimation()(this.drawAnimationFrame);
+            delete this.drawAnimationFrame;
+        }
+        if (this.paused) return;
+        for (const [, plugin] of this.plugins)if (plugin.pause) plugin.pause();
+        if (!this.pageHidden) this.paused = true;
+        __classPrivateFieldGet(this, _Container_engine, "f").dispatchEvent("containerPaused", {
+            container: this
+        });
+    }
+    draw(force) {
+        let refreshTime = force;
+        this.drawAnimationFrame = _utils.animate()(async (timestamp)=>{
+            if (refreshTime) {
+                this.lastFrameTime = undefined;
+                refreshTime = false;
+            }
+            await this.drawer.nextFrame(timestamp);
+        });
+    }
+    getAnimationStatus() {
+        return !this.paused && !this.pageHidden;
+    }
+    setNoise(noiseOrGenerator, init, update) {
+        this.setPath(noiseOrGenerator, init, update);
+    }
+    setPath(pathOrGenerator, init, update) {
+        var _a, _b, _c;
+        if (!pathOrGenerator) return;
+        if (typeof pathOrGenerator === "function") {
+            this.pathGenerator.generate = pathOrGenerator;
+            if (init) this.pathGenerator.init = init;
+            if (update) this.pathGenerator.update = update;
+        } else {
+            const oldGenerator = this.pathGenerator;
+            this.pathGenerator = pathOrGenerator;
+            (_a = this.pathGenerator).generate || (_a.generate = oldGenerator.generate);
+            (_b = this.pathGenerator).init || (_b.init = oldGenerator.init);
+            (_c = this.pathGenerator).update || (_c.update = oldGenerator.update);
+        }
+    }
+    destroy() {
+        this.stop();
+        this.canvas.destroy();
+        for (const [, drawer] of this.drawers)if (drawer.destroy) drawer.destroy(this);
+        for (const key of this.drawers.keys())this.drawers.delete(key);
+        this.destroyed = true;
+        __classPrivateFieldGet(this, _Container_engine, "f").dispatchEvent("containerDestroyed", {
+            container: this
+        });
+    }
+    exportImg(callback) {
+        this.exportImage(callback);
+    }
+    exportImage(callback, type, quality) {
+        var _a;
+        return (_a = this.canvas.element) === null || _a === void 0 ? void 0 : _a.toBlob(callback, type !== null && type !== void 0 ? type : "image/png", quality);
+    }
+    exportConfiguration() {
+        return JSON.stringify(this.actualOptions, undefined, 2);
+    }
+    refresh() {
+        this.stop();
+        return this.start();
+    }
+    reset() {
+        this._options = _utils.loadContainerOptions(__classPrivateFieldGet(this, _Container_engine, "f"));
+        return this.refresh();
+    }
+    stop() {
+        if (!this.started) return;
+        this.firstStart = true;
+        this.started = false;
+        this.eventListeners.removeListeners();
+        this.pause();
+        this.particles.clear();
+        this.canvas.clear();
+        if (this.interactivity.element instanceof HTMLElement && this.intersectionObserver) this.intersectionObserver.unobserve(this.interactivity.element);
+        for (const [, plugin] of this.plugins)if (plugin.stop) plugin.stop();
+        for (const key of this.plugins.keys())this.plugins.delete(key);
+        this.particles.linksColors = new Map();
+        delete this.particles.grabLineColor;
+        delete this.particles.linksColor;
+        this._sourceOptions = this._options;
+        __classPrivateFieldGet(this, _Container_engine, "f").dispatchEvent("containerStopped", {
+            container: this
+        });
+    }
+    async loadTheme(name) {
+        this.currentTheme = name;
+        await this.refresh();
+    }
+    async start() {
+        if (this.started) return;
+        await this.init();
+        this.started = true;
+        this.eventListeners.addListeners();
+        if (this.interactivity.element instanceof HTMLElement && this.intersectionObserver) this.intersectionObserver.observe(this.interactivity.element);
+        for (const [, plugin] of this.plugins){
+            if (plugin.startAsync !== undefined) await plugin.startAsync();
+            else if (plugin.start !== undefined) plugin.start();
+        }
+        __classPrivateFieldGet(this, _Container_engine, "f").dispatchEvent("containerStarted", {
+            container: this
+        });
+        this.play();
+    }
+    addClickHandler(callback) {
+        const el = this.interactivity.element;
+        if (!el) return;
+        const clickOrTouchHandler = (e, pos, radius)=>{
+            if (this.destroyed) return;
+            const pxRatio = this.retina.pixelRatio, posRetina = {
+                x: pos.x * pxRatio,
+                y: pos.y * pxRatio
+            }, particles = this.particles.quadTree.queryCircle(posRetina, radius * pxRatio);
+            callback(e, particles);
+        };
+        const clickHandler = (e)=>{
+            if (this.destroyed) return;
+            const mouseEvent = e, pos = {
+                x: mouseEvent.offsetX || mouseEvent.clientX,
+                y: mouseEvent.offsetY || mouseEvent.clientY
+            };
+            clickOrTouchHandler(e, pos, 1);
+        };
+        const touchStartHandler = ()=>{
+            if (this.destroyed) return;
+            touched = true;
+            touchMoved = false;
+        };
+        const touchMoveHandler = ()=>{
+            if (this.destroyed) return;
+            touchMoved = true;
+        };
+        const touchEndHandler = (e)=>{
+            var _a, _b, _c;
+            if (this.destroyed) return;
+            if (touched && !touchMoved) {
+                const touchEvent = e;
+                let lastTouch = touchEvent.touches[touchEvent.touches.length - 1];
+                if (!lastTouch) {
+                    lastTouch = touchEvent.changedTouches[touchEvent.changedTouches.length - 1];
+                    if (!lastTouch) return;
+                }
+                const canvasRect = (_a = this.canvas.element) === null || _a === void 0 ? void 0 : _a.getBoundingClientRect(), pos = {
+                    x: lastTouch.clientX - ((_b = canvasRect === null || canvasRect === void 0 ? void 0 : canvasRect.left) !== null && _b !== void 0 ? _b : 0),
+                    y: lastTouch.clientY - ((_c = canvasRect === null || canvasRect === void 0 ? void 0 : canvasRect.top) !== null && _c !== void 0 ? _c : 0)
+                };
+                clickOrTouchHandler(e, pos, Math.max(lastTouch.radiusX, lastTouch.radiusY));
+            }
+            touched = false;
+            touchMoved = false;
+        };
+        const touchCancelHandler = ()=>{
+            if (this.destroyed) return;
+            touched = false;
+            touchMoved = false;
+        };
+        let touched = false;
+        let touchMoved = false;
+        el.addEventListener("click", clickHandler);
+        el.addEventListener("touchstart", touchStartHandler);
+        el.addEventListener("touchmove", touchMoveHandler);
+        el.addEventListener("touchend", touchEndHandler);
+        el.addEventListener("touchcancel", touchCancelHandler);
+    }
+    handleClickMode(mode) {
+        this.particles.handleClickMode(mode);
+        for (const [, plugin] of this.plugins)if (plugin.handleClickMode) plugin.handleClickMode(mode);
+    }
+    updateActualOptions() {
+        this.actualOptions.responsive = [];
+        const newMaxWidth = this.actualOptions.setResponsive(this.canvas.size.width, this.retina.pixelRatio, this._options);
+        this.actualOptions.setTheme(this.currentTheme);
+        if (this.responsiveMaxWidth != newMaxWidth) {
+            this.responsiveMaxWidth = newMaxWidth;
+            return true;
+        }
+        return false;
+    }
+    async init() {
+        const shapes = __classPrivateFieldGet(this, _Container_engine, "f").plugins.getSupportedShapes();
+        for (const type of shapes){
+            const drawer = __classPrivateFieldGet(this, _Container_engine, "f").plugins.getShapeDrawer(type);
+            if (drawer) this.drawers.set(type, drawer);
+        }
+        this._options = _utils.loadContainerOptions(__classPrivateFieldGet(this, _Container_engine, "f"), this._initialSourceOptions, this.sourceOptions);
+        this.actualOptions = _utils.loadContainerOptions(__classPrivateFieldGet(this, _Container_engine, "f"), this._options);
+        this.retina.init();
+        this.canvas.init();
+        this.updateActualOptions();
+        this.canvas.initBackground();
+        this.canvas.resize();
+        this.zLayers = this.actualOptions.zLayers;
+        this.duration = _numberUtils.getRangeValue(this.actualOptions.duration);
+        this.lifeTime = 0;
+        this.fpsLimit = this.actualOptions.fpsLimit > 0 ? this.actualOptions.fpsLimit : 120;
+        const availablePlugins = __classPrivateFieldGet(this, _Container_engine, "f").plugins.getAvailablePlugins(this);
+        for (const [id, plugin] of availablePlugins)this.plugins.set(id, plugin);
+        for (const [, drawer] of this.drawers)if (drawer.init) await drawer.init(this);
+        for (const [, plugin1] of this.plugins){
+            if (plugin1.init) plugin1.init(this.actualOptions);
+            else if (plugin1.initAsync !== undefined) await plugin1.initAsync(this.actualOptions);
+        }
+        const pathOptions = this.actualOptions.particles.move.path;
+        if (pathOptions.generator) this.setPath(__classPrivateFieldGet(this, _Container_engine, "f").plugins.getPathGenerator(pathOptions.generator));
+        __classPrivateFieldGet(this, _Container_engine, "f").dispatchEvent("containerInit", {
+            container: this
+        });
+        this.particles.init();
+        this.particles.setDensity();
+        for (const [, plugin2] of this.plugins)if (plugin2.particlesSetup !== undefined) plugin2.particlesSetup();
+        __classPrivateFieldGet(this, _Container_engine, "f").dispatchEvent("particlesSetup", {
+            container: this
+        });
+    }
+    intersectionManager(entries) {
+        if (!this.actualOptions.pauseOnOutsideViewport) return;
+        for (const entry of entries){
+            if (entry.target !== this.interactivity.element) continue;
+            if (entry.isIntersecting) this.play();
+            else this.pause();
+        }
+    }
+}
+_Container_engine = new WeakMap();
+
+},{"../Utils/Utils":"cbRwi","./Canvas":"fTHv9","./Utils/EventListeners":"4wX6U","./Utils/FrameManager":"8DXh1","./Particles":"4qz45","./Retina":"jA44d","../Utils/NumberUtils":"4qdpK","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"cbRwi":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "isSsr", ()=>isSsr
+);
+parcelHelpers.export(exports, "animate", ()=>animate
+);
+parcelHelpers.export(exports, "cancelAnimation", ()=>cancelAnimation
+);
+parcelHelpers.export(exports, "isInArray", ()=>isInArray
+);
+parcelHelpers.export(exports, "loadFont", ()=>loadFont
+);
+parcelHelpers.export(exports, "arrayRandomIndex", ()=>arrayRandomIndex
+);
+parcelHelpers.export(exports, "itemFromArray", ()=>itemFromArray
+);
+parcelHelpers.export(exports, "isPointInside", ()=>isPointInside
+);
+parcelHelpers.export(exports, "areBoundsInside", ()=>areBoundsInside
+);
+parcelHelpers.export(exports, "calculateBounds", ()=>calculateBounds
+);
+parcelHelpers.export(exports, "deepExtend", ()=>deepExtend
+);
+parcelHelpers.export(exports, "isDivModeEnabled", ()=>isDivModeEnabled
+);
+parcelHelpers.export(exports, "divModeExecute", ()=>divModeExecute
+);
+parcelHelpers.export(exports, "singleDivModeExecute", ()=>singleDivModeExecute
+);
+parcelHelpers.export(exports, "divMode", ()=>divMode
+);
+parcelHelpers.export(exports, "circleBounceDataFromParticle", ()=>circleBounceDataFromParticle
+);
+parcelHelpers.export(exports, "circleBounce", ()=>circleBounce
+);
+parcelHelpers.export(exports, "rectBounce", ()=>rectBounce
+);
+parcelHelpers.export(exports, "loadContainerOptions", ()=>loadContainerOptions
+);
+parcelHelpers.export(exports, "loadParticlesOptions", ()=>loadParticlesOptions
+);
+var _numberUtils = require("./NumberUtils");
+var _options = require("../Options/Classes/Options");
+var _particlesOptions = require("../Options/Classes/Particles/ParticlesOptions");
+var _vector = require("../Core/Utils/Vector");
+function rectSideBounce(pSide, pOtherSide, rectSide, rectOtherSide, velocity, factor) {
+    const res = {
+        bounced: false
+    };
+    if (pOtherSide.min < rectOtherSide.min || pOtherSide.min > rectOtherSide.max || pOtherSide.max < rectOtherSide.min || pOtherSide.max > rectOtherSide.max) return res;
+    if (pSide.max >= rectSide.min && pSide.max <= (rectSide.max + rectSide.min) / 2 && velocity > 0 || pSide.min <= rectSide.max && pSide.min > (rectSide.max + rectSide.min) / 2 && velocity < 0) {
+        res.velocity = velocity * -factor;
+        res.bounced = true;
+    }
+    return res;
+}
+function checkSelector(element, selectors) {
+    if (!(selectors instanceof Array)) return element.matches(selectors);
+    for (const selector of selectors){
+        if (element.matches(selector)) return true;
+    }
+    return false;
+}
+function isSsr() {
+    return typeof window === "undefined" || !window || typeof window.document === "undefined" || !window.document;
+}
+function animate() {
+    return isSsr() ? (callback)=>setTimeout(callback)
+     : (callback)=>(window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.oRequestAnimationFrame || window.msRequestAnimationFrame || window.setTimeout)(callback)
+    ;
+}
+function cancelAnimation() {
+    return isSsr() ? (handle)=>clearTimeout(handle)
+     : (handle)=>(window.cancelAnimationFrame || window.webkitCancelRequestAnimationFrame || window.mozCancelRequestAnimationFrame || window.oCancelRequestAnimationFrame || window.msCancelRequestAnimationFrame || window.clearTimeout)(handle)
+    ;
+}
+function isInArray(value, array) {
+    return value === array || array instanceof Array && array.indexOf(value) > -1;
+}
+async function loadFont(font, weight) {
+    try {
+        await document.fonts.load(`${weight !== null && weight !== void 0 ? weight : "400"} 36px '${font !== null && font !== void 0 ? font : "Verdana"}'`);
+    } catch (_a) {}
+}
+function arrayRandomIndex(array) {
+    return Math.floor(Math.random() * array.length);
+}
+function itemFromArray(array, index, useIndex = true) {
+    const fixedIndex = index !== undefined && useIndex ? index % array.length : arrayRandomIndex(array);
+    return array[fixedIndex];
+}
+function isPointInside(point, size, offset, radius, direction) {
+    return areBoundsInside(calculateBounds(point, radius !== null && radius !== void 0 ? radius : 0), size, offset, direction);
+}
+function areBoundsInside(bounds, size, offset, direction) {
+    let inside = true;
+    if (!direction || direction === "bottom") inside = bounds.top < size.height + offset.x;
+    if (inside && (!direction || direction === "left")) inside = bounds.right > offset.x;
+    if (inside && (!direction || direction === "right")) inside = bounds.left < size.width + offset.y;
+    if (inside && (!direction || direction === "top")) inside = bounds.bottom > offset.y;
+    return inside;
+}
+function calculateBounds(point, radius) {
+    return {
+        bottom: point.y + radius,
+        left: point.x - radius,
+        right: point.x + radius,
+        top: point.y - radius
+    };
+}
+function deepExtend(destination, ...sources) {
+    for (const source of sources){
+        if (source === undefined || source === null) continue;
+        if (typeof source !== "object") {
+            destination = source;
+            continue;
+        }
+        const sourceIsArray = Array.isArray(source);
+        if (sourceIsArray && (typeof destination !== "object" || !destination || !Array.isArray(destination))) destination = [];
+        else if (!sourceIsArray && (typeof destination !== "object" || !destination || Array.isArray(destination))) destination = {};
+        for(const key in source){
+            if (key === "__proto__") continue;
+            const sourceDict = source, value = sourceDict[key], isObject = typeof value === "object", destDict = destination;
+            destDict[key] = isObject && Array.isArray(value) ? value.map((v)=>deepExtend(destDict[key], v)
+            ) : deepExtend(destDict[key], value);
+        }
+    }
+    return destination;
+}
+function isDivModeEnabled(mode, divs) {
+    return divs instanceof Array ? !!divs.find((t)=>t.enable && isInArray(mode, t.mode)
+    ) : isInArray(mode, divs.mode);
+}
+function divModeExecute(mode, divs, callback) {
+    if (divs instanceof Array) for (const div of divs){
+        const divMode1 = div.mode, divEnabled = div.enable;
+        if (divEnabled && isInArray(mode, divMode1)) singleDivModeExecute(div, callback);
+    }
+    else {
+        const divMode2 = divs.mode, divEnabled = divs.enable;
+        if (divEnabled && isInArray(mode, divMode2)) singleDivModeExecute(divs, callback);
+    }
+}
+function singleDivModeExecute(div, callback) {
+    const selectors = div.selectors;
+    if (selectors instanceof Array) for (const selector of selectors)callback(selector, div);
+    else callback(selectors, div);
+}
+function divMode(divs, element) {
+    if (!element || !divs) return;
+    if (divs instanceof Array) return divs.find((d)=>checkSelector(element, d.selectors)
+    );
+    else if (checkSelector(element, divs.selectors)) return divs;
+}
+function circleBounceDataFromParticle(p) {
+    return {
+        position: p.getPosition(),
+        radius: p.getRadius(),
+        mass: p.getMass(),
+        velocity: p.velocity,
+        factor: _vector.Vector.create(_numberUtils.getValue(p.options.bounce.horizontal), _numberUtils.getValue(p.options.bounce.vertical))
+    };
+}
+function circleBounce(p1, p2) {
+    const { x: xVelocityDiff , y: yVelocityDiff  } = p1.velocity.sub(p2.velocity), [pos1, pos2] = [
+        p1.position,
+        p2.position
+    ], { dx: xDist , dy: yDist  } = _numberUtils.getDistances(pos2, pos1);
+    if (xVelocityDiff * xDist + yVelocityDiff * yDist < 0) return;
+    const angle = -Math.atan2(yDist, xDist), m1 = p1.mass, m2 = p2.mass, u1 = p1.velocity.rotate(angle), u2 = p2.velocity.rotate(angle), v1 = _numberUtils.collisionVelocity(u1, u2, m1, m2), v2 = _numberUtils.collisionVelocity(u2, u1, m1, m2), vFinal1 = v1.rotate(-angle), vFinal2 = v2.rotate(-angle);
+    p1.velocity.x = vFinal1.x * p1.factor.x;
+    p1.velocity.y = vFinal1.y * p1.factor.y;
+    p2.velocity.x = vFinal2.x * p2.factor.x;
+    p2.velocity.y = vFinal2.y * p2.factor.y;
+}
+function rectBounce(particle, divBounds) {
+    const pPos = particle.getPosition(), size = particle.getRadius(), bounds = calculateBounds(pPos, size);
+    const resH = rectSideBounce({
+        min: bounds.left,
+        max: bounds.right
+    }, {
+        min: bounds.top,
+        max: bounds.bottom
+    }, {
+        min: divBounds.left,
+        max: divBounds.right
+    }, {
+        min: divBounds.top,
+        max: divBounds.bottom
+    }, particle.velocity.x, _numberUtils.getValue(particle.options.bounce.horizontal));
+    if (resH.bounced) {
+        if (resH.velocity !== undefined) particle.velocity.x = resH.velocity;
+        if (resH.position !== undefined) particle.position.x = resH.position;
+    }
+    const resV = rectSideBounce({
+        min: bounds.top,
+        max: bounds.bottom
+    }, {
+        min: bounds.left,
+        max: bounds.right
+    }, {
+        min: divBounds.top,
+        max: divBounds.bottom
+    }, {
+        min: divBounds.left,
+        max: divBounds.right
+    }, particle.velocity.y, _numberUtils.getValue(particle.options.bounce.vertical));
+    if (resV.bounced) {
+        if (resV.velocity !== undefined) particle.velocity.y = resV.velocity;
+        if (resV.position !== undefined) particle.position.y = resV.position;
+    }
+}
+function loadOptions(options, ...sourceOptionsArr) {
+    for (const sourceOptions of sourceOptionsArr)options.load(sourceOptions);
+}
+function loadContainerOptions(engine, ...sourceOptionsArr) {
+    const options = new _options.Options(engine);
+    loadOptions(options, ...sourceOptionsArr);
+    return options;
+}
+function loadParticlesOptions(...sourceOptionsArr) {
+    const options = new _particlesOptions.ParticlesOptions();
+    loadOptions(options, ...sourceOptionsArr);
+    return options;
+}
+
+},{"./NumberUtils":"4qdpK","../Options/Classes/Options":"dlH2D","../Options/Classes/Particles/ParticlesOptions":"axrcM","../Core/Utils/Vector":"fzYYX","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"4qdpK":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "clamp", ()=>clamp
+);
+parcelHelpers.export(exports, "mix", ()=>mix
+);
+parcelHelpers.export(exports, "randomInRange", ()=>randomInRange
+);
+parcelHelpers.export(exports, "getRangeValue", ()=>getRangeValue
+);
+parcelHelpers.export(exports, "getRangeMin", ()=>getRangeMin
+);
+parcelHelpers.export(exports, "getRangeMax", ()=>getRangeMax
+);
+parcelHelpers.export(exports, "setRangeValue", ()=>setRangeValue
+);
+parcelHelpers.export(exports, "getValue", ()=>getValue
+);
+parcelHelpers.export(exports, "getDistances", ()=>getDistances
+);
+parcelHelpers.export(exports, "getDistance", ()=>getDistance
+);
+parcelHelpers.export(exports, "getParticleDirectionAngle", ()=>getParticleDirectionAngle
+);
+parcelHelpers.export(exports, "getParticleBaseVelocity", ()=>getParticleBaseVelocity
+);
+parcelHelpers.export(exports, "collisionVelocity", ()=>collisionVelocity
+);
+parcelHelpers.export(exports, "calcEasing", ()=>calcEasing
+);
+parcelHelpers.export(exports, "calcPositionFromSize", ()=>calcPositionFromSize
+);
+parcelHelpers.export(exports, "calcPositionOrRandomFromSize", ()=>calcPositionOrRandomFromSize
+);
+parcelHelpers.export(exports, "calcPositionOrRandomFromSizeRanged", ()=>calcPositionOrRandomFromSizeRanged
+);
+parcelHelpers.export(exports, "calcExactPositionOrRandomFromSize", ()=>calcExactPositionOrRandomFromSize
+);
+parcelHelpers.export(exports, "calcExactPositionOrRandomFromSizeRanged", ()=>calcExactPositionOrRandomFromSizeRanged
+);
+var _vector = require("../Core/Utils/Vector");
+function clamp(num, min, max) {
+    return Math.min(Math.max(num, min), max);
+}
+function mix(comp1, comp2, weight1, weight2) {
+    return Math.floor((comp1 * weight1 + comp2 * weight2) / (weight1 + weight2));
+}
+function randomInRange(r) {
+    const max = getRangeMax(r);
+    let min = getRangeMin(r);
+    if (max === min) min = 0;
+    return Math.random() * (max - min) + min;
+}
+function getRangeValue(value) {
+    return typeof value === "number" ? value : randomInRange(value);
+}
+function getRangeMin(value) {
+    return typeof value === "number" ? value : value.min;
+}
+function getRangeMax(value) {
+    return typeof value === "number" ? value : value.max;
+}
+function setRangeValue(source, value) {
+    if (source === value || value === undefined && typeof source === "number") return source;
+    const min = getRangeMin(source), max = getRangeMax(source);
+    return value !== undefined ? {
+        min: Math.min(min, value),
+        max: Math.max(max, value)
+    } : setRangeValue(min, max);
+}
+function getValue(options) {
+    const random = options.random, { enable , minimumValue  } = typeof random === "boolean" ? {
+        enable: random,
+        minimumValue: 0
+    } : random;
+    return enable ? getRangeValue(setRangeValue(options.value, minimumValue)) : getRangeValue(options.value);
+}
+function getDistances(pointA, pointB) {
+    const dx = pointA.x - pointB.x, dy = pointA.y - pointB.y;
+    return {
+        dx: dx,
+        dy: dy,
+        distance: Math.sqrt(dx * dx + dy * dy)
+    };
+}
+function getDistance(pointA, pointB) {
+    return getDistances(pointA, pointB).distance;
+}
+function getParticleDirectionAngle(direction, position, center) {
+    if (typeof direction === "number") return direction * Math.PI / 180;
+    else switch(direction){
+        case "top":
+            return -Math.PI / 2;
+        case "top-right":
+            return -Math.PI / 4;
+        case "right":
+            return 0;
+        case "bottom-right":
+            return Math.PI / 4;
+        case "bottom":
+            return Math.PI / 2;
+        case "bottom-left":
+            return 3 * Math.PI / 4;
+        case "left":
+            return Math.PI;
+        case "top-left":
+            return -3 * Math.PI / 4;
+        case "inside":
+            return Math.atan2(center.y - position.y, center.x - position.x);
+        case "outside":
+            return Math.atan2(position.y - center.y, position.x - center.x);
+        case "none":
+        default:
+            return Math.random() * Math.PI * 2;
+    }
+}
+function getParticleBaseVelocity(direction) {
+    const baseVelocity = _vector.Vector.origin;
+    baseVelocity.length = 1;
+    baseVelocity.angle = direction;
+    return baseVelocity;
+}
+function collisionVelocity(v1, v2, m1, m2) {
+    return _vector.Vector.create(v1.x * (m1 - m2) / (m1 + m2) + v2.x * 2 * m2 / (m1 + m2), v1.y);
+}
+function calcEasing(value, type) {
+    switch(type){
+        case "ease-out-quad":
+            return 1 - (1 - value) ** 2;
+        case "ease-out-cubic":
+            return 1 - (1 - value) ** 3;
+        case "ease-out-quart":
+            return 1 - (1 - value) ** 4;
+        case "ease-out-quint":
+            return 1 - (1 - value) ** 5;
+        case "ease-out-expo":
+            return value === 1 ? 1 : 1 - Math.pow(2, -10 * value);
+        case "ease-out-sine":
+            return Math.sin(value * Math.PI / 2);
+        case "ease-out-back":
+            {
+                const c1 = 1.70158, c3 = c1 + 1;
+                return 1 + c3 * Math.pow(value - 1, 3) + c1 * Math.pow(value - 1, 2);
+            }
+        case "ease-out-circ":
+            return Math.sqrt(1 - Math.pow(value - 1, 2));
+        default:
+            return value;
+    }
+}
+function calcPositionFromSize(data) {
+    var _a, _b;
+    return ((_a = data.position) === null || _a === void 0 ? void 0 : _a.x) !== undefined && ((_b = data.position) === null || _b === void 0 ? void 0 : _b.y) !== undefined ? {
+        x: data.position.x * data.size.width / 100,
+        y: data.position.y * data.size.height / 100
+    } : undefined;
+}
+function calcPositionOrRandomFromSize(data) {
+    var _a, _b, _c, _d;
+    return {
+        x: ((_b = (_a = data.position) === null || _a === void 0 ? void 0 : _a.x) !== null && _b !== void 0 ? _b : Math.random() * 100) * data.size.width / 100,
+        y: ((_d = (_c = data.position) === null || _c === void 0 ? void 0 : _c.y) !== null && _d !== void 0 ? _d : Math.random() * 100) * data.size.height / 100
+    };
+}
+function calcPositionOrRandomFromSizeRanged(data) {
+    var _a, _b;
+    const position = {
+        x: ((_a = data.position) === null || _a === void 0 ? void 0 : _a.x) !== undefined ? getRangeValue(data.position.x) : undefined,
+        y: ((_b = data.position) === null || _b === void 0 ? void 0 : _b.y) !== undefined ? getRangeValue(data.position.y) : undefined
+    };
+    return calcPositionOrRandomFromSize({
+        size: data.size,
+        position
+    });
+}
+function calcExactPositionOrRandomFromSize(data) {
+    var _a, _b, _c, _d;
+    return {
+        x: (_b = (_a = data.position) === null || _a === void 0 ? void 0 : _a.x) !== null && _b !== void 0 ? _b : Math.random() * data.size.width,
+        y: (_d = (_c = data.position) === null || _c === void 0 ? void 0 : _c.y) !== null && _d !== void 0 ? _d : Math.random() * data.size.height
+    };
+}
+function calcExactPositionOrRandomFromSizeRanged(data) {
+    var _a, _b;
+    const position = {
+        x: ((_a = data.position) === null || _a === void 0 ? void 0 : _a.x) !== undefined ? getRangeValue(data.position.x) : undefined,
+        y: ((_b = data.position) === null || _b === void 0 ? void 0 : _b.y) !== undefined ? getRangeValue(data.position.y) : undefined
+    };
+    return calcExactPositionOrRandomFromSize({
+        size: data.size,
+        position
+    });
+}
+
+},{"../Core/Utils/Vector":"fzYYX","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"fzYYX":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "Vector", ()=>Vector
+);
+class Vector {
+    constructor(xOrCoords, y){
+        if (typeof xOrCoords !== "number" && xOrCoords) {
+            this.x = xOrCoords.x;
+            this.y = xOrCoords.y;
+        } else if (xOrCoords !== undefined && y !== undefined) {
+            this.x = xOrCoords;
+            this.y = y;
+        } else throw new Error("tsParticles - Vector not initialized correctly");
+    }
+    static clone(source) {
+        return Vector.create(source.x, source.y);
+    }
+    static create(x, y) {
+        return new Vector(x, y);
+    }
+    static get origin() {
+        return Vector.create(0, 0);
+    }
+    get angle() {
+        return Math.atan2(this.y, this.x);
+    }
+    set angle(angle) {
+        this.updateFromAngle(angle, this.length);
+    }
+    get length() {
+        return Math.sqrt(this.getLengthSq());
+    }
+    set length(length) {
+        this.updateFromAngle(this.angle, length);
+    }
+    add(v) {
+        return Vector.create(this.x + v.x, this.y + v.y);
+    }
+    addTo(v) {
+        this.x += v.x;
+        this.y += v.y;
+    }
+    sub(v) {
+        return Vector.create(this.x - v.x, this.y - v.y);
+    }
+    subFrom(v) {
+        this.x -= v.x;
+        this.y -= v.y;
+    }
+    mult(n) {
+        return Vector.create(this.x * n, this.y * n);
+    }
+    multTo(n) {
+        this.x *= n;
+        this.y *= n;
+    }
+    div(n) {
+        return Vector.create(this.x / n, this.y / n);
+    }
+    divTo(n) {
+        this.x /= n;
+        this.y /= n;
+    }
+    distanceTo(v) {
+        return this.sub(v).length;
+    }
+    getLengthSq() {
+        return this.x ** 2 + this.y ** 2;
+    }
+    distanceToSq(v) {
+        return this.sub(v).getLengthSq();
+    }
+    manhattanDistanceTo(v) {
+        return Math.abs(v.x - this.x) + Math.abs(v.y - this.y);
+    }
+    copy() {
+        return Vector.clone(this);
+    }
+    setTo(v) {
+        this.x = v.x;
+        this.y = v.y;
+    }
+    rotate(angle) {
+        return Vector.create(this.x * Math.cos(angle) - this.y * Math.sin(angle), this.x * Math.sin(angle) + this.y * Math.cos(angle));
+    }
+    updateFromAngle(angle, length) {
+        this.x = Math.cos(angle) * length;
+        this.y = Math.sin(angle) * length;
+    }
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"dlH2D":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "Options", ()=>Options
+);
+var _utils = require("../../Utils/Utils");
+var _background = require("./Background/Background");
+var _backgroundMask = require("./BackgroundMask/BackgroundMask");
+var _fullScreen = require("./FullScreen/FullScreen");
+var _interactivity = require("./Interactivity/Interactivity");
+var _manualParticle = require("./ManualParticle");
+var _motion = require("./Motion/Motion");
+var _responsive = require("./Responsive");
+var _theme = require("./Theme/Theme");
+var __classPrivateFieldSet = undefined && undefined.__classPrivateFieldSet || function(receiver, state, value, kind, f) {
+    if (kind === "m") throw new TypeError("Private method is not writable");
+    if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a setter");
+    if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
+    return kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value), value;
+};
+var __classPrivateFieldGet = undefined && undefined.__classPrivateFieldGet || function(receiver, state, kind, f) {
+    if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a getter");
+    if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
+    return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
+};
+var _Options_instances, _Options_engine, _Options_findDefaultTheme;
+class Options {
+    constructor(engine){
+        _Options_instances.add(this);
+        _Options_engine.set(this, void 0);
+        __classPrivateFieldSet(this, _Options_engine, engine, "f");
+        this.autoPlay = true;
+        this.background = new _background.Background();
+        this.backgroundMask = new _backgroundMask.BackgroundMask();
+        this.fullScreen = new _fullScreen.FullScreen();
+        this.detectRetina = true;
+        this.duration = 0;
+        this.fpsLimit = 120;
+        this.interactivity = new _interactivity.Interactivity();
+        this.manualParticles = [];
+        this.motion = new _motion.Motion();
+        this.particles = _utils.loadParticlesOptions();
+        this.pauseOnBlur = true;
+        this.pauseOnOutsideViewport = true;
+        this.responsive = [];
+        this.style = {};
+        this.themes = [];
+        this.zLayers = 100;
+    }
+    get fps_limit() {
+        return this.fpsLimit;
+    }
+    set fps_limit(value) {
+        this.fpsLimit = value;
+    }
+    get retina_detect() {
+        return this.detectRetina;
+    }
+    set retina_detect(value) {
+        this.detectRetina = value;
+    }
+    get backgroundMode() {
+        return this.fullScreen;
+    }
+    set backgroundMode(value) {
+        this.fullScreen.load(value);
+    }
+    load(data) {
+        var _a, _b, _c, _d, _e;
+        if (!data) return;
+        if (data.preset !== undefined) {
+            if (data.preset instanceof Array) for (const preset of data.preset)this.importPreset(preset);
+            else this.importPreset(data.preset);
+        }
+        if (data.autoPlay !== undefined) this.autoPlay = data.autoPlay;
+        const detectRetina = (_a = data.detectRetina) !== null && _a !== void 0 ? _a : data.retina_detect;
+        if (detectRetina !== undefined) this.detectRetina = detectRetina;
+        if (data.duration !== undefined) this.duration = data.duration;
+        const fpsLimit = (_b = data.fpsLimit) !== null && _b !== void 0 ? _b : data.fps_limit;
+        if (fpsLimit !== undefined) this.fpsLimit = fpsLimit;
+        if (data.pauseOnBlur !== undefined) this.pauseOnBlur = data.pauseOnBlur;
+        if (data.pauseOnOutsideViewport !== undefined) this.pauseOnOutsideViewport = data.pauseOnOutsideViewport;
+        if (data.zLayers !== undefined) this.zLayers = data.zLayers;
+        this.background.load(data.background);
+        const fullScreen = (_c = data.fullScreen) !== null && _c !== void 0 ? _c : data.backgroundMode;
+        if (typeof fullScreen === "boolean") this.fullScreen.enable = fullScreen;
+        else this.fullScreen.load(fullScreen);
+        this.backgroundMask.load(data.backgroundMask);
+        this.interactivity.load(data.interactivity);
+        if (data.manualParticles !== undefined) this.manualParticles = data.manualParticles.map((t)=>{
+            const tmp = new _manualParticle.ManualParticle();
+            tmp.load(t);
+            return tmp;
+        });
+        this.motion.load(data.motion);
+        this.particles.load(data.particles);
+        this.style = _utils.deepExtend(this.style, data.style);
+        __classPrivateFieldGet(this, _Options_engine, "f").plugins.loadOptions(this, data);
+        if (data.responsive !== undefined) for (const responsive of data.responsive){
+            const optResponsive = new _responsive.Responsive();
+            optResponsive.load(responsive);
+            this.responsive.push(optResponsive);
+        }
+        this.responsive.sort((a, b)=>a.maxWidth - b.maxWidth
+        );
+        if (data.themes !== undefined) for (const theme of data.themes){
+            const optTheme = new _theme.Theme();
+            optTheme.load(theme);
+            this.themes.push(optTheme);
+        }
+        this.defaultDarkTheme = (_d = __classPrivateFieldGet(this, _Options_instances, "m", _Options_findDefaultTheme).call(this, "dark")) === null || _d === void 0 ? void 0 : _d.name;
+        this.defaultLightTheme = (_e = __classPrivateFieldGet(this, _Options_instances, "m", _Options_findDefaultTheme).call(this, "light")) === null || _e === void 0 ? void 0 : _e.name;
+    }
+    setTheme(name) {
+        if (name) {
+            const chosenTheme = this.themes.find((theme)=>theme.name === name
+            );
+            if (chosenTheme) this.load(chosenTheme.options);
+        } else {
+            const mediaMatch = typeof matchMedia !== "undefined" && matchMedia("(prefers-color-scheme: dark)"), clientDarkMode = mediaMatch && mediaMatch.matches, defaultTheme = __classPrivateFieldGet(this, _Options_instances, "m", _Options_findDefaultTheme).call(this, clientDarkMode ? "dark" : "light");
+            if (defaultTheme) this.load(defaultTheme.options);
+        }
+    }
+    setResponsive(width, pxRatio, defaultOptions) {
+        this.load(defaultOptions);
+        const responsiveOptions = this.responsive.find((t)=>t.mode === "screen" && screen ? t.maxWidth * pxRatio > screen.availWidth : t.maxWidth * pxRatio > width
+        );
+        this.load(responsiveOptions === null || responsiveOptions === void 0 ? void 0 : responsiveOptions.options);
+        return responsiveOptions === null || responsiveOptions === void 0 ? void 0 : responsiveOptions.maxWidth;
+    }
+    importPreset(preset) {
+        this.load(__classPrivateFieldGet(this, _Options_engine, "f").plugins.getPreset(preset));
+    }
+}
+_Options_engine = new WeakMap(), _Options_instances = new WeakSet(), _Options_findDefaultTheme = function _Options_findDefaultTheme(mode) {
+    var _a;
+    return (_a = this.themes.find((theme)=>theme.default.value && theme.default.mode === mode
+    )) !== null && _a !== void 0 ? _a : this.themes.find((theme)=>theme.default.value && theme.default.mode === "any"
+    );
+};
+
+},{"../../Utils/Utils":"cbRwi","./Background/Background":"5HSxj","./BackgroundMask/BackgroundMask":"i0570","./FullScreen/FullScreen":"dAp2r","./Interactivity/Interactivity":"fWqAq","./ManualParticle":"a0uQ8","./Motion/Motion":"6SSGu","./Responsive":"7u6Vz","./Theme/Theme":"grKR5","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"5HSxj":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "Background", ()=>Background
+);
+var _optionsColor = require("../OptionsColor");
+class Background {
+    constructor(){
+        this.color = new _optionsColor.OptionsColor();
+        this.color.value = "";
+        this.image = "";
+        this.position = "";
+        this.repeat = "";
+        this.size = "";
+        this.opacity = 1;
+    }
+    load(data) {
+        if (!data) return;
+        if (data.color !== undefined) this.color = _optionsColor.OptionsColor.create(this.color, data.color);
+        if (data.image !== undefined) this.image = data.image;
+        if (data.position !== undefined) this.position = data.position;
+        if (data.repeat !== undefined) this.repeat = data.repeat;
+        if (data.size !== undefined) this.size = data.size;
+        if (data.opacity !== undefined) this.opacity = data.opacity;
+    }
+}
+
+},{"../OptionsColor":"9IFHT","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"9IFHT":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "OptionsColor", ()=>OptionsColor
+);
+class OptionsColor {
+    constructor(){
+        this.value = "";
+    }
+    static create(source, data) {
+        const color = new OptionsColor();
+        color.load(source);
+        if (data !== undefined) {
+            if (typeof data === "string" || data instanceof Array) color.load({
+                value: data
+            });
+            else color.load(data);
+        }
+        return color;
+    }
+    load(data) {
+        if ((data === null || data === void 0 ? void 0 : data.value) === undefined) return;
+        this.value = data.value;
+    }
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"i0570":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "BackgroundMask", ()=>BackgroundMask
+);
+var _backgroundMaskCover = require("./BackgroundMaskCover");
+class BackgroundMask {
+    constructor(){
+        this.composite = "destination-out";
+        this.cover = new _backgroundMaskCover.BackgroundMaskCover();
+        this.enable = false;
+    }
+    load(data) {
+        if (!data) return;
+        if (data.composite !== undefined) this.composite = data.composite;
+        if (data.cover !== undefined) {
+            const cover = data.cover;
+            const color = typeof data.cover === "string" ? {
+                color: data.cover
+            } : data.cover;
+            this.cover.load(cover.color !== undefined ? cover : {
+                color: color
+            });
+        }
+        if (data.enable !== undefined) this.enable = data.enable;
+    }
+}
+
+},{"./BackgroundMaskCover":"7IhS9","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"7IhS9":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "BackgroundMaskCover", ()=>BackgroundMaskCover
+);
+var _optionsColor = require("../OptionsColor");
+class BackgroundMaskCover {
+    constructor(){
+        this.color = new _optionsColor.OptionsColor();
+        this.color.value = "#fff";
+        this.opacity = 1;
+    }
+    load(data) {
+        if (!data) return;
+        if (data.color !== undefined) this.color = _optionsColor.OptionsColor.create(this.color, data.color);
+        if (data.opacity !== undefined) this.opacity = data.opacity;
+    }
+}
+
+},{"../OptionsColor":"9IFHT","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"dAp2r":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "FullScreen", ()=>FullScreen
+);
+class FullScreen {
+    constructor(){
+        this.enable = true;
+        this.zIndex = 0;
+    }
+    load(data) {
+        if (!data) return;
+        if (data.enable !== undefined) this.enable = data.enable;
+        if (data.zIndex !== undefined) this.zIndex = data.zIndex;
+    }
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"fWqAq":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "Interactivity", ()=>Interactivity
+);
+var _events = require("./Events/Events");
+var _modes = require("./Modes/Modes");
+class Interactivity {
+    constructor(){
+        this.detectsOn = "window";
+        this.events = new _events.Events();
+        this.modes = new _modes.Modes();
+    }
+    get detect_on() {
+        return this.detectsOn;
+    }
+    set detect_on(value) {
+        this.detectsOn = value;
+    }
+    load(data) {
+        var _a, _b, _c;
+        if (!data) return;
+        const detectsOn = (_a = data.detectsOn) !== null && _a !== void 0 ? _a : data.detect_on;
+        if (detectsOn !== undefined) this.detectsOn = detectsOn;
+        this.events.load(data.events);
+        this.modes.load(data.modes);
+        if (((_c = (_b = data.modes) === null || _b === void 0 ? void 0 : _b.slow) === null || _c === void 0 ? void 0 : _c.active) === true) {
+            if (this.events.onHover.mode instanceof Array) {
+                if (this.events.onHover.mode.indexOf("slow") < 0) this.events.onHover.mode.push("slow");
+            } else if (this.events.onHover.mode !== "slow") this.events.onHover.mode = [
+                this.events.onHover.mode,
+                "slow"
+            ];
+        }
+    }
+}
+
+},{"./Events/Events":"d2kAR","./Modes/Modes":"he8V2","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"d2kAR":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "Events", ()=>Events
+);
+var _clickEvent = require("./ClickEvent");
+var _divEvent = require("./DivEvent");
+var _hoverEvent = require("./HoverEvent");
+class Events {
+    constructor(){
+        this.onClick = new _clickEvent.ClickEvent();
+        this.onDiv = new _divEvent.DivEvent();
+        this.onHover = new _hoverEvent.HoverEvent();
+        this.resize = true;
+    }
+    get onclick() {
+        return this.onClick;
+    }
+    set onclick(value) {
+        this.onClick = value;
+    }
+    get ondiv() {
+        return this.onDiv;
+    }
+    set ondiv(value) {
+        this.onDiv = value;
+    }
+    get onhover() {
+        return this.onHover;
+    }
+    set onhover(value) {
+        this.onHover = value;
+    }
+    load(data) {
+        var _a, _b, _c;
+        if (!data) return;
+        this.onClick.load((_a = data.onClick) !== null && _a !== void 0 ? _a : data.onclick);
+        const onDiv = (_b = data.onDiv) !== null && _b !== void 0 ? _b : data.ondiv;
+        if (onDiv !== undefined) {
+            if (onDiv instanceof Array) this.onDiv = onDiv.map((div)=>{
+                const tmp = new _divEvent.DivEvent();
+                tmp.load(div);
+                return tmp;
+            });
+            else {
+                this.onDiv = new _divEvent.DivEvent();
+                this.onDiv.load(onDiv);
+            }
+        }
+        this.onHover.load((_c = data.onHover) !== null && _c !== void 0 ? _c : data.onhover);
+        if (data.resize !== undefined) this.resize = data.resize;
+    }
+}
+
+},{"./ClickEvent":"i9nH5","./DivEvent":"kOVM1","./HoverEvent":"9oAKZ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"i9nH5":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "ClickEvent", ()=>ClickEvent
+);
+class ClickEvent {
+    constructor(){
+        this.enable = false;
+        this.mode = [];
+    }
+    load(data) {
+        if (!data) return;
+        if (data.enable !== undefined) this.enable = data.enable;
+        if (data.mode !== undefined) this.mode = data.mode;
+    }
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"kOVM1":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "DivEvent", ()=>DivEvent
+);
+class DivEvent {
+    constructor(){
+        this.selectors = [];
+        this.enable = false;
+        this.mode = [];
+        this.type = "circle";
+    }
+    get elementId() {
+        return this.ids;
+    }
+    set elementId(value) {
+        this.ids = value;
+    }
+    get el() {
+        return this.elementId;
+    }
+    set el(value) {
+        this.elementId = value;
+    }
+    get ids() {
+        return this.selectors instanceof Array ? this.selectors.map((t)=>t.replace("#", "")
+        ) : this.selectors.replace("#", "");
+    }
+    set ids(value) {
+        this.selectors = value instanceof Array ? value.map((t)=>`#${t}`
+        ) : `#${value}`;
+    }
+    load(data) {
+        var _a, _b;
+        if (!data) return;
+        const ids = (_b = (_a = data.ids) !== null && _a !== void 0 ? _a : data.elementId) !== null && _b !== void 0 ? _b : data.el;
+        if (ids !== undefined) this.ids = ids;
+        if (data.selectors !== undefined) this.selectors = data.selectors;
+        if (data.enable !== undefined) this.enable = data.enable;
+        if (data.mode !== undefined) this.mode = data.mode;
+        if (data.type !== undefined) this.type = data.type;
+    }
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"9oAKZ":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "HoverEvent", ()=>HoverEvent
+);
+var _parallax = require("./Parallax");
+class HoverEvent {
+    constructor(){
+        this.enable = false;
+        this.mode = [];
+        this.parallax = new _parallax.Parallax();
+    }
+    load(data) {
+        if (!data) return;
+        if (data.enable !== undefined) this.enable = data.enable;
+        if (data.mode !== undefined) this.mode = data.mode;
+        this.parallax.load(data.parallax);
+    }
+}
+
+},{"./Parallax":"6cuKp","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"6cuKp":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "Parallax", ()=>Parallax
+);
+class Parallax {
+    constructor(){
+        this.enable = false;
+        this.force = 2;
+        this.smooth = 10;
+    }
+    load(data) {
+        if (!data) return;
+        if (data.enable !== undefined) this.enable = data.enable;
+        if (data.force !== undefined) this.force = data.force;
+        if (data.smooth !== undefined) this.smooth = data.smooth;
+    }
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"he8V2":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "Modes", ()=>Modes
+);
+var _attract = require("./Attract");
+var _bounce = require("./Bounce");
+var _bubble = require("./Bubble");
+var _connect = require("./Connect");
+var _grab = require("./Grab");
+var _light = require("./Light");
+var _push = require("./Push");
+var _remove = require("./Remove");
+var _repulse = require("./Repulse");
+var _slow = require("./Slow");
+var _trail = require("./Trail");
+class Modes {
+    constructor(){
+        this.attract = new _attract.Attract();
+        this.bounce = new _bounce.Bounce();
+        this.bubble = new _bubble.Bubble();
+        this.connect = new _connect.Connect();
+        this.grab = new _grab.Grab();
+        this.light = new _light.Light();
+        this.push = new _push.Push();
+        this.remove = new _remove.Remove();
+        this.repulse = new _repulse.Repulse();
+        this.slow = new _slow.Slow();
+        this.trail = new _trail.Trail();
+    }
+    load(data) {
+        if (!data) return;
+        this.attract.load(data.attract);
+        this.bubble.load(data.bubble);
+        this.connect.load(data.connect);
+        this.grab.load(data.grab);
+        this.light.load(data.light);
+        this.push.load(data.push);
+        this.remove.load(data.remove);
+        this.repulse.load(data.repulse);
+        this.slow.load(data.slow);
+        this.trail.load(data.trail);
+    }
+}
+
+},{"./Attract":"2Pk1P","./Bounce":"1usWC","./Bubble":"8riJd","./Connect":"2Q1KB","./Grab":"9vA1L","./Light":"8rmOb","./Push":"6K8P4","./Remove":"lPFOm","./Repulse":"hF23l","./Slow":"jKemb","./Trail":"AsxFZ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"2Pk1P":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "Attract", ()=>Attract
+);
+class Attract {
+    constructor(){
+        this.distance = 200;
+        this.duration = 0.4;
+        this.easing = "ease-out-quad";
+        this.factor = 1;
+        this.maxSpeed = 50;
+        this.speed = 1;
+    }
+    load(data) {
+        if (!data) return;
+        if (data.distance !== undefined) this.distance = data.distance;
+        if (data.duration !== undefined) this.duration = data.duration;
+        if (data.easing !== undefined) this.easing = data.easing;
+        if (data.factor !== undefined) this.factor = data.factor;
+        if (data.maxSpeed !== undefined) this.maxSpeed = data.maxSpeed;
+        if (data.speed !== undefined) this.speed = data.speed;
+    }
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"1usWC":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "Bounce", ()=>Bounce
+);
+class Bounce {
+    constructor(){
+        this.distance = 200;
+    }
+    load(data) {
+        if (!data) return;
+        if (data.distance !== undefined) this.distance = data.distance;
+    }
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"8riJd":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "Bubble", ()=>Bubble
+);
+var _bubbleBase = require("./BubbleBase");
+var _bubbleDiv = require("./BubbleDiv");
+class Bubble extends _bubbleBase.BubbleBase {
+    load(data) {
+        super.load(data);
+        if (!data) return;
+        if (data.divs instanceof Array) this.divs = data.divs.map((s)=>{
+            const tmp = new _bubbleDiv.BubbleDiv();
+            tmp.load(s);
+            return tmp;
+        });
+        else {
+            if (this.divs instanceof Array || !this.divs) this.divs = new _bubbleDiv.BubbleDiv();
+            this.divs.load(data.divs);
+        }
+    }
+}
+
+},{"./BubbleBase":"kbxLc","./BubbleDiv":"3eRJc","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"kbxLc":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "BubbleBase", ()=>BubbleBase
+);
+var _optionsColor = require("../../OptionsColor");
+class BubbleBase {
+    constructor(){
+        this.distance = 200;
+        this.duration = 0.4;
+        this.mix = false;
+    }
+    load(data) {
+        if (!data) return;
+        if (data.distance !== undefined) this.distance = data.distance;
+        if (data.duration !== undefined) this.duration = data.duration;
+        if (data.mix !== undefined) this.mix = data.mix;
+        if (data.opacity !== undefined) this.opacity = data.opacity;
+        if (data.color !== undefined) {
+            if (data.color instanceof Array) this.color = data.color.map((s)=>_optionsColor.OptionsColor.create(undefined, s)
+            );
+            else {
+                if (this.color instanceof Array) this.color = new _optionsColor.OptionsColor();
+                this.color = _optionsColor.OptionsColor.create(this.color, data.color);
+            }
+        }
+        if (data.size !== undefined) this.size = data.size;
+    }
+}
+
+},{"../../OptionsColor":"9IFHT","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"3eRJc":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "BubbleDiv", ()=>BubbleDiv
+);
+var _bubbleBase = require("./BubbleBase");
+class BubbleDiv extends _bubbleBase.BubbleBase {
+    constructor(){
+        super();
+        this.selectors = [];
+    }
+    get ids() {
+        return this.selectors instanceof Array ? this.selectors.map((t)=>t.replace("#", "")
+        ) : this.selectors.replace("#", "");
+    }
+    set ids(value) {
+        this.selectors = value instanceof Array ? value.map((t)=>`#${t}`
+        ) : `#${value}`;
+    }
+    load(data) {
+        super.load(data);
+        if (!data) return;
+        if (data.ids !== undefined) this.ids = data.ids;
+        if (data.selectors !== undefined) this.selectors = data.selectors;
+    }
+}
+
+},{"./BubbleBase":"kbxLc","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"2Q1KB":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "Connect", ()=>Connect
+);
+var _connectLinks = require("./ConnectLinks");
+class Connect {
+    constructor(){
+        this.distance = 80;
+        this.links = new _connectLinks.ConnectLinks();
+        this.radius = 60;
+    }
+    get line_linked() {
+        return this.links;
+    }
+    set line_linked(value) {
+        this.links = value;
+    }
+    get lineLinked() {
+        return this.links;
+    }
+    set lineLinked(value) {
+        this.links = value;
+    }
+    load(data) {
+        var _a, _b;
+        if (!data) return;
+        if (data.distance !== undefined) this.distance = data.distance;
+        this.links.load((_b = (_a = data.links) !== null && _a !== void 0 ? _a : data.lineLinked) !== null && _b !== void 0 ? _b : data.line_linked);
+        if (data.radius !== undefined) this.radius = data.radius;
+    }
+}
+
+},{"./ConnectLinks":"U1Vzi","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"U1Vzi":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "ConnectLinks", ()=>ConnectLinks
+);
+class ConnectLinks {
+    constructor(){
+        this.opacity = 0.5;
+    }
+    load(data) {
+        if (!(data !== undefined && data.opacity !== undefined)) return;
+        if (data.opacity !== undefined) this.opacity = data.opacity;
+    }
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"9vA1L":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "Grab", ()=>Grab
+);
+var _grabLinks = require("./GrabLinks");
+class Grab {
+    constructor(){
+        this.distance = 100;
+        this.links = new _grabLinks.GrabLinks();
+    }
+    get line_linked() {
+        return this.links;
+    }
+    set line_linked(value) {
+        this.links = value;
+    }
+    get lineLinked() {
+        return this.links;
+    }
+    set lineLinked(value) {
+        this.links = value;
+    }
+    load(data) {
+        var _a, _b;
+        if (!data) return;
+        if (data.distance !== undefined) this.distance = data.distance;
+        this.links.load((_b = (_a = data.links) !== null && _a !== void 0 ? _a : data.lineLinked) !== null && _b !== void 0 ? _b : data.line_linked);
+    }
+}
+
+},{"./GrabLinks":"5q4Dk","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"5q4Dk":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "GrabLinks", ()=>GrabLinks
+);
+var _optionsColor = require("../../OptionsColor");
+class GrabLinks {
+    constructor(){
+        this.blink = false;
+        this.consent = false;
+        this.opacity = 1;
+    }
+    load(data) {
+        if (!data) return;
+        if (data.blink !== undefined) this.blink = data.blink;
+        if (data.color !== undefined) this.color = _optionsColor.OptionsColor.create(this.color, data.color);
+        if (data.consent !== undefined) this.consent = data.consent;
+        if (data.opacity !== undefined) this.opacity = data.opacity;
+    }
+}
+
+},{"../../OptionsColor":"9IFHT","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"8rmOb":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "Light", ()=>Light
+);
+var _lightArea = require("./LightArea");
+var _lightShadow = require("./LightShadow");
+class Light {
+    constructor(){
+        this.area = new _lightArea.LightArea();
+        this.shadow = new _lightShadow.LightShadow();
+    }
+    load(data) {
+        if (!data) return;
+        this.area.load(data.area);
+        this.shadow.load(data.shadow);
+    }
+}
+
+},{"./LightArea":"d9Ex4","./LightShadow":"6mKab","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"d9Ex4":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "LightArea", ()=>LightArea
+);
+var _lightGradient = require("./LightGradient");
+class LightArea {
+    constructor(){
+        this.gradient = new _lightGradient.LightGradient();
+        this.radius = 1000;
+    }
+    load(data) {
+        if (!data) return;
+        this.gradient.load(data.gradient);
+        if (data.radius !== undefined) this.radius = data.radius;
+    }
+}
+
+},{"./LightGradient":"fy3m6","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"fy3m6":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "LightGradient", ()=>LightGradient
+);
+var _optionsColor = require("../../OptionsColor");
+class LightGradient {
+    constructor(){
+        this.start = new _optionsColor.OptionsColor();
+        this.stop = new _optionsColor.OptionsColor();
+        this.start.value = "#ffffff";
+        this.stop.value = "#000000";
+    }
+    load(data) {
+        if (!data) return;
+        this.start = _optionsColor.OptionsColor.create(this.start, data.start);
+        this.stop = _optionsColor.OptionsColor.create(this.stop, data.stop);
+    }
+}
+
+},{"../../OptionsColor":"9IFHT","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"6mKab":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "LightShadow", ()=>LightShadow
+);
+var _optionsColor = require("../../OptionsColor");
+class LightShadow {
+    constructor(){
+        this.color = new _optionsColor.OptionsColor();
+        this.color.value = "#000000";
+        this.length = 2000;
+    }
+    load(data) {
+        if (!data) return;
+        this.color = _optionsColor.OptionsColor.create(this.color, data.color);
+        if (data.length !== undefined) this.length = data.length;
+    }
+}
+
+},{"../../OptionsColor":"9IFHT","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"6K8P4":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "Push", ()=>Push
+);
+class Push {
+    constructor(){
+        this.default = true;
+        this.groups = [];
+        this.quantity = 4;
+    }
+    get particles_nb() {
+        return this.quantity;
+    }
+    set particles_nb(value) {
+        this.quantity = value;
+    }
+    load(data) {
+        var _a;
+        if (!data) return;
+        if (data.default !== undefined) this.default = data.default;
+        if (data.groups !== undefined) this.groups = data.groups.map((t)=>t
+        );
+        if (!this.groups.length) this.default = true;
+        const quantity = (_a = data.quantity) !== null && _a !== void 0 ? _a : data.particles_nb;
+        if (quantity !== undefined) this.quantity = quantity;
+    }
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"lPFOm":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "Remove", ()=>Remove
+);
+class Remove {
+    constructor(){
+        this.quantity = 2;
+    }
+    get particles_nb() {
+        return this.quantity;
+    }
+    set particles_nb(value) {
+        this.quantity = value;
+    }
+    load(data) {
+        var _a;
+        if (!data) return;
+        const quantity = (_a = data.quantity) !== null && _a !== void 0 ? _a : data.particles_nb;
+        if (quantity !== undefined) this.quantity = quantity;
+    }
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"hF23l":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "Repulse", ()=>Repulse
+);
+var _repulseBase = require("./RepulseBase");
+var _repulseDiv = require("./RepulseDiv");
+class Repulse extends _repulseBase.RepulseBase {
+    load(data) {
+        super.load(data);
+        if (!data) return;
+        if (data.divs instanceof Array) this.divs = data.divs.map((s)=>{
+            const tmp = new _repulseDiv.RepulseDiv();
+            tmp.load(s);
+            return tmp;
+        });
+        else {
+            if (this.divs instanceof Array || !this.divs) this.divs = new _repulseDiv.RepulseDiv();
+            this.divs.load(data.divs);
+        }
+    }
+}
+
+},{"./RepulseBase":"aNdo0","./RepulseDiv":"8P1aR","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"aNdo0":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "RepulseBase", ()=>RepulseBase
+);
+class RepulseBase {
+    constructor(){
+        this.distance = 200;
+        this.duration = 0.4;
+        this.factor = 100;
+        this.speed = 1;
+        this.maxSpeed = 50;
+        this.easing = "ease-out-quad";
+    }
+    load(data) {
+        if (!data) return;
+        if (data.distance !== undefined) this.distance = data.distance;
+        if (data.duration !== undefined) this.duration = data.duration;
+        if (data.easing !== undefined) this.easing = data.easing;
+        if (data.factor !== undefined) this.factor = data.factor;
+        if (data.speed !== undefined) this.speed = data.speed;
+        if (data.maxSpeed !== undefined) this.maxSpeed = data.maxSpeed;
+    }
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"8P1aR":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "RepulseDiv", ()=>RepulseDiv
+);
+var _repulseBase = require("./RepulseBase");
+class RepulseDiv extends _repulseBase.RepulseBase {
+    constructor(){
+        super();
+        this.selectors = [];
+    }
+    get ids() {
+        if (this.selectors instanceof Array) return this.selectors.map((t)=>t.replace("#", "")
+        );
+        else return this.selectors.replace("#", "");
+    }
+    set ids(value) {
+        if (value instanceof Array) this.selectors = value.map(()=>`#${value}`
+        );
+        else this.selectors = `#${value}`;
+    }
+    load(data) {
+        super.load(data);
+        if (!data) return;
+        if (data.ids !== undefined) this.ids = data.ids;
+        if (data.selectors !== undefined) this.selectors = data.selectors;
+    }
+}
+
+},{"./RepulseBase":"aNdo0","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"jKemb":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "Slow", ()=>Slow
+);
+class Slow {
+    constructor(){
+        this.factor = 3;
+        this.radius = 200;
+    }
+    get active() {
+        return false;
+    }
+    set active(_value) {}
+    load(data) {
+        if (!data) return;
+        if (data.factor !== undefined) this.factor = data.factor;
+        if (data.radius !== undefined) this.radius = data.radius;
+    }
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"AsxFZ":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "Trail", ()=>Trail
+);
+var _utils = require("../../../../Utils/Utils");
+class Trail {
+    constructor(){
+        this.delay = 1;
+        this.pauseOnStop = false;
+        this.quantity = 1;
+    }
+    load(data) {
+        if (!data) return;
+        if (data.delay !== undefined) this.delay = data.delay;
+        if (data.quantity !== undefined) this.quantity = data.quantity;
+        if (data.particles !== undefined) this.particles = _utils.deepExtend({}, data.particles);
+        if (data.pauseOnStop !== undefined) this.pauseOnStop = data.pauseOnStop;
+    }
+}
+
+},{"../../../../Utils/Utils":"cbRwi","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"a0uQ8":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "ManualParticle", ()=>ManualParticle
+);
+var _utils = require("../../Utils/Utils");
+class ManualParticle {
+    load(data) {
+        var _a, _b;
+        if (!data) return;
+        if (data.position !== undefined) this.position = {
+            x: (_a = data.position.x) !== null && _a !== void 0 ? _a : 50,
+            y: (_b = data.position.y) !== null && _b !== void 0 ? _b : 50
+        };
+        if (data.options !== undefined) this.options = _utils.deepExtend({}, data.options);
+    }
+}
+
+},{"../../Utils/Utils":"cbRwi","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"6SSGu":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "Motion", ()=>Motion
+);
+var _motionReduce = require("./MotionReduce");
+class Motion {
+    constructor(){
+        this.disable = false;
+        this.reduce = new _motionReduce.MotionReduce();
+    }
+    load(data) {
+        if (!data) return;
+        if (data.disable !== undefined) this.disable = data.disable;
+        this.reduce.load(data.reduce);
+    }
+}
+
+},{"./MotionReduce":"bDjM5","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"bDjM5":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "MotionReduce", ()=>MotionReduce
+);
+class MotionReduce {
+    constructor(){
+        this.factor = 4;
+        this.value = true;
+    }
+    load(data) {
+        if (!data) return;
+        if (data.factor !== undefined) this.factor = data.factor;
+        if (data.value !== undefined) this.value = data.value;
+    }
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"7u6Vz":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "Responsive", ()=>Responsive
+);
+var _utils = require("../../Utils/Utils");
+class Responsive {
+    constructor(){
+        this.maxWidth = Infinity;
+        this.options = {};
+        this.mode = "canvas";
+    }
+    load(data) {
+        if (!data) return;
+        if (data.maxWidth !== undefined) this.maxWidth = data.maxWidth;
+        if (data.mode !== undefined) {
+            if (data.mode === "screen") this.mode = "screen";
+            else this.mode = "canvas";
+        }
+        if (data.options !== undefined) this.options = _utils.deepExtend({}, data.options);
+    }
+}
+
+},{"../../Utils/Utils":"cbRwi","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"grKR5":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "Theme", ()=>Theme
+);
+var _themeDefault = require("./ThemeDefault");
+var _utils = require("../../../Utils/Utils");
+class Theme {
+    constructor(){
+        this.name = "";
+        this.default = new _themeDefault.ThemeDefault();
+    }
+    load(data) {
+        if (!data) return;
+        if (data.name !== undefined) this.name = data.name;
+        this.default.load(data.default);
+        if (data.options !== undefined) this.options = _utils.deepExtend({}, data.options);
+    }
+}
+
+},{"./ThemeDefault":"lXrEr","../../../Utils/Utils":"cbRwi","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"lXrEr":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "ThemeDefault", ()=>ThemeDefault
+);
+class ThemeDefault {
+    constructor(){
+        this.auto = false;
+        this.mode = "any";
+        this.value = false;
+    }
+    load(data) {
+        if (!data) return;
+        if (data.auto !== undefined) this.auto = data.auto;
+        if (data.mode !== undefined) this.mode = data.mode;
+        if (data.value !== undefined) this.value = data.value;
+    }
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"axrcM":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "ParticlesOptions", ()=>ParticlesOptions
+);
+var _animatableColor = require("../AnimatableColor");
+var _animatableGradient = require("../AnimatableGradient");
+var _collisions = require("./Collisions/Collisions");
+var _destroy = require("./Destroy/Destroy");
+var _life = require("./Life/Life");
+var _links = require("./Links/Links");
+var _move = require("./Move/Move");
+var _opacity = require("./Opacity/Opacity");
+var _orbit = require("./Orbit/Orbit");
+var _particlesBounce = require("./Bounce/ParticlesBounce");
+var _particlesNumber = require("./Number/ParticlesNumber");
+var _particlesRepulse = require("./Repulse/ParticlesRepulse");
+var _roll = require("./Roll/Roll");
+var _rotate = require("./Rotate/Rotate");
+var _shadow = require("./Shadow");
+var _shape = require("./Shape/Shape");
+var _size = require("./Size/Size");
+var _stroke = require("./Stroke");
+var _tilt = require("./Tilt/Tilt");
+var _twinkle = require("./Twinkle/Twinkle");
+var _wobble = require("./Wobble/Wobble");
+var _zindex = require("./ZIndex/ZIndex");
+var _utils = require("../../../Utils/Utils");
+class ParticlesOptions {
+    constructor(){
+        this.bounce = new _particlesBounce.ParticlesBounce();
+        this.collisions = new _collisions.Collisions();
+        this.color = new _animatableColor.AnimatableColor();
+        this.color.value = "#fff";
+        this.destroy = new _destroy.Destroy();
+        this.gradient = [];
+        this.groups = {};
+        this.life = new _life.Life();
+        this.links = new _links.Links();
+        this.move = new _move.Move();
+        this.number = new _particlesNumber.ParticlesNumber();
+        this.opacity = new _opacity.Opacity();
+        this.orbit = new _orbit.Orbit();
+        this.reduceDuplicates = false;
+        this.repulse = new _particlesRepulse.ParticlesRepulse();
+        this.roll = new _roll.Roll();
+        this.rotate = new _rotate.Rotate();
+        this.shadow = new _shadow.Shadow();
+        this.shape = new _shape.Shape();
+        this.size = new _size.Size();
+        this.stroke = new _stroke.Stroke();
+        this.tilt = new _tilt.Tilt();
+        this.twinkle = new _twinkle.Twinkle();
+        this.wobble = new _wobble.Wobble();
+        this.zIndex = new _zindex.ZIndex();
+    }
+    get line_linked() {
+        return this.links;
+    }
+    set line_linked(value) {
+        this.links = value;
+    }
+    get lineLinked() {
+        return this.links;
+    }
+    set lineLinked(value) {
+        this.links = value;
+    }
+    load(data) {
+        var _a, _b, _c, _d, _e, _f, _g, _h;
+        if (!data) return;
+        this.bounce.load(data.bounce);
+        this.color.load(_animatableColor.AnimatableColor.create(this.color, data.color));
+        this.destroy.load(data.destroy);
+        this.life.load(data.life);
+        const links = (_b = (_a = data.links) !== null && _a !== void 0 ? _a : data.lineLinked) !== null && _b !== void 0 ? _b : data.line_linked;
+        if (links !== undefined) this.links.load(links);
+        if (data.groups !== undefined) for(const group in data.groups){
+            const item = data.groups[group];
+            if (item !== undefined) this.groups[group] = _utils.deepExtend((_c = this.groups[group]) !== null && _c !== void 0 ? _c : {}, item);
+        }
+        this.move.load(data.move);
+        this.number.load(data.number);
+        this.opacity.load(data.opacity);
+        this.orbit.load(data.orbit);
+        if (data.reduceDuplicates !== undefined) this.reduceDuplicates = data.reduceDuplicates;
+        this.repulse.load(data.repulse);
+        this.roll.load(data.roll);
+        this.rotate.load(data.rotate);
+        this.shape.load(data.shape);
+        this.size.load(data.size);
+        this.shadow.load(data.shadow);
+        this.tilt.load(data.tilt);
+        this.twinkle.load(data.twinkle);
+        this.wobble.load(data.wobble);
+        this.zIndex.load(data.zIndex);
+        const collisions = (_e = (_d = data.move) === null || _d === void 0 ? void 0 : _d.collisions) !== null && _e !== void 0 ? _e : (_f = data.move) === null || _f === void 0 ? void 0 : _f.bounce;
+        if (collisions !== undefined) this.collisions.enable = collisions;
+        this.collisions.load(data.collisions);
+        const strokeToLoad = (_g = data.stroke) !== null && _g !== void 0 ? _g : (_h = data.shape) === null || _h === void 0 ? void 0 : _h.stroke;
+        if (strokeToLoad) {
+            if (strokeToLoad instanceof Array) this.stroke = strokeToLoad.map((s)=>{
+                const tmp = new _stroke.Stroke();
+                tmp.load(s);
+                return tmp;
+            });
+            else {
+                if (this.stroke instanceof Array) this.stroke = new _stroke.Stroke();
+                this.stroke.load(strokeToLoad);
+            }
+        }
+        const gradientToLoad = data.gradient;
+        if (gradientToLoad) {
+            if (gradientToLoad instanceof Array) this.gradient = gradientToLoad.map((s)=>{
+                const tmp = new _animatableGradient.AnimatableGradient();
+                tmp.load(s);
+                return tmp;
+            });
+            else {
+                if (this.gradient instanceof Array) this.gradient = new _animatableGradient.AnimatableGradient();
+                this.gradient.load(gradientToLoad);
+            }
+        }
+    }
+}
+
+},{"../AnimatableColor":"5TDzE","../AnimatableGradient":"eVNFP","./Collisions/Collisions":"2P9DX","./Destroy/Destroy":"lC8ls","./Life/Life":"k5OCm","./Links/Links":"l4Yb3","./Move/Move":"jq3RH","./Opacity/Opacity":"gcec4","./Orbit/Orbit":"eM2lc","./Bounce/ParticlesBounce":"cs8FZ","./Number/ParticlesNumber":"jc6iI","./Repulse/ParticlesRepulse":"2FM3f","./Roll/Roll":"cd7db","./Rotate/Rotate":"eIgsE","./Shadow":"FYOwc","./Shape/Shape":"44IjP","./Size/Size":"WG86G","./Stroke":"b2zNO","./Tilt/Tilt":"hCPFH","./Twinkle/Twinkle":"1Y53F","./Wobble/Wobble":"7yEbC","./ZIndex/ZIndex":"4J4Up","../../../Utils/Utils":"cbRwi","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"5TDzE":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "AnimatableColor", ()=>AnimatableColor
+);
+var _hslAnimation = require("./HslAnimation");
+var _optionsColor = require("./OptionsColor");
+class AnimatableColor extends _optionsColor.OptionsColor {
+    constructor(){
+        super();
+        this.animation = new _hslAnimation.HslAnimation();
+    }
+    static create(source, data) {
+        const color = new AnimatableColor();
+        color.load(source);
+        if (data !== undefined) {
+            if (typeof data === "string" || data instanceof Array) color.load({
+                value: data
+            });
+            else color.load(data);
+        }
+        return color;
+    }
+    load(data) {
+        super.load(data);
+        if (!data) return;
+        const colorAnimation = data.animation;
+        if (colorAnimation !== undefined) {
+            if (colorAnimation.enable !== undefined) this.animation.h.load(colorAnimation);
+            else this.animation.load(data.animation);
+        }
+    }
+}
+
+},{"./HslAnimation":"3Ldxw","./OptionsColor":"9IFHT","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"3Ldxw":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "HslAnimation", ()=>HslAnimation
+);
+var _colorAnimation = require("./ColorAnimation");
+class HslAnimation {
+    constructor(){
+        this.h = new _colorAnimation.ColorAnimation();
+        this.s = new _colorAnimation.ColorAnimation();
+        this.l = new _colorAnimation.ColorAnimation();
+    }
+    load(data) {
+        if (!data) return;
+        this.h.load(data.h);
+        this.s.load(data.s);
+        this.l.load(data.l);
+    }
+}
+
+},{"./ColorAnimation":"aF9LP","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"aF9LP":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "ColorAnimation", ()=>ColorAnimation
+);
+var _numberUtils = require("../../Utils/NumberUtils");
+class ColorAnimation {
+    constructor(){
+        this.count = 0;
+        this.enable = false;
+        this.offset = 0;
+        this.speed = 1;
+        this.sync = true;
+    }
+    load(data) {
+        if (!data) return;
+        if (data.count !== undefined) this.count = _numberUtils.setRangeValue(data.count);
+        if (data.enable !== undefined) this.enable = data.enable;
+        if (data.offset !== undefined) this.offset = _numberUtils.setRangeValue(data.offset);
+        if (data.speed !== undefined) this.speed = _numberUtils.setRangeValue(data.speed);
+        if (data.sync !== undefined) this.sync = data.sync;
+    }
+}
+
+},{"../../Utils/NumberUtils":"4qdpK","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"eVNFP":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "AnimatableGradient", ()=>AnimatableGradient
+);
+parcelHelpers.export(exports, "GradientAngle", ()=>GradientAngle
+);
+parcelHelpers.export(exports, "GradientColorOpacity", ()=>GradientColorOpacity
+);
+parcelHelpers.export(exports, "AnimatableGradientColor", ()=>AnimatableGradientColor
+);
+parcelHelpers.export(exports, "GradientAngleAnimation", ()=>GradientAngleAnimation
+);
+parcelHelpers.export(exports, "GradientColorOpacityAnimation", ()=>GradientColorOpacityAnimation
+);
+var _animatableColor = require("./AnimatableColor");
+var _numberUtils = require("../../Utils/NumberUtils");
+class AnimatableGradient {
+    constructor(){
+        this.angle = new GradientAngle();
+        this.colors = [];
+        this.type = "random";
+    }
+    load(data) {
+        if (!data) return;
+        this.angle.load(data.angle);
+        if (data.colors !== undefined) this.colors = data.colors.map((s)=>{
+            const tmp = new AnimatableGradientColor();
+            tmp.load(s);
+            return tmp;
+        });
+        if (data.type !== undefined) this.type = data.type;
+    }
+}
+class GradientAngle {
+    constructor(){
+        this.value = 0;
+        this.animation = new GradientAngleAnimation();
+        this.direction = "clockwise";
+    }
+    load(data) {
+        if (!data) return;
+        this.animation.load(data.animation);
+        if (data.value !== undefined) this.value = data.value;
+        if (data.direction !== undefined) this.direction = data.direction;
+    }
+}
+class GradientColorOpacity {
+    constructor(){
+        this.value = 0;
+        this.animation = new GradientColorOpacityAnimation();
+    }
+    load(data) {
+        if (!data) return;
+        this.animation.load(data.animation);
+        if (data.value !== undefined) this.value = _numberUtils.setRangeValue(data.value);
+    }
+}
+class AnimatableGradientColor {
+    constructor(){
+        this.stop = 0;
+        this.value = new _animatableColor.AnimatableColor();
+    }
+    load(data) {
+        if (!data) return;
+        if (data.stop !== undefined) this.stop = data.stop;
+        this.value = _animatableColor.AnimatableColor.create(this.value, data.value);
+        if (data.opacity !== undefined) {
+            this.opacity = new GradientColorOpacity();
+            if (typeof data.opacity === "number") this.opacity.value = data.opacity;
+            else this.opacity.load(data.opacity);
+        }
+    }
+}
+class GradientAngleAnimation {
+    constructor(){
+        this.count = 0;
+        this.enable = false;
+        this.speed = 0;
+        this.sync = false;
+    }
+    load(data) {
+        if (!data) return;
+        if (data.count !== undefined) this.count = _numberUtils.setRangeValue(data.count);
+        if (data.enable !== undefined) this.enable = data.enable;
+        if (data.speed !== undefined) this.speed = _numberUtils.setRangeValue(data.speed);
+        if (data.sync !== undefined) this.sync = data.sync;
+    }
+}
+class GradientColorOpacityAnimation {
+    constructor(){
+        this.count = 0;
+        this.enable = false;
+        this.speed = 0;
+        this.sync = false;
+        this.startValue = "random";
+    }
+    load(data) {
+        if (!data) return;
+        if (data.count !== undefined) this.count = _numberUtils.setRangeValue(data.count);
+        if (data.enable !== undefined) this.enable = data.enable;
+        if (data.speed !== undefined) this.speed = _numberUtils.setRangeValue(data.speed);
+        if (data.sync !== undefined) this.sync = data.sync;
+        if (data.startValue !== undefined) this.startValue = data.startValue;
+    }
+}
+
+},{"./AnimatableColor":"5TDzE","../../Utils/NumberUtils":"4qdpK","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"2P9DX":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "Collisions", ()=>Collisions
+);
+var _collisionsOverlap = require("./CollisionsOverlap");
+var _particlesBounce = require("../Bounce/ParticlesBounce");
+class Collisions {
+    constructor(){
+        this.bounce = new _particlesBounce.ParticlesBounce();
+        this.enable = false;
+        this.mode = "bounce";
+        this.overlap = new _collisionsOverlap.CollisionsOverlap();
+    }
+    load(data) {
+        if (!data) return;
+        this.bounce.load(data.bounce);
+        if (data.enable !== undefined) this.enable = data.enable;
+        if (data.mode !== undefined) this.mode = data.mode;
+        this.overlap.load(data.overlap);
+    }
+}
+
+},{"./CollisionsOverlap":"jQmLv","../Bounce/ParticlesBounce":"cs8FZ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"jQmLv":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "CollisionsOverlap", ()=>CollisionsOverlap
+);
+class CollisionsOverlap {
+    constructor(){
+        this.enable = true;
+        this.retries = 0;
+    }
+    load(data) {
+        if (!data) return;
+        if (data.enable !== undefined) this.enable = data.enable;
+        if (data.retries !== undefined) this.retries = data.retries;
+    }
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"cs8FZ":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "ParticlesBounce", ()=>ParticlesBounce
+);
+var _particlesBounceFactor = require("./ParticlesBounceFactor");
+class ParticlesBounce {
+    constructor(){
+        this.horizontal = new _particlesBounceFactor.ParticlesBounceFactor();
+        this.vertical = new _particlesBounceFactor.ParticlesBounceFactor();
+    }
+    load(data) {
+        if (!data) return;
+        this.horizontal.load(data.horizontal);
+        this.vertical.load(data.vertical);
+    }
+}
+
+},{"./ParticlesBounceFactor":"jh0V4","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"jh0V4":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "ParticlesBounceFactor", ()=>ParticlesBounceFactor
+);
+var _valueWithRandom = require("../../ValueWithRandom");
+class ParticlesBounceFactor extends _valueWithRandom.ValueWithRandom {
+    constructor(){
+        super();
+        this.random.minimumValue = 0.1;
+        this.value = 1;
+    }
+}
+
+},{"../../ValueWithRandom":"iQyOZ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"iQyOZ":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "ValueWithRandom", ()=>ValueWithRandom
+);
+var _random = require("./Random");
+var _numberUtils = require("../../Utils/NumberUtils");
+class ValueWithRandom {
+    constructor(){
+        this.random = new _random.Random();
+        this.value = 0;
+    }
+    load(data) {
+        if (!data) return;
+        if (typeof data.random === "boolean") this.random.enable = data.random;
+        else this.random.load(data.random);
+        if (data.value !== undefined) this.value = _numberUtils.setRangeValue(data.value, this.random.enable ? this.random.minimumValue : undefined);
+    }
+}
+
+},{"./Random":"5XdsY","../../Utils/NumberUtils":"4qdpK","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"5XdsY":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "Random", ()=>Random
+);
+class Random {
+    constructor(){
+        this.enable = false;
+        this.minimumValue = 0;
+    }
+    load(data) {
+        if (!data) return;
+        if (data.enable !== undefined) this.enable = data.enable;
+        if (data.minimumValue !== undefined) this.minimumValue = data.minimumValue;
+    }
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"lC8ls":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "Destroy", ()=>Destroy
+);
+var _split = require("./Split");
+class Destroy {
+    constructor(){
+        this.mode = "none";
+        this.split = new _split.Split();
+    }
+    load(data) {
+        if (!data) return;
+        if (data.mode !== undefined) this.mode = data.mode;
+        this.split.load(data.split);
+    }
+}
+
+},{"./Split":"78tx0","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"78tx0":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "Split", ()=>Split
+);
+var _splitFactor = require("./SplitFactor");
+var _splitRate = require("./SplitRate");
+var _utils = require("../../../../Utils/Utils");
+class Split {
+    constructor(){
+        this.count = 1;
+        this.factor = new _splitFactor.SplitFactor();
+        this.rate = new _splitRate.SplitRate();
+        this.sizeOffset = true;
+    }
+    load(data) {
+        if (!data) return;
+        if (data.count !== undefined) this.count = data.count;
+        this.factor.load(data.factor);
+        this.rate.load(data.rate);
+        if (data.particles !== undefined) this.particles = _utils.deepExtend({}, data.particles);
+        if (data.sizeOffset !== undefined) this.sizeOffset = data.sizeOffset;
+    }
+}
+
+},{"./SplitFactor":"ieT6W","./SplitRate":"dKbAT","../../../../Utils/Utils":"cbRwi","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"ieT6W":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "SplitFactor", ()=>SplitFactor
+);
+var _valueWithRandom = require("../../ValueWithRandom");
+class SplitFactor extends _valueWithRandom.ValueWithRandom {
+    constructor(){
+        super();
+        this.value = 3;
+    }
+}
+
+},{"../../ValueWithRandom":"iQyOZ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"dKbAT":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "SplitRate", ()=>SplitRate
+);
+var _valueWithRandom = require("../../ValueWithRandom");
+class SplitRate extends _valueWithRandom.ValueWithRandom {
+    constructor(){
+        super();
+        this.value = {
+            min: 4,
+            max: 9
+        };
+    }
+}
+
+},{"../../ValueWithRandom":"iQyOZ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"k5OCm":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "Life", ()=>Life
+);
+var _lifeDelay = require("./LifeDelay");
+var _lifeDuration = require("./LifeDuration");
+class Life {
+    constructor(){
+        this.count = 0;
+        this.delay = new _lifeDelay.LifeDelay();
+        this.duration = new _lifeDuration.LifeDuration();
+    }
+    load(data) {
+        if (!data) return;
+        if (data.count !== undefined) this.count = data.count;
+        this.delay.load(data.delay);
+        this.duration.load(data.duration);
+    }
+}
+
+},{"./LifeDelay":"gEqZX","./LifeDuration":"20rVc","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"gEqZX":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "LifeDelay", ()=>LifeDelay
+);
+var _valueWithRandom = require("../../ValueWithRandom");
+class LifeDelay extends _valueWithRandom.ValueWithRandom {
+    constructor(){
+        super();
+        this.sync = false;
+    }
+    load(data) {
+        if (!data) return;
+        super.load(data);
+        if (data.sync !== undefined) this.sync = data.sync;
+    }
+}
+
+},{"../../ValueWithRandom":"iQyOZ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"20rVc":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "LifeDuration", ()=>LifeDuration
+);
+var _valueWithRandom = require("../../ValueWithRandom");
+class LifeDuration extends _valueWithRandom.ValueWithRandom {
+    constructor(){
+        super();
+        this.random.minimumValue = 0.0001;
+        this.sync = false;
+    }
+    load(data) {
+        if (!data) return;
+        super.load(data);
+        if (data.sync !== undefined) this.sync = data.sync;
+    }
+}
+
+},{"../../ValueWithRandom":"iQyOZ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"l4Yb3":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "Links", ()=>Links
+);
+var _linksShadow = require("./LinksShadow");
+var _linksTriangle = require("./LinksTriangle");
+var _optionsColor = require("../../OptionsColor");
+class Links {
+    constructor(){
+        this.blink = false;
+        this.color = new _optionsColor.OptionsColor();
+        this.color.value = "#fff";
+        this.consent = false;
+        this.distance = 100;
+        this.enable = false;
+        this.frequency = 1;
+        this.opacity = 1;
+        this.shadow = new _linksShadow.LinksShadow();
+        this.triangles = new _linksTriangle.LinksTriangle();
+        this.width = 1;
+        this.warp = false;
+    }
+    load(data) {
+        if (!data) return;
+        if (data.id !== undefined) this.id = data.id;
+        if (data.blink !== undefined) this.blink = data.blink;
+        this.color = _optionsColor.OptionsColor.create(this.color, data.color);
+        if (data.consent !== undefined) this.consent = data.consent;
+        if (data.distance !== undefined) this.distance = data.distance;
+        if (data.enable !== undefined) this.enable = data.enable;
+        if (data.frequency !== undefined) this.frequency = data.frequency;
+        if (data.opacity !== undefined) this.opacity = data.opacity;
+        this.shadow.load(data.shadow);
+        this.triangles.load(data.triangles);
+        if (data.width !== undefined) this.width = data.width;
+        if (data.warp !== undefined) this.warp = data.warp;
+    }
+}
+
+},{"./LinksShadow":"2f4wg","./LinksTriangle":"9KTxN","../../OptionsColor":"9IFHT","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"2f4wg":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "LinksShadow", ()=>LinksShadow
+);
+var _optionsColor = require("../../OptionsColor");
+class LinksShadow {
+    constructor(){
+        this.blur = 5;
+        this.color = new _optionsColor.OptionsColor();
+        this.color.value = "#000";
+        this.enable = false;
+    }
+    load(data) {
+        if (!data) return;
+        if (data.blur !== undefined) this.blur = data.blur;
+        this.color = _optionsColor.OptionsColor.create(this.color, data.color);
+        if (data.enable !== undefined) this.enable = data.enable;
+    }
+}
+
+},{"../../OptionsColor":"9IFHT","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"9KTxN":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "LinksTriangle", ()=>LinksTriangle
+);
+var _optionsColor = require("../../OptionsColor");
+class LinksTriangle {
+    constructor(){
+        this.enable = false;
+        this.frequency = 1;
+    }
+    load(data) {
+        if (!data) return;
+        if (data.color !== undefined) this.color = _optionsColor.OptionsColor.create(this.color, data.color);
+        if (data.enable !== undefined) this.enable = data.enable;
+        if (data.frequency !== undefined) this.frequency = data.frequency;
+        if (data.opacity !== undefined) this.opacity = data.opacity;
+    }
+}
+
+},{"../../OptionsColor":"9IFHT","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"jq3RH":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "Move", ()=>Move
+);
+var _moveAngle = require("./MoveAngle");
+var _moveAttract = require("./MoveAttract");
+var _moveGravity = require("./MoveGravity");
+var _movePath = require("./Path/MovePath");
+var _moveTrail = require("./MoveTrail");
+var _outModes = require("./OutModes");
+var _spin = require("./Spin");
+var _utils = require("../../../../Utils/Utils");
+var _numberUtils = require("../../../../Utils/NumberUtils");
+class Move {
+    constructor(){
+        this.angle = new _moveAngle.MoveAngle();
+        this.attract = new _moveAttract.MoveAttract();
+        this.center = {
+            x: 50,
+            y: 50,
+            radius: 0
+        };
+        this.decay = 0;
+        this.distance = {};
+        this.direction = "none";
+        this.drift = 0;
+        this.enable = false;
+        this.gravity = new _moveGravity.MoveGravity();
+        this.path = new _movePath.MovePath();
+        this.outModes = new _outModes.OutModes();
+        this.random = false;
+        this.size = false;
+        this.speed = 2;
+        this.spin = new _spin.Spin();
+        this.straight = false;
+        this.trail = new _moveTrail.MoveTrail();
+        this.vibrate = false;
+        this.warp = false;
+    }
+    get collisions() {
+        return false;
+    }
+    set collisions(value) {}
+    get bounce() {
+        return this.collisions;
+    }
+    set bounce(value) {
+        this.collisions = value;
+    }
+    get out_mode() {
+        return this.outMode;
+    }
+    set out_mode(value) {
+        this.outMode = value;
+    }
+    get outMode() {
+        return this.outModes.default;
+    }
+    set outMode(value) {
+        this.outModes.default = value;
+    }
+    get noise() {
+        return this.path;
+    }
+    set noise(value) {
+        this.path = value;
+    }
+    load(data) {
+        var _a, _b, _c;
+        if (!data) return;
+        if (data.angle !== undefined) {
+            if (typeof data.angle === "number") this.angle.value = data.angle;
+            else this.angle.load(data.angle);
+        }
+        this.attract.load(data.attract);
+        this.center = _utils.deepExtend(this.center, data.center);
+        if (data.decay !== undefined) this.decay = data.decay;
+        if (data.direction !== undefined) this.direction = data.direction;
+        if (data.distance !== undefined) this.distance = typeof data.distance === "number" ? {
+            horizontal: data.distance,
+            vertical: data.distance
+        } : _utils.deepExtend({}, data.distance);
+        if (data.drift !== undefined) this.drift = _numberUtils.setRangeValue(data.drift);
+        if (data.enable !== undefined) this.enable = data.enable;
+        this.gravity.load(data.gravity);
+        const outMode = (_a = data.outMode) !== null && _a !== void 0 ? _a : data.out_mode;
+        if (data.outModes !== undefined || outMode !== undefined) {
+            if (typeof data.outModes === "string" || data.outModes === undefined && outMode !== undefined) this.outModes.load({
+                default: (_b = data.outModes) !== null && _b !== void 0 ? _b : outMode
+            });
+            else this.outModes.load(data.outModes);
+        }
+        this.path.load((_c = data.path) !== null && _c !== void 0 ? _c : data.noise);
+        if (data.random !== undefined) this.random = data.random;
+        if (data.size !== undefined) this.size = data.size;
+        if (data.speed !== undefined) this.speed = _numberUtils.setRangeValue(data.speed);
+        this.spin.load(data.spin);
+        if (data.straight !== undefined) this.straight = data.straight;
+        this.trail.load(data.trail);
+        if (data.vibrate !== undefined) this.vibrate = data.vibrate;
+        if (data.warp !== undefined) this.warp = data.warp;
+    }
+}
+
+},{"./MoveAngle":"elOHf","./MoveAttract":"5uFdQ","./MoveGravity":"1wBxF","./Path/MovePath":"cUvzW","./MoveTrail":"81ov1","./OutModes":"aGnlT","./Spin":"kpq95","../../../../Utils/Utils":"cbRwi","../../../../Utils/NumberUtils":"4qdpK","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"elOHf":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "MoveAngle", ()=>MoveAngle
+);
+var _numberUtils = require("../../../../Utils/NumberUtils");
+class MoveAngle {
+    constructor(){
+        this.offset = 0;
+        this.value = 90;
+    }
+    load(data) {
+        if (!data) return;
+        if (data.offset !== undefined) this.offset = _numberUtils.setRangeValue(data.offset);
+        if (data.value !== undefined) this.value = _numberUtils.setRangeValue(data.value);
+    }
+}
+
+},{"../../../../Utils/NumberUtils":"4qdpK","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"5uFdQ":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "MoveAttract", ()=>MoveAttract
+);
+var _numberUtils = require("../../../../Utils/NumberUtils");
+class MoveAttract {
+    constructor(){
+        this.distance = 200;
+        this.enable = false;
+        this.rotate = {
+            x: 3000,
+            y: 3000
+        };
+    }
+    get rotateX() {
+        return this.rotate.x;
+    }
+    set rotateX(value) {
+        this.rotate.x = value;
+    }
+    get rotateY() {
+        return this.rotate.y;
+    }
+    set rotateY(value) {
+        this.rotate.y = value;
+    }
+    load(data) {
+        var _a, _b, _c, _d;
+        if (!data) return;
+        if (data.distance !== undefined) this.distance = _numberUtils.setRangeValue(data.distance);
+        if (data.enable !== undefined) this.enable = data.enable;
+        const rotateX = (_b = (_a = data.rotate) === null || _a === void 0 ? void 0 : _a.x) !== null && _b !== void 0 ? _b : data.rotateX;
+        if (rotateX !== undefined) this.rotate.x = rotateX;
+        const rotateY = (_d = (_c = data.rotate) === null || _c === void 0 ? void 0 : _c.y) !== null && _d !== void 0 ? _d : data.rotateY;
+        if (rotateY !== undefined) this.rotate.y = rotateY;
+    }
+}
+
+},{"../../../../Utils/NumberUtils":"4qdpK","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"1wBxF":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "MoveGravity", ()=>MoveGravity
+);
+var _numberUtils = require("../../../../Utils/NumberUtils");
+class MoveGravity {
+    constructor(){
+        this.acceleration = 9.81;
+        this.enable = false;
+        this.inverse = false;
+        this.maxSpeed = 50;
+    }
+    load(data) {
+        if (!data) return;
+        if (data.acceleration !== undefined) this.acceleration = _numberUtils.setRangeValue(data.acceleration);
+        if (data.enable !== undefined) this.enable = data.enable;
+        if (data.inverse !== undefined) this.inverse = data.inverse;
+        if (data.maxSpeed !== undefined) this.maxSpeed = _numberUtils.setRangeValue(data.maxSpeed);
+    }
+}
+
+},{"../../../../Utils/NumberUtils":"4qdpK","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"cUvzW":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "MovePath", ()=>MovePath
+);
+var _movePathDelay = require("./MovePathDelay");
+var _utils = require("../../../../../Utils/Utils");
+class MovePath {
+    constructor(){
+        this.clamp = true;
+        this.delay = new _movePathDelay.MovePathDelay();
+        this.enable = false;
+        this.options = {};
+    }
+    load(data) {
+        if (!data) return;
+        if (data.clamp !== undefined) this.clamp = data.clamp;
+        this.delay.load(data.delay);
+        if (data.enable !== undefined) this.enable = data.enable;
+        this.generator = data.generator;
+        if (data.options) this.options = _utils.deepExtend(this.options, data.options);
+    }
+}
+
+},{"./MovePathDelay":"95pO2","../../../../../Utils/Utils":"cbRwi","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"95pO2":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "MovePathDelay", ()=>MovePathDelay
+);
+var _valueWithRandom = require("../../../ValueWithRandom");
+class MovePathDelay extends _valueWithRandom.ValueWithRandom {
+    constructor(){
+        super();
+    }
+}
+
+},{"../../../ValueWithRandom":"iQyOZ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"81ov1":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "MoveTrail", ()=>MoveTrail
+);
+var _optionsColor = require("../../OptionsColor");
+class MoveTrail {
+    constructor(){
+        this.enable = false;
+        this.length = 10;
+        this.fillColor = new _optionsColor.OptionsColor();
+        this.fillColor.value = "#000000";
+    }
+    load(data) {
+        if (!data) return;
+        if (data.enable !== undefined) this.enable = data.enable;
+        this.fillColor = _optionsColor.OptionsColor.create(this.fillColor, data.fillColor);
+        if (data.length !== undefined) this.length = data.length;
+    }
+}
+
+},{"../../OptionsColor":"9IFHT","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"aGnlT":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "OutModes", ()=>OutModes
+);
+class OutModes {
+    constructor(){
+        this.default = "out";
+    }
+    load(data) {
+        var _a, _b, _c, _d;
+        if (!data) return;
+        if (data.default !== undefined) this.default = data.default;
+        this.bottom = (_a = data.bottom) !== null && _a !== void 0 ? _a : data.default;
+        this.left = (_b = data.left) !== null && _b !== void 0 ? _b : data.default;
+        this.right = (_c = data.right) !== null && _c !== void 0 ? _c : data.default;
+        this.top = (_d = data.top) !== null && _d !== void 0 ? _d : data.default;
+    }
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"kpq95":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "Spin", ()=>Spin
+);
+var _utils = require("../../../../Utils/Utils");
+var _numberUtils = require("../../../../Utils/NumberUtils");
+class Spin {
+    constructor(){
+        this.acceleration = 0;
+        this.enable = false;
+    }
+    load(data) {
+        if (!data) return;
+        if (data.acceleration !== undefined) this.acceleration = _numberUtils.setRangeValue(data.acceleration);
+        if (data.enable !== undefined) this.enable = data.enable;
+        this.position = data.position ? _utils.deepExtend({}, data.position) : undefined;
+    }
+}
+
+},{"../../../../Utils/Utils":"cbRwi","../../../../Utils/NumberUtils":"4qdpK","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"gcec4":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "Opacity", ()=>Opacity
+);
+var _opacityAnimation = require("./OpacityAnimation");
+var _valueWithRandom = require("../../ValueWithRandom");
+var _numberUtils = require("../../../../Utils/NumberUtils");
+class Opacity extends _valueWithRandom.ValueWithRandom {
+    constructor(){
+        super();
+        this.animation = new _opacityAnimation.OpacityAnimation();
+        this.random.minimumValue = 0.1;
+        this.value = 1;
+    }
+    get anim() {
+        return this.animation;
+    }
+    set anim(value) {
+        this.animation = value;
+    }
+    load(data) {
+        var _a;
+        if (!data) return;
+        super.load(data);
+        const animation = (_a = data.animation) !== null && _a !== void 0 ? _a : data.anim;
+        if (animation !== undefined) {
+            this.animation.load(animation);
+            this.value = _numberUtils.setRangeValue(this.value, this.animation.enable ? this.animation.minimumValue : undefined);
+        }
+    }
+}
+
+},{"./OpacityAnimation":"2xxT3","../../ValueWithRandom":"iQyOZ","../../../../Utils/NumberUtils":"4qdpK","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"2xxT3":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "OpacityAnimation", ()=>OpacityAnimation
+);
+var _animationOptions = require("../../AnimationOptions");
+class OpacityAnimation extends _animationOptions.AnimationOptions {
+    constructor(){
+        super();
+        this.destroy = "none";
+        this.enable = false;
+        this.speed = 2;
+        this.startValue = "random";
+        this.sync = false;
+    }
+    get opacity_min() {
+        return this.minimumValue;
+    }
+    set opacity_min(value) {
+        this.minimumValue = value;
+    }
+    load(data) {
+        var _a;
+        if (!data) return;
+        super.load(data);
+        if (data.destroy !== undefined) this.destroy = data.destroy;
+        if (data.enable !== undefined) this.enable = data.enable;
+        this.minimumValue = (_a = data.minimumValue) !== null && _a !== void 0 ? _a : data.opacity_min;
+        if (data.speed !== undefined) this.speed = data.speed;
+        if (data.startValue !== undefined) this.startValue = data.startValue;
+        if (data.sync !== undefined) this.sync = data.sync;
+    }
+}
+
+},{"../../AnimationOptions":"3QF4A","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"3QF4A":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "AnimationOptions", ()=>AnimationOptions
+);
+var _numberUtils = require("../../Utils/NumberUtils");
+class AnimationOptions {
+    constructor(){
+        this.count = 0;
+        this.enable = false;
+        this.speed = 1;
+        this.sync = false;
+    }
+    load(data) {
+        if (!data) return;
+        if (data.count !== undefined) this.count = _numberUtils.setRangeValue(data.count);
+        if (data.enable !== undefined) this.enable = data.enable;
+        if (data.speed !== undefined) this.speed = _numberUtils.setRangeValue(data.speed);
+        if (data.sync !== undefined) this.sync = data.sync;
+    }
+}
+
+},{"../../Utils/NumberUtils":"4qdpK","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"eM2lc":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "Orbit", ()=>Orbit
+);
+var _animationOptions = require("../../AnimationOptions");
+var _optionsColor = require("../../OptionsColor");
+var _orbitRotation = require("./OrbitRotation");
+var _numberUtils = require("../../../../Utils/NumberUtils");
+class Orbit {
+    constructor(){
+        this.animation = new _animationOptions.AnimationOptions();
+        this.enable = false;
+        this.opacity = 1;
+        this.rotation = new _orbitRotation.OrbitRotation();
+        this.width = 1;
+    }
+    load(data) {
+        if (!data) return;
+        this.animation.load(data.animation);
+        this.rotation.load(data.rotation);
+        if (data.enable !== undefined) this.enable = data.enable;
+        if (data.opacity !== undefined) this.opacity = _numberUtils.setRangeValue(data.opacity);
+        if (data.width !== undefined) this.width = _numberUtils.setRangeValue(data.width);
+        if (data.radius !== undefined) this.radius = _numberUtils.setRangeValue(data.radius);
+        if (data.color !== undefined) this.color = _optionsColor.OptionsColor.create(this.color, data.color);
+    }
+}
+
+},{"../../AnimationOptions":"3QF4A","../../OptionsColor":"9IFHT","./OrbitRotation":"9UWLK","../../../../Utils/NumberUtils":"4qdpK","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"9UWLK":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "OrbitRotation", ()=>OrbitRotation
+);
+var _valueWithRandom = require("../../ValueWithRandom");
+class OrbitRotation extends _valueWithRandom.ValueWithRandom {
+    constructor(){
+        super();
+        this.value = 45;
+        this.random.enable = false;
+        this.random.minimumValue = 0;
+    }
+    load(data) {
+        if (data === undefined) return;
+        super.load(data);
+    }
+}
+
+},{"../../ValueWithRandom":"iQyOZ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"jc6iI":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "ParticlesNumber", ()=>ParticlesNumber
+);
+var _particlesDensity = require("./ParticlesDensity");
+class ParticlesNumber {
+    constructor(){
+        this.density = new _particlesDensity.ParticlesDensity();
+        this.limit = 0;
+        this.value = 100;
+    }
+    get max() {
+        return this.limit;
+    }
+    set max(value) {
+        this.limit = value;
+    }
+    load(data) {
+        var _a;
+        if (!data) return;
+        this.density.load(data.density);
+        const limit = (_a = data.limit) !== null && _a !== void 0 ? _a : data.max;
+        if (limit !== undefined) this.limit = limit;
+        if (data.value !== undefined) this.value = data.value;
+    }
+}
+
+},{"./ParticlesDensity":"8EwXQ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"8EwXQ":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "ParticlesDensity", ()=>ParticlesDensity
+);
+class ParticlesDensity {
+    constructor(){
+        this.enable = false;
+        this.area = 800;
+        this.factor = 1000;
+    }
+    get value_area() {
+        return this.area;
+    }
+    set value_area(value) {
+        this.area = value;
+    }
+    load(data) {
+        var _a;
+        if (!data) return;
+        if (data.enable !== undefined) this.enable = data.enable;
+        const area = (_a = data.area) !== null && _a !== void 0 ? _a : data.value_area;
+        if (area !== undefined) this.area = area;
+        if (data.factor !== undefined) this.factor = data.factor;
+    }
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"2FM3f":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "ParticlesRepulse", ()=>ParticlesRepulse
+);
+var _valueWithRandom = require("../../ValueWithRandom");
+var _numberUtils = require("../../../../Utils/NumberUtils");
+class ParticlesRepulse extends _valueWithRandom.ValueWithRandom {
+    constructor(){
+        super();
+        this.enabled = false;
+        this.distance = 1;
+        this.duration = 1;
+        this.factor = 1;
+        this.speed = 1;
+    }
+    load(data) {
+        super.load(data);
+        if (!data) return;
+        if (data.enabled !== undefined) this.enabled = data.enabled;
+        if (data.distance !== undefined) this.distance = _numberUtils.setRangeValue(data.distance);
+        if (data.duration !== undefined) this.duration = _numberUtils.setRangeValue(data.duration);
+        if (data.factor !== undefined) this.factor = _numberUtils.setRangeValue(data.factor);
+        if (data.speed !== undefined) this.speed = _numberUtils.setRangeValue(data.speed);
+    }
+}
+
+},{"../../ValueWithRandom":"iQyOZ","../../../../Utils/NumberUtils":"4qdpK","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"cd7db":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "Roll", ()=>Roll
+);
+var _optionsColor = require("../../OptionsColor");
+var _rollLight = require("./RollLight");
+var _numberUtils = require("../../../../Utils/NumberUtils");
+class Roll {
+    constructor(){
+        this.darken = new _rollLight.RollLight();
+        this.enable = false;
+        this.enlighten = new _rollLight.RollLight();
+        this.mode = "vertical";
+        this.speed = 25;
+    }
+    load(data) {
+        if (!data) return;
+        if (data.backColor !== undefined) this.backColor = _optionsColor.OptionsColor.create(this.backColor, data.backColor);
+        this.darken.load(data.darken);
+        if (data.enable !== undefined) this.enable = data.enable;
+        this.enlighten.load(data.enlighten);
+        if (data.mode !== undefined) this.mode = data.mode;
+        if (data.speed !== undefined) this.speed = _numberUtils.setRangeValue(data.speed);
+    }
+}
+
+},{"../../OptionsColor":"9IFHT","./RollLight":"2g1W9","../../../../Utils/NumberUtils":"4qdpK","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"2g1W9":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "RollLight", ()=>RollLight
+);
+var _numberUtils = require("../../../../Utils/NumberUtils");
+class RollLight {
+    constructor(){
+        this.enable = false;
+        this.value = 0;
+    }
+    load(data) {
+        if (!data) return;
+        if (data.enable !== undefined) this.enable = data.enable;
+        if (data.value !== undefined) this.value = _numberUtils.setRangeValue(data.value);
+    }
+}
+
+},{"../../../../Utils/NumberUtils":"4qdpK","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"eIgsE":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "Rotate", ()=>Rotate
+);
+var _rotateAnimation = require("./RotateAnimation");
+var _valueWithRandom = require("../../ValueWithRandom");
+class Rotate extends _valueWithRandom.ValueWithRandom {
+    constructor(){
+        super();
+        this.animation = new _rotateAnimation.RotateAnimation();
+        this.direction = "clockwise";
+        this.path = false;
+        this.value = 0;
+    }
+    load(data) {
+        if (!data) return;
+        super.load(data);
+        if (data.direction !== undefined) this.direction = data.direction;
+        this.animation.load(data.animation);
+        if (data.path !== undefined) this.path = data.path;
+    }
+}
+
+},{"./RotateAnimation":"dwCDL","../../ValueWithRandom":"iQyOZ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"dwCDL":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "RotateAnimation", ()=>RotateAnimation
+);
+var _numberUtils = require("../../../../Utils/NumberUtils");
+class RotateAnimation {
+    constructor(){
+        this.enable = false;
+        this.speed = 0;
+        this.sync = false;
+    }
+    load(data) {
+        if (!data) return;
+        if (data.enable !== undefined) this.enable = data.enable;
+        if (data.speed !== undefined) this.speed = _numberUtils.setRangeValue(data.speed);
+        if (data.sync !== undefined) this.sync = data.sync;
+    }
+}
+
+},{"../../../../Utils/NumberUtils":"4qdpK","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"FYOwc":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "Shadow", ()=>Shadow
+);
+var _optionsColor = require("../OptionsColor");
+class Shadow {
+    constructor(){
+        this.blur = 0;
+        this.color = new _optionsColor.OptionsColor();
+        this.enable = false;
+        this.offset = {
+            x: 0,
+            y: 0
+        };
+        this.color.value = "#000";
+    }
+    load(data) {
+        if (!data) return;
+        if (data.blur !== undefined) this.blur = data.blur;
+        this.color = _optionsColor.OptionsColor.create(this.color, data.color);
+        if (data.enable !== undefined) this.enable = data.enable;
+        if (data.offset === undefined) return;
+        if (data.offset.x !== undefined) this.offset.x = data.offset.x;
+        if (data.offset.y !== undefined) this.offset.y = data.offset.y;
+    }
+}
+
+},{"../OptionsColor":"9IFHT","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"44IjP":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "Shape", ()=>Shape
+);
+var _utils = require("../../../../Utils/Utils");
+class Shape {
+    constructor(){
+        this.options = {};
+        this.type = "circle";
+    }
+    get image() {
+        var _a;
+        return (_a = this.options["image"]) !== null && _a !== void 0 ? _a : this.options["images"];
+    }
+    set image(value) {
+        this.options["image"] = value;
+        this.options["images"] = value;
+    }
+    get custom() {
+        return this.options;
+    }
+    set custom(value) {
+        this.options = value;
+    }
+    get images() {
+        return this.image;
+    }
+    set images(value) {
+        this.image = value;
+    }
+    get stroke() {
+        return [];
+    }
+    set stroke(_value) {}
+    get character() {
+        var _a;
+        return (_a = this.options["character"]) !== null && _a !== void 0 ? _a : this.options["char"];
+    }
+    set character(value) {
+        this.options["character"] = value;
+        this.options["char"] = value;
+    }
+    get polygon() {
+        var _a;
+        return (_a = this.options["polygon"]) !== null && _a !== void 0 ? _a : this.options["star"];
+    }
+    set polygon(value) {
+        this.options["polygon"] = value;
+        this.options["star"] = value;
+    }
+    load(data) {
+        var _a, _b, _c;
+        if (!data) return;
+        const options = (_a = data.options) !== null && _a !== void 0 ? _a : data.custom;
+        if (options !== undefined) for(const shape in options){
+            const item = options[shape];
+            if (item) this.options[shape] = _utils.deepExtend((_b = this.options[shape]) !== null && _b !== void 0 ? _b : {}, item);
+        }
+        this.loadShape(data.character, "character", "char", true);
+        this.loadShape(data.polygon, "polygon", "star", false);
+        this.loadShape((_c = data.image) !== null && _c !== void 0 ? _c : data.images, "image", "images", true);
+        if (data.type !== undefined) this.type = data.type;
+    }
+    loadShape(item, mainKey, altKey, altOverride) {
+        var _a, _b, _c, _d;
+        if (item === undefined) return;
+        if (item instanceof Array) {
+            if (!(this.options[mainKey] instanceof Array)) {
+                this.options[mainKey] = [];
+                if (!this.options[altKey] || altOverride) this.options[altKey] = [];
+            }
+            this.options[mainKey] = _utils.deepExtend((_a = this.options[mainKey]) !== null && _a !== void 0 ? _a : [], item);
+            if (!this.options[altKey] || altOverride) this.options[altKey] = _utils.deepExtend((_b = this.options[altKey]) !== null && _b !== void 0 ? _b : [], item);
+        } else {
+            if (this.options[mainKey] instanceof Array) {
+                this.options[mainKey] = {};
+                if (!this.options[altKey] || altOverride) this.options[altKey] = {};
+            }
+            this.options[mainKey] = _utils.deepExtend((_c = this.options[mainKey]) !== null && _c !== void 0 ? _c : {}, item);
+            if (!this.options[altKey] || altOverride) this.options[altKey] = _utils.deepExtend((_d = this.options[altKey]) !== null && _d !== void 0 ? _d : {}, item);
+        }
+    }
+}
+
+},{"../../../../Utils/Utils":"cbRwi","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"WG86G":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "Size", ()=>Size
+);
+var _sizeAnimation = require("./SizeAnimation");
+var _valueWithRandom = require("../../ValueWithRandom");
+var _numberUtils = require("../../../../Utils/NumberUtils");
+class Size extends _valueWithRandom.ValueWithRandom {
+    constructor(){
+        super();
+        this.animation = new _sizeAnimation.SizeAnimation();
+        this.random.minimumValue = 1;
+        this.value = 3;
+    }
+    get anim() {
+        return this.animation;
+    }
+    set anim(value) {
+        this.animation = value;
+    }
+    load(data) {
+        var _a;
+        super.load(data);
+        if (!data) return;
+        const animation = (_a = data.animation) !== null && _a !== void 0 ? _a : data.anim;
+        if (animation !== undefined) {
+            this.animation.load(animation);
+            this.value = _numberUtils.setRangeValue(this.value, this.animation.enable ? this.animation.minimumValue : undefined);
+        }
+    }
+}
+
+},{"./SizeAnimation":"57KRW","../../ValueWithRandom":"iQyOZ","../../../../Utils/NumberUtils":"4qdpK","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"57KRW":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "SizeAnimation", ()=>SizeAnimation
+);
+var _animationOptions = require("../../AnimationOptions");
+class SizeAnimation extends _animationOptions.AnimationOptions {
+    constructor(){
+        super();
+        this.destroy = "none";
+        this.enable = false;
+        this.speed = 5;
+        this.startValue = "random";
+        this.sync = false;
+    }
+    get size_min() {
+        return this.minimumValue;
+    }
+    set size_min(value) {
+        this.minimumValue = value;
+    }
+    load(data) {
+        var _a;
+        super.load(data);
+        if (!data) return;
+        if (data.destroy !== undefined) this.destroy = data.destroy;
+        if (data.enable !== undefined) this.enable = data.enable;
+        this.minimumValue = (_a = data.minimumValue) !== null && _a !== void 0 ? _a : data.size_min;
+        if (data.speed !== undefined) this.speed = data.speed;
+        if (data.startValue !== undefined) this.startValue = data.startValue;
+        if (data.sync !== undefined) this.sync = data.sync;
+    }
+}
+
+},{"../../AnimationOptions":"3QF4A","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"b2zNO":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "Stroke", ()=>Stroke
+);
+var _animatableColor = require("../AnimatableColor");
+class Stroke {
+    constructor(){
+        this.width = 0;
+    }
+    load(data) {
+        if (!data) return;
+        if (data.color !== undefined) this.color = _animatableColor.AnimatableColor.create(this.color, data.color);
+        if (data.width !== undefined) this.width = data.width;
+        if (data.opacity !== undefined) this.opacity = data.opacity;
+    }
+}
+
+},{"../AnimatableColor":"5TDzE","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"hCPFH":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "Tilt", ()=>Tilt
+);
+var _tiltAnimation = require("./TiltAnimation");
+var _valueWithRandom = require("../../ValueWithRandom");
+class Tilt extends _valueWithRandom.ValueWithRandom {
+    constructor(){
+        super();
+        this.animation = new _tiltAnimation.TiltAnimation();
+        this.direction = "clockwise";
+        this.enable = false;
+        this.value = 0;
+    }
+    load(data) {
+        super.load(data);
+        if (!data) return;
+        this.animation.load(data.animation);
+        if (data.direction !== undefined) this.direction = data.direction;
+        if (data.enable !== undefined) this.enable = data.enable;
+    }
+}
+
+},{"./TiltAnimation":"4L4Ib","../../ValueWithRandom":"iQyOZ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"4L4Ib":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "TiltAnimation", ()=>TiltAnimation
+);
+var _numberUtils = require("../../../../Utils/NumberUtils");
+class TiltAnimation {
+    constructor(){
+        this.enable = false;
+        this.speed = 0;
+        this.sync = false;
+    }
+    load(data) {
+        if (!data) return;
+        if (data.enable !== undefined) this.enable = data.enable;
+        if (data.speed !== undefined) this.speed = _numberUtils.setRangeValue(data.speed);
+        if (data.sync !== undefined) this.sync = data.sync;
+    }
+}
+
+},{"../../../../Utils/NumberUtils":"4qdpK","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"1Y53F":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "Twinkle", ()=>Twinkle
+);
+var _twinkleValues = require("./TwinkleValues");
+class Twinkle {
+    constructor(){
+        this.lines = new _twinkleValues.TwinkleValues();
+        this.particles = new _twinkleValues.TwinkleValues();
+    }
+    load(data) {
+        if (!data) return;
+        this.lines.load(data.lines);
+        this.particles.load(data.particles);
+    }
+}
+
+},{"./TwinkleValues":"eGjGX","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"eGjGX":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "TwinkleValues", ()=>TwinkleValues
+);
+var _optionsColor = require("../../OptionsColor");
+var _numberUtils = require("../../../../Utils/NumberUtils");
+class TwinkleValues {
+    constructor(){
+        this.enable = false;
+        this.frequency = 0.05;
+        this.opacity = 1;
+    }
+    load(data) {
+        if (!data) return;
+        if (data.color !== undefined) this.color = _optionsColor.OptionsColor.create(this.color, data.color);
+        if (data.enable !== undefined) this.enable = data.enable;
+        if (data.frequency !== undefined) this.frequency = data.frequency;
+        if (data.opacity !== undefined) this.opacity = _numberUtils.setRangeValue(data.opacity);
+    }
+}
+
+},{"../../OptionsColor":"9IFHT","../../../../Utils/NumberUtils":"4qdpK","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"7yEbC":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "Wobble", ()=>Wobble
+);
+var _numberUtils = require("../../../../Utils/NumberUtils");
+class Wobble {
+    constructor(){
+        this.distance = 5;
+        this.enable = false;
+        this.speed = 50;
+    }
+    load(data) {
+        if (!data) return;
+        if (data.distance !== undefined) this.distance = _numberUtils.setRangeValue(data.distance);
+        if (data.enable !== undefined) this.enable = data.enable;
+        if (data.speed !== undefined) this.speed = _numberUtils.setRangeValue(data.speed);
+    }
+}
+
+},{"../../../../Utils/NumberUtils":"4qdpK","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"4J4Up":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "ZIndex", ()=>ZIndex
+);
+var _valueWithRandom = require("../../ValueWithRandom");
+class ZIndex extends _valueWithRandom.ValueWithRandom {
+    constructor(){
+        super();
+        this.opacityRate = 1;
+        this.sizeRate = 1;
+        this.velocityRate = 1;
+    }
+    load(data) {
+        super.load(data);
+        if (!data) return;
+        if (data.opacityRate !== undefined) this.opacityRate = data.opacityRate;
+        if (data.sizeRate !== undefined) this.sizeRate = data.sizeRate;
+        if (data.velocityRate !== undefined) this.velocityRate = data.velocityRate;
+    }
+}
+
+},{"../../ValueWithRandom":"iQyOZ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"fTHv9":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "Canvas", ()=>Canvas
+);
+var _canvasUtils = require("../Utils/CanvasUtils");
+var _colorUtils = require("../Utils/ColorUtils");
+var _utils = require("../Utils/Utils");
+var _constants = require("./Utils/Constants");
+class Canvas {
+    constructor(container){
+        this.container = container;
+        this.size = {
+            height: 0,
+            width: 0
+        };
+        this.context = null;
+        this.generatedCanvas = false;
+    }
+    init() {
+        this.resize();
+        this.initStyle();
+        this.initCover();
+        this.initTrail();
+        this.initBackground();
+        this.paint();
+    }
+    loadCanvas(canvas) {
+        var _a;
+        if (this.generatedCanvas) (_a = this.element) === null || _a === void 0 || _a.remove();
+        this.generatedCanvas = canvas.dataset && _constants.generatedAttribute in canvas.dataset ? canvas.dataset[_constants.generatedAttribute] === "true" : this.generatedCanvas;
+        this.element = canvas;
+        this.originalStyle = _utils.deepExtend({}, this.element.style);
+        this.size.height = canvas.offsetHeight;
+        this.size.width = canvas.offsetWidth;
+        this.context = this.element.getContext("2d");
+        this.container.retina.init();
+        this.initBackground();
+    }
+    destroy() {
+        var _a;
+        if (this.generatedCanvas) (_a = this.element) === null || _a === void 0 || _a.remove();
+        this.draw((ctx)=>{
+            _canvasUtils.clear(ctx, this.size);
+        });
+    }
+    paint() {
+        const options = this.container.actualOptions;
+        this.draw((ctx)=>{
+            if (options.backgroundMask.enable && options.backgroundMask.cover) {
+                _canvasUtils.clear(ctx, this.size);
+                this.paintBase(this.coverColorStyle);
+            } else this.paintBase();
+        });
+    }
+    clear() {
+        const options = this.container.actualOptions, trail = options.particles.move.trail;
+        if (options.backgroundMask.enable) this.paint();
+        else if (trail.enable && trail.length > 0 && this.trailFillColor) this.paintBase(_colorUtils.getStyleFromRgb(this.trailFillColor, 1 / trail.length));
+        else this.draw((ctx)=>{
+            _canvasUtils.clear(ctx, this.size);
+        });
+    }
+    async windowResize() {
+        if (!this.element) return;
+        this.resize();
+        const container = this.container, needsRefresh = container.updateActualOptions();
+        container.particles.setDensity();
+        for (const [, plugin] of container.plugins)if (plugin.resize !== undefined) plugin.resize();
+        if (needsRefresh) await container.refresh();
+    }
+    resize() {
+        if (!this.element) return;
+        const container = this.container, pxRatio = container.retina.pixelRatio, size = container.canvas.size, newSize = {
+            width: this.element.offsetWidth * pxRatio,
+            height: this.element.offsetHeight * pxRatio
+        };
+        if (newSize.height === size.height && newSize.width === size.width && newSize.height === this.element.height && newSize.width === this.element.width) return;
+        const oldSize = Object.assign({}, size);
+        this.element.width = size.width = this.element.offsetWidth * pxRatio;
+        this.element.height = size.height = this.element.offsetHeight * pxRatio;
+        if (this.container.started) this.resizeFactor = {
+            width: size.width / oldSize.width,
+            height: size.height / oldSize.height
+        };
+    }
+    drawConnectLine(p1, p2) {
+        this.draw((ctx)=>{
+            var _a;
+            const lineStyle = this.lineStyle(p1, p2);
+            if (!lineStyle) return;
+            const pos1 = p1.getPosition(), pos2 = p2.getPosition();
+            _canvasUtils.drawConnectLine(ctx, (_a = p1.retina.linksWidth) !== null && _a !== void 0 ? _a : this.container.retina.linksWidth, lineStyle, pos1, pos2);
+        });
+    }
+    drawGrabLine(particle, lineColor, opacity, mousePos) {
+        const container = this.container;
+        this.draw((ctx)=>{
+            var _a;
+            const beginPos = particle.getPosition();
+            _canvasUtils.drawGrabLine(ctx, (_a = particle.retina.linksWidth) !== null && _a !== void 0 ? _a : container.retina.linksWidth, beginPos, mousePos, lineColor, opacity);
+        });
+    }
+    drawParticle(particle, delta) {
+        var _a, _b, _c, _d, _e, _f;
+        if (particle.spawning || particle.destroyed) return;
+        const radius = particle.getRadius();
+        if (radius <= 0) return;
+        const pfColor = particle.getFillColor(), psColor = (_a = particle.getStrokeColor()) !== null && _a !== void 0 ? _a : pfColor;
+        if (!pfColor && !psColor) return;
+        let [fColor, sColor] = this.getPluginParticleColors(particle);
+        if (!fColor || !sColor) {
+            if (!fColor) fColor = pfColor ? pfColor : undefined;
+            if (!sColor) sColor = psColor ? psColor : undefined;
+        }
+        const options = this.container.actualOptions, zIndexOptions = particle.options.zIndex, zOpacityFactor = (1 - particle.zIndexFactor) ** zIndexOptions.opacityRate, opacity = (_d = (_b = particle.bubble.opacity) !== null && _b !== void 0 ? _b : (_c = particle.opacity) === null || _c === void 0 ? void 0 : _c.value) !== null && _d !== void 0 ? _d : 1, strokeOpacity = (_f = (_e = particle.stroke) === null || _e === void 0 ? void 0 : _e.opacity) !== null && _f !== void 0 ? _f : opacity, zOpacity = opacity * zOpacityFactor, zStrokeOpacity = strokeOpacity * zOpacityFactor;
+        const colorStyles = {
+            fill: fColor ? _colorUtils.getStyleFromHsl(fColor, zOpacity) : undefined
+        };
+        colorStyles.stroke = sColor ? _colorUtils.getStyleFromHsl(sColor, zStrokeOpacity) : colorStyles.fill;
+        this.draw((ctx)=>{
+            const zSizeFactor = (1 - particle.zIndexFactor) ** zIndexOptions.sizeRate, container = this.container;
+            for (const updater of container.particles.updaters){
+                if (updater.beforeDraw) updater.beforeDraw(particle);
+                if (updater.getColorStyles) {
+                    const { fill , stroke  } = updater.getColorStyles(particle, ctx, radius, zOpacity);
+                    if (fill) colorStyles.fill = fill;
+                    if (stroke) colorStyles.stroke = stroke;
+                }
+            }
+            _canvasUtils.drawParticle(container, ctx, particle, delta, colorStyles, options.backgroundMask.enable, options.backgroundMask.composite, radius * zSizeFactor, zOpacity, particle.options.shadow);
+            for (const updater1 of container.particles.updaters)if (updater1.afterDraw) updater1.afterDraw(particle);
+        });
+    }
+    drawPlugin(plugin, delta) {
+        this.draw((ctx)=>{
+            _canvasUtils.drawPlugin(ctx, plugin, delta);
+        });
+    }
+    drawParticlePlugin(plugin, particle, delta) {
+        this.draw((ctx)=>{
+            _canvasUtils.drawParticlePlugin(ctx, plugin, particle, delta);
+        });
+    }
+    initBackground() {
+        const options = this.container.actualOptions, background = options.background, element = this.element, elementStyle = element === null || element === void 0 ? void 0 : element.style;
+        if (!elementStyle) return;
+        if (background.color) {
+            const color = _colorUtils.colorToRgb(background.color);
+            elementStyle.backgroundColor = color ? _colorUtils.getStyleFromRgb(color, background.opacity) : "";
+        } else elementStyle.backgroundColor = "";
+        elementStyle.backgroundImage = background.image || "";
+        elementStyle.backgroundPosition = background.position || "";
+        elementStyle.backgroundRepeat = background.repeat || "";
+        elementStyle.backgroundSize = background.size || "";
+    }
+    draw(cb) {
+        if (!this.context) return;
+        return cb(this.context);
+    }
+    initCover() {
+        const options = this.container.actualOptions, cover = options.backgroundMask.cover, color = cover.color, coverRgb = _colorUtils.colorToRgb(color);
+        if (coverRgb) {
+            const coverColor = {
+                r: coverRgb.r,
+                g: coverRgb.g,
+                b: coverRgb.b,
+                a: cover.opacity
+            };
+            this.coverColorStyle = _colorUtils.getStyleFromRgb(coverColor, coverColor.a);
+        }
+    }
+    initTrail() {
+        const options = this.container.actualOptions, trail = options.particles.move.trail, fillColor = _colorUtils.colorToRgb(trail.fillColor);
+        if (fillColor) {
+            const trail = options.particles.move.trail;
+            this.trailFillColor = {
+                r: fillColor.r,
+                g: fillColor.g,
+                b: fillColor.b,
+                a: 1 / trail.length
+            };
+        }
+    }
+    getPluginParticleColors(particle) {
+        let fColor, sColor;
+        for (const [, plugin] of this.container.plugins){
+            if (!fColor && plugin.particleFillColor) fColor = _colorUtils.colorToHsl(plugin.particleFillColor(particle));
+            if (!sColor && plugin.particleStrokeColor) sColor = _colorUtils.colorToHsl(plugin.particleStrokeColor(particle));
+            if (fColor && sColor) break;
+        }
+        return [
+            fColor,
+            sColor
+        ];
+    }
+    initStyle() {
+        const element = this.element, options = this.container.actualOptions;
+        if (!element) return;
+        const originalStyle = this.originalStyle;
+        if (options.fullScreen.enable) {
+            this.originalStyle = _utils.deepExtend({}, element.style);
+            element.style.setProperty("position", "fixed", "important");
+            element.style.setProperty("z-index", options.fullScreen.zIndex.toString(10), "important");
+            element.style.setProperty("top", "0", "important");
+            element.style.setProperty("left", "0", "important");
+            element.style.setProperty("width", "100%", "important");
+            element.style.setProperty("height", "100%", "important");
+        } else if (originalStyle) {
+            element.style.position = originalStyle.position;
+            element.style.zIndex = originalStyle.zIndex;
+            element.style.top = originalStyle.top;
+            element.style.left = originalStyle.left;
+            element.style.width = originalStyle.width;
+            element.style.height = originalStyle.height;
+        }
+        for(const key in options.style){
+            if (!key || !options.style) continue;
+            const value = options.style[key];
+            if (!value) continue;
+            element.style.setProperty(key, value, "important");
+        }
+    }
+    paintBase(baseColor) {
+        this.draw((ctx)=>{
+            _canvasUtils.paintBase(ctx, this.size, baseColor);
+        });
+    }
+    lineStyle(p1, p2) {
+        return this.draw((ctx)=>{
+            const options = this.container.actualOptions, connectOptions = options.interactivity.modes.connect;
+            return _canvasUtils.gradient(ctx, p1, p2, connectOptions.links.opacity);
+        });
+    }
+}
+
+},{"../Utils/CanvasUtils":"knoc1","../Utils/ColorUtils":"cYU1v","../Utils/Utils":"cbRwi","./Utils/Constants":"kUBJ0","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"knoc1":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "drawLine", ()=>drawLine
+);
+parcelHelpers.export(exports, "drawTriangle", ()=>drawTriangle
+);
+parcelHelpers.export(exports, "paintBase", ()=>paintBase
+);
+parcelHelpers.export(exports, "clear", ()=>clear
+);
+parcelHelpers.export(exports, "drawConnectLine", ()=>drawConnectLine
+);
+parcelHelpers.export(exports, "gradient", ()=>gradient
+);
+parcelHelpers.export(exports, "drawGrabLine", ()=>drawGrabLine
+);
+parcelHelpers.export(exports, "drawParticle", ()=>drawParticle
+);
+parcelHelpers.export(exports, "drawShape", ()=>drawShape
+);
+parcelHelpers.export(exports, "drawShapeAfterEffect", ()=>drawShapeAfterEffect
+);
+parcelHelpers.export(exports, "drawPlugin", ()=>drawPlugin
+);
+parcelHelpers.export(exports, "drawParticlePlugin", ()=>drawParticlePlugin
+);
+parcelHelpers.export(exports, "drawEllipse", ()=>drawEllipse
+);
+parcelHelpers.export(exports, "alterHsl", ()=>alterHsl
+);
+var _colorUtils = require("./ColorUtils");
+function drawLine(context, begin, end) {
+    context.beginPath();
+    context.moveTo(begin.x, begin.y);
+    context.lineTo(end.x, end.y);
+    context.closePath();
+}
+function drawTriangle(context, p1, p2, p3) {
+    context.beginPath();
+    context.moveTo(p1.x, p1.y);
+    context.lineTo(p2.x, p2.y);
+    context.lineTo(p3.x, p3.y);
+    context.closePath();
+}
+function paintBase(context, dimension, baseColor) {
+    context.save();
+    context.fillStyle = baseColor !== null && baseColor !== void 0 ? baseColor : "rgba(0,0,0,0)";
+    context.fillRect(0, 0, dimension.width, dimension.height);
+    context.restore();
+}
+function clear(context, dimension) {
+    context.clearRect(0, 0, dimension.width, dimension.height);
+}
+function drawConnectLine(context, width, lineStyle, begin, end) {
+    context.save();
+    drawLine(context, begin, end);
+    context.lineWidth = width;
+    context.strokeStyle = lineStyle;
+    context.stroke();
+    context.restore();
+}
+function gradient(context, p1, p2, opacity) {
+    const gradStop = Math.floor(p2.getRadius() / p1.getRadius()), color1 = p1.getFillColor(), color2 = p2.getFillColor();
+    if (!color1 || !color2) return;
+    const sourcePos = p1.getPosition(), destPos = p2.getPosition(), midRgb = _colorUtils.colorMix(color1, color2, p1.getRadius(), p2.getRadius()), grad = context.createLinearGradient(sourcePos.x, sourcePos.y, destPos.x, destPos.y);
+    grad.addColorStop(0, _colorUtils.getStyleFromHsl(color1, opacity));
+    grad.addColorStop(gradStop > 1 ? 1 : gradStop, _colorUtils.getStyleFromRgb(midRgb, opacity));
+    grad.addColorStop(1, _colorUtils.getStyleFromHsl(color2, opacity));
+    return grad;
+}
+function drawGrabLine(context, width, begin, end, colorLine, opacity) {
+    context.save();
+    drawLine(context, begin, end);
+    context.strokeStyle = _colorUtils.getStyleFromRgb(colorLine, opacity);
+    context.lineWidth = width;
+    context.stroke();
+    context.restore();
+}
+function drawParticle(container, context, particle, delta, colorStyles, backgroundMask, composite, radius, opacity, shadow) {
+    var _a, _b, _c, _d;
+    const pos = particle.getPosition(), tiltOptions = particle.options.tilt, rollOptions = particle.options.roll;
+    context.save();
+    if (tiltOptions.enable || rollOptions.enable) {
+        const roll = rollOptions.enable && particle.roll, tilt = tiltOptions.enable && particle.tilt, rollHorizontal = roll && (rollOptions.mode === "horizontal" || rollOptions.mode === "both"), rollVertical = roll && (rollOptions.mode === "vertical" || rollOptions.mode === "both");
+        context.setTransform(rollHorizontal ? Math.cos(particle.roll.angle) : 1, tilt ? Math.cos(particle.tilt.value) * particle.tilt.cosDirection : 0, tilt ? Math.sin(particle.tilt.value) * particle.tilt.sinDirection : 0, rollVertical ? Math.sin(particle.roll.angle) : 1, pos.x, pos.y);
+    } else context.translate(pos.x, pos.y);
+    context.beginPath();
+    const angle = ((_b = (_a = particle.rotate) === null || _a === void 0 ? void 0 : _a.value) !== null && _b !== void 0 ? _b : 0) + (particle.options.rotate.path ? particle.velocity.angle : 0);
+    if (angle !== 0) context.rotate(angle);
+    if (backgroundMask) context.globalCompositeOperation = composite;
+    const shadowColor = particle.shadowColor;
+    if (shadow.enable && shadowColor) {
+        context.shadowBlur = shadow.blur;
+        context.shadowColor = _colorUtils.getStyleFromRgb(shadowColor);
+        context.shadowOffsetX = shadow.offset.x;
+        context.shadowOffsetY = shadow.offset.y;
+    }
+    if (colorStyles.fill) context.fillStyle = colorStyles.fill;
+    const stroke = particle.stroke;
+    context.lineWidth = (_c = particle.strokeWidth) !== null && _c !== void 0 ? _c : 0;
+    if (colorStyles.stroke) context.strokeStyle = colorStyles.stroke;
+    drawShape(container, context, particle, radius, opacity, delta);
+    if (((_d = stroke === null || stroke === void 0 ? void 0 : stroke.width) !== null && _d !== void 0 ? _d : 0) > 0) context.stroke();
+    if (particle.close) context.closePath();
+    if (particle.fill) context.fill();
+    context.restore();
+    context.save();
+    if (tiltOptions.enable && particle.tilt) context.setTransform(1, Math.cos(particle.tilt.value) * particle.tilt.cosDirection, Math.sin(particle.tilt.value) * particle.tilt.sinDirection, 1, pos.x, pos.y);
+    else context.translate(pos.x, pos.y);
+    if (angle !== 0) context.rotate(angle);
+    if (backgroundMask) context.globalCompositeOperation = composite;
+    drawShapeAfterEffect(container, context, particle, radius, opacity, delta);
+    context.restore();
+}
+function drawShape(container, context, particle, radius, opacity, delta) {
+    if (!particle.shape) return;
+    const drawer = container.drawers.get(particle.shape);
+    if (!drawer) return;
+    drawer.draw(context, particle, radius, opacity, delta, container.retina.pixelRatio);
+}
+function drawShapeAfterEffect(container, context, particle, radius, opacity, delta) {
+    if (!particle.shape) return;
+    const drawer = container.drawers.get(particle.shape);
+    if (!(drawer === null || drawer === void 0 ? void 0 : drawer.afterEffect)) return;
+    drawer.afterEffect(context, particle, radius, opacity, delta, container.retina.pixelRatio);
+}
+function drawPlugin(context, plugin, delta) {
+    if (!plugin.draw) return;
+    context.save();
+    plugin.draw(context, delta);
+    context.restore();
+}
+function drawParticlePlugin(context, plugin, particle, delta) {
+    if (!plugin.drawParticle) return;
+    context.save();
+    plugin.drawParticle(context, particle, delta);
+    context.restore();
+}
+function drawEllipse(context, particle, fillColorValue, radius, opacity, width, rotation, start, end) {
+    if (width <= 0) return;
+    const pos = particle.getPosition();
+    if (fillColorValue) context.strokeStyle = _colorUtils.getStyleFromHsl(fillColorValue, opacity);
+    context.lineWidth = width;
+    const rotationRadian = rotation * Math.PI / 180;
+    context.beginPath();
+    context.ellipse(pos.x, pos.y, radius / 2, radius * 2, rotationRadian, start, end);
+    context.stroke();
+}
+function alterHsl(color, type, value) {
+    return {
+        h: color.h,
+        s: color.s,
+        l: color.l + (type === "darken" ? -1 : 1) * value
+    };
+}
+
+},{"./ColorUtils":"cYU1v","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"cYU1v":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "colorToRgb", ()=>colorToRgb
+);
+parcelHelpers.export(exports, "colorToHsl", ()=>colorToHsl
+);
+parcelHelpers.export(exports, "rgbToHsl", ()=>rgbToHsl
+);
+parcelHelpers.export(exports, "stringToAlpha", ()=>stringToAlpha
+);
+parcelHelpers.export(exports, "stringToRgb", ()=>stringToRgb
+);
+parcelHelpers.export(exports, "hslToRgb", ()=>hslToRgb
+);
+parcelHelpers.export(exports, "hslaToRgba", ()=>hslaToRgba
+);
+parcelHelpers.export(exports, "hslToHsv", ()=>hslToHsv
+);
+parcelHelpers.export(exports, "hslaToHsva", ()=>hslaToHsva
+);
+parcelHelpers.export(exports, "hsvToHsl", ()=>hsvToHsl
+);
+parcelHelpers.export(exports, "hsvaToHsla", ()=>hsvaToHsla
+);
+parcelHelpers.export(exports, "hsvToRgb", ()=>hsvToRgb
+);
+parcelHelpers.export(exports, "hsvaToRgba", ()=>hsvaToRgba
+);
+parcelHelpers.export(exports, "rgbToHsv", ()=>rgbToHsv
+);
+parcelHelpers.export(exports, "rgbaToHsva", ()=>rgbaToHsva
+);
+parcelHelpers.export(exports, "getRandomRgbColor", ()=>getRandomRgbColor
+);
+parcelHelpers.export(exports, "getStyleFromRgb", ()=>getStyleFromRgb
+);
+parcelHelpers.export(exports, "getStyleFromHsl", ()=>getStyleFromHsl
+);
+parcelHelpers.export(exports, "getStyleFromHsv", ()=>getStyleFromHsv
+);
+parcelHelpers.export(exports, "colorMix", ()=>colorMix
+);
+parcelHelpers.export(exports, "getLinkColor", ()=>getLinkColor
+);
+parcelHelpers.export(exports, "getLinkRandomColor", ()=>getLinkRandomColor
+);
+parcelHelpers.export(exports, "getHslFromAnimation", ()=>getHslFromAnimation
+);
+parcelHelpers.export(exports, "getHslAnimationFromHsl", ()=>getHslAnimationFromHsl
+);
+var _numberUtils = require("./NumberUtils");
+var _constants = require("../Core/Utils/Constants");
+var _utils = require("./Utils");
+function hue2rgb(p, q, t) {
+    let tCalc = t;
+    if (tCalc < 0) tCalc += 1;
+    if (tCalc > 1) tCalc -= 1;
+    if (tCalc < 1 / 6) return p + (q - p) * 6 * tCalc;
+    if (tCalc < 0.5) return q;
+    if (tCalc < 2 / 3) return p + (q - p) * (2 / 3 - tCalc) * 6;
+    return p;
+}
+function stringToRgba(input) {
+    if (input.startsWith("rgb")) {
+        const regex = /rgba?\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*(,\s*([\d.]+)\s*)?\)/i;
+        const result = regex.exec(input);
+        return result ? {
+            a: result.length > 4 ? parseFloat(result[5]) : 1,
+            b: parseInt(result[3], 10),
+            g: parseInt(result[2], 10),
+            r: parseInt(result[1], 10)
+        } : undefined;
+    } else if (input.startsWith("hsl")) {
+        const regex = /hsla?\(\s*(\d+)\s*,\s*(\d+)%\s*,\s*(\d+)%\s*(,\s*([\d.]+)\s*)?\)/i;
+        const result = regex.exec(input);
+        return result ? hslaToRgba({
+            a: result.length > 4 ? parseFloat(result[5]) : 1,
+            h: parseInt(result[1], 10),
+            l: parseInt(result[3], 10),
+            s: parseInt(result[2], 10)
+        }) : undefined;
+    } else if (input.startsWith("hsv")) {
+        const regex = /hsva?\(\s*(\d+)°\s*,\s*(\d+)%\s*,\s*(\d+)%\s*(,\s*([\d.]+)\s*)?\)/i;
+        const result = regex.exec(input);
+        return result ? hsvaToRgba({
+            a: result.length > 4 ? parseFloat(result[5]) : 1,
+            h: parseInt(result[1], 10),
+            s: parseInt(result[2], 10),
+            v: parseInt(result[3], 10)
+        }) : undefined;
+    } else {
+        const shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])([a-f\d])?$/i;
+        const hexFixed = input.replace(shorthandRegex, (_m, r, g, b, a)=>{
+            return r + r + g + g + b + b + (a !== undefined ? a + a : "");
+        });
+        const regex = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})?$/i;
+        const result = regex.exec(hexFixed);
+        return result ? {
+            a: result[4] !== undefined ? parseInt(result[4], 16) / 0xff : 1,
+            b: parseInt(result[3], 16),
+            g: parseInt(result[2], 16),
+            r: parseInt(result[1], 16)
+        } : undefined;
+    }
+}
+function colorToRgb(input, index, useIndex = true) {
+    var _a, _b, _c;
+    if (input === undefined) return;
+    const color = typeof input === "string" ? {
+        value: input
+    } : input;
+    let res;
+    if (typeof color.value === "string") res = color.value === _constants.randomColorValue ? getRandomRgbColor() : stringToRgb(color.value);
+    else if (color.value instanceof Array) {
+        const colorSelected = _utils.itemFromArray(color.value, index, useIndex);
+        res = colorToRgb({
+            value: colorSelected
+        });
+    } else {
+        const colorValue = color.value, rgbColor = (_a = colorValue.rgb) !== null && _a !== void 0 ? _a : color.value;
+        if (rgbColor.r !== undefined) res = rgbColor;
+        else {
+            const hslColor = (_b = colorValue.hsl) !== null && _b !== void 0 ? _b : color.value;
+            if (hslColor.h !== undefined && hslColor.l !== undefined) res = hslToRgb(hslColor);
+            else {
+                const hsvColor = (_c = colorValue.hsv) !== null && _c !== void 0 ? _c : color.value;
+                if (hsvColor.h !== undefined && hsvColor.v !== undefined) res = hsvToRgb(hsvColor);
+            }
+        }
+    }
+    return res;
+}
+function colorToHsl(color, index, useIndex = true) {
+    const rgb = colorToRgb(color, index, useIndex);
+    return rgb !== undefined ? rgbToHsl(rgb) : undefined;
+}
+function rgbToHsl(color) {
+    const r1 = color.r / 255, g1 = color.g / 255, b1 = color.b / 255;
+    const max = Math.max(r1, g1, b1), min = Math.min(r1, g1, b1);
+    const res = {
+        h: 0,
+        l: (max + min) / 2,
+        s: 0
+    };
+    if (max !== min) {
+        res.s = res.l < 0.5 ? (max - min) / (max + min) : (max - min) / (2.0 - max - min);
+        res.h = r1 === max ? (g1 - b1) / (max - min) : res.h = g1 === max ? 2.0 + (b1 - r1) / (max - min) : 4.0 + (r1 - g1) / (max - min);
+    }
+    res.l *= 100;
+    res.s *= 100;
+    res.h *= 60;
+    if (res.h < 0) res.h += 360;
+    return res;
+}
+function stringToAlpha(input) {
+    var _a;
+    return (_a = stringToRgba(input)) === null || _a === void 0 ? void 0 : _a.a;
+}
+function stringToRgb(input) {
+    return stringToRgba(input);
+}
+function hslToRgb(hsl) {
+    const result = {
+        b: 0,
+        g: 0,
+        r: 0
+    }, hslPercent = {
+        h: hsl.h / 360,
+        l: hsl.l / 100,
+        s: hsl.s / 100
+    };
+    if (hslPercent.s === 0) {
+        result.b = hslPercent.l;
+        result.g = hslPercent.l;
+        result.r = hslPercent.l;
+    } else {
+        const q = hslPercent.l < 0.5 ? hslPercent.l * (1 + hslPercent.s) : hslPercent.l + hslPercent.s - hslPercent.l * hslPercent.s, p = 2 * hslPercent.l - q;
+        result.r = hue2rgb(p, q, hslPercent.h + 1 / 3);
+        result.g = hue2rgb(p, q, hslPercent.h);
+        result.b = hue2rgb(p, q, hslPercent.h - 1 / 3);
+    }
+    result.r = Math.floor(result.r * 255);
+    result.g = Math.floor(result.g * 255);
+    result.b = Math.floor(result.b * 255);
+    return result;
+}
+function hslaToRgba(hsla) {
+    const rgbResult = hslToRgb(hsla);
+    return {
+        a: hsla.a,
+        b: rgbResult.b,
+        g: rgbResult.g,
+        r: rgbResult.r
+    };
+}
+function hslToHsv(hsl) {
+    const l = hsl.l / 100, sl = hsl.s / 100, v = l + sl * Math.min(l, 1 - l), sv = !v ? 0 : 2 * (1 - l / v);
+    return {
+        h: hsl.h,
+        s: sv * 100,
+        v: v * 100
+    };
+}
+function hslaToHsva(hsla) {
+    const hsvResult = hslToHsv(hsla);
+    return {
+        a: hsla.a,
+        h: hsvResult.h,
+        s: hsvResult.s,
+        v: hsvResult.v
+    };
+}
+function hsvToHsl(hsv) {
+    const v = hsv.v / 100, sv = hsv.s / 100, l = v * (1 - sv / 2), sl = l === 0 || l === 1 ? 0 : (v - l) / Math.min(l, 1 - l);
+    return {
+        h: hsv.h,
+        l: l * 100,
+        s: sl * 100
+    };
+}
+function hsvaToHsla(hsva) {
+    const hslResult = hsvToHsl(hsva);
+    return {
+        a: hsva.a,
+        h: hslResult.h,
+        l: hslResult.l,
+        s: hslResult.s
+    };
+}
+function hsvToRgb(hsv) {
+    const result = {
+        b: 0,
+        g: 0,
+        r: 0
+    }, hsvPercent = {
+        h: hsv.h / 60,
+        s: hsv.s / 100,
+        v: hsv.v / 100
+    };
+    const c = hsvPercent.v * hsvPercent.s, x = c * (1 - Math.abs(hsvPercent.h % 2 - 1));
+    let tempRgb;
+    if (hsvPercent.h >= 0 && hsvPercent.h <= 1) tempRgb = {
+        r: c,
+        g: x,
+        b: 0
+    };
+    else if (hsvPercent.h > 1 && hsvPercent.h <= 2) tempRgb = {
+        r: x,
+        g: c,
+        b: 0
+    };
+    else if (hsvPercent.h > 2 && hsvPercent.h <= 3) tempRgb = {
+        r: 0,
+        g: c,
+        b: x
+    };
+    else if (hsvPercent.h > 3 && hsvPercent.h <= 4) tempRgb = {
+        r: 0,
+        g: x,
+        b: c
+    };
+    else if (hsvPercent.h > 4 && hsvPercent.h <= 5) tempRgb = {
+        r: x,
+        g: 0,
+        b: c
+    };
+    else if (hsvPercent.h > 5 && hsvPercent.h <= 6) tempRgb = {
+        r: c,
+        g: 0,
+        b: x
+    };
+    if (tempRgb) {
+        const m = hsvPercent.v - c;
+        result.r = Math.floor((tempRgb.r + m) * 255);
+        result.g = Math.floor((tempRgb.g + m) * 255);
+        result.b = Math.floor((tempRgb.b + m) * 255);
+    }
+    return result;
+}
+function hsvaToRgba(hsva) {
+    const rgbResult = hsvToRgb(hsva);
+    return {
+        a: hsva.a,
+        b: rgbResult.b,
+        g: rgbResult.g,
+        r: rgbResult.r
+    };
+}
+function rgbToHsv(rgb) {
+    const rgbPercent = {
+        r: rgb.r / 255,
+        g: rgb.g / 255,
+        b: rgb.b / 255
+    }, xMax = Math.max(rgbPercent.r, rgbPercent.g, rgbPercent.b), xMin = Math.min(rgbPercent.r, rgbPercent.g, rgbPercent.b), v = xMax, c = xMax - xMin;
+    let h = 0;
+    if (v === rgbPercent.r) h = 60 * ((rgbPercent.g - rgbPercent.b) / c);
+    else if (v === rgbPercent.g) h = 60 * (2 + (rgbPercent.b - rgbPercent.r) / c);
+    else if (v === rgbPercent.b) h = 60 * (4 + (rgbPercent.r - rgbPercent.g) / c);
+    const s = !v ? 0 : c / v;
+    return {
+        h,
+        s: s * 100,
+        v: v * 100
+    };
+}
+function rgbaToHsva(rgba) {
+    const hsvResult = rgbToHsv(rgba);
+    return {
+        a: rgba.a,
+        h: hsvResult.h,
+        s: hsvResult.s,
+        v: hsvResult.v
+    };
+}
+function getRandomRgbColor(min) {
+    const fixedMin = min !== null && min !== void 0 ? min : 0;
+    return {
+        b: Math.floor(_numberUtils.randomInRange(_numberUtils.setRangeValue(fixedMin, 256))),
+        g: Math.floor(_numberUtils.randomInRange(_numberUtils.setRangeValue(fixedMin, 256))),
+        r: Math.floor(_numberUtils.randomInRange(_numberUtils.setRangeValue(fixedMin, 256)))
+    };
+}
+function getStyleFromRgb(color, opacity) {
+    return `rgba(${color.r}, ${color.g}, ${color.b}, ${opacity !== null && opacity !== void 0 ? opacity : 1})`;
+}
+function getStyleFromHsl(color, opacity) {
+    return `hsla(${color.h}, ${color.s}%, ${color.l}%, ${opacity !== null && opacity !== void 0 ? opacity : 1})`;
+}
+function getStyleFromHsv(color, opacity) {
+    return getStyleFromHsl(hsvToHsl(color), opacity);
+}
+function colorMix(color1, color2, size1, size2) {
+    let rgb1 = color1, rgb2 = color2;
+    if (rgb1.r === undefined) rgb1 = hslToRgb(color1);
+    if (rgb2.r === undefined) rgb2 = hslToRgb(color2);
+    return {
+        b: _numberUtils.mix(rgb1.b, rgb2.b, size1, size2),
+        g: _numberUtils.mix(rgb1.g, rgb2.g, size1, size2),
+        r: _numberUtils.mix(rgb1.r, rgb2.r, size1, size2)
+    };
+}
+function getLinkColor(p1, p2, linkColor) {
+    var _a, _b;
+    if (linkColor === _constants.randomColorValue) return getRandomRgbColor();
+    else if (linkColor === "mid") {
+        const sourceColor = (_a = p1.getFillColor()) !== null && _a !== void 0 ? _a : p1.getStrokeColor(), destColor = (_b = p2 === null || p2 === void 0 ? void 0 : p2.getFillColor()) !== null && _b !== void 0 ? _b : p2 === null || p2 === void 0 ? void 0 : p2.getStrokeColor();
+        if (sourceColor && destColor && p2) return colorMix(sourceColor, destColor, p1.getRadius(), p2.getRadius());
+        else {
+            const hslColor = sourceColor !== null && sourceColor !== void 0 ? sourceColor : destColor;
+            if (hslColor) return hslToRgb(hslColor);
+        }
+    } else return linkColor;
+}
+function getLinkRandomColor(optColor, blink, consent) {
+    const color = typeof optColor === "string" ? optColor : optColor.value;
+    if (color === _constants.randomColorValue) {
+        if (consent) return colorToRgb({
+            value: color
+        });
+        else if (blink) return _constants.randomColorValue;
+        else return _constants.midColorValue;
+    } else return colorToRgb({
+        value: color
+    });
+}
+function getHslFromAnimation(animation) {
+    return animation !== undefined ? {
+        h: animation.h.value,
+        s: animation.s.value,
+        l: animation.l.value
+    } : undefined;
+}
+function getHslAnimationFromHsl(hsl, animationOptions, reduceFactor) {
+    const resColor = {
+        h: {
+            enable: false,
+            value: hsl.h
+        },
+        s: {
+            enable: false,
+            value: hsl.s
+        },
+        l: {
+            enable: false,
+            value: hsl.l
+        }
+    };
+    if (animationOptions) {
+        setColorAnimation(resColor.h, animationOptions.h, reduceFactor);
+        setColorAnimation(resColor.s, animationOptions.s, reduceFactor);
+        setColorAnimation(resColor.l, animationOptions.l, reduceFactor);
+    }
+    return resColor;
+}
+function setColorAnimation(colorValue, colorAnimation, reduceFactor) {
+    colorValue.enable = colorAnimation.enable;
+    if (colorValue.enable) {
+        colorValue.velocity = _numberUtils.getRangeValue(colorAnimation.speed) / 100 * reduceFactor;
+        if (colorAnimation.sync) return;
+        colorValue.status = 0;
+        colorValue.velocity *= Math.random();
+        if (colorValue.value) colorValue.value *= Math.random();
+    } else colorValue.velocity = 0;
+}
+
+},{"./NumberUtils":"4qdpK","../Core/Utils/Constants":"kUBJ0","./Utils":"cbRwi","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"kUBJ0":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "generatedAttribute", ()=>generatedAttribute
+);
+parcelHelpers.export(exports, "randomColorValue", ()=>randomColorValue
+);
+parcelHelpers.export(exports, "midColorValue", ()=>midColorValue
+);
+parcelHelpers.export(exports, "touchEndEvent", ()=>touchEndEvent
+);
+parcelHelpers.export(exports, "mouseDownEvent", ()=>mouseDownEvent
+);
+parcelHelpers.export(exports, "mouseUpEvent", ()=>mouseUpEvent
+);
+parcelHelpers.export(exports, "mouseMoveEvent", ()=>mouseMoveEvent
+);
+parcelHelpers.export(exports, "touchStartEvent", ()=>touchStartEvent
+);
+parcelHelpers.export(exports, "touchMoveEvent", ()=>touchMoveEvent
+);
+parcelHelpers.export(exports, "mouseLeaveEvent", ()=>mouseLeaveEvent
+);
+parcelHelpers.export(exports, "mouseOutEvent", ()=>mouseOutEvent
+);
+parcelHelpers.export(exports, "touchCancelEvent", ()=>touchCancelEvent
+);
+parcelHelpers.export(exports, "resizeEvent", ()=>resizeEvent
+);
+parcelHelpers.export(exports, "visibilityChangeEvent", ()=>visibilityChangeEvent
+);
+parcelHelpers.export(exports, "noPolygonDataLoaded", ()=>noPolygonDataLoaded
+);
+parcelHelpers.export(exports, "noPolygonFound", ()=>noPolygonFound
+);
+const generatedAttribute = "generated";
+const randomColorValue = "random";
+const midColorValue = "mid";
+const touchEndEvent = "touchend";
+const mouseDownEvent = "mousedown";
+const mouseUpEvent = "mouseup";
+const mouseMoveEvent = "mousemove";
+const touchStartEvent = "touchstart";
+const touchMoveEvent = "touchmove";
+const mouseLeaveEvent = "mouseleave";
+const mouseOutEvent = "mouseout";
+const touchCancelEvent = "touchcancel";
+const resizeEvent = "resize";
+const visibilityChangeEvent = "visibilitychange";
+const noPolygonDataLoaded = "No polygon data loaded.";
+const noPolygonFound = "No polygon found, you need to specify SVG url in config.";
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"4wX6U":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "EventListeners", ()=>EventListeners
+);
+var _constants = require("./Constants");
+var _utils = require("../../Utils/Utils");
+function manageListener(element, event, handler, add, options) {
+    if (add) {
+        let addOptions = {
+            passive: true
+        };
+        if (typeof options === "boolean") addOptions.capture = options;
+        else if (options !== undefined) addOptions = options;
+        element.addEventListener(event, handler, addOptions);
+    } else {
+        const removeOptions = options;
+        element.removeEventListener(event, handler, removeOptions);
+    }
+}
+class EventListeners {
+    constructor(container){
+        this.container = container;
+        this.canPush = true;
+        this.mouseMoveHandler = (e)=>this.mouseTouchMove(e)
+        ;
+        this.touchStartHandler = (e)=>this.mouseTouchMove(e)
+        ;
+        this.touchMoveHandler = (e)=>this.mouseTouchMove(e)
+        ;
+        this.touchEndHandler = ()=>this.mouseTouchFinish()
+        ;
+        this.mouseLeaveHandler = ()=>this.mouseTouchFinish()
+        ;
+        this.touchCancelHandler = ()=>this.mouseTouchFinish()
+        ;
+        this.touchEndClickHandler = (e)=>this.mouseTouchClick(e)
+        ;
+        this.mouseUpHandler = (e)=>this.mouseTouchClick(e)
+        ;
+        this.mouseDownHandler = ()=>this.mouseDown()
+        ;
+        this.visibilityChangeHandler = ()=>this.handleVisibilityChange()
+        ;
+        this.themeChangeHandler = (e)=>this.handleThemeChange(e)
+        ;
+        this.oldThemeChangeHandler = (e)=>this.handleThemeChange(e)
+        ;
+        this.resizeHandler = ()=>this.handleWindowResize()
+        ;
+    }
+    addListeners() {
+        this.manageListeners(true);
+    }
+    removeListeners() {
+        this.manageListeners(false);
+    }
+    manageListeners(add) {
+        var _a;
+        const container = this.container, options = container.actualOptions, detectType = options.interactivity.detectsOn;
+        let mouseLeaveTmpEvent = _constants.mouseLeaveEvent;
+        if (detectType === "window") {
+            container.interactivity.element = window;
+            mouseLeaveTmpEvent = _constants.mouseOutEvent;
+        } else if (detectType === "parent" && container.canvas.element) {
+            const canvasEl = container.canvas.element;
+            container.interactivity.element = (_a = canvasEl.parentElement) !== null && _a !== void 0 ? _a : canvasEl.parentNode;
+        } else container.interactivity.element = container.canvas.element;
+        const mediaMatch = !_utils.isSsr() && typeof matchMedia !== "undefined" && matchMedia("(prefers-color-scheme: dark)");
+        if (mediaMatch) {
+            if (mediaMatch.addEventListener !== undefined) manageListener(mediaMatch, "change", this.themeChangeHandler, add);
+            else if (mediaMatch.addListener !== undefined) {
+                if (add) mediaMatch.addListener(this.oldThemeChangeHandler);
+                else mediaMatch.removeListener(this.oldThemeChangeHandler);
+            }
+        }
+        const interactivityEl = container.interactivity.element;
+        if (!interactivityEl) return;
+        const html = interactivityEl;
+        if (options.interactivity.events.onHover.enable || options.interactivity.events.onClick.enable) {
+            manageListener(interactivityEl, _constants.mouseMoveEvent, this.mouseMoveHandler, add);
+            manageListener(interactivityEl, _constants.touchStartEvent, this.touchStartHandler, add);
+            manageListener(interactivityEl, _constants.touchMoveEvent, this.touchMoveHandler, add);
+            if (!options.interactivity.events.onClick.enable) manageListener(interactivityEl, _constants.touchEndEvent, this.touchEndHandler, add);
+            else {
+                manageListener(interactivityEl, _constants.touchEndEvent, this.touchEndClickHandler, add);
+                manageListener(interactivityEl, _constants.mouseUpEvent, this.mouseUpHandler, add);
+                manageListener(interactivityEl, _constants.mouseDownEvent, this.mouseDownHandler, add);
+            }
+            manageListener(interactivityEl, mouseLeaveTmpEvent, this.mouseLeaveHandler, add);
+            manageListener(interactivityEl, _constants.touchCancelEvent, this.touchCancelHandler, add);
+        }
+        if (container.canvas.element) container.canvas.element.style.pointerEvents = html === container.canvas.element ? "initial" : "none";
+        if (options.interactivity.events.resize) {
+            if (typeof ResizeObserver !== "undefined") {
+                if (this.resizeObserver && !add) {
+                    if (container.canvas.element) this.resizeObserver.unobserve(container.canvas.element);
+                    this.resizeObserver.disconnect();
+                    delete this.resizeObserver;
+                } else if (!this.resizeObserver && add && container.canvas.element) {
+                    this.resizeObserver = new ResizeObserver((entries)=>{
+                        const entry = entries.find((e)=>e.target === container.canvas.element
+                        );
+                        if (!entry) return;
+                        this.handleWindowResize();
+                    });
+                    this.resizeObserver.observe(container.canvas.element);
+                }
+            } else manageListener(window, _constants.resizeEvent, this.resizeHandler, add);
+        }
+        if (document) manageListener(document, _constants.visibilityChangeEvent, this.visibilityChangeHandler, add, false);
+    }
+    handleWindowResize() {
+        if (this.resizeTimeout) {
+            clearTimeout(this.resizeTimeout);
+            delete this.resizeTimeout;
+        }
+        this.resizeTimeout = setTimeout(async ()=>{
+            var _a;
+            return (_a = this.container.canvas) === null || _a === void 0 ? void 0 : _a.windowResize();
+        }, 500);
+    }
+    handleVisibilityChange() {
+        const container = this.container, options = container.actualOptions;
+        this.mouseTouchFinish();
+        if (!options.pauseOnBlur) return;
+        if (document === null || document === void 0 ? void 0 : document.hidden) {
+            container.pageHidden = true;
+            container.pause();
+        } else {
+            container.pageHidden = false;
+            if (container.getAnimationStatus()) container.play(true);
+            else container.draw(true);
+        }
+    }
+    mouseDown() {
+        const interactivity = this.container.interactivity;
+        if (interactivity) {
+            const mouse = interactivity.mouse;
+            mouse.clicking = true;
+            mouse.downPosition = mouse.position;
+        }
+    }
+    mouseTouchMove(e) {
+        var _a, _b, _c, _d, _e, _f, _g;
+        const container = this.container, options = container.actualOptions;
+        if (!((_a = container.interactivity) === null || _a === void 0 ? void 0 : _a.element)) return;
+        container.interactivity.mouse.inside = true;
+        let pos;
+        const canvas = container.canvas.element;
+        if (e.type.startsWith("mouse")) {
+            this.canPush = true;
+            const mouseEvent = e;
+            if (container.interactivity.element === window) {
+                if (canvas) {
+                    const clientRect = canvas.getBoundingClientRect();
+                    pos = {
+                        x: mouseEvent.clientX - clientRect.left,
+                        y: mouseEvent.clientY - clientRect.top
+                    };
+                }
+            } else if (options.interactivity.detectsOn === "parent") {
+                const source = mouseEvent.target;
+                const target = mouseEvent.currentTarget;
+                const canvasEl = container.canvas.element;
+                if (source && target && canvasEl) {
+                    const sourceRect = source.getBoundingClientRect();
+                    const targetRect = target.getBoundingClientRect();
+                    const canvasRect = canvasEl.getBoundingClientRect();
+                    pos = {
+                        x: mouseEvent.offsetX + 2 * sourceRect.left - (targetRect.left + canvasRect.left),
+                        y: mouseEvent.offsetY + 2 * sourceRect.top - (targetRect.top + canvasRect.top)
+                    };
+                } else pos = {
+                    x: (_b = mouseEvent.offsetX) !== null && _b !== void 0 ? _b : mouseEvent.clientX,
+                    y: (_c = mouseEvent.offsetY) !== null && _c !== void 0 ? _c : mouseEvent.clientY
+                };
+            } else if (mouseEvent.target === container.canvas.element) pos = {
+                x: (_d = mouseEvent.offsetX) !== null && _d !== void 0 ? _d : mouseEvent.clientX,
+                y: (_e = mouseEvent.offsetY) !== null && _e !== void 0 ? _e : mouseEvent.clientY
+            };
+        } else {
+            this.canPush = e.type !== "touchmove";
+            const touchEvent = e;
+            const lastTouch = touchEvent.touches[touchEvent.touches.length - 1];
+            const canvasRect = canvas === null || canvas === void 0 ? void 0 : canvas.getBoundingClientRect();
+            pos = {
+                x: lastTouch.clientX - ((_f = canvasRect === null || canvasRect === void 0 ? void 0 : canvasRect.left) !== null && _f !== void 0 ? _f : 0),
+                y: lastTouch.clientY - ((_g = canvasRect === null || canvasRect === void 0 ? void 0 : canvasRect.top) !== null && _g !== void 0 ? _g : 0)
+            };
+        }
+        const pxRatio = container.retina.pixelRatio;
+        if (pos) {
+            pos.x *= pxRatio;
+            pos.y *= pxRatio;
+        }
+        container.interactivity.mouse.position = pos;
+        container.interactivity.status = _constants.mouseMoveEvent;
+    }
+    mouseTouchFinish() {
+        const interactivity = this.container.interactivity;
+        if (!interactivity) return;
+        const mouse = interactivity.mouse;
+        delete mouse.position;
+        delete mouse.clickPosition;
+        delete mouse.downPosition;
+        interactivity.status = _constants.mouseLeaveEvent;
+        mouse.inside = false;
+        mouse.clicking = false;
+    }
+    mouseTouchClick(e) {
+        const container = this.container, options = container.actualOptions, mouse = container.interactivity.mouse;
+        mouse.inside = true;
+        let handled = false;
+        const mousePosition = mouse.position;
+        if (!mousePosition || !options.interactivity.events.onClick.enable) return;
+        for (const [, plugin] of container.plugins){
+            if (!plugin.clickPositionValid) continue;
+            handled = plugin.clickPositionValid(mousePosition);
+            if (handled) break;
+        }
+        if (!handled) this.doMouseTouchClick(e);
+        mouse.clicking = false;
+    }
+    doMouseTouchClick(e) {
+        const container = this.container, options = container.actualOptions;
+        if (this.canPush) {
+            const mousePos = container.interactivity.mouse.position;
+            if (!mousePos) return;
+            container.interactivity.mouse.clickPosition = {
+                x: mousePos.x,
+                y: mousePos.y
+            };
+            container.interactivity.mouse.clickTime = new Date().getTime();
+            const onClick = options.interactivity.events.onClick;
+            if (onClick.mode instanceof Array) for (const mode of onClick.mode)this.handleClickMode(mode);
+            else this.handleClickMode(onClick.mode);
+        }
+        if (e.type === "touchend") setTimeout(()=>this.mouseTouchFinish()
+        , 500);
+    }
+    handleThemeChange(e) {
+        const mediaEvent = e, themeName = mediaEvent.matches ? this.container.options.defaultDarkTheme : this.container.options.defaultLightTheme, theme1 = this.container.options.themes.find((theme)=>theme.name === themeName
+        );
+        if (theme1 && theme1.default.auto) this.container.loadTheme(themeName);
+    }
+    handleClickMode(mode) {
+        this.container.handleClickMode(mode);
+    }
+}
+
+},{"./Constants":"kUBJ0","../../Utils/Utils":"cbRwi","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"8DXh1":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "FrameManager", ()=>FrameManager
+);
+class FrameManager {
+    constructor(container){
+        this.container = container;
+    }
+    async nextFrame(timestamp) {
+        var _a;
+        try {
+            const container = this.container;
+            if (container.lastFrameTime !== undefined && timestamp < container.lastFrameTime + 1000 / container.fpsLimit) {
+                container.draw(false);
+                return;
+            }
+            (_a = container.lastFrameTime) !== null && _a !== void 0 || (container.lastFrameTime = timestamp);
+            const deltaValue = timestamp - container.lastFrameTime, delta = {
+                value: deltaValue,
+                factor: 60 * deltaValue / 1000
+            };
+            container.lifeTime += delta.value;
+            container.lastFrameTime = timestamp;
+            if (deltaValue > 1000) {
+                container.draw(false);
+                return;
+            }
+            await container.particles.draw(delta);
+            if (container.duration > 0 && container.lifeTime > container.duration) {
+                container.destroy();
+                return;
+            }
+            if (container.getAnimationStatus()) container.draw(false);
+        } catch (e) {
+            console.error("tsParticles error in animation loop", e);
+        }
+    }
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"4qz45":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "Particles", ()=>Particles
+);
+var _numberUtils = require("../Utils/NumberUtils");
+var _interactionManager = require("./Utils/InteractionManager");
+var _particle = require("./Particle");
+var _point = require("./Utils/Point");
+var _quadTree = require("./Utils/QuadTree");
+var _rectangle = require("./Utils/Rectangle");
+var _utils = require("../Utils/Utils");
+var __classPrivateFieldSet = undefined && undefined.__classPrivateFieldSet || function(receiver, state, value, kind, f) {
+    if (kind === "m") throw new TypeError("Private method is not writable");
+    if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a setter");
+    if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
+    return kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value), value;
+};
+var __classPrivateFieldGet = undefined && undefined.__classPrivateFieldGet || function(receiver, state, kind, f) {
+    if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a getter");
+    if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
+    return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
+};
+var _Particles_engine;
+class Particles {
+    constructor(engine, container){
+        this.container = container;
+        _Particles_engine.set(this, void 0);
+        __classPrivateFieldSet(this, _Particles_engine, engine, "f");
+        this.nextId = 0;
+        this.array = [];
+        this.zArray = [];
+        this.limit = 0;
+        this.needsSort = false;
+        this.lastZIndex = 0;
+        this.freqs = {
+            links: new Map(),
+            triangles: new Map()
+        };
+        this.interactionManager = new _interactionManager.InteractionManager(__classPrivateFieldGet(this, _Particles_engine, "f"), container);
+        const canvasSize = this.container.canvas.size;
+        this.linksColors = new Map();
+        this.quadTree = new _quadTree.QuadTree(new _rectangle.Rectangle(-canvasSize.width / 4, -canvasSize.height / 4, canvasSize.width * 3 / 2, canvasSize.height * 3 / 2), 4);
+        this.movers = __classPrivateFieldGet(this, _Particles_engine, "f").plugins.getMovers(container, true);
+        this.updaters = __classPrivateFieldGet(this, _Particles_engine, "f").plugins.getUpdaters(container, true);
+    }
+    get count() {
+        return this.array.length;
+    }
+    init() {
+        var _a;
+        const container = this.container, options = container.actualOptions;
+        this.lastZIndex = 0;
+        this.needsSort = false;
+        this.freqs.links = new Map();
+        this.freqs.triangles = new Map();
+        let handled = false;
+        this.updaters = __classPrivateFieldGet(this, _Particles_engine, "f").plugins.getUpdaters(container, true);
+        this.interactionManager.init();
+        for (const [, plugin] of container.plugins){
+            if (plugin.particlesInitialization !== undefined) handled = plugin.particlesInitialization();
+            if (handled) break;
+        }
+        this.addManualParticles();
+        if (!handled) {
+            for(const group in options.particles.groups){
+                const groupOptions = options.particles.groups[group];
+                for(let i = this.count, j = 0; j < ((_a = groupOptions.number) === null || _a === void 0 ? void 0 : _a.value) && i < options.particles.number.value; i++, j++)this.addParticle(undefined, groupOptions, group);
+            }
+            for(let i = this.count; i < options.particles.number.value; i++)this.addParticle();
+        }
+        container.pathGenerator.init(container);
+    }
+    async redraw() {
+        this.clear();
+        this.init();
+        await this.draw({
+            value: 0,
+            factor: 0
+        });
+    }
+    removeAt(index, quantity = 1, group, override) {
+        if (!(index >= 0 && index <= this.count)) return;
+        let deleted = 0;
+        for(let i = index; deleted < quantity && i < this.count; i++){
+            const particle = this.array[i];
+            if (!particle || particle.group !== group) continue;
+            particle.destroy(override);
+            this.array.splice(i--, 1);
+            const zIdx = this.zArray.indexOf(particle);
+            this.zArray.splice(zIdx, 1);
+            deleted++;
+            __classPrivateFieldGet(this, _Particles_engine, "f").dispatchEvent("particleRemoved", {
+                container: this.container,
+                data: {
+                    particle
+                }
+            });
+        }
+    }
+    remove(particle, group, override) {
+        this.removeAt(this.array.indexOf(particle), undefined, group, override);
+    }
+    async update(delta) {
+        const container = this.container, particlesToDelete = [];
+        container.pathGenerator.update();
+        for (const [, plugin] of container.plugins)if (plugin.update !== undefined) plugin.update(delta);
+        for (const particle of this.array){
+            const resizeFactor = container.canvas.resizeFactor;
+            if (resizeFactor && !particle.ignoresResizeRatio) {
+                particle.position.x *= resizeFactor.width;
+                particle.position.y *= resizeFactor.height;
+            }
+            particle.ignoresResizeRatio = false;
+            particle.bubble.inRange = false;
+            for (const [, plugin] of this.container.plugins){
+                if (particle.destroyed) break;
+                if (plugin.particleUpdate) plugin.particleUpdate(particle, delta);
+            }
+            for (const mover of this.movers)if (mover.isEnabled(particle)) mover.move(particle, delta);
+            if (particle.destroyed) {
+                particlesToDelete.push(particle);
+                continue;
+            }
+            this.quadTree.insert(new _point.Point(particle.getPosition(), particle));
+        }
+        for (const particle1 of particlesToDelete)this.remove(particle1);
+        await this.interactionManager.externalInteract(delta);
+        for (const particle2 of container.particles.array){
+            for (const updater of this.updaters)updater.update(particle2, delta);
+            if (!particle2.destroyed && !particle2.spawning) await this.interactionManager.particlesInteract(particle2, delta);
+        }
+        delete container.canvas.resizeFactor;
+    }
+    async draw(delta) {
+        const container = this.container, canvasSize = this.container.canvas.size;
+        this.quadTree = new _quadTree.QuadTree(new _rectangle.Rectangle(-canvasSize.width / 4, -canvasSize.height / 4, canvasSize.width * 3 / 2, canvasSize.height * 3 / 2), 4);
+        container.canvas.clear();
+        await this.update(delta);
+        if (this.needsSort) {
+            this.zArray.sort((a, b)=>b.position.z - a.position.z || a.id - b.id
+            );
+            this.lastZIndex = this.zArray[this.zArray.length - 1].position.z;
+            this.needsSort = false;
+        }
+        for (const [, plugin] of container.plugins)container.canvas.drawPlugin(plugin, delta);
+        for (const p of this.zArray)p.draw(delta);
+    }
+    clear() {
+        this.array = [];
+        this.zArray = [];
+    }
+    push(nb, mouse, overrideOptions, group) {
+        this.pushing = true;
+        for(let i = 0; i < nb; i++)this.addParticle(mouse === null || mouse === void 0 ? void 0 : mouse.position, overrideOptions, group);
+        this.pushing = false;
+    }
+    addParticle(position, overrideOptions, group) {
+        const container = this.container, options = container.actualOptions, limit = options.particles.number.limit * container.density;
+        if (limit > 0) {
+            const countToRemove = this.count + 1 - limit;
+            if (countToRemove > 0) this.removeQuantity(countToRemove);
+        }
+        return this.pushParticle(position, overrideOptions, group);
+    }
+    addSplitParticle(parent) {
+        const splitOptions = parent.options.destroy.split;
+        const options = _utils.loadParticlesOptions(parent.options);
+        const factor = _numberUtils.getValue(splitOptions.factor);
+        options.color.load({
+            value: {
+                hsl: parent.getFillColor()
+            }
+        });
+        if (typeof options.size.value === "number") options.size.value /= factor;
+        else {
+            options.size.value.min /= factor;
+            options.size.value.max /= factor;
+        }
+        options.load(splitOptions.particles);
+        const offset = splitOptions.sizeOffset ? _numberUtils.setRangeValue(-parent.size.value, parent.size.value) : 0, position = {
+            x: parent.position.x + _numberUtils.randomInRange(offset),
+            y: parent.position.y + _numberUtils.randomInRange(offset)
+        };
+        return this.pushParticle(position, options, parent.group, (particle)=>{
+            if (particle.size.value < 0.5) return false;
+            particle.velocity.length = _numberUtils.randomInRange(_numberUtils.setRangeValue(parent.velocity.length, particle.velocity.length));
+            particle.splitCount = parent.splitCount + 1;
+            particle.unbreakable = true;
+            setTimeout(()=>{
+                particle.unbreakable = false;
+            }, 500);
+            return true;
+        });
+    }
+    removeQuantity(quantity, group) {
+        this.removeAt(0, quantity, group);
+    }
+    getLinkFrequency(p1, p2) {
+        const range = _numberUtils.setRangeValue(p1.id, p2.id), key = `${_numberUtils.getRangeMin(range)}_${_numberUtils.getRangeMax(range)}`;
+        let res = this.freqs.links.get(key);
+        if (res === undefined) {
+            res = Math.random();
+            this.freqs.links.set(key, res);
+        }
+        return res;
+    }
+    getTriangleFrequency(p1, p2, p3) {
+        let [id1, id2, id3] = [
+            p1.id,
+            p2.id,
+            p3.id
+        ];
+        if (id1 > id2) [id2, id1] = [
+            id1,
+            id2
+        ];
+        if (id2 > id3) [id3, id2] = [
+            id2,
+            id3
+        ];
+        if (id1 > id3) [id3, id1] = [
+            id1,
+            id3
+        ];
+        const key = `${id1}_${id2}_${id3}`;
+        let res = this.freqs.triangles.get(key);
+        if (res === undefined) {
+            res = Math.random();
+            this.freqs.triangles.set(key, res);
+        }
+        return res;
+    }
+    addManualParticles() {
+        const container = this.container, options = container.actualOptions;
+        for (const particle of options.manualParticles)this.addParticle(_numberUtils.calcPositionFromSize({
+            size: container.canvas.size,
+            position: particle.position
+        }), particle.options);
+    }
+    setDensity() {
+        const options = this.container.actualOptions;
+        for(const group in options.particles.groups)this.applyDensity(options.particles.groups[group], 0, group);
+        this.applyDensity(options.particles, options.manualParticles.length);
+    }
+    handleClickMode(mode) {
+        this.interactionManager.handleClickMode(mode);
+    }
+    applyDensity(options, manualCount, group) {
+        var _a;
+        if (!((_a = options.number.density) === null || _a === void 0 ? void 0 : _a.enable)) return;
+        const numberOptions = options.number, densityFactor = this.initDensityFactor(numberOptions.density), optParticlesNumber = numberOptions.value, optParticlesLimit = numberOptions.limit > 0 ? numberOptions.limit : optParticlesNumber, particlesNumber = Math.min(optParticlesNumber, optParticlesLimit) * densityFactor + manualCount, particlesCount = Math.min(this.count, this.array.filter((t)=>t.group === group
+        ).length);
+        this.limit = numberOptions.limit * densityFactor;
+        if (particlesCount < particlesNumber) this.push(Math.abs(particlesNumber - particlesCount), undefined, options, group);
+        else if (particlesCount > particlesNumber) this.removeQuantity(particlesCount - particlesNumber, group);
+    }
+    initDensityFactor(densityOptions) {
+        const container = this.container;
+        if (!container.canvas.element || !densityOptions.enable) return 1;
+        const canvas = container.canvas.element, pxRatio = container.retina.pixelRatio;
+        return canvas.width * canvas.height / (densityOptions.factor * pxRatio ** 2 * densityOptions.area);
+    }
+    pushParticle(position, overrideOptions, group, initializer) {
+        try {
+            const particle = new _particle.Particle(__classPrivateFieldGet(this, _Particles_engine, "f"), this.nextId, this.container, position, overrideOptions, group);
+            let canAdd = true;
+            if (initializer) canAdd = initializer(particle);
+            if (!canAdd) return;
+            this.array.push(particle);
+            this.zArray.push(particle);
+            this.nextId++;
+            __classPrivateFieldGet(this, _Particles_engine, "f").dispatchEvent("particleAdded", {
+                container: this.container,
+                data: {
+                    particle
+                }
+            });
+            return particle;
+        } catch (e) {
+            console.warn(`error adding particle: ${e}`);
+            return;
+        }
+    }
+}
+_Particles_engine = new WeakMap();
+
+},{"../Utils/NumberUtils":"4qdpK","./Utils/InteractionManager":"lgKbb","./Particle":"diom3","./Utils/Point":"e0OMt","./Utils/QuadTree":"i6Jjw","./Utils/Rectangle":"19HhJ","../Utils/Utils":"cbRwi","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"lgKbb":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "InteractionManager", ()=>InteractionManager
+);
+var __classPrivateFieldSet = undefined && undefined.__classPrivateFieldSet || function(receiver, state, value, kind, f) {
+    if (kind === "m") throw new TypeError("Private method is not writable");
+    if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a setter");
+    if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
+    return kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value), value;
+};
+var __classPrivateFieldGet = undefined && undefined.__classPrivateFieldGet || function(receiver, state, kind, f) {
+    if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a getter");
+    if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
+    return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
+};
+var _InteractionManager_engine;
+class InteractionManager {
+    constructor(engine, container){
+        this.container = container;
+        _InteractionManager_engine.set(this, void 0);
+        __classPrivateFieldSet(this, _InteractionManager_engine, engine, "f");
+        this.externalInteractors = [];
+        this.particleInteractors = [];
+        this.init();
+    }
+    init() {
+        const interactors = __classPrivateFieldGet(this, _InteractionManager_engine, "f").plugins.getInteractors(this.container, true);
+        this.externalInteractors = [];
+        this.particleInteractors = [];
+        for (const interactor of interactors)switch(interactor.type){
+            case 0:
+                this.externalInteractors.push(interactor);
+                break;
+            case 1:
+                this.particleInteractors.push(interactor);
+                break;
+        }
+    }
+    async externalInteract(delta) {
+        for (const interactor of this.externalInteractors)if (interactor.isEnabled()) await interactor.interact(delta);
+    }
+    async particlesInteract(particle, delta) {
+        for (const interactor of this.externalInteractors)interactor.reset(particle);
+        for (const interactor1 of this.particleInteractors)if (interactor1.isEnabled(particle)) await interactor1.interact(particle, delta);
+    }
+    handleClickMode(mode) {
+        for (const interactor of this.externalInteractors)if (interactor.handleClickMode) interactor.handleClickMode(mode);
+    }
+}
+_InteractionManager_engine = new WeakMap();
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"diom3":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "Particle", ()=>Particle
+);
+var _numberUtils = require("../Utils/NumberUtils");
+var _colorUtils = require("../Utils/ColorUtils");
+var _utils = require("../Utils/Utils");
+var _shape = require("../Options/Classes/Particles/Shape/Shape");
+var _vector = require("./Utils/Vector");
+var _vector3D = require("./Utils/Vector3d");
+var _canvasUtils = require("../Utils/CanvasUtils");
+var __classPrivateFieldSet = undefined && undefined.__classPrivateFieldSet || function(receiver, state, value, kind, f) {
+    if (kind === "m") throw new TypeError("Private method is not writable");
+    if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a setter");
+    if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
+    return kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value), value;
+};
+var __classPrivateFieldGet = undefined && undefined.__classPrivateFieldGet || function(receiver, state, kind, f) {
+    if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a getter");
+    if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
+    return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
+};
+var _Particle_engine;
+const fixOutMode = (data)=>{
+    if (!(_utils.isInArray(data.outMode, data.checkModes) || _utils.isInArray(data.outMode, data.checkModes))) return;
+    if (data.coord > data.maxCoord - data.radius * 2) data.setCb(-data.radius);
+    else if (data.coord < data.radius * 2) data.setCb(data.radius);
+};
+class Particle {
+    constructor(engine, id, container, position, overrideOptions, group){
+        var _a, _b, _c, _d, _e, _f, _g;
+        this.id = id;
+        this.container = container;
+        this.group = group;
+        _Particle_engine.set(this, void 0);
+        __classPrivateFieldSet(this, _Particle_engine, engine, "f");
+        this.fill = true;
+        this.close = true;
+        this.lastPathTime = 0;
+        this.destroyed = false;
+        this.unbreakable = false;
+        this.splitCount = 0;
+        this.misplaced = false;
+        this.retina = {
+            maxDistance: {}
+        };
+        this.outType = "normal";
+        this.ignoresResizeRatio = true;
+        const pxRatio = container.retina.pixelRatio, mainOptions = container.actualOptions, particlesOptions = _utils.loadParticlesOptions(mainOptions.particles);
+        const shapeType = particlesOptions.shape.type, reduceDuplicates = particlesOptions.reduceDuplicates;
+        this.shape = shapeType instanceof Array ? _utils.itemFromArray(shapeType, this.id, reduceDuplicates) : shapeType;
+        if (overrideOptions === null || overrideOptions === void 0 ? void 0 : overrideOptions.shape) {
+            if (overrideOptions.shape.type) {
+                const overrideShapeType = overrideOptions.shape.type;
+                this.shape = overrideShapeType instanceof Array ? _utils.itemFromArray(overrideShapeType, this.id, reduceDuplicates) : overrideShapeType;
+            }
+            const shapeOptions = new _shape.Shape();
+            shapeOptions.load(overrideOptions.shape);
+            if (this.shape) this.shapeData = this.loadShapeData(shapeOptions, reduceDuplicates);
+        } else this.shapeData = this.loadShapeData(particlesOptions.shape, reduceDuplicates);
+        if (overrideOptions !== undefined) particlesOptions.load(overrideOptions);
+        if (((_a = this.shapeData) === null || _a === void 0 ? void 0 : _a.particles) !== undefined) particlesOptions.load((_b = this.shapeData) === null || _b === void 0 ? void 0 : _b.particles);
+        this.fill = (_d = (_c = this.shapeData) === null || _c === void 0 ? void 0 : _c.fill) !== null && _d !== void 0 ? _d : this.fill;
+        this.close = (_f = (_e = this.shapeData) === null || _e === void 0 ? void 0 : _e.close) !== null && _f !== void 0 ? _f : this.close;
+        this.options = particlesOptions;
+        this.pathDelay = _numberUtils.getValue(this.options.move.path.delay) * 1000;
+        const zIndexValue = _numberUtils.getRangeValue(this.options.zIndex.value);
+        container.retina.initParticle(this);
+        const sizeOptions = this.options.size, sizeRange = sizeOptions.value;
+        this.size = {
+            enable: sizeOptions.animation.enable,
+            value: _numberUtils.getRangeValue(sizeOptions.value) * container.retina.pixelRatio,
+            max: _numberUtils.getRangeMax(sizeRange) * pxRatio,
+            min: _numberUtils.getRangeMin(sizeRange) * pxRatio,
+            loops: 0,
+            maxLoops: _numberUtils.getRangeValue(sizeOptions.animation.count)
+        };
+        const sizeAnimation = sizeOptions.animation;
+        if (sizeAnimation.enable) {
+            this.size.status = 0;
+            switch(sizeAnimation.startValue){
+                case "min":
+                    this.size.value = this.size.min;
+                    this.size.status = 0;
+                    break;
+                case "random":
+                    this.size.value = _numberUtils.randomInRange(this.size) * pxRatio;
+                    this.size.status = Math.random() >= 0.5 ? 0 : 1;
+                    break;
+                case "max":
+                default:
+                    this.size.value = this.size.max;
+                    this.size.status = 1;
+                    break;
+            }
+            this.size.velocity = ((_g = this.retina.sizeAnimationSpeed) !== null && _g !== void 0 ? _g : container.retina.sizeAnimationSpeed) / 100 * container.retina.reduceFactor;
+            if (!sizeAnimation.sync) this.size.velocity *= Math.random();
+        }
+        this.bubble = {
+            inRange: false
+        };
+        this.position = this.calcPosition(container, position, _numberUtils.clamp(zIndexValue, 0, container.zLayers));
+        this.initialPosition = this.position.copy();
+        const canvasSize = container.canvas.size, moveCenterPerc = this.options.move.center;
+        this.moveCenter = {
+            x: canvasSize.width * moveCenterPerc.x / 100,
+            y: canvasSize.height * moveCenterPerc.y / 100,
+            radius: this.options.move.center.radius
+        };
+        this.direction = _numberUtils.getParticleDirectionAngle(this.options.move.direction, this.position, this.moveCenter);
+        switch(this.options.move.direction){
+            case "inside":
+                this.outType = "inside";
+                break;
+            case "outside":
+                this.outType = "outside";
+                break;
+        }
+        this.initialVelocity = this.calculateVelocity();
+        this.velocity = this.initialVelocity.copy();
+        this.moveDecay = 1 - _numberUtils.getRangeValue(this.options.move.decay);
+        const gravityOptions = this.options.move.gravity;
+        this.gravity = {
+            enable: gravityOptions.enable,
+            acceleration: _numberUtils.getRangeValue(gravityOptions.acceleration),
+            inverse: gravityOptions.inverse
+        };
+        this.offset = _vector.Vector.origin;
+        const particles = container.particles;
+        particles.needsSort = particles.needsSort || particles.lastZIndex < this.position.z;
+        particles.lastZIndex = this.position.z;
+        this.zIndexFactor = this.position.z / container.zLayers;
+        this.sides = 24;
+        let drawer = container.drawers.get(this.shape);
+        if (!drawer) {
+            drawer = __classPrivateFieldGet(this, _Particle_engine, "f").plugins.getShapeDrawer(this.shape);
+            if (drawer) container.drawers.set(this.shape, drawer);
+        }
+        if (drawer === null || drawer === void 0 ? void 0 : drawer.loadShape) drawer === null || drawer === void 0 || drawer.loadShape(this);
+        const sideCountFunc = drawer === null || drawer === void 0 ? void 0 : drawer.getSidesCount;
+        if (sideCountFunc) this.sides = sideCountFunc(this);
+        this.life = this.loadLife();
+        this.spawning = this.life.delay > 0;
+        this.shadowColor = _colorUtils.colorToRgb(this.options.shadow.color);
+        for (const updater of container.particles.updaters)if (updater.init) updater.init(this);
+        for (const mover of container.particles.movers)if (mover.init) mover.init(this);
+        if (drawer && drawer.particleInit) drawer.particleInit(container, this);
+        for (const [, plugin] of container.plugins)if (plugin.particleCreated) plugin.particleCreated(this);
+    }
+    isVisible() {
+        return !this.destroyed && !this.spawning && this.isInsideCanvas();
+    }
+    isInsideCanvas() {
+        const radius = this.getRadius(), canvasSize = this.container.canvas.size;
+        return this.position.x >= -radius && this.position.y >= -radius && this.position.y <= canvasSize.height + radius && this.position.x <= canvasSize.width + radius;
+    }
+    draw(delta) {
+        const container = this.container;
+        for (const [, plugin] of container.plugins)container.canvas.drawParticlePlugin(plugin, this, delta);
+        container.canvas.drawParticle(this, delta);
+    }
+    getPosition() {
+        return {
+            x: this.position.x + this.offset.x,
+            y: this.position.y + this.offset.y,
+            z: this.position.z
+        };
+    }
+    getRadius() {
+        var _a;
+        return (_a = this.bubble.radius) !== null && _a !== void 0 ? _a : this.size.value;
+    }
+    getMass() {
+        return this.getRadius() ** 2 * Math.PI / 2;
+    }
+    getFillColor() {
+        var _a, _b;
+        const color = (_a = this.bubble.color) !== null && _a !== void 0 ? _a : _colorUtils.getHslFromAnimation(this.color);
+        if (color && this.roll && (this.backColor || this.roll.alter)) {
+            const backFactor = this.options.roll.mode === "both" ? 2 : 1, backSum = this.options.roll.mode === "horizontal" ? Math.PI / 2 : 0, rolled = Math.floor((((_b = this.roll.angle) !== null && _b !== void 0 ? _b : 0) + backSum) / (Math.PI / backFactor)) % 2;
+            if (rolled) {
+                if (this.backColor) return this.backColor;
+                if (this.roll.alter) return _canvasUtils.alterHsl(color, this.roll.alter.type, this.roll.alter.value);
+            }
+        }
+        return color;
+    }
+    getStrokeColor() {
+        var _a, _b;
+        return (_b = (_a = this.bubble.color) !== null && _a !== void 0 ? _a : _colorUtils.getHslFromAnimation(this.strokeColor)) !== null && _b !== void 0 ? _b : this.getFillColor();
+    }
+    destroy(override) {
+        this.destroyed = true;
+        this.bubble.inRange = false;
+        if (this.unbreakable) return;
+        this.destroyed = true;
+        this.bubble.inRange = false;
+        for (const [, plugin] of this.container.plugins)if (plugin.particleDestroyed) plugin.particleDestroyed(this, override);
+        if (override) return;
+        const destroyOptions = this.options.destroy;
+        if (destroyOptions.mode === "split") this.split();
+    }
+    reset() {
+        if (this.opacity) this.opacity.loops = 0;
+        this.size.loops = 0;
+    }
+    split() {
+        const splitOptions = this.options.destroy.split;
+        if (splitOptions.count >= 0 && (this.splitCount++) > splitOptions.count) return;
+        const rate = _numberUtils.getValue(splitOptions.rate);
+        for(let i = 0; i < rate; i++)this.container.particles.addSplitParticle(this);
+    }
+    calcPosition(container, position, zIndex, tryCount = 0) {
+        var _a, _b, _c, _d;
+        for (const [, plugin] of container.plugins){
+            const pluginPos = plugin.particlePosition !== undefined ? plugin.particlePosition(position, this) : undefined;
+            if (pluginPos !== undefined) return _vector3D.Vector3d.create(pluginPos.x, pluginPos.y, zIndex);
+        }
+        const canvasSize = container.canvas.size, exactPosition = _numberUtils.calcExactPositionOrRandomFromSize({
+            size: canvasSize,
+            position: position
+        }), pos = _vector3D.Vector3d.create(exactPosition.x, exactPosition.y, zIndex), radius = this.getRadius(), outModes = this.options.move.outModes, fixHorizontal = (outMode)=>{
+            fixOutMode({
+                outMode,
+                checkModes: [
+                    "bounce",
+                    "bounce-horizontal"
+                ],
+                coord: pos.x,
+                maxCoord: container.canvas.size.width,
+                setCb: (value)=>pos.x += value
+                ,
+                radius
+            });
+        }, fixVertical = (outMode)=>{
+            fixOutMode({
+                outMode,
+                checkModes: [
+                    "bounce",
+                    "bounce-vertical"
+                ],
+                coord: pos.y,
+                maxCoord: container.canvas.size.height,
+                setCb: (value)=>pos.y += value
+                ,
+                radius
+            });
+        };
+        fixHorizontal((_a = outModes.left) !== null && _a !== void 0 ? _a : outModes.default);
+        fixHorizontal((_b = outModes.right) !== null && _b !== void 0 ? _b : outModes.default);
+        fixVertical((_c = outModes.top) !== null && _c !== void 0 ? _c : outModes.default);
+        fixVertical((_d = outModes.bottom) !== null && _d !== void 0 ? _d : outModes.default);
+        if (this.checkOverlap(pos, tryCount)) return this.calcPosition(container, undefined, zIndex, tryCount + 1);
+        return pos;
+    }
+    checkOverlap(pos, tryCount = 0) {
+        const collisionsOptions = this.options.collisions, radius = this.getRadius();
+        if (!collisionsOptions.enable) return false;
+        const overlapOptions = collisionsOptions.overlap;
+        if (overlapOptions.enable) return false;
+        const retries = overlapOptions.retries;
+        if (retries >= 0 && tryCount > retries) throw new Error("Particle is overlapping and can't be placed");
+        let overlaps = false;
+        for (const particle of this.container.particles.array)if (_numberUtils.getDistance(pos, particle.position) < radius + particle.getRadius()) {
+            overlaps = true;
+            break;
+        }
+        return overlaps;
+    }
+    calculateVelocity() {
+        const baseVelocity = _numberUtils.getParticleBaseVelocity(this.direction);
+        const res = baseVelocity.copy();
+        const moveOptions = this.options.move;
+        if (moveOptions.direction === "inside" || moveOptions.direction === "outside") return res;
+        const rad = Math.PI / 180 * _numberUtils.getRangeValue(moveOptions.angle.value);
+        const radOffset = Math.PI / 180 * _numberUtils.getRangeValue(moveOptions.angle.offset);
+        const range = {
+            left: radOffset - rad / 2,
+            right: radOffset + rad / 2
+        };
+        if (!moveOptions.straight) res.angle += _numberUtils.randomInRange(_numberUtils.setRangeValue(range.left, range.right));
+        if (moveOptions.random && typeof moveOptions.speed === "number") res.length *= Math.random();
+        return res;
+    }
+    loadShapeData(shapeOptions, reduceDuplicates) {
+        const shapeData = shapeOptions.options[this.shape];
+        if (shapeData) return _utils.deepExtend({}, shapeData instanceof Array ? _utils.itemFromArray(shapeData, this.id, reduceDuplicates) : shapeData);
+    }
+    loadLife() {
+        const container = this.container, particlesOptions = this.options, lifeOptions = particlesOptions.life, life = {
+            delay: container.retina.reduceFactor ? _numberUtils.getRangeValue(lifeOptions.delay.value) * (lifeOptions.delay.sync ? 1 : Math.random()) / container.retina.reduceFactor * 1000 : 0,
+            delayTime: 0,
+            duration: container.retina.reduceFactor ? _numberUtils.getRangeValue(lifeOptions.duration.value) * (lifeOptions.duration.sync ? 1 : Math.random()) / container.retina.reduceFactor * 1000 : 0,
+            time: 0,
+            count: particlesOptions.life.count
+        };
+        if (life.duration <= 0) life.duration = -1;
+        if (life.count <= 0) life.count = -1;
+        return life;
+    }
+}
+_Particle_engine = new WeakMap();
+
+},{"../Utils/NumberUtils":"4qdpK","../Utils/ColorUtils":"cYU1v","../Utils/Utils":"cbRwi","../Options/Classes/Particles/Shape/Shape":"44IjP","./Utils/Vector":"fzYYX","./Utils/Vector3d":"dk2zG","../Utils/CanvasUtils":"knoc1","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"dk2zG":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "Vector3d", ()=>Vector3d
+);
+var _vector = require("./Vector");
+class Vector3d extends _vector.Vector {
+    constructor(xOrCoords, y, z){
+        super(xOrCoords, y);
+        if (typeof xOrCoords !== "number" && xOrCoords) this.z = xOrCoords.z;
+        else if (z !== undefined) this.z = z;
+        else throw new Error("tsParticles - Vector not initialized correctly");
+    }
+    static clone(source) {
+        return Vector3d.create(source.x, source.y, source.z);
+    }
+    static create(x, y, z) {
+        return new Vector3d(x, y, z);
+    }
+    static get origin() {
+        return Vector3d.create(0, 0, 0);
+    }
+    add(v) {
+        return v instanceof Vector3d ? Vector3d.create(this.x + v.x, this.y + v.y, this.z + v.z) : super.add(v);
+    }
+    addTo(v) {
+        super.addTo(v);
+        if (v instanceof Vector3d) this.z += v.z;
+    }
+    sub(v) {
+        return v instanceof Vector3d ? Vector3d.create(this.x - v.x, this.y - v.y, this.z - v.z) : super.sub(v);
+    }
+    subFrom(v) {
+        super.subFrom(v);
+        if (v instanceof Vector3d) this.z -= v.z;
+    }
+    mult(n) {
+        return Vector3d.create(this.x * n, this.y * n, this.z * n);
+    }
+    multTo(n) {
+        super.multTo(n);
+        this.z *= n;
+    }
+    div(n) {
+        return Vector3d.create(this.x / n, this.y / n, this.z / n);
+    }
+    divTo(n) {
+        super.divTo(n);
+        this.z /= n;
+    }
+    copy() {
+        return Vector3d.clone(this);
+    }
+    setTo(v) {
+        super.setTo(v);
+        const v3d = v;
+        if (v3d.z !== undefined) this.z = v3d.z;
+    }
+}
+
+},{"./Vector":"fzYYX","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"e0OMt":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "Point", ()=>Point
+);
+class Point {
+    constructor(position, particle){
+        this.position = position;
+        this.particle = particle;
+    }
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"i6Jjw":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "QuadTree", ()=>QuadTree
+);
+var _circle = require("./Circle");
+var _circleWarp = require("./CircleWarp");
+var _rectangle = require("./Rectangle");
+var _numberUtils = require("../../Utils/NumberUtils");
+class QuadTree {
+    constructor(rectangle, capacity){
+        this.rectangle = rectangle;
+        this.capacity = capacity;
+        this.points = [];
+        this.divided = false;
+    }
+    insert(point) {
+        var _a, _b, _c, _d, _e;
+        if (!this.rectangle.contains(point.position)) return false;
+        if (this.points.length < this.capacity) {
+            this.points.push(point);
+            return true;
+        }
+        if (!this.divided) this.subdivide();
+        return (_e = ((_a = this.northEast) === null || _a === void 0 ? void 0 : _a.insert(point)) || ((_b = this.northWest) === null || _b === void 0 ? void 0 : _b.insert(point)) || ((_c = this.southEast) === null || _c === void 0 ? void 0 : _c.insert(point)) || ((_d = this.southWest) === null || _d === void 0 ? void 0 : _d.insert(point))) !== null && _e !== void 0 ? _e : false;
+    }
+    queryCircle(position, radius) {
+        return this.query(new _circle.Circle(position.x, position.y, radius));
+    }
+    queryCircleWarp(position, radius, containerOrSize) {
+        const container = containerOrSize, size = containerOrSize;
+        return this.query(new _circleWarp.CircleWarp(position.x, position.y, radius, container.canvas !== undefined ? container.canvas.size : size));
+    }
+    queryRectangle(position, size) {
+        return this.query(new _rectangle.Rectangle(position.x, position.y, size.width, size.height));
+    }
+    query(range, found) {
+        var _a, _b, _c, _d;
+        const res = found !== null && found !== void 0 ? found : [];
+        if (!range.intersects(this.rectangle)) return [];
+        for (const p of this.points){
+            if (!range.contains(p.position) && _numberUtils.getDistance(range.position, p.position) > p.particle.getRadius()) continue;
+            res.push(p.particle);
+        }
+        if (this.divided) {
+            (_a = this.northEast) === null || _a === void 0 || _a.query(range, res);
+            (_b = this.northWest) === null || _b === void 0 || _b.query(range, res);
+            (_c = this.southEast) === null || _c === void 0 || _c.query(range, res);
+            (_d = this.southWest) === null || _d === void 0 || _d.query(range, res);
+        }
+        return res;
+    }
+    subdivide() {
+        const x = this.rectangle.position.x, y = this.rectangle.position.y, w = this.rectangle.size.width, h = this.rectangle.size.height, capacity = this.capacity;
+        this.northEast = new QuadTree(new _rectangle.Rectangle(x, y, w / 2, h / 2), capacity);
+        this.northWest = new QuadTree(new _rectangle.Rectangle(x + w / 2, y, w / 2, h / 2), capacity);
+        this.southEast = new QuadTree(new _rectangle.Rectangle(x, y + h / 2, w / 2, h / 2), capacity);
+        this.southWest = new QuadTree(new _rectangle.Rectangle(x + w / 2, y + h / 2, w / 2, h / 2), capacity);
+        this.divided = true;
+    }
+}
+
+},{"./Circle":"g0wDX","./CircleWarp":"jD8tV","./Rectangle":"19HhJ","../../Utils/NumberUtils":"4qdpK","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"g0wDX":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "Circle", ()=>Circle
+);
+var _range = require("./Range");
+var _numberUtils = require("../../Utils/NumberUtils");
+class Circle extends _range.Range {
+    constructor(x, y, radius){
+        super(x, y);
+        this.radius = radius;
+    }
+    contains(point) {
+        return _numberUtils.getDistance(point, this.position) <= this.radius;
+    }
+    intersects(range) {
+        const rect = range, circle = range, pos1 = this.position, pos2 = range.position, xDist = Math.abs(pos2.x - pos1.x), yDist = Math.abs(pos2.y - pos1.y), r = this.radius;
+        if (circle.radius !== undefined) {
+            const rSum = r + circle.radius, dist = Math.sqrt(xDist * xDist + yDist + yDist);
+            return rSum > dist;
+        } else if (rect.size !== undefined) {
+            const w = rect.size.width, h = rect.size.height, edges = Math.pow(xDist - w, 2) + Math.pow(yDist - h, 2);
+            if (xDist > r + w || yDist > r + h) return false;
+            if (xDist <= w || yDist <= h) return true;
+            return edges <= r * r;
+        }
+        return false;
+    }
+}
+
+},{"./Range":"hPnz6","../../Utils/NumberUtils":"4qdpK","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"hPnz6":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "Range", ()=>Range
+);
+class Range {
+    constructor(x, y){
+        this.position = {
+            x: x,
+            y: y
+        };
+    }
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"jD8tV":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "CircleWarp", ()=>CircleWarp
+);
+var _circle = require("./Circle");
+var _rectangle = require("./Rectangle");
+class CircleWarp extends _circle.Circle {
+    constructor(x, y, radius, canvasSize){
+        super(x, y, radius);
+        this.canvasSize = canvasSize;
+        this.canvasSize = Object.assign({}, canvasSize);
+    }
+    contains(point) {
+        if (super.contains(point)) return true;
+        const posNE = {
+            x: point.x - this.canvasSize.width,
+            y: point.y
+        };
+        if (super.contains(posNE)) return true;
+        const posSE = {
+            x: point.x - this.canvasSize.width,
+            y: point.y - this.canvasSize.height
+        };
+        if (super.contains(posSE)) return true;
+        const posSW = {
+            x: point.x,
+            y: point.y - this.canvasSize.height
+        };
+        return super.contains(posSW);
+    }
+    intersects(range) {
+        if (super.intersects(range)) return true;
+        const rect = range, circle = range, newPos = {
+            x: range.position.x - this.canvasSize.width,
+            y: range.position.y - this.canvasSize.height
+        };
+        if (circle.radius !== undefined) {
+            const biggerCircle = new _circle.Circle(newPos.x, newPos.y, circle.radius * 2);
+            return super.intersects(biggerCircle);
+        } else if (rect.size !== undefined) {
+            const rectSW = new _rectangle.Rectangle(newPos.x, newPos.y, rect.size.width * 2, rect.size.height * 2);
+            return super.intersects(rectSW);
+        }
+        return false;
+    }
+}
+
+},{"./Circle":"g0wDX","./Rectangle":"19HhJ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"19HhJ":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "Rectangle", ()=>Rectangle
+);
+var _range = require("./Range");
+class Rectangle extends _range.Range {
+    constructor(x, y, width, height){
+        super(x, y);
+        this.size = {
+            height: height,
+            width: width
+        };
+    }
+    contains(point) {
+        const w = this.size.width, h = this.size.height, pos = this.position;
+        return point.x >= pos.x && point.x <= pos.x + w && point.y >= pos.y && point.y <= pos.y + h;
+    }
+    intersects(range) {
+        const rect = range, circle = range, w = this.size.width, h = this.size.height, pos1 = this.position, pos2 = range.position;
+        if (circle.radius !== undefined) return circle.intersects(this);
+        if (!rect.size) return false;
+        const size2 = rect.size, w2 = size2.width, h2 = size2.height;
+        return pos2.x < pos1.x + w && pos2.x + w2 > pos1.x && pos2.y < pos1.y + h && pos2.y + h2 > pos1.y;
+    }
+}
+
+},{"./Range":"hPnz6","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"jA44d":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "Retina", ()=>Retina
+);
+var _numberUtils = require("../Utils/NumberUtils");
+var _utils = require("../Utils/Utils");
+class Retina {
+    constructor(container){
+        this.container = container;
+    }
+    init() {
+        const container = this.container, options = container.actualOptions;
+        this.pixelRatio = !options.detectRetina || _utils.isSsr() ? 1 : window.devicePixelRatio;
+        const motionOptions = this.container.actualOptions.motion;
+        if (motionOptions && (motionOptions.disable || motionOptions.reduce.value)) {
+            if (_utils.isSsr() || typeof matchMedia === "undefined" || !matchMedia) this.reduceFactor = 1;
+            else {
+                const mediaQuery = matchMedia("(prefers-reduced-motion: reduce)");
+                if (mediaQuery) {
+                    this.handleMotionChange(mediaQuery);
+                    const handleChange = ()=>{
+                        this.handleMotionChange(mediaQuery);
+                        container.refresh().catch(()=>{});
+                    };
+                    if (mediaQuery.addEventListener !== undefined) mediaQuery.addEventListener("change", handleChange);
+                    else if (mediaQuery.addListener !== undefined) mediaQuery.addListener(handleChange);
+                }
+            }
+        } else this.reduceFactor = 1;
+        const ratio = this.pixelRatio;
+        if (container.canvas.element) {
+            const element = container.canvas.element;
+            container.canvas.size.width = element.offsetWidth * ratio;
+            container.canvas.size.height = element.offsetHeight * ratio;
+        }
+        const particles = options.particles;
+        this.attractDistance = _numberUtils.getRangeValue(particles.move.attract.distance) * ratio;
+        this.linksDistance = particles.links.distance * ratio;
+        this.linksWidth = particles.links.width * ratio;
+        this.sizeAnimationSpeed = _numberUtils.getRangeValue(particles.size.animation.speed) * ratio;
+        this.maxSpeed = _numberUtils.getRangeValue(particles.move.gravity.maxSpeed) * ratio;
+        const modes = options.interactivity.modes;
+        this.connectModeDistance = modes.connect.distance * ratio;
+        this.connectModeRadius = modes.connect.radius * ratio;
+        this.grabModeDistance = modes.grab.distance * ratio;
+        this.repulseModeDistance = modes.repulse.distance * ratio;
+        this.bounceModeDistance = modes.bounce.distance * ratio;
+        this.attractModeDistance = modes.attract.distance * ratio;
+        this.slowModeRadius = modes.slow.radius * ratio;
+        this.bubbleModeDistance = modes.bubble.distance * ratio;
+        if (modes.bubble.size) this.bubbleModeSize = modes.bubble.size * ratio;
+    }
+    initParticle(particle) {
+        const options = particle.options, ratio = this.pixelRatio, moveDistance = options.move.distance, props = particle.retina;
+        props.attractDistance = _numberUtils.getRangeValue(options.move.attract.distance) * ratio;
+        props.linksDistance = options.links.distance * ratio;
+        props.linksWidth = options.links.width * ratio;
+        props.moveDrift = _numberUtils.getRangeValue(options.move.drift) * ratio;
+        props.moveSpeed = _numberUtils.getRangeValue(options.move.speed) * ratio;
+        props.sizeAnimationSpeed = _numberUtils.getRangeValue(options.size.animation.speed) * ratio;
+        const maxDistance = props.maxDistance;
+        maxDistance.horizontal = moveDistance.horizontal !== undefined ? moveDistance.horizontal * ratio : undefined;
+        maxDistance.vertical = moveDistance.vertical !== undefined ? moveDistance.vertical * ratio : undefined;
+        props.maxSpeed = _numberUtils.getRangeValue(options.move.gravity.maxSpeed) * ratio;
+    }
+    handleMotionChange(mediaQuery) {
+        const options = this.container.actualOptions;
+        if (mediaQuery.matches) {
+            const motion = options.motion;
+            this.reduceFactor = motion.disable ? 0 : motion.reduce.value ? 1 / motion.reduce.factor : 1;
+        } else this.reduceFactor = 1;
+    }
+}
+
+},{"../Utils/NumberUtils":"4qdpK","../Utils/Utils":"cbRwi","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"9qxGZ":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "Plugins", ()=>Plugins
+);
+var __classPrivateFieldSet = undefined && undefined.__classPrivateFieldSet || function(receiver, state, value, kind, f) {
+    if (kind === "m") throw new TypeError("Private method is not writable");
+    if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a setter");
+    if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
+    return kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value), value;
+};
+var _Plugins_engine;
+class Plugins {
+    constructor(engine){
+        _Plugins_engine.set(this, void 0);
+        __classPrivateFieldSet(this, _Plugins_engine, engine, "f");
+        this.plugins = [];
+        this.interactorsInitializers = new Map();
+        this.moversInitializers = new Map();
+        this.updatersInitializers = new Map();
+        this.interactors = new Map();
+        this.movers = new Map();
+        this.updaters = new Map();
+        this.presets = new Map();
+        this.drawers = new Map();
+        this.pathGenerators = new Map();
+    }
+    getPlugin(plugin) {
+        return this.plugins.find((t)=>t.id === plugin
+        );
+    }
+    addPlugin(plugin) {
+        if (!this.getPlugin(plugin.id)) this.plugins.push(plugin);
+    }
+    getAvailablePlugins(container) {
+        const res = new Map();
+        for (const plugin of this.plugins){
+            if (!plugin.needsPlugin(container.actualOptions)) continue;
+            res.set(plugin.id, plugin.getPlugin(container));
+        }
+        return res;
+    }
+    loadOptions(options, sourceOptions) {
+        for (const plugin of this.plugins)plugin.loadOptions(options, sourceOptions);
+    }
+    getPreset(preset) {
+        return this.presets.get(preset);
+    }
+    addPreset(presetKey, options, override = false) {
+        if (override || !this.getPreset(presetKey)) this.presets.set(presetKey, options);
+    }
+    getShapeDrawer(type) {
+        return this.drawers.get(type);
+    }
+    addShapeDrawer(type, drawer) {
+        if (!this.getShapeDrawer(type)) this.drawers.set(type, drawer);
+    }
+    getSupportedShapes() {
+        return this.drawers.keys();
+    }
+    getPathGenerator(type) {
+        return this.pathGenerators.get(type);
+    }
+    addPathGenerator(type, pathGenerator) {
+        if (!this.getPathGenerator(type)) this.pathGenerators.set(type, pathGenerator);
+    }
+    getInteractors(container, force = false) {
+        let res = this.interactors.get(container);
+        if (!res || force) {
+            res = [
+                ...this.interactorsInitializers.values()
+            ].map((t)=>t(container)
+            );
+            this.interactors.set(container, res);
+        }
+        return res;
+    }
+    addInteractor(name, initInteractor) {
+        this.interactorsInitializers.set(name, initInteractor);
+    }
+    getUpdaters(container, force = false) {
+        let res = this.updaters.get(container);
+        if (!res || force) {
+            res = [
+                ...this.updatersInitializers.values()
+            ].map((t)=>t(container)
+            );
+            this.updaters.set(container, res);
+        }
+        return res;
+    }
+    addParticleUpdater(name, initUpdater) {
+        this.updatersInitializers.set(name, initUpdater);
+    }
+    getMovers(container, force = false) {
+        let res = this.movers.get(container);
+        if (!res || force) {
+            res = [
+                ...this.moversInitializers.values()
+            ].map((t)=>t(container)
+            );
+            this.movers.set(container, res);
+        }
+        return res;
+    }
+    addParticleMover(name, initMover) {
+        this.moversInitializers.set(name, initMover);
+    }
+}
+_Plugins_engine = new WeakMap();
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"hmNUx":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"d3tBN":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"7p19j":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"hynso":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"2FoFV":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"4BNk6":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"kaGMe":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"1aicF":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"5LpmO":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"eOVtk":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"fiHxJ":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"g6DyX":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"cp2fX":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"2lzmu":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"a4dIo":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"UXmaE":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"16VnX":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"ft2uF":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"fvd91":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"4fOWq":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"kZKll":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"9D7A1":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"6sf5m":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"hCaPF":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"aQfJq":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"ga60i":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"iSCit":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"9LhS9":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"jVBIQ":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"bRPLy":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"8tlf2":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"klDaR":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"kWFLo":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"7s0lE":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "ExternalInteractorBase", ()=>ExternalInteractorBase
+);
+class ExternalInteractorBase {
+    constructor(container){
+        this.container = container;
+        this.type = 0;
+    }
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"9J8jG":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "ParticlesInteractorBase", ()=>ParticlesInteractorBase
+);
+class ParticlesInteractorBase {
+    constructor(container){
+        this.container = container;
+        this.type = 1;
+    }
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"3sfoz":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"ZcRkY":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"7Xvow":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"7K3pF":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"7nV7A":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"cAxCj":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"7C7Pb":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"b54VN":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"4fvdr":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"lqLzp":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"jMfqB":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"gjBui":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"jvNWw":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"bzYGL":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"1tUic":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"fbMq3":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"8Kzml":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"7FmFs":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"on8st":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"3rwBZ":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"cXTPj":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"kQ0QE":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"fZELz":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"10ey7":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"jtxV1":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"aVXbf":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"5JAyj":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"80s7p":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"fYNmb":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"7AFkk":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"lCLGF":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"ewWCM":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"gj4HK":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"fB39n":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"49GFQ":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"gQjvf":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"2M279":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"0477f":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"8sZTU":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"fj2yl":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"1IG6l":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"gbKkq":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"9NAIa":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"ldAPG":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"QGV6p":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"3KBIx":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"7bxxM":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"161eG":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"iy9jj":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"jeLQa":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"jp7bY":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"aGlYy":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"kBw5G":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"1HX6H":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"daexo":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"5At6C":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"cylAm":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"74x8a":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"a4HRG":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"eFSsh":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"gOCRK":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"56dHs":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"i0hfc":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"5jMB4":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"jlaJH":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"7N4fO":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"klirE":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"gcVOA":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"9YEgz":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"ivtey":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"gOAdU":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"6ncrQ":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"7sgKM":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"clO6q":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"4G8dV":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"ftaxK":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"46uDD":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"2nI9v":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"84mIa":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"1TEat":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"6NKDz":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"9bctQ":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"YZbJt":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"4JxSi":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"e8fL3":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"iITKM":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"5cuRM":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"h4mCR":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"a8WiS":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"2U2b3":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"cTnMy":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"jtGQV":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"gjzNt":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"7S9h2":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"8PXle":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"6CufQ":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"jStOY":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"ewOrw":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"7FAGU":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"fL1U0":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"70V3T":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"5b7ar":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"9orv0":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"9TjDx":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"9JZlu":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"b3IeV":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"jvHgf":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"gUrWN":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _ishapeValues = require("../../../../Core/Interfaces/IShapeValues");
+parcelHelpers.exportAll(_ishapeValues, exports);
+
+},{"../../../../Core/Interfaces/IShapeValues":"kWFLo","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"6m5ki":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"2JnSz":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"h9lf4":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"k2kzW":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"brSyW":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"3pFI7":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"5jmDG":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"5jrtj":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"5zcLx":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"5JXUv":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"5WYm8":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"aOYBw":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"f9JOj":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"k7vaj":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"c4aXU":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"eQSWE":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"iiqB7":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"kNe9Z":[function(require,module,exports) {
+'use strict';
+// do not edit .js files directly - edit src/index.jst
+module.exports = function equal(a, b) {
+    if (a === b) return true;
+    if (a && b && typeof a == 'object' && typeof b == 'object') {
+        if (a.constructor !== b.constructor) return false;
+        var length, i, keys;
+        if (Array.isArray(a)) {
+            length = a.length;
+            if (length != b.length) return false;
+            for(i = length; (i--) !== 0;)if (!equal(a[i], b[i])) return false;
+            return true;
+        }
+        if (a.constructor === RegExp) return a.source === b.source && a.flags === b.flags;
+        if (a.valueOf !== Object.prototype.valueOf) return a.valueOf() === b.valueOf();
+        if (a.toString !== Object.prototype.toString) return a.toString() === b.toString();
+        keys = Object.keys(a);
+        length = keys.length;
+        if (length !== Object.keys(b).length) return false;
+        for(i = length; (i--) !== 0;)if (!Object.prototype.hasOwnProperty.call(b, keys[i])) return false;
+        for(i = length; (i--) !== 0;){
+            var key = keys[i];
+            if (key === '_owner' && a.$$typeof) continue;
+            if (!equal(a[key], b[key])) return false;
+        }
+        return true;
+    }
+    // true if both NaN, false otherwise
+    return a !== a && b !== b;
+};
+
+},{}],"9YC3G":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "loadFull", ()=>loadFull
+);
+var _tsparticlesPluginAbsorbers = require("tsparticles-plugin-absorbers");
+var _tsparticlesPluginEmitters = require("tsparticles-plugin-emitters");
+var _tsparticlesInteractionExternalTrail = require("tsparticles-interaction-external-trail");
+var _tsparticlesPluginPolygonMask = require("tsparticles-plugin-polygon-mask");
+var _tsparticlesUpdaterRoll = require("tsparticles-updater-roll");
+var _tsparticlesSlim = require("tsparticles-slim");
+var _tsparticlesUpdaterTilt = require("tsparticles-updater-tilt");
+var _tsparticlesUpdaterTwinkle = require("tsparticles-updater-twinkle");
+var _tsparticlesUpdaterWobble = require("tsparticles-updater-wobble");
+async function loadFull(engine) {
+    await _tsparticlesSlim.loadSlim(engine);
+    await _tsparticlesUpdaterRoll.loadRollUpdater(engine);
+    await _tsparticlesUpdaterTilt.loadTiltUpdater(engine);
+    await _tsparticlesUpdaterTwinkle.loadTwinkleUpdater(engine);
+    await _tsparticlesUpdaterWobble.loadWobbleUpdater(engine);
+    await _tsparticlesInteractionExternalTrail.loadExternalTrailInteraction(engine);
+    await _tsparticlesPluginAbsorbers.loadAbsorbersPlugin(engine);
+    await _tsparticlesPluginEmitters.loadEmittersPlugin(engine);
+    await _tsparticlesPluginPolygonMask.loadPolygonMaskPlugin(engine);
+}
+
+},{"tsparticles-plugin-absorbers":"iR7ZS","tsparticles-plugin-emitters":"9f2cc","tsparticles-interaction-external-trail":"11WBd","tsparticles-plugin-polygon-mask":"cZsFw","tsparticles-updater-roll":"dlqhB","tsparticles-slim":"3ofEJ","tsparticles-updater-tilt":"dcD6p","tsparticles-updater-twinkle":"8JpXR","tsparticles-updater-wobble":"9Uagp","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"iR7ZS":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "loadAbsorbersPlugin", ()=>loadAbsorbersPlugin
+);
+var _absorber = require("./Options/Classes/Absorber");
+var _absorbers = require("./Absorbers");
+var _tsparticlesEngine = require("tsparticles-engine");
+var _absorberContainer = require("./AbsorberContainer");
+parcelHelpers.exportAll(_absorberContainer, exports);
+var _absorberClickMode = require("./Enums/AbsorberClickMode");
+parcelHelpers.exportAll(_absorberClickMode, exports);
+var _iabsorberOptions = require("./Options/Interfaces/IAbsorberOptions");
+parcelHelpers.exportAll(_iabsorberOptions, exports);
+class AbsorbersPlugin {
+    constructor(){
+        this.id = "absorbers";
+    }
+    getPlugin(container) {
+        return new _absorbers.Absorbers(container);
+    }
+    needsPlugin(options) {
+        var _a, _b, _c;
+        if (!options) return false;
+        const absorbers = options.absorbers;
+        if (absorbers instanceof Array) return !!absorbers.length;
+        else if (absorbers) return true;
+        else if (((_c = (_b = (_a = options.interactivity) === null || _a === void 0 ? void 0 : _a.events) === null || _b === void 0 ? void 0 : _b.onClick) === null || _c === void 0 ? void 0 : _c.mode) && _tsparticlesEngine.isInArray("absorber", options.interactivity.events.onClick.mode)) return true;
+        return false;
+    }
+    loadOptions(options, source) {
+        var _a, _b;
+        if (!this.needsPlugin(options) && !this.needsPlugin(source)) return;
+        const optionsCast = options;
+        if (source === null || source === void 0 ? void 0 : source.absorbers) {
+            if ((source === null || source === void 0 ? void 0 : source.absorbers) instanceof Array) optionsCast.absorbers = source === null || source === void 0 ? void 0 : source.absorbers.map((s)=>{
+                const tmp = new _absorber.Absorber();
+                tmp.load(s);
+                return tmp;
+            });
+            else {
+                let absorberOptions = optionsCast.absorbers;
+                if ((absorberOptions === null || absorberOptions === void 0 ? void 0 : absorberOptions.load) === undefined) optionsCast.absorbers = absorberOptions = new _absorber.Absorber();
+                absorberOptions.load(source === null || source === void 0 ? void 0 : source.absorbers);
+            }
+        }
+        const interactivityAbsorbers = (_b = (_a = source === null || source === void 0 ? void 0 : source.interactivity) === null || _a === void 0 ? void 0 : _a.modes) === null || _b === void 0 ? void 0 : _b.absorbers;
+        if (interactivityAbsorbers) {
+            if (interactivityAbsorbers instanceof Array) optionsCast.interactivity.modes.absorbers = interactivityAbsorbers.map((s)=>{
+                const tmp = new _absorber.Absorber();
+                tmp.load(s);
+                return tmp;
+            });
+            else {
+                let absorberOptions = optionsCast.interactivity.modes.absorbers;
+                if ((absorberOptions === null || absorberOptions === void 0 ? void 0 : absorberOptions.load) === undefined) optionsCast.interactivity.modes.absorbers = absorberOptions = new _absorber.Absorber();
+                absorberOptions.load(interactivityAbsorbers);
+            }
+        }
+    }
+}
+async function loadAbsorbersPlugin(engine) {
+    const plugin = new AbsorbersPlugin();
+    await engine.addPlugin(plugin);
+}
+
+},{"./Options/Classes/Absorber":"5oO9K","./Absorbers":"5wgF0","tsparticles-engine":"9BizU","./AbsorberContainer":"b2byu","./Enums/AbsorberClickMode":"erSH8","./Options/Interfaces/IAbsorberOptions":"4eKdX","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"5oO9K":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "Absorber", ()=>Absorber
+);
+var _tsparticlesEngine = require("tsparticles-engine");
+var _absorberSize = require("./AbsorberSize");
+class Absorber {
+    constructor(){
+        this.color = new _tsparticlesEngine.OptionsColor();
+        this.color.value = "#000000";
+        this.draggable = false;
+        this.opacity = 1;
+        this.destroy = true;
+        this.orbits = false;
+        this.size = new _absorberSize.AbsorberSize();
+    }
+    load(data) {
+        if (data === undefined) return;
+        if (data.color !== undefined) this.color = _tsparticlesEngine.OptionsColor.create(this.color, data.color);
+        if (data.draggable !== undefined) this.draggable = data.draggable;
+        this.name = data.name;
+        if (data.opacity !== undefined) this.opacity = data.opacity;
+        if (data.position !== undefined) {
+            this.position = {};
+            if (data.position.x !== undefined) this.position.x = _tsparticlesEngine.setRangeValue(data.position.x);
+            if (data.position.y !== undefined) this.position.y = _tsparticlesEngine.setRangeValue(data.position.y);
+        }
+        if (data.size !== undefined) this.size.load(data.size);
+        if (data.destroy !== undefined) this.destroy = data.destroy;
+        if (data.orbits !== undefined) this.orbits = data.orbits;
+    }
+}
+
+},{"tsparticles-engine":"9BizU","./AbsorberSize":"50X6C","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"50X6C":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "AbsorberSize", ()=>AbsorberSize
+);
+var _absorberSizeLimit = require("./AbsorberSizeLimit");
+var _tsparticlesEngine = require("tsparticles-engine");
+class AbsorberSize extends _tsparticlesEngine.ValueWithRandom {
+    constructor(){
+        super();
+        this.density = 5;
+        this.value = 50;
+        this.limit = new _absorberSizeLimit.AbsorberSizeLimit();
+    }
+    load(data) {
+        if (!data) return;
+        super.load(data);
+        if (data.density !== undefined) this.density = data.density;
+        if (typeof data.limit === "number") this.limit.radius = data.limit;
+        else this.limit.load(data.limit);
+    }
+}
+
+},{"./AbsorberSizeLimit":"iBUd0","tsparticles-engine":"9BizU","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"iBUd0":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "AbsorberSizeLimit", ()=>AbsorberSizeLimit
+);
+class AbsorberSizeLimit {
+    constructor(){
+        this.radius = 0;
+        this.mass = 0;
+    }
+    load(data) {
+        if (!data) return;
+        if (data.mass !== undefined) this.mass = data.mass;
+        if (data.radius !== undefined) this.radius = data.radius;
+    }
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"5wgF0":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "Absorbers", ()=>Absorbers
+);
+var _absorber = require("./Options/Classes/Absorber");
+var _absorberInstance = require("./AbsorberInstance");
+var _tsparticlesEngine = require("tsparticles-engine");
+class Absorbers {
+    constructor(container){
+        this.container = container;
+        this.array = [];
+        this.absorbers = [];
+        this.interactivityAbsorbers = [];
+        container.getAbsorber = (idxOrName)=>idxOrName === undefined || typeof idxOrName === "number" ? this.array[idxOrName || 0] : this.array.find((t)=>t.name === idxOrName
+            )
+        ;
+        container.addAbsorber = (options, position)=>this.addAbsorber(options, position)
+        ;
+    }
+    init(options) {
+        var _a, _b;
+        if (!options) return;
+        if (options.absorbers) {
+            if (options.absorbers instanceof Array) this.absorbers = options.absorbers.map((s)=>{
+                const tmp = new _absorber.Absorber();
+                tmp.load(s);
+                return tmp;
+            });
+            else {
+                if (this.absorbers instanceof Array) this.absorbers = new _absorber.Absorber();
+                this.absorbers.load(options.absorbers);
+            }
+        }
+        const interactivityAbsorbers = (_b = (_a = options.interactivity) === null || _a === void 0 ? void 0 : _a.modes) === null || _b === void 0 ? void 0 : _b.absorbers;
+        if (interactivityAbsorbers) {
+            if (interactivityAbsorbers instanceof Array) this.interactivityAbsorbers = interactivityAbsorbers.map((s)=>{
+                const tmp = new _absorber.Absorber();
+                tmp.load(s);
+                return tmp;
+            });
+            else {
+                if (this.interactivityAbsorbers instanceof Array) this.interactivityAbsorbers = new _absorber.Absorber();
+                this.interactivityAbsorbers.load(interactivityAbsorbers);
+            }
+        }
+        if (this.absorbers instanceof Array) for (const absorberOptions of this.absorbers)this.addAbsorber(absorberOptions);
+        else this.addAbsorber(this.absorbers);
+    }
+    particleUpdate(particle) {
+        for (const absorber of this.array){
+            absorber.attract(particle);
+            if (particle.destroyed) break;
+        }
+    }
+    draw(context) {
+        for (const absorber of this.array){
+            context.save();
+            absorber.draw(context);
+            context.restore();
+        }
+    }
+    stop() {
+        this.array = [];
+    }
+    resize() {
+        for (const absorber of this.array)absorber.resize();
+    }
+    handleClickMode(mode) {
+        const absorberOptions = this.absorbers, modeAbsorbers = this.interactivityAbsorbers;
+        if (mode === "absorber") {
+            let absorbersModeOptions;
+            if (modeAbsorbers instanceof Array) {
+                if (modeAbsorbers.length > 0) absorbersModeOptions = _tsparticlesEngine.itemFromArray(modeAbsorbers);
+            } else absorbersModeOptions = modeAbsorbers;
+            const absorbersOptions = absorbersModeOptions !== null && absorbersModeOptions !== void 0 ? absorbersModeOptions : absorberOptions instanceof Array ? _tsparticlesEngine.itemFromArray(absorberOptions) : absorberOptions, aPosition = this.container.interactivity.mouse.clickPosition;
+            this.addAbsorber(absorbersOptions, aPosition);
+        }
+    }
+    addAbsorber(options, position) {
+        const absorber = new _absorberInstance.AbsorberInstance(this, this.container, options, position);
+        this.array.push(absorber);
+        return absorber;
+    }
+    removeAbsorber(absorber) {
+        const index = this.array.indexOf(absorber);
+        if (index >= 0) this.array.splice(index, 1);
+    }
+}
+
+},{"./Options/Classes/Absorber":"5oO9K","./AbsorberInstance":"cv7dN","tsparticles-engine":"9BizU","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"cv7dN":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "AbsorberInstance", ()=>AbsorberInstance
+);
+var _tsparticlesEngine = require("tsparticles-engine");
+var _absorber = require("./Options/Classes/Absorber");
+class AbsorberInstance {
+    constructor(absorbers, container, options, position){
+        var _a, _b, _c;
+        this.absorbers = absorbers;
+        this.container = container;
+        this.initialPosition = position ? _tsparticlesEngine.Vector.create(position.x, position.y) : undefined;
+        if (options instanceof _absorber.Absorber) this.options = options;
+        else {
+            this.options = new _absorber.Absorber();
+            this.options.load(options);
+        }
+        this.dragging = false;
+        this.name = this.options.name;
+        this.opacity = this.options.opacity;
+        this.size = _tsparticlesEngine.getRangeValue(this.options.size.value) * container.retina.pixelRatio;
+        this.mass = this.size * this.options.size.density * container.retina.reduceFactor;
+        const limit = this.options.size.limit;
+        this.limit = {
+            radius: limit.radius * container.retina.pixelRatio * container.retina.reduceFactor,
+            mass: limit.mass
+        };
+        this.color = (_a = _tsparticlesEngine.colorToRgb(this.options.color)) !== null && _a !== void 0 ? _a : {
+            b: 0,
+            g: 0,
+            r: 0
+        };
+        this.position = (_c = (_b = this.initialPosition) === null || _b === void 0 ? void 0 : _b.copy()) !== null && _c !== void 0 ? _c : this.calcPosition();
+    }
+    attract(particle) {
+        const container = this.container, options = this.options;
+        if (options.draggable) {
+            const mouse = container.interactivity.mouse;
+            if (mouse.clicking && mouse.downPosition) {
+                const mouseDist = _tsparticlesEngine.getDistance(this.position, mouse.downPosition);
+                if (mouseDist <= this.size) this.dragging = true;
+            } else this.dragging = false;
+            if (this.dragging && mouse.position) {
+                this.position.x = mouse.position.x;
+                this.position.y = mouse.position.y;
+            }
+        }
+        const pos = particle.getPosition(), { dx , dy , distance  } = _tsparticlesEngine.getDistances(this.position, pos), v = _tsparticlesEngine.Vector.create(dx, dy);
+        v.length = this.mass / Math.pow(distance, 2) * container.retina.reduceFactor;
+        if (distance < this.size + particle.getRadius()) {
+            const sizeFactor = particle.getRadius() * 0.033 * container.retina.pixelRatio;
+            if (this.size > particle.getRadius() && distance < this.size - particle.getRadius() || particle.absorberOrbit !== undefined && particle.absorberOrbit.length < 0) {
+                if (options.destroy) particle.destroy();
+                else {
+                    particle.needsNewPosition = true;
+                    this.updateParticlePosition(particle, v);
+                }
+            } else {
+                if (options.destroy) particle.size.value -= sizeFactor;
+                this.updateParticlePosition(particle, v);
+            }
+            if (this.limit.radius <= 0 || this.size < this.limit.radius) this.size += sizeFactor;
+            if (this.limit.mass <= 0 || this.mass < this.limit.mass) this.mass += sizeFactor * this.options.size.density * container.retina.reduceFactor;
+        } else this.updateParticlePosition(particle, v);
+    }
+    resize() {
+        const initialPosition = this.initialPosition;
+        this.position = initialPosition && _tsparticlesEngine.isPointInside(initialPosition, this.container.canvas.size, _tsparticlesEngine.Vector.origin) ? initialPosition : this.calcPosition();
+    }
+    draw(context) {
+        context.translate(this.position.x, this.position.y);
+        context.beginPath();
+        context.arc(0, 0, this.size, 0, Math.PI * 2, false);
+        context.closePath();
+        context.fillStyle = _tsparticlesEngine.getStyleFromRgb(this.color, this.opacity);
+        context.fill();
+    }
+    calcPosition() {
+        const exactPosition = _tsparticlesEngine.calcPositionOrRandomFromSizeRanged({
+            size: this.container.canvas.size,
+            position: this.options.position
+        });
+        return _tsparticlesEngine.Vector.create(exactPosition.x, exactPosition.y);
+    }
+    updateParticlePosition(particle, v) {
+        var _a;
+        if (particle.destroyed) return;
+        const container = this.container, canvasSize = container.canvas.size;
+        if (particle.needsNewPosition) {
+            const newPosition = _tsparticlesEngine.calcPositionOrRandomFromSize({
+                size: canvasSize
+            });
+            particle.position.setTo(newPosition);
+            particle.velocity.setTo(particle.initialVelocity);
+            particle.absorberOrbit = undefined;
+            particle.needsNewPosition = false;
+        }
+        if (this.options.orbits) {
+            if (particle.absorberOrbit === undefined) {
+                particle.absorberOrbit = _tsparticlesEngine.Vector.create(0, 0);
+                particle.absorberOrbit.length = _tsparticlesEngine.getDistance(particle.getPosition(), this.position);
+                particle.absorberOrbit.angle = Math.random() * Math.PI * 2;
+            }
+            if (particle.absorberOrbit.length <= this.size && !this.options.destroy) {
+                const minSize = Math.min(canvasSize.width, canvasSize.height);
+                particle.absorberOrbit.length = minSize * (1 + (Math.random() * 0.2 - 0.1));
+            }
+            if (particle.absorberOrbitDirection === undefined) particle.absorberOrbitDirection = particle.velocity.x >= 0 ? "clockwise" : "counter-clockwise";
+            const orbitRadius = particle.absorberOrbit.length, orbitAngle = particle.absorberOrbit.angle, orbitDirection = particle.absorberOrbitDirection;
+            particle.velocity.setTo(_tsparticlesEngine.Vector.origin);
+            const updateFunc = {
+                x: orbitDirection === "clockwise" ? Math.cos : Math.sin,
+                y: orbitDirection === "clockwise" ? Math.sin : Math.cos
+            };
+            particle.position.x = this.position.x + orbitRadius * updateFunc.x(orbitAngle);
+            particle.position.y = this.position.y + orbitRadius * updateFunc.y(orbitAngle);
+            particle.absorberOrbit.length -= v.length;
+            particle.absorberOrbit.angle += ((_a = particle.retina.moveSpeed) !== null && _a !== void 0 ? _a : 0) * container.retina.pixelRatio / 100 * container.retina.reduceFactor;
+        } else {
+            const addV = _tsparticlesEngine.Vector.origin;
+            addV.length = v.length;
+            addV.angle = v.angle;
+            particle.velocity.addTo(addV);
+        }
+    }
+}
+
+},{"tsparticles-engine":"9BizU","./Options/Classes/Absorber":"5oO9K","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"b2byu":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"erSH8":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"4eKdX":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"9f2cc":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "loadEmittersPlugin", ()=>loadEmittersPlugin
+);
+var _circleShape = require("./Shapes/Circle/CircleShape");
+var _emitter = require("./Options/Classes/Emitter");
+var _emitters = require("./Emitters");
+var _shapeManager = require("./ShapeManager");
+var _squareShape = require("./Shapes/Square/SquareShape");
+var _tsparticlesEngine = require("tsparticles-engine");
+var _emitterContainer = require("./EmitterContainer");
+parcelHelpers.exportAll(_emitterContainer, exports);
+var _emittersEngine = require("./EmittersEngine");
+parcelHelpers.exportAll(_emittersEngine, exports);
+var _emitterClickMode = require("./Enums/EmitterClickMode");
+parcelHelpers.exportAll(_emitterClickMode, exports);
+var _emitterShapeType = require("./Enums/EmitterShapeType");
+parcelHelpers.exportAll(_emitterShapeType, exports);
+var _iemitterOptions = require("./Options/Interfaces/IEmitterOptions");
+parcelHelpers.exportAll(_iemitterOptions, exports);
+var __classPrivateFieldSet = undefined && undefined.__classPrivateFieldSet || function(receiver, state, value, kind, f) {
+    if (kind === "m") throw new TypeError("Private method is not writable");
+    if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a setter");
+    if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
+    return kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value), value;
+};
+var __classPrivateFieldGet = undefined && undefined.__classPrivateFieldGet || function(receiver, state, kind, f) {
+    if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a getter");
+    if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
+    return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
+};
+var _EmittersPlugin_engine;
+class EmittersPlugin {
+    constructor(engine){
+        _EmittersPlugin_engine.set(this, void 0);
+        __classPrivateFieldSet(this, _EmittersPlugin_engine, engine, "f");
+        this.id = "emitters";
+    }
+    getPlugin(container) {
+        return new _emitters.Emitters(__classPrivateFieldGet(this, _EmittersPlugin_engine, "f"), container);
+    }
+    needsPlugin(options) {
+        var _a, _b, _c;
+        if (options === undefined) return false;
+        const emitters = options.emitters;
+        return emitters instanceof Array && !!emitters.length || emitters !== undefined || !!((_c = (_b = (_a = options.interactivity) === null || _a === void 0 ? void 0 : _a.events) === null || _b === void 0 ? void 0 : _b.onClick) === null || _c === void 0 ? void 0 : _c.mode) && _tsparticlesEngine.isInArray("emitter", options.interactivity.events.onClick.mode);
+    }
+    loadOptions(options, source) {
+        var _a, _b;
+        if (!this.needsPlugin(options) && !this.needsPlugin(source)) return;
+        const optionsCast = options;
+        if (source === null || source === void 0 ? void 0 : source.emitters) {
+            if ((source === null || source === void 0 ? void 0 : source.emitters) instanceof Array) optionsCast.emitters = source === null || source === void 0 ? void 0 : source.emitters.map((s)=>{
+                const tmp = new _emitter.Emitter();
+                tmp.load(s);
+                return tmp;
+            });
+            else {
+                let emitterOptions = optionsCast.emitters;
+                if ((emitterOptions === null || emitterOptions === void 0 ? void 0 : emitterOptions.load) === undefined) optionsCast.emitters = emitterOptions = new _emitter.Emitter();
+                emitterOptions.load(source === null || source === void 0 ? void 0 : source.emitters);
+            }
+        }
+        const interactivityEmitters = (_b = (_a = source === null || source === void 0 ? void 0 : source.interactivity) === null || _a === void 0 ? void 0 : _a.modes) === null || _b === void 0 ? void 0 : _b.emitters;
+        if (interactivityEmitters) {
+            if (interactivityEmitters instanceof Array) optionsCast.interactivity.modes.emitters = interactivityEmitters.map((s)=>{
+                const tmp = new _emitter.Emitter();
+                tmp.load(s);
+                return tmp;
+            });
+            else {
+                let emitterOptions = optionsCast.interactivity.modes.emitters;
+                if ((emitterOptions === null || emitterOptions === void 0 ? void 0 : emitterOptions.load) === undefined) optionsCast.interactivity.modes.emitters = emitterOptions = new _emitter.Emitter();
+                emitterOptions.load(interactivityEmitters);
+            }
+        }
+    }
+}
+_EmittersPlugin_engine = new WeakMap();
+async function loadEmittersPlugin(engine) {
+    if (!engine.emitterShapeManager) engine.emitterShapeManager = new _shapeManager.ShapeManager(engine);
+    if (!engine.addEmitterShape) engine.addEmitterShape = (name, shape)=>{
+        var _a;
+        (_a = engine.emitterShapeManager) === null || _a === void 0 || _a.addShape(name, shape);
+    };
+    const plugin = new EmittersPlugin(engine);
+    await engine.addPlugin(plugin);
+    engine.addEmitterShape("circle", new _circleShape.CircleShape());
+    engine.addEmitterShape("square", new _squareShape.SquareShape());
+}
+
+},{"./Shapes/Circle/CircleShape":"iSk7x","./Options/Classes/Emitter":"1Gkiv","./Emitters":"lj0cD","./ShapeManager":"2rpo7","./Shapes/Square/SquareShape":"3YzdE","tsparticles-engine":"9BizU","./EmitterContainer":"2KBg2","./EmittersEngine":"60zpi","./Enums/EmitterClickMode":"8QvsQ","./Enums/EmitterShapeType":"83VRT","./Options/Interfaces/IEmitterOptions":"bsI49","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"iSk7x":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "CircleShape", ()=>CircleShape
+);
+class CircleShape {
+    randomPosition(position, size, fill) {
+        const generateTheta = (x, y)=>{
+            const u = Math.random() / 4.0, theta = Math.atan(y / x * Math.tan(2 * Math.PI * u)), v = Math.random();
+            if (v < 0.25) return theta;
+            else if (v < 0.5) return Math.PI - theta;
+            else if (v < 0.75) return Math.PI + theta;
+            else return -theta;
+        }, radius = (x, y, theta)=>x * y / Math.sqrt((y * Math.cos(theta)) ** 2 + (x * Math.sin(theta)) ** 2)
+        , [a, b] = [
+            size.width / 2,
+            size.height / 2
+        ], randomTheta = generateTheta(a, b), maxRadius = radius(a, b, randomTheta), randomRadius = fill ? maxRadius * Math.sqrt(Math.random()) : maxRadius;
+        return {
+            x: position.x + randomRadius * Math.cos(randomTheta),
+            y: position.y + randomRadius * Math.sin(randomTheta)
+        };
+    }
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"1Gkiv":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "Emitter", ()=>Emitter
+);
+var _tsparticlesEngine = require("tsparticles-engine");
+var _emitterLife = require("./EmitterLife");
+var _emitterRate = require("./EmitterRate");
+var _emitterSize = require("./EmitterSize");
+class Emitter {
+    constructor(){
+        this.autoPlay = true;
+        this.fill = true;
+        this.life = new _emitterLife.EmitterLife();
+        this.rate = new _emitterRate.EmitterRate();
+        this.shape = "square";
+        this.startCount = 0;
+    }
+    load(data) {
+        if (data === undefined) return;
+        if (data.autoPlay !== undefined) this.autoPlay = data.autoPlay;
+        if (data.size !== undefined) {
+            if (this.size === undefined) this.size = new _emitterSize.EmitterSize();
+            this.size.load(data.size);
+        }
+        if (data.direction !== undefined) this.direction = data.direction;
+        this.domId = data.domId;
+        if (data.fill !== undefined) this.fill = data.fill;
+        this.life.load(data.life);
+        this.name = data.name;
+        if (data.particles !== undefined) this.particles = _tsparticlesEngine.deepExtend({}, data.particles);
+        this.rate.load(data.rate);
+        if (data.shape !== undefined) this.shape = data.shape;
+        if (data.position !== undefined) {
+            this.position = {};
+            if (data.position.x !== undefined) this.position.x = _tsparticlesEngine.setRangeValue(data.position.x);
+            if (data.position.y !== undefined) this.position.y = _tsparticlesEngine.setRangeValue(data.position.y);
+        }
+        if (data.spawnColor !== undefined) {
+            if (this.spawnColor === undefined) this.spawnColor = new _tsparticlesEngine.AnimatableColor();
+            this.spawnColor.load(data.spawnColor);
+        }
+        if (data.startCount !== undefined) this.startCount = data.startCount;
+    }
+}
+
+},{"tsparticles-engine":"9BizU","./EmitterLife":"3xX0N","./EmitterRate":"bHR3B","./EmitterSize":"30lmO","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"3xX0N":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "EmitterLife", ()=>EmitterLife
+);
+class EmitterLife {
+    constructor(){
+        this.wait = false;
+    }
+    load(data) {
+        if (data === undefined) return;
+        if (data.count !== undefined) this.count = data.count;
+        if (data.delay !== undefined) this.delay = data.delay;
+        if (data.duration !== undefined) this.duration = data.duration;
+        if (data.wait !== undefined) this.wait = data.wait;
+    }
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"bHR3B":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "EmitterRate", ()=>EmitterRate
+);
+var _tsparticlesEngine = require("tsparticles-engine");
+class EmitterRate {
+    constructor(){
+        this.quantity = 1;
+        this.delay = 0.1;
+    }
+    load(data) {
+        if (data === undefined) return;
+        if (data.quantity !== undefined) this.quantity = _tsparticlesEngine.setRangeValue(data.quantity);
+        if (data.delay !== undefined) this.delay = _tsparticlesEngine.setRangeValue(data.delay);
+    }
+}
+
+},{"tsparticles-engine":"9BizU","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"30lmO":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "EmitterSize", ()=>EmitterSize
+);
+class EmitterSize {
+    constructor(){
+        this.mode = "percent";
+        this.height = 0;
+        this.width = 0;
+    }
+    load(data) {
+        if (data === undefined) return;
+        if (data.mode !== undefined) this.mode = data.mode;
+        if (data.height !== undefined) this.height = data.height;
+        if (data.width !== undefined) this.width = data.width;
+    }
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"lj0cD":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "Emitters", ()=>Emitters
+);
+var _tsparticlesEngine = require("tsparticles-engine");
+var _emitter = require("./Options/Classes/Emitter");
+var _emitterInstance = require("./EmitterInstance");
+var __classPrivateFieldSet = undefined && undefined.__classPrivateFieldSet || function(receiver, state, value, kind, f) {
+    if (kind === "m") throw new TypeError("Private method is not writable");
+    if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a setter");
+    if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
+    return kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value), value;
+};
+var __classPrivateFieldGet = undefined && undefined.__classPrivateFieldGet || function(receiver, state, kind, f) {
+    if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a getter");
+    if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
+    return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
+};
+var _Emitters_engine;
+class Emitters {
+    constructor(engine, container){
+        this.container = container;
+        _Emitters_engine.set(this, void 0);
+        __classPrivateFieldSet(this, _Emitters_engine, engine, "f");
+        this.array = [];
+        this.emitters = [];
+        this.interactivityEmitters = [];
+        container.getEmitter = (idxOrName)=>idxOrName === undefined || typeof idxOrName === "number" ? this.array[idxOrName || 0] : this.array.find((t)=>t.name === idxOrName
+            )
+        ;
+        container.addEmitter = (options, position)=>this.addEmitter(options, position)
+        ;
+        container.removeEmitter = (idxOrName)=>{
+            const emitter = container.getEmitter(idxOrName);
+            if (emitter) this.removeEmitter(emitter);
+        };
+        container.playEmitter = (idxOrName)=>{
+            const emitter = container.getEmitter(idxOrName);
+            if (emitter) emitter.externalPlay();
+        };
+        container.pauseEmitter = (idxOrName)=>{
+            const emitter = container.getEmitter(idxOrName);
+            if (emitter) emitter.externalPause();
+        };
+    }
+    init(options) {
+        var _a, _b;
+        if (!options) return;
+        if (options.emitters) {
+            if (options.emitters instanceof Array) this.emitters = options.emitters.map((s)=>{
+                const tmp = new _emitter.Emitter();
+                tmp.load(s);
+                return tmp;
+            });
+            else {
+                if (this.emitters instanceof Array) this.emitters = new _emitter.Emitter();
+                this.emitters.load(options.emitters);
+            }
+        }
+        const interactivityEmitters = (_b = (_a = options.interactivity) === null || _a === void 0 ? void 0 : _a.modes) === null || _b === void 0 ? void 0 : _b.emitters;
+        if (interactivityEmitters) {
+            if (interactivityEmitters instanceof Array) this.interactivityEmitters = interactivityEmitters.map((s)=>{
+                const tmp = new _emitter.Emitter();
+                tmp.load(s);
+                return tmp;
+            });
+            else {
+                if (this.interactivityEmitters instanceof Array) this.interactivityEmitters = new _emitter.Emitter();
+                this.interactivityEmitters.load(interactivityEmitters);
+            }
+        }
+        if (this.emitters instanceof Array) for (const emitterOptions of this.emitters)this.addEmitter(emitterOptions);
+        else this.addEmitter(this.emitters);
+    }
+    play() {
+        for (const emitter of this.array)emitter.play();
+    }
+    pause() {
+        for (const emitter of this.array)emitter.pause();
+    }
+    stop() {
+        this.array = [];
+    }
+    update(delta) {
+        for (const emitter of this.array)emitter.update(delta);
+    }
+    handleClickMode(mode) {
+        const emitterOptions = this.emitters, modeEmitters = this.interactivityEmitters;
+        if (mode === "emitter") {
+            let emitterModeOptions;
+            if (modeEmitters instanceof Array) {
+                if (modeEmitters.length > 0) emitterModeOptions = _tsparticlesEngine.itemFromArray(modeEmitters);
+            } else emitterModeOptions = modeEmitters;
+            const emittersOptions = emitterModeOptions !== null && emitterModeOptions !== void 0 ? emitterModeOptions : emitterOptions instanceof Array ? _tsparticlesEngine.itemFromArray(emitterOptions) : emitterOptions, ePosition = this.container.interactivity.mouse.clickPosition;
+            this.addEmitter(_tsparticlesEngine.deepExtend({}, emittersOptions), ePosition);
+        }
+    }
+    resize() {
+        for (const emitter of this.array)emitter.resize();
+    }
+    addEmitter(options, position) {
+        const emitterOptions = new _emitter.Emitter();
+        emitterOptions.load(options);
+        const emitter = new _emitterInstance.EmitterInstance(__classPrivateFieldGet(this, _Emitters_engine, "f"), this, this.container, emitterOptions, position);
+        this.array.push(emitter);
+        return emitter;
+    }
+    removeEmitter(emitter) {
+        const index = this.array.indexOf(emitter);
+        if (index >= 0) this.array.splice(index, 1);
+    }
+}
+_Emitters_engine = new WeakMap();
+
+},{"tsparticles-engine":"9BizU","./Options/Classes/Emitter":"1Gkiv","./EmitterInstance":"18HvR","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"18HvR":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "EmitterInstance", ()=>EmitterInstance
+);
+var _tsparticlesEngine = require("tsparticles-engine");
+var _emitter = require("./Options/Classes/Emitter");
+var _emitterSize = require("./Options/Classes/EmitterSize");
+var __classPrivateFieldSet = undefined && undefined.__classPrivateFieldSet || function(receiver, state, value, kind, f) {
+    if (kind === "m") throw new TypeError("Private method is not writable");
+    if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a setter");
+    if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
+    return kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value), value;
+};
+var __classPrivateFieldGet = undefined && undefined.__classPrivateFieldGet || function(receiver, state, kind, f) {
+    if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a getter");
+    if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
+    return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
+};
+var _EmitterInstance_firstSpawn, _EmitterInstance_startParticlesAdded, _EmitterInstance_engine;
+class EmitterInstance {
+    constructor(engine, emitters, container, options, position){
+        var _a, _b, _c, _d, _e, _f, _g;
+        var _h;
+        this.emitters = emitters;
+        this.container = container;
+        _EmitterInstance_firstSpawn.set(this, void 0);
+        _EmitterInstance_startParticlesAdded.set(this, void 0);
+        _EmitterInstance_engine.set(this, void 0);
+        __classPrivateFieldSet(this, _EmitterInstance_engine, engine, "f");
+        this.currentDuration = 0;
+        this.currentEmitDelay = 0;
+        this.currentSpawnDelay = 0;
+        this.initialPosition = position;
+        if (options instanceof _emitter.Emitter) this.options = options;
+        else {
+            this.options = new _emitter.Emitter();
+            this.options.load(options);
+        }
+        this.spawnDelay = ((_a = this.options.life.delay) !== null && _a !== void 0 ? _a : 0) * 1000 / this.container.retina.reduceFactor;
+        this.position = (_b = this.initialPosition) !== null && _b !== void 0 ? _b : this.calcPosition();
+        this.name = this.options.name;
+        this.shape = (_c = __classPrivateFieldGet(this, _EmitterInstance_engine, "f").emitterShapeManager) === null || _c === void 0 ? void 0 : _c.getShape(this.options.shape);
+        this.fill = this.options.fill;
+        __classPrivateFieldSet(this, _EmitterInstance_firstSpawn, !this.options.life.wait, "f");
+        __classPrivateFieldSet(this, _EmitterInstance_startParticlesAdded, false, "f");
+        let particlesOptions = _tsparticlesEngine.deepExtend({}, this.options.particles);
+        particlesOptions !== null && particlesOptions !== void 0 || (particlesOptions = {});
+        (_d = particlesOptions.move) !== null && _d !== void 0 || (particlesOptions.move = {});
+        (_e = (_h = particlesOptions.move).direction) !== null && _e !== void 0 || (_h.direction = this.options.direction);
+        if (this.options.spawnColor) this.spawnColor = _tsparticlesEngine.colorToHsl(this.options.spawnColor);
+        this.paused = !this.options.autoPlay;
+        this.particlesOptions = particlesOptions;
+        this.size = (_f = this.options.size) !== null && _f !== void 0 ? _f : (()=>{
+            const size = new _emitterSize.EmitterSize();
+            size.load({
+                height: 0,
+                mode: "percent",
+                width: 0
+            });
+            return size;
+        })();
+        this.lifeCount = (_g = this.options.life.count) !== null && _g !== void 0 ? _g : -1;
+        this.immortal = this.lifeCount <= 0;
+        __classPrivateFieldGet(this, _EmitterInstance_engine, "f").dispatchEvent("emitterCreated", {
+            container,
+            data: {
+                emitter: this
+            }
+        });
+        this.play();
+    }
+    externalPlay() {
+        this.paused = false;
+        this.play();
+    }
+    externalPause() {
+        this.paused = true;
+        this.pause();
+    }
+    play() {
+        var _a;
+        if (this.paused) return;
+        if (!(this.container.retina.reduceFactor && (this.lifeCount > 0 || this.immortal || !this.options.life.count) && (__classPrivateFieldGet(this, _EmitterInstance_firstSpawn, "f") || this.currentSpawnDelay >= ((_a = this.spawnDelay) !== null && _a !== void 0 ? _a : 0)))) return;
+        if (this.emitDelay === undefined) {
+            const delay = _tsparticlesEngine.getRangeValue(this.options.rate.delay);
+            this.emitDelay = 1000 * delay / this.container.retina.reduceFactor;
+        }
+        if (this.lifeCount > 0 || this.immortal) this.prepareToDie();
+    }
+    pause() {
+        if (this.paused) return;
+        delete this.emitDelay;
+    }
+    resize() {
+        const initialPosition = this.initialPosition;
+        this.position = initialPosition && _tsparticlesEngine.isPointInside(initialPosition, this.container.canvas.size, _tsparticlesEngine.Vector.origin) ? initialPosition : this.calcPosition();
+    }
+    update(delta) {
+        var _a, _b, _c;
+        if (this.paused) return;
+        if (__classPrivateFieldGet(this, _EmitterInstance_firstSpawn, "f")) {
+            __classPrivateFieldSet(this, _EmitterInstance_firstSpawn, false, "f");
+            this.currentSpawnDelay = (_a = this.spawnDelay) !== null && _a !== void 0 ? _a : 0;
+            this.currentEmitDelay = (_b = this.emitDelay) !== null && _b !== void 0 ? _b : 0;
+        }
+        if (!__classPrivateFieldGet(this, _EmitterInstance_startParticlesAdded, "f")) {
+            __classPrivateFieldSet(this, _EmitterInstance_startParticlesAdded, true, "f");
+            this.emitParticles(this.options.startCount);
+        }
+        if (this.duration !== undefined) {
+            this.currentDuration += delta.value;
+            if (this.currentDuration >= this.duration) {
+                this.pause();
+                if (this.spawnDelay !== undefined) delete this.spawnDelay;
+                if (!this.immortal) this.lifeCount--;
+                if (this.lifeCount > 0 || this.immortal) {
+                    this.position = this.calcPosition();
+                    this.spawnDelay = ((_c = this.options.life.delay) !== null && _c !== void 0 ? _c : 0) * 1000 / this.container.retina.reduceFactor;
+                } else this.destroy();
+                this.currentDuration -= this.duration;
+                delete this.duration;
+            }
+        }
+        if (this.spawnDelay !== undefined) {
+            this.currentSpawnDelay += delta.value;
+            if (this.currentSpawnDelay >= this.spawnDelay) {
+                __classPrivateFieldGet(this, _EmitterInstance_engine, "f").dispatchEvent("emitterPlay", {
+                    container: this.container
+                });
+                this.play();
+                this.currentSpawnDelay -= this.currentSpawnDelay;
+                delete this.spawnDelay;
+            }
+        }
+        if (this.emitDelay !== undefined) {
+            this.currentEmitDelay += delta.value;
+            if (this.currentEmitDelay >= this.emitDelay) {
+                this.emit();
+                this.currentEmitDelay -= this.emitDelay;
+            }
+        }
+    }
+    getPosition() {
+        if (this.options.domId) {
+            const container = this.container, element = document.getElementById(this.options.domId);
+            if (element) {
+                const elRect = element.getBoundingClientRect();
+                return {
+                    x: (elRect.x + elRect.width / 2) * container.retina.pixelRatio,
+                    y: (elRect.y + elRect.height / 2) * container.retina.pixelRatio
+                };
+            }
+        }
+        return this.position;
+    }
+    getSize() {
+        const container = this.container;
+        if (this.options.domId) {
+            const element = document.getElementById(this.options.domId);
+            if (element) {
+                const elRect = element.getBoundingClientRect();
+                return {
+                    width: elRect.width * container.retina.pixelRatio,
+                    height: elRect.height * container.retina.pixelRatio
+                };
+            }
+        }
+        return {
+            width: this.size.mode === "percent" ? container.canvas.size.width * this.size.width / 100 : this.size.width,
+            height: this.size.mode === "percent" ? container.canvas.size.height * this.size.height / 100 : this.size.height
+        };
+    }
+    prepareToDie() {
+        var _a;
+        if (this.paused) return;
+        const duration = (_a = this.options.life) === null || _a === void 0 ? void 0 : _a.duration;
+        if (this.container.retina.reduceFactor && (this.lifeCount > 0 || this.immortal) && duration !== undefined && duration > 0) this.duration = duration * 1000;
+    }
+    destroy() {
+        this.emitters.removeEmitter(this);
+        __classPrivateFieldGet(this, _EmitterInstance_engine, "f").dispatchEvent("emitterDestroyed", {
+            container: this.container,
+            data: {
+                emitter: this
+            }
+        });
+    }
+    calcPosition() {
+        return _tsparticlesEngine.calcPositionOrRandomFromSizeRanged({
+            size: this.container.canvas.size,
+            position: this.options.position
+        });
+    }
+    emit() {
+        if (this.paused) return;
+        const quantity = _tsparticlesEngine.getRangeValue(this.options.rate.quantity);
+        this.emitParticles(quantity);
+    }
+    emitParticles(quantity) {
+        var _a, _b, _c;
+        const position = this.getPosition(), size = this.getSize();
+        for(let i = 0; i < quantity; i++){
+            const particlesOptions = _tsparticlesEngine.deepExtend({}, this.particlesOptions);
+            if (this.spawnColor) {
+                const hslAnimation = (_a = this.options.spawnColor) === null || _a === void 0 ? void 0 : _a.animation;
+                if (hslAnimation) {
+                    this.spawnColor.h = this.setColorAnimation(hslAnimation.h, this.spawnColor.h, 360);
+                    this.spawnColor.s = this.setColorAnimation(hslAnimation.s, this.spawnColor.s, 100);
+                    this.spawnColor.l = this.setColorAnimation(hslAnimation.l, this.spawnColor.l, 100);
+                }
+                if (!particlesOptions.color) particlesOptions.color = {
+                    value: this.spawnColor
+                };
+                else particlesOptions.color.value = this.spawnColor;
+            }
+            if (!position) return;
+            const pPosition = (_c = (_b = this.shape) === null || _b === void 0 ? void 0 : _b.randomPosition(position, size, this.fill)) !== null && _c !== void 0 ? _c : position;
+            this.container.particles.addParticle(pPosition, particlesOptions);
+        }
+    }
+    setColorAnimation(animation, initValue, maxValue) {
+        var _a;
+        const container = this.container;
+        if (!animation.enable) return initValue;
+        const colorOffset = _tsparticlesEngine.randomInRange(animation.offset), delay = _tsparticlesEngine.getRangeValue(this.options.rate.delay), emitFactor = 1000 * delay / container.retina.reduceFactor, colorSpeed = _tsparticlesEngine.getRangeValue((_a = animation.speed) !== null && _a !== void 0 ? _a : 0);
+        return (initValue + colorSpeed * container.fpsLimit / emitFactor + colorOffset * 3.6) % maxValue;
+    }
+}
+_EmitterInstance_firstSpawn = new WeakMap(), _EmitterInstance_startParticlesAdded = new WeakMap(), _EmitterInstance_engine = new WeakMap();
+
+},{"tsparticles-engine":"9BizU","./Options/Classes/Emitter":"1Gkiv","./Options/Classes/EmitterSize":"30lmO","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"2rpo7":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "ShapeManager", ()=>ShapeManager
+);
+var __classPrivateFieldSet = undefined && undefined.__classPrivateFieldSet || function(receiver, state, value, kind, f) {
+    if (kind === "m") throw new TypeError("Private method is not writable");
+    if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a setter");
+    if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
+    return kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value), value;
+};
+var _ShapeManager_engine;
+const shapes = new Map();
+class ShapeManager {
+    constructor(engine){
+        _ShapeManager_engine.set(this, void 0);
+        __classPrivateFieldSet(this, _ShapeManager_engine, engine, "f");
+    }
+    addShape(name, drawer) {
+        if (!this.getShape(name)) shapes.set(name, drawer);
+    }
+    getShape(name) {
+        return shapes.get(name);
+    }
+    getSupportedShapes() {
+        return shapes.keys();
+    }
+}
+_ShapeManager_engine = new WeakMap();
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"3YzdE":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "SquareShape", ()=>SquareShape
+);
+function randomSquareCoordinate(position, offset) {
+    return position + offset * (Math.random() - 0.5);
+}
+class SquareShape {
+    randomPosition(position, size, fill) {
+        if (fill) return {
+            x: randomSquareCoordinate(position.x, size.width),
+            y: randomSquareCoordinate(position.y, size.height)
+        };
+        else {
+            const halfW = size.width / 2, halfH = size.height / 2, side = Math.floor(Math.random() * 4), v = (Math.random() - 0.5) * 2;
+            switch(side){
+                case 0:
+                    return {
+                        x: position.x + v * halfW,
+                        y: position.y - halfH
+                    };
+                case 1:
+                    return {
+                        x: position.x - halfW,
+                        y: position.y + v * halfH
+                    };
+                case 2:
+                    return {
+                        x: position.x + v * halfW,
+                        y: position.y + halfH
+                    };
+                case 3:
+                default:
+                    return {
+                        x: position.x + halfW,
+                        y: position.y + v * halfH
+                    };
+            }
+        }
+    }
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"2KBg2":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"60zpi":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"8QvsQ":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"83VRT":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"bsI49":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"11WBd":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "loadExternalTrailInteraction", ()=>loadExternalTrailInteraction
+);
+var _trailMaker = require("./TrailMaker");
+async function loadExternalTrailInteraction(engine) {
+    await engine.addInteractor("externalTrail", (container)=>new _trailMaker.TrailMaker(container)
+    );
+}
+
+},{"./TrailMaker":"046nw","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"046nw":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "TrailMaker", ()=>TrailMaker
+);
+var _tsparticlesEngine = require("tsparticles-engine");
+class TrailMaker extends _tsparticlesEngine.ExternalInteractorBase {
+    constructor(container){
+        super(container);
+        this.delay = 0;
+    }
+    async interact(delta) {
+        var _a, _b, _c, _d;
+        if (!this.container.retina.reduceFactor) return;
+        const container = this.container, options = container.actualOptions, trailOptions = options.interactivity.modes.trail, optDelay = trailOptions.delay * 1000 / this.container.retina.reduceFactor;
+        if (this.delay < optDelay) this.delay += delta.value;
+        if (this.delay < optDelay) return;
+        let canEmit = true;
+        if (trailOptions.pauseOnStop) {
+            if (container.interactivity.mouse.position === this.lastPosition || ((_a = container.interactivity.mouse.position) === null || _a === void 0 ? void 0 : _a.x) === ((_b = this.lastPosition) === null || _b === void 0 ? void 0 : _b.x) && ((_c = container.interactivity.mouse.position) === null || _c === void 0 ? void 0 : _c.y) === ((_d = this.lastPosition) === null || _d === void 0 ? void 0 : _d.y)) canEmit = false;
+        }
+        if (container.interactivity.mouse.position) this.lastPosition = {
+            x: container.interactivity.mouse.position.x,
+            y: container.interactivity.mouse.position.y
+        };
+        else delete this.lastPosition;
+        if (canEmit) container.particles.push(trailOptions.quantity, container.interactivity.mouse, trailOptions.particles);
+        this.delay -= optDelay;
+    }
+    isEnabled() {
+        const container = this.container, options = container.actualOptions, mouse = container.interactivity.mouse, events = options.interactivity.events;
+        return mouse.clicking && mouse.inside && !!mouse.position && _tsparticlesEngine.isInArray("trail", events.onClick.mode) || mouse.inside && !!mouse.position && _tsparticlesEngine.isInArray("trail", events.onHover.mode);
+    }
+    reset() {}
+}
+
+},{"tsparticles-engine":"9BizU","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"cZsFw":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "loadPolygonMaskPlugin", ()=>loadPolygonMaskPlugin
+);
+var _polygonMask = require("./Options/Classes/PolygonMask");
+var _polygonMaskInstance = require("./PolygonMaskInstance");
+var _tsparticlesEngine = require("tsparticles-engine");
+var _polygonMaskInlineArrangement = require("./Enums/PolygonMaskInlineArrangement");
+parcelHelpers.exportAll(_polygonMaskInlineArrangement, exports);
+var _polygonMaskMoveType = require("./Enums/PolygonMaskMoveType");
+parcelHelpers.exportAll(_polygonMaskMoveType, exports);
+var _polygonMaskType = require("./Enums/PolygonMaskType");
+parcelHelpers.exportAll(_polygonMaskType, exports);
+var _ipolygonMaskOptions = require("./Options/Interfaces/IPolygonMaskOptions");
+parcelHelpers.exportAll(_ipolygonMaskOptions, exports);
+var __classPrivateFieldSet = undefined && undefined.__classPrivateFieldSet || function(receiver, state, value, kind, f) {
+    if (kind === "m") throw new TypeError("Private method is not writable");
+    if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a setter");
+    if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
+    return kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value), value;
+};
+var __classPrivateFieldGet = undefined && undefined.__classPrivateFieldGet || function(receiver, state, kind, f) {
+    if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a getter");
+    if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
+    return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
+};
+var _PolygonMaskPlugin_engine;
+class PolygonMaskPlugin {
+    constructor(engine){
+        _PolygonMaskPlugin_engine.set(this, void 0);
+        this.id = "polygonMask";
+        __classPrivateFieldSet(this, _PolygonMaskPlugin_engine, engine, "f");
+    }
+    getPlugin(container) {
+        return new _polygonMaskInstance.PolygonMaskInstance(container, __classPrivateFieldGet(this, _PolygonMaskPlugin_engine, "f"));
+    }
+    needsPlugin(options) {
+        var _a, _b, _c;
+        return (_b = (_a = options === null || options === void 0 ? void 0 : options.polygon) === null || _a === void 0 ? void 0 : _a.enable) !== null && _b !== void 0 ? _b : ((_c = options === null || options === void 0 ? void 0 : options.polygon) === null || _c === void 0 ? void 0 : _c.type) !== undefined && options.polygon.type !== "none";
+    }
+    loadOptions(options, source) {
+        if (!this.needsPlugin(source)) return;
+        const optionsCast = options;
+        let polygonOptions = optionsCast.polygon;
+        if ((polygonOptions === null || polygonOptions === void 0 ? void 0 : polygonOptions.load) === undefined) optionsCast.polygon = polygonOptions = new _polygonMask.PolygonMask();
+        polygonOptions.load(source === null || source === void 0 ? void 0 : source.polygon);
+    }
+}
+_PolygonMaskPlugin_engine = new WeakMap();
+async function loadPolygonMaskPlugin(engine) {
+    if (!_tsparticlesEngine.isSsr() && !("SVGPathSeg" in window)) await require("4193c9beef6e2bb6");
+    const plugin = new PolygonMaskPlugin(engine);
+    await engine.addPlugin(plugin);
+}
+
+},{"./Options/Classes/PolygonMask":"7PFsE","./PolygonMaskInstance":"2EQLb","tsparticles-engine":"9BizU","4193c9beef6e2bb6":"4BKvA","./Enums/PolygonMaskInlineArrangement":"7MZdO","./Enums/PolygonMaskMoveType":"5XDur","./Enums/PolygonMaskType":"1zoOs","./Options/Interfaces/IPolygonMaskOptions":"lOj4p","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"7PFsE":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "PolygonMask", ()=>PolygonMask
+);
+var _polygonMaskDraw = require("./PolygonMaskDraw");
+var _polygonMaskInline = require("./PolygonMaskInline");
+var _polygonMaskLocalSvg = require("./PolygonMaskLocalSvg");
+var _polygonMaskMove = require("./PolygonMaskMove");
+var _tsparticlesEngine = require("tsparticles-engine");
+class PolygonMask {
+    constructor(){
+        this.draw = new _polygonMaskDraw.PolygonMaskDraw();
+        this.enable = false;
+        this.inline = new _polygonMaskInline.PolygonMaskInline();
+        this.move = new _polygonMaskMove.PolygonMaskMove();
+        this.scale = 1;
+        this.type = "none";
+    }
+    get inlineArrangement() {
+        return this.inline.arrangement;
+    }
+    set inlineArrangement(value) {
+        this.inline.arrangement = value;
+    }
+    load(data) {
+        if (!data) return;
+        this.draw.load(data.draw);
+        this.inline.load(data.inline);
+        this.move.load(data.move);
+        if (data.scale !== undefined) this.scale = data.scale;
+        if (data.type !== undefined) this.type = data.type;
+        if (data.enable !== undefined) this.enable = data.enable;
+        else this.enable = this.type !== "none";
+        if (data.url !== undefined) this.url = data.url;
+        if (data.data !== undefined) {
+            if (typeof data.data === "string") this.data = data.data;
+            else {
+                this.data = new _polygonMaskLocalSvg.PolygonMaskLocalSvg();
+                this.data.load(data.data);
+            }
+        }
+        if (data.position !== undefined) this.position = _tsparticlesEngine.deepExtend({}, data.position);
+    }
+}
+
+},{"./PolygonMaskDraw":"lyMEE","./PolygonMaskInline":"fnOc5","./PolygonMaskLocalSvg":"bWqOw","./PolygonMaskMove":"5mueY","tsparticles-engine":"9BizU","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"lyMEE":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "PolygonMaskDraw", ()=>PolygonMaskDraw
+);
+var _tsparticlesEngine = require("tsparticles-engine");
+var _polygonMaskDrawStroke = require("./PolygonMaskDrawStroke");
+class PolygonMaskDraw {
+    constructor(){
+        this.enable = false;
+        this.stroke = new _polygonMaskDrawStroke.PolygonMaskDrawStroke();
+    }
+    get lineWidth() {
+        return this.stroke.width;
+    }
+    set lineWidth(value) {
+        this.stroke.width = value;
+    }
+    get lineColor() {
+        return this.stroke.color;
+    }
+    set lineColor(value) {
+        this.stroke.color = _tsparticlesEngine.OptionsColor.create(this.stroke.color, value);
+    }
+    load(data) {
+        var _a;
+        if (!data) return;
+        if (data.enable !== undefined) this.enable = data.enable;
+        const stroke = (_a = data.stroke) !== null && _a !== void 0 ? _a : {
+            color: data.lineColor,
+            width: data.lineWidth
+        };
+        this.stroke.load(stroke);
+    }
+}
+
+},{"tsparticles-engine":"9BizU","./PolygonMaskDrawStroke":"idtxB","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"idtxB":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "PolygonMaskDrawStroke", ()=>PolygonMaskDrawStroke
+);
+var _tsparticlesEngine = require("tsparticles-engine");
+class PolygonMaskDrawStroke {
+    constructor(){
+        this.color = new _tsparticlesEngine.OptionsColor();
+        this.width = 0.5;
+        this.opacity = 1;
+    }
+    load(data) {
+        var _a;
+        if (!data) return;
+        this.color = _tsparticlesEngine.OptionsColor.create(this.color, data.color);
+        if (typeof this.color.value === "string") this.opacity = (_a = _tsparticlesEngine.stringToAlpha(this.color.value)) !== null && _a !== void 0 ? _a : this.opacity;
+        if (data.opacity !== undefined) this.opacity = data.opacity;
+        if (data.width !== undefined) this.width = data.width;
+    }
+}
+
+},{"tsparticles-engine":"9BizU","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"fnOc5":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "PolygonMaskInline", ()=>PolygonMaskInline
+);
+class PolygonMaskInline {
+    constructor(){
+        this.arrangement = "one-per-point";
+    }
+    load(data) {
+        if (!data) return;
+        if (data.arrangement !== undefined) this.arrangement = data.arrangement;
+    }
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"bWqOw":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "PolygonMaskLocalSvg", ()=>PolygonMaskLocalSvg
+);
+class PolygonMaskLocalSvg {
+    constructor(){
+        this.path = [];
+        this.size = {
+            height: 0,
+            width: 0
+        };
+    }
+    load(data) {
+        if (!data) return;
+        if (data.path !== undefined) this.path = data.path;
+        if (data.size !== undefined) {
+            if (data.size.width !== undefined) this.size.width = data.size.width;
+            if (data.size.height !== undefined) this.size.height = data.size.height;
+        }
+    }
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"5mueY":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "PolygonMaskMove", ()=>PolygonMaskMove
+);
+class PolygonMaskMove {
+    constructor(){
+        this.radius = 10;
+        this.type = "path";
+    }
+    load(data) {
+        if (!data) return;
+        if (data.radius !== undefined) this.radius = data.radius;
+        if (data.type !== undefined) this.type = data.type;
+    }
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"2EQLb":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "PolygonMaskInstance", ()=>PolygonMaskInstance
+);
+var _utils = require("./utils");
+var _tsparticlesEngine = require("tsparticles-engine");
+var _polygonMask = require("./Options/Classes/PolygonMask");
+var __classPrivateFieldSet = undefined && undefined.__classPrivateFieldSet || function(receiver, state, value, kind, f) {
+    if (kind === "m") throw new TypeError("Private method is not writable");
+    if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a setter");
+    if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
+    return kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value), value;
+};
+var __classPrivateFieldGet = undefined && undefined.__classPrivateFieldGet || function(receiver, state, kind, f) {
+    if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a getter");
+    if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
+    return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
+};
+var _PolygonMaskInstance_engine;
+class PolygonMaskInstance {
+    constructor(container, engine){
+        this.container = container;
+        _PolygonMaskInstance_engine.set(this, void 0);
+        __classPrivateFieldSet(this, _PolygonMaskInstance_engine, engine, "f");
+        this.dimension = {
+            height: 0,
+            width: 0
+        };
+        this.path2DSupported = !!window.Path2D;
+        this.options = new _polygonMask.PolygonMask();
+        this.polygonMaskMoveRadius = this.options.move.radius * container.retina.pixelRatio;
+    }
+    async initAsync(options) {
+        this.options.load(options === null || options === void 0 ? void 0 : options.polygon);
+        const polygonMaskOptions = this.options;
+        this.polygonMaskMoveRadius = polygonMaskOptions.move.radius * this.container.retina.pixelRatio;
+        if (polygonMaskOptions.enable) await this.initRawData();
+    }
+    resize() {
+        const container = this.container, options = this.options;
+        if (!(options.enable && options.type !== "none")) return;
+        if (this.redrawTimeout) clearTimeout(this.redrawTimeout);
+        this.redrawTimeout = window.setTimeout(async ()=>{
+            await this.initRawData(true);
+            await container.particles.redraw();
+        }, 250);
+    }
+    stop() {
+        delete this.raw;
+        delete this.paths;
+    }
+    particlesInitialization() {
+        const options = this.options;
+        if (options.enable && options.type === "inline" && (options.inline.arrangement === "one-per-point" || options.inline.arrangement === "per-point")) {
+            this.drawPoints();
+            return true;
+        }
+        return false;
+    }
+    particlePosition(position) {
+        var _a, _b;
+        const options = this.options;
+        if (!(options.enable && ((_b = (_a = this.raw) === null || _a === void 0 ? void 0 : _a.length) !== null && _b !== void 0 ? _b : 0) > 0)) return;
+        return _tsparticlesEngine.deepExtend({}, position ? position : this.randomPoint());
+    }
+    particleBounce(particle, delta, direction) {
+        return this.polygonBounce(particle, delta, direction);
+    }
+    clickPositionValid(position) {
+        const options = this.options;
+        return options.enable && options.type !== "none" && options.type !== "inline" && this.checkInsidePolygon(position);
+    }
+    draw(context) {
+        var _a;
+        if (!((_a = this.paths) === null || _a === void 0 ? void 0 : _a.length)) return;
+        const options = this.options, polygonDraw = options.draw;
+        if (!options.enable || !polygonDraw.enable) return;
+        const rawData = this.raw;
+        for (const path of this.paths){
+            const path2d = path.path2d, path2dSupported = this.path2DSupported;
+            if (!context) continue;
+            if (path2dSupported && path2d && this.offset) _utils.drawPolygonMaskPath(context, path2d, polygonDraw.stroke, this.offset);
+            else if (rawData) _utils.drawPolygonMask(context, rawData, polygonDraw.stroke);
+        }
+    }
+    polygonBounce(particle, _delta, direction) {
+        const options = this.options;
+        if (!this.raw || !options.enable || direction !== "top") return false;
+        if (options.type === "inside" || options.type === "outside") {
+            let closest, dx, dy;
+            const pos = particle.getPosition(), radius = particle.getRadius();
+            for(let i = 0, j = this.raw.length - 1; i < this.raw.length; j = i++){
+                const pi = this.raw[i], pj = this.raw[j];
+                closest = _utils.calcClosestPtOnSegment(pi, pj, pos);
+                const dist = _tsparticlesEngine.getDistances(pos, closest);
+                [dx, dy] = [
+                    dist.dx,
+                    dist.dy
+                ];
+                if (dist.distance < radius) {
+                    _utils.segmentBounce(pi, pj, particle.velocity);
+                    return true;
+                }
+            }
+            if (closest && dx !== undefined && dy !== undefined && !this.checkInsidePolygon(pos)) {
+                const factor = {
+                    x: 1,
+                    y: 1
+                };
+                if (particle.position.x >= closest.x) factor.x = -1;
+                if (particle.position.y >= closest.y) factor.y = -1;
+                particle.position.x = closest.x + radius * 2 * factor.x;
+                particle.position.y = closest.y + radius * 2 * factor.y;
+                particle.velocity.mult(-1);
+                return true;
+            }
+        } else if (options.type === "inline" && particle.initialPosition) {
+            const dist = _tsparticlesEngine.getDistance(particle.initialPosition, particle.getPosition());
+            if (dist > this.polygonMaskMoveRadius) {
+                particle.velocity.x = particle.velocity.y / 2 - particle.velocity.x;
+                particle.velocity.y = particle.velocity.x / 2 - particle.velocity.y;
+                return true;
+            }
+        }
+        return false;
+    }
+    checkInsidePolygon(position) {
+        var _a, _b;
+        const container = this.container, options = this.options;
+        if (!options.enable || options.type === "none" || options.type === "inline") return true;
+        if (!this.raw) throw new Error(_tsparticlesEngine.noPolygonFound);
+        const canvasSize = container.canvas.size, x = (_a = position === null || position === void 0 ? void 0 : position.x) !== null && _a !== void 0 ? _a : Math.random() * canvasSize.width, y = (_b = position === null || position === void 0 ? void 0 : position.y) !== null && _b !== void 0 ? _b : Math.random() * canvasSize.height;
+        let inside = false;
+        for(let i = 0, j = this.raw.length - 1; i < this.raw.length; j = i++){
+            const pi = this.raw[i], pj = this.raw[j], intersect = pi.y > y !== pj.y > y && x < (pj.x - pi.x) * (y - pi.y) / (pj.y - pi.y) + pi.x;
+            if (intersect) inside = !inside;
+        }
+        return options.type === "inside" ? inside : options.type === "outside" ? !inside : false;
+    }
+    parseSvgPath(xml, force) {
+        var _a, _b, _c;
+        const forceDownload = force !== null && force !== void 0 ? force : false;
+        if (this.paths !== undefined && !forceDownload) return this.raw;
+        const container = this.container, options = this.options, parser = new DOMParser(), doc = parser.parseFromString(xml, "image/svg+xml"), svg = doc.getElementsByTagName("svg")[0];
+        let svgPaths = svg.getElementsByTagName("path");
+        if (!svgPaths.length) svgPaths = doc.getElementsByTagName("path");
+        this.paths = [];
+        for(let i = 0; i < svgPaths.length; i++){
+            const path = svgPaths.item(i);
+            if (path) this.paths.push({
+                element: path,
+                length: path.getTotalLength()
+            });
+        }
+        const pxRatio = container.retina.pixelRatio, scale = options.scale / pxRatio;
+        this.dimension.width = parseFloat((_a = svg.getAttribute("width")) !== null && _a !== void 0 ? _a : "0") * scale;
+        this.dimension.height = parseFloat((_b = svg.getAttribute("height")) !== null && _b !== void 0 ? _b : "0") * scale;
+        const position = (_c = options.position) !== null && _c !== void 0 ? _c : {
+            x: 50,
+            y: 50
+        };
+        this.offset = {
+            x: container.canvas.size.width * position.x / (100 * pxRatio) - this.dimension.width / 2,
+            y: container.canvas.size.height * position.y / (100 * pxRatio) - this.dimension.height / 2
+        };
+        return _utils.parsePaths(this.paths, scale, this.offset);
+    }
+    async downloadSvgPath(svgUrl, force) {
+        const options = this.options, url = svgUrl || options.url, forceDownload = force !== null && force !== void 0 ? force : false;
+        if (!url || this.paths !== undefined && !forceDownload) return this.raw;
+        const req = await fetch(url);
+        if (!req.ok) throw new Error("tsParticles Error - Error occurred during polygon mask download");
+        return this.parseSvgPath(await req.text(), force);
+    }
+    drawPoints() {
+        if (!this.raw) return;
+        for (const item of this.raw)this.container.particles.addParticle({
+            x: item.x,
+            y: item.y
+        });
+    }
+    randomPoint() {
+        const container = this.container, options = this.options;
+        let position;
+        if (options.type === "inline") switch(options.inline.arrangement){
+            case "random-point":
+                position = this.getRandomPoint();
+                break;
+            case "random-length":
+                position = this.getRandomPointByLength();
+                break;
+            case "equidistant":
+                position = this.getEquidistantPointByIndex(container.particles.count);
+                break;
+            case "one-per-point":
+            case "per-point":
+            default:
+                position = this.getPointByIndex(container.particles.count);
+        }
+        else position = {
+            x: Math.random() * container.canvas.size.width,
+            y: Math.random() * container.canvas.size.height
+        };
+        if (this.checkInsidePolygon(position)) return position;
+        else return this.randomPoint();
+    }
+    getRandomPoint() {
+        if (!this.raw || !this.raw.length) throw new Error(_tsparticlesEngine.noPolygonDataLoaded);
+        const coords = _tsparticlesEngine.itemFromArray(this.raw);
+        return {
+            x: coords.x,
+            y: coords.y
+        };
+    }
+    getRandomPointByLength() {
+        var _a, _b, _c;
+        const options = this.options;
+        if (!this.raw || !this.raw.length || !((_a = this.paths) === null || _a === void 0 ? void 0 : _a.length)) throw new Error(_tsparticlesEngine.noPolygonDataLoaded);
+        const path = _tsparticlesEngine.itemFromArray(this.paths), distance = Math.floor(Math.random() * path.length) + 1, point = path.element.getPointAtLength(distance);
+        return {
+            x: point.x * options.scale + (((_b = this.offset) === null || _b === void 0 ? void 0 : _b.x) || 0),
+            y: point.y * options.scale + (((_c = this.offset) === null || _c === void 0 ? void 0 : _c.y) || 0)
+        };
+    }
+    getEquidistantPointByIndex(index) {
+        var _a, _b, _c, _d, _e, _f, _g;
+        const options = this.container.actualOptions, polygonMaskOptions = this.options;
+        if (!this.raw || !this.raw.length || !((_a = this.paths) === null || _a === void 0 ? void 0 : _a.length)) throw new Error(_tsparticlesEngine.noPolygonDataLoaded);
+        let offset = 0, point;
+        const totalLength = this.paths.reduce((tot, path)=>tot + path.length
+        , 0), distance = totalLength / options.particles.number.value;
+        for (const path1 of this.paths){
+            const pathDistance = distance * index - offset;
+            if (pathDistance <= path1.length) {
+                point = path1.element.getPointAtLength(pathDistance);
+                break;
+            } else offset += path1.length;
+        }
+        return {
+            x: ((_b = point === null || point === void 0 ? void 0 : point.x) !== null && _b !== void 0 ? _b : 0) * polygonMaskOptions.scale + ((_d = (_c = this.offset) === null || _c === void 0 ? void 0 : _c.x) !== null && _d !== void 0 ? _d : 0),
+            y: ((_e = point === null || point === void 0 ? void 0 : point.y) !== null && _e !== void 0 ? _e : 0) * polygonMaskOptions.scale + ((_g = (_f = this.offset) === null || _f === void 0 ? void 0 : _f.y) !== null && _g !== void 0 ? _g : 0)
+        };
+    }
+    getPointByIndex(index) {
+        if (!this.raw || !this.raw.length) throw new Error(_tsparticlesEngine.noPolygonDataLoaded);
+        const coords = this.raw[index % this.raw.length];
+        return {
+            x: coords.x,
+            y: coords.y
+        };
+    }
+    createPath2D() {
+        var _a1, _b;
+        const options = this.options;
+        if (!this.path2DSupported || !((_a1 = this.paths) === null || _a1 === void 0 ? void 0 : _a1.length)) return;
+        for (const path of this.paths){
+            const pathData = (_b = path.element) === null || _b === void 0 ? void 0 : _b.getAttribute("d");
+            if (pathData) {
+                const path2d = new Path2D(pathData), matrix = document.createElementNS("http://www.w3.org/2000/svg", "svg").createSVGMatrix(), finalPath = new Path2D(), transform = matrix.scale(options.scale);
+                if (finalPath.addPath) {
+                    finalPath.addPath(path2d, transform);
+                    path.path2d = finalPath;
+                } else delete path.path2d;
+            } else delete path.path2d;
+            if (path.path2d || !this.raw) continue;
+            path.path2d = new Path2D();
+            path.path2d.moveTo(this.raw[0].x, this.raw[0].y);
+            this.raw.forEach((pos, i)=>{
+                var _a;
+                if (i > 0) (_a = path.path2d) === null || _a === void 0 || _a.lineTo(pos.x, pos.y);
+            });
+            path.path2d.closePath();
+        }
+    }
+    async initRawData(force) {
+        const options = this.options;
+        if (options.url) this.raw = await this.downloadSvgPath(options.url, force);
+        else if (options.data) {
+            const data = options.data;
+            let svg;
+            if (typeof data !== "string") {
+                const path = data.path instanceof Array ? data.path.map((t)=>`<path d="${t}" />`
+                ).join("") : `<path d="${data.path}" />`;
+                const namespaces = 'xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"';
+                svg = `<svg ${namespaces} width="${data.size.width}" height="${data.size.height}">${path}</svg>`;
+            } else svg = data;
+            this.raw = this.parseSvgPath(svg, force);
+        }
+        this.createPath2D();
+        __classPrivateFieldGet(this, _PolygonMaskInstance_engine, "f").dispatchEvent("polygonMaskLoaded", {
+            container: this.container
+        });
+    }
+}
+_PolygonMaskInstance_engine = new WeakMap();
+
+},{"./utils":"jqDvS","tsparticles-engine":"9BizU","./Options/Classes/PolygonMask":"7PFsE","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"jqDvS":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "drawPolygonMask", ()=>drawPolygonMask
+);
+parcelHelpers.export(exports, "drawPolygonMaskPath", ()=>drawPolygonMaskPath
+);
+parcelHelpers.export(exports, "parsePaths", ()=>parsePaths
+);
+parcelHelpers.export(exports, "calcClosestPtOnSegment", ()=>calcClosestPtOnSegment
+);
+parcelHelpers.export(exports, "segmentBounce", ()=>segmentBounce
+);
+var _tsparticlesEngine = require("tsparticles-engine");
+function drawPolygonMask(context, rawData, stroke) {
+    const color = _tsparticlesEngine.colorToRgb(stroke.color);
+    if (!color) return;
+    context.beginPath();
+    context.moveTo(rawData[0].x, rawData[0].y);
+    for (const item of rawData)context.lineTo(item.x, item.y);
+    context.closePath();
+    context.strokeStyle = _tsparticlesEngine.getStyleFromRgb(color);
+    context.lineWidth = stroke.width;
+    context.stroke();
+}
+function drawPolygonMaskPath(context, path, stroke, position) {
+    context.translate(position.x, position.y);
+    const color = _tsparticlesEngine.colorToRgb(stroke.color);
+    if (!color) return;
+    context.strokeStyle = _tsparticlesEngine.getStyleFromRgb(color, stroke.opacity);
+    context.lineWidth = stroke.width;
+    context.stroke(path);
+}
+function parsePaths(paths, scale, offset) {
+    var _a;
+    const res = [];
+    for (const path of paths){
+        const segments = path.element.pathSegList, len = (_a = segments === null || segments === void 0 ? void 0 : segments.numberOfItems) !== null && _a !== void 0 ? _a : 0, p = {
+            x: 0,
+            y: 0
+        };
+        for(let i = 0; i < len; i++){
+            const segment = segments === null || segments === void 0 ? void 0 : segments.getItem(i);
+            const svgPathSeg = window.SVGPathSeg;
+            switch(segment === null || segment === void 0 ? void 0 : segment.pathSegType){
+                case svgPathSeg.PATHSEG_MOVETO_ABS:
+                case svgPathSeg.PATHSEG_LINETO_ABS:
+                case svgPathSeg.PATHSEG_CURVETO_CUBIC_ABS:
+                case svgPathSeg.PATHSEG_CURVETO_QUADRATIC_ABS:
+                case svgPathSeg.PATHSEG_ARC_ABS:
+                case svgPathSeg.PATHSEG_CURVETO_CUBIC_SMOOTH_ABS:
+                case svgPathSeg.PATHSEG_CURVETO_QUADRATIC_SMOOTH_ABS:
+                    {
+                        const absSeg = segment;
+                        p.x = absSeg.x;
+                        p.y = absSeg.y;
+                        break;
+                    }
+                case svgPathSeg.PATHSEG_LINETO_HORIZONTAL_ABS:
+                    p.x = segment.x;
+                    break;
+                case svgPathSeg.PATHSEG_LINETO_VERTICAL_ABS:
+                    p.y = segment.y;
+                    break;
+                case svgPathSeg.PATHSEG_LINETO_REL:
+                case svgPathSeg.PATHSEG_MOVETO_REL:
+                case svgPathSeg.PATHSEG_CURVETO_CUBIC_REL:
+                case svgPathSeg.PATHSEG_CURVETO_QUADRATIC_REL:
+                case svgPathSeg.PATHSEG_ARC_REL:
+                case svgPathSeg.PATHSEG_CURVETO_CUBIC_SMOOTH_REL:
+                case svgPathSeg.PATHSEG_CURVETO_QUADRATIC_SMOOTH_REL:
+                    {
+                        const relSeg = segment;
+                        p.x += relSeg.x;
+                        p.y += relSeg.y;
+                        break;
+                    }
+                case svgPathSeg.PATHSEG_LINETO_HORIZONTAL_REL:
+                    p.x += segment.x;
+                    break;
+                case svgPathSeg.PATHSEG_LINETO_VERTICAL_REL:
+                    p.y += segment.y;
+                    break;
+                case svgPathSeg.PATHSEG_UNKNOWN:
+                case svgPathSeg.PATHSEG_CLOSEPATH:
+                    continue;
+            }
+            res.push({
+                x: p.x * scale + offset.x,
+                y: p.y * scale + offset.y
+            });
+        }
+    }
+    return res;
+}
+function calcClosestPtOnSegment(s1, s2, pos) {
+    const { dx , dy  } = _tsparticlesEngine.getDistances(pos, s1), { dx: dxx , dy: dyy  } = _tsparticlesEngine.getDistances(s2, s1), t = (dx * dxx + dy * dyy) / (dxx ** 2 + dyy ** 2), res = {
+        x: s1.x + dxx * t,
+        y: s1.x + dyy * t,
+        isOnSegment: t >= 0 && t <= 1
+    };
+    if (t < 0) {
+        res.x = s1.x;
+        res.y = s1.y;
+    } else if (t > 1) {
+        res.x = s2.x;
+        res.y = s2.y;
+    }
+    return res;
+}
+function segmentBounce(start, stop, velocity) {
+    const { dx , dy  } = _tsparticlesEngine.getDistances(start, stop), wallAngle = Math.atan2(dy, dx), wallNormal = _tsparticlesEngine.Vector.create(Math.sin(wallAngle), -Math.cos(wallAngle)), d = 2 * (velocity.x * wallNormal.x + velocity.y * wallNormal.y);
+    wallNormal.multTo(d);
+    velocity.subFrom(wallNormal);
+}
+
+},{"tsparticles-engine":"9BizU","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"4BKvA":[function(require,module,exports) {
+module.exports = require("./helpers/browser/js-loader")(require('./helpers/bundle-url').getBundleURL('bLxZJ') + "pathseg.2b5ab0f7.js" + "?" + Date.now()).catch((err)=>{
+    delete module.bundle.cache[module.id];
+    throw err;
+}).then(()=>module.bundle.root('attJj')
+);
+
+},{"./helpers/browser/js-loader":"61B45","./helpers/bundle-url":"lgJ39"}],"61B45":[function(require,module,exports) {
+"use strict";
+var cacheLoader = require('../cacheLoader');
+module.exports = cacheLoader(function(bundle) {
+    return new Promise(function(resolve, reject) {
+        // Don't insert the same script twice (e.g. if it was already in the HTML)
+        var existingScripts = document.getElementsByTagName('script');
+        if ([].concat(existingScripts).some(function isCurrentBundle(script) {
+            return script.src === bundle;
+        })) {
+            resolve();
+            return;
+        }
+        var preloadLink = document.createElement('link');
+        preloadLink.href = bundle;
+        preloadLink.rel = 'preload';
+        preloadLink.as = 'script';
+        document.head.appendChild(preloadLink);
+        var script1 = document.createElement('script');
+        script1.async = true;
+        script1.type = 'text/javascript';
+        script1.charset = 'utf-8';
+        script1.src = bundle;
+        script1.onerror = function(e) {
+            var error = new TypeError("Failed to fetch dynamically imported module: ".concat(bundle, ". Error: ").concat(e.message));
+            script1.onerror = script1.onload = null;
+            script1.remove();
+            reject(error);
+        };
+        script1.onload = function() {
+            script1.onerror = script1.onload = null;
+            resolve();
+        };
+        document.getElementsByTagName('head')[0].appendChild(script1);
+    });
+});
+
+},{"../cacheLoader":"j49pS"}],"j49pS":[function(require,module,exports) {
+"use strict";
+var cachedBundles = {};
+var cachedPreloads = {};
+var cachedPrefetches = {};
+function getCache(type) {
+    switch(type){
+        case 'preload':
+            return cachedPreloads;
+        case 'prefetch':
+            return cachedPrefetches;
+        default:
+            return cachedBundles;
+    }
+}
+module.exports = function(loader, type) {
+    return function(bundle) {
+        var cache = getCache(type);
+        if (cache[bundle]) return cache[bundle];
+        return cache[bundle] = loader.apply(null, arguments).catch(function(e) {
+            delete cache[bundle];
+            throw e;
+        });
+    };
+};
+
+},{}],"lgJ39":[function(require,module,exports) {
 "use strict";
 var bundleURL = {};
 function getBundleURLCached(id) {
@@ -25353,6 +36040,3599 @@ exports.getBundleURL = getBundleURLCached;
 exports.getBaseURL = getBaseURL;
 exports.getOrigin = getOrigin;
 
-},{}]},["kn9T2","7fmqN","8lqZg"], "8lqZg", "parcelRequire2037")
+},{}],"7MZdO":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"5XDur":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"1zoOs":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"lOj4p":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"dlqhB":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "loadRollUpdater", ()=>loadRollUpdater
+);
+var _rollUpdater = require("./RollUpdater");
+async function loadRollUpdater(engine) {
+    await engine.addParticleUpdater("roll", ()=>new _rollUpdater.RollUpdater()
+    );
+}
+
+},{"./RollUpdater":"8QXhf","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"8QXhf":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "RollUpdater", ()=>RollUpdater
+);
+var _tsparticlesEngine = require("tsparticles-engine");
+function updateRoll(particle, delta) {
+    const roll = particle.options.roll;
+    if (!particle.roll || !roll.enable) return;
+    const speed = particle.roll.speed * delta.factor;
+    const max = 2 * Math.PI;
+    particle.roll.angle += speed;
+    if (particle.roll.angle > max) particle.roll.angle -= max;
+}
+class RollUpdater {
+    init(particle) {
+        const rollOpt = particle.options.roll;
+        if (rollOpt.enable) {
+            particle.roll = {
+                angle: Math.random() * Math.PI * 2,
+                speed: _tsparticlesEngine.getRangeValue(rollOpt.speed) / 360
+            };
+            if (rollOpt.backColor) particle.backColor = _tsparticlesEngine.colorToHsl(rollOpt.backColor);
+            else if (rollOpt.darken.enable && rollOpt.enlighten.enable) {
+                const alterType = Math.random() >= 0.5 ? "darken" : "enlighten";
+                particle.roll.alter = {
+                    type: alterType,
+                    value: _tsparticlesEngine.getRangeValue(alterType === "darken" ? rollOpt.darken.value : rollOpt.enlighten.value)
+                };
+            } else if (rollOpt.darken.enable) particle.roll.alter = {
+                type: "darken",
+                value: _tsparticlesEngine.getRangeValue(rollOpt.darken.value)
+            };
+            else if (rollOpt.enlighten.enable) particle.roll.alter = {
+                type: "enlighten",
+                value: _tsparticlesEngine.getRangeValue(rollOpt.enlighten.value)
+            };
+        } else particle.roll = {
+            angle: 0,
+            speed: 0
+        };
+    }
+    isEnabled(particle) {
+        const roll = particle.options.roll;
+        return !particle.destroyed && !particle.spawning && roll.enable;
+    }
+    update(particle, delta) {
+        if (!this.isEnabled(particle)) return;
+        updateRoll(particle, delta);
+    }
+}
+
+},{"tsparticles-engine":"9BizU","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"3ofEJ":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "loadSlim", ()=>loadSlim
+);
+var _tsparticlesParticlesJs = require("tsparticles-particles.js");
+var _tsparticlesUpdaterAngle = require("tsparticles-updater-angle");
+var _tsparticlesMoveBase = require("tsparticles-move-base");
+var _tsparticlesShapeCircle = require("tsparticles-shape-circle");
+var _tsparticlesUpdaterColor = require("tsparticles-updater-color");
+var _tsparticlesInteractionExternalAttract = require("tsparticles-interaction-external-attract");
+var _tsparticlesInteractionExternalBounce = require("tsparticles-interaction-external-bounce");
+var _tsparticlesInteractionExternalBubble = require("tsparticles-interaction-external-bubble");
+var _tsparticlesInteractionExternalConnect = require("tsparticles-interaction-external-connect");
+var _tsparticlesInteractionExternalGrab = require("tsparticles-interaction-external-grab");
+var _tsparticlesInteractionExternalPause = require("tsparticles-interaction-external-pause");
+var _tsparticlesInteractionExternalPush = require("tsparticles-interaction-external-push");
+var _tsparticlesInteractionExternalRemove = require("tsparticles-interaction-external-remove");
+var _tsparticlesInteractionExternalRepulse = require("tsparticles-interaction-external-repulse");
+var _tsparticlesShapeImage = require("tsparticles-shape-image");
+var _tsparticlesUpdaterLife = require("tsparticles-updater-life");
+var _tsparticlesShapeLine = require("tsparticles-shape-line");
+var _tsparticlesUpdaterOpacity = require("tsparticles-updater-opacity");
+var _tsparticlesUpdaterOutModes = require("tsparticles-updater-out-modes");
+var _tsparticlesMoveParallax = require("tsparticles-move-parallax");
+var _tsparticlesInteractionParticlesAttract = require("tsparticles-interaction-particles-attract");
+var _tsparticlesInteractionParticlesCollisions = require("tsparticles-interaction-particles-collisions");
+var _tsparticlesInteractionParticlesLinks = require("tsparticles-interaction-particles-links");
+var _tsparticlesShapePolygon = require("tsparticles-shape-polygon");
+var _tsparticlesUpdaterSize = require("tsparticles-updater-size");
+var _tsparticlesShapeSquare = require("tsparticles-shape-square");
+var _tsparticlesShapeStar = require("tsparticles-shape-star");
+var _tsparticlesUpdaterStrokeColor = require("tsparticles-updater-stroke-color");
+var _tsparticlesShapeText = require("tsparticles-shape-text");
+async function loadSlim(engine) {
+    await _tsparticlesMoveBase.loadBaseMover(engine);
+    await _tsparticlesMoveParallax.loadParallaxMover(engine);
+    await _tsparticlesInteractionExternalAttract.loadExternalAttractInteraction(engine);
+    await _tsparticlesInteractionExternalBounce.loadExternalBounceInteraction(engine);
+    await _tsparticlesInteractionExternalBubble.loadExternalBubbleInteraction(engine);
+    await _tsparticlesInteractionExternalConnect.loadExternalConnectInteraction(engine);
+    await _tsparticlesInteractionExternalGrab.loadExternalGrabInteraction(engine);
+    await _tsparticlesInteractionExternalPause.loadExternalPauseInteraction(engine);
+    await _tsparticlesInteractionExternalPush.loadExternalPushInteraction(engine);
+    await _tsparticlesInteractionExternalRemove.loadExternalRemoveInteraction(engine);
+    await _tsparticlesInteractionExternalRepulse.loadExternalRepulseInteraction(engine);
+    await _tsparticlesInteractionParticlesAttract.loadParticlesAttractInteraction(engine);
+    await _tsparticlesInteractionParticlesCollisions.loadParticlesCollisionsInteraction(engine);
+    await _tsparticlesInteractionParticlesLinks.loadParticlesLinksInteraction(engine);
+    await _tsparticlesShapeCircle.loadCircleShape(engine);
+    await _tsparticlesShapeImage.loadImageShape(engine);
+    await _tsparticlesShapeLine.loadLineShape(engine);
+    await _tsparticlesShapePolygon.loadPolygonShape(engine);
+    await _tsparticlesShapeSquare.loadSquareShape(engine);
+    await _tsparticlesShapeStar.loadStarShape(engine);
+    await _tsparticlesShapeText.loadTextShape(engine);
+    await _tsparticlesUpdaterLife.loadLifeUpdater(engine);
+    await _tsparticlesUpdaterOpacity.loadOpacityUpdater(engine);
+    await _tsparticlesUpdaterSize.loadSizeUpdater(engine);
+    await _tsparticlesUpdaterAngle.loadAngleUpdater(engine);
+    await _tsparticlesUpdaterColor.loadColorUpdater(engine);
+    await _tsparticlesUpdaterStrokeColor.loadStrokeColorUpdater(engine);
+    await _tsparticlesUpdaterOutModes.loadOutModesUpdater(engine);
+    await _tsparticlesParticlesJs.initPjs(engine);
+}
+
+},{"tsparticles-particles.js":"eD2QH","tsparticles-updater-angle":"6ECtQ","tsparticles-move-base":"dGzQB","tsparticles-shape-circle":"cYWJW","tsparticles-updater-color":"hIGlB","tsparticles-interaction-external-attract":"cgjW4","tsparticles-interaction-external-bounce":"8bSsH","tsparticles-interaction-external-bubble":"13qtF","tsparticles-interaction-external-connect":"380Ww","tsparticles-interaction-external-grab":"1M73j","tsparticles-interaction-external-pause":"9D7d5","tsparticles-interaction-external-push":"4KnGU","tsparticles-interaction-external-remove":"8Qyy1","tsparticles-interaction-external-repulse":"9n7B3","tsparticles-shape-image":"iKDSt","tsparticles-updater-life":"1rG0O","tsparticles-shape-line":"doEvU","tsparticles-updater-opacity":"itAT8","tsparticles-updater-out-modes":"hZ6tz","tsparticles-move-parallax":"gH4Ex","tsparticles-interaction-particles-attract":"74oSv","tsparticles-interaction-particles-collisions":"37YrZ","tsparticles-interaction-particles-links":"029dI","tsparticles-shape-polygon":"fm2j0","tsparticles-updater-size":"hOW9I","tsparticles-shape-square":"k7A7h","tsparticles-shape-star":"7MmRD","tsparticles-updater-stroke-color":"8d7rY","tsparticles-shape-text":"fWfvv","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"eD2QH":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "initPjs", ()=>initPjs
+);
+const initPjs = (engine)=>{
+    const particlesJS = (tagId, options)=>{
+        return engine.load(tagId, options);
+    };
+    particlesJS.load = (tagId, pathConfigJson, callback)=>{
+        engine.loadJSON(tagId, pathConfigJson).then((container)=>{
+            if (container) callback(container);
+        }).catch(()=>{
+            callback(undefined);
+        });
+    };
+    particlesJS.setOnClickHandler = (callback)=>{
+        engine.setOnClickHandler(callback);
+    };
+    const pJSDom = engine.dom();
+    return {
+        particlesJS,
+        pJSDom
+    };
+};
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"6ECtQ":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "loadAngleUpdater", ()=>loadAngleUpdater
+);
+var _angleUpdater = require("./AngleUpdater");
+async function loadAngleUpdater(engine) {
+    await engine.addParticleUpdater("angle", (container)=>new _angleUpdater.AngleUpdater(container)
+    );
+}
+
+},{"./AngleUpdater":"bXsPq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"bXsPq":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "AngleUpdater", ()=>AngleUpdater
+);
+var _tsparticlesEngine = require("tsparticles-engine");
+function updateAngle(particle, delta) {
+    var _a;
+    const rotate = particle.rotate;
+    if (!rotate) return;
+    const rotateOptions = particle.options.rotate;
+    const rotateAnimation = rotateOptions.animation;
+    const speed = ((_a = rotate.velocity) !== null && _a !== void 0 ? _a : 0) * delta.factor;
+    const max = 2 * Math.PI;
+    if (!rotateAnimation.enable) return;
+    switch(rotate.status){
+        case 0:
+            rotate.value += speed;
+            if (rotate.value > max) rotate.value -= max;
+            break;
+        case 1:
+        default:
+            rotate.value -= speed;
+            if (rotate.value < 0) rotate.value += max;
+            break;
+    }
+}
+class AngleUpdater {
+    constructor(container){
+        this.container = container;
+    }
+    init(particle) {
+        const rotateOptions = particle.options.rotate;
+        particle.rotate = {
+            enable: rotateOptions.animation.enable,
+            value: _tsparticlesEngine.getRangeValue(rotateOptions.value) * Math.PI / 180
+        };
+        let rotateDirection = rotateOptions.direction;
+        if (rotateDirection === "random") {
+            const index = Math.floor(Math.random() * 2);
+            rotateDirection = index > 0 ? "counter-clockwise" : "clockwise";
+        }
+        switch(rotateDirection){
+            case "counter-clockwise":
+            case "counterClockwise":
+                particle.rotate.status = 1;
+                break;
+            case "clockwise":
+                particle.rotate.status = 0;
+                break;
+        }
+        const rotateAnimation = particle.options.rotate.animation;
+        if (rotateAnimation.enable) {
+            particle.rotate.velocity = _tsparticlesEngine.getRangeValue(rotateAnimation.speed) / 360 * this.container.retina.reduceFactor;
+            if (!rotateAnimation.sync) particle.rotate.velocity *= Math.random();
+        }
+    }
+    isEnabled(particle) {
+        const rotate = particle.options.rotate;
+        const rotateAnimation = rotate.animation;
+        return !particle.destroyed && !particle.spawning && !rotate.path && rotateAnimation.enable;
+    }
+    update(particle, delta) {
+        if (!this.isEnabled(particle)) return;
+        updateAngle(particle, delta);
+    }
+}
+
+},{"tsparticles-engine":"9BizU","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"dGzQB":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "loadBaseMover", ()=>loadBaseMover
+);
+var _baseMover = require("./BaseMover");
+async function loadBaseMover(engine) {
+    engine.addMover("base", ()=>new _baseMover.BaseMover()
+    );
+}
+
+},{"./BaseMover":"2jnkp","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"2jnkp":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "BaseMover", ()=>BaseMover
+);
+var _tsparticlesEngine = require("tsparticles-engine");
+var _utils = require("./Utils");
+class BaseMover {
+    init(particle) {
+        var _a;
+        const container = particle.container, options = particle.options, spinOptions = options.move.spin;
+        if (spinOptions.enable) {
+            const spinPos = (_a = spinOptions.position) !== null && _a !== void 0 ? _a : {
+                x: 50,
+                y: 50
+            };
+            const spinCenter = {
+                x: spinPos.x / 100 * container.canvas.size.width,
+                y: spinPos.y / 100 * container.canvas.size.height
+            };
+            const pos = particle.getPosition();
+            const distance = _tsparticlesEngine.getDistance(pos, spinCenter);
+            const spinAcceleration = _tsparticlesEngine.getRangeValue(spinOptions.acceleration);
+            particle.retina.spinAcceleration = spinAcceleration * container.retina.pixelRatio;
+            particle.spin = {
+                center: spinCenter,
+                direction: particle.velocity.x >= 0 ? "clockwise" : "counter-clockwise",
+                angle: particle.velocity.angle,
+                radius: distance,
+                acceleration: particle.retina.spinAcceleration
+            };
+        }
+    }
+    isEnabled(particle) {
+        return !particle.destroyed && particle.options.move.enable;
+    }
+    move(particle, delta) {
+        var _a, _b, _c;
+        var _d, _e;
+        const particleOptions = particle.options, moveOptions = particleOptions.move;
+        if (!moveOptions.enable) return;
+        const container = particle.container, slowFactor = _utils.getProximitySpeedFactor(particle), baseSpeed = ((_a = (_d = particle.retina).moveSpeed) !== null && _a !== void 0 ? _a : _d.moveSpeed = _tsparticlesEngine.getRangeValue(moveOptions.speed) * container.retina.pixelRatio) * container.retina.reduceFactor, moveDrift = (_b = (_e = particle.retina).moveDrift) !== null && _b !== void 0 ? _b : _e.moveDrift = _tsparticlesEngine.getRangeValue(particle.options.move.drift) * container.retina.pixelRatio, maxSize = _tsparticlesEngine.getRangeMax(particleOptions.size.value) * container.retina.pixelRatio, sizeFactor = moveOptions.size ? particle.getRadius() / maxSize : 1, speedFactor = sizeFactor * slowFactor * (delta.factor || 1), diffFactor = 2, moveSpeed = baseSpeed * speedFactor / diffFactor;
+        _utils.applyPath(particle, delta);
+        const gravityOptions = particle.gravity, gravityFactor = gravityOptions.enable && gravityOptions.inverse ? -1 : 1;
+        if (gravityOptions.enable && moveSpeed) particle.velocity.y += gravityFactor * (gravityOptions.acceleration * delta.factor) / (60 * moveSpeed);
+        if (moveDrift && moveSpeed) particle.velocity.x += moveDrift * delta.factor / (60 * moveSpeed);
+        const decay = particle.moveDecay;
+        if (decay != 1) particle.velocity.multTo(decay);
+        const velocity = particle.velocity.mult(moveSpeed), maxSpeed = (_c = particle.retina.maxSpeed) !== null && _c !== void 0 ? _c : container.retina.maxSpeed;
+        if (gravityOptions.enable && maxSpeed > 0 && (!gravityOptions.inverse && velocity.y >= 0 && velocity.y >= maxSpeed || gravityOptions.inverse && velocity.y <= 0 && velocity.y <= -maxSpeed)) {
+            velocity.y = gravityFactor * maxSpeed;
+            if (moveSpeed) particle.velocity.y = velocity.y / moveSpeed;
+        }
+        const zIndexOptions = particle.options.zIndex, zVelocityFactor = (1 - particle.zIndexFactor) ** zIndexOptions.velocityRate;
+        if (moveOptions.spin.enable) _utils.spin(particle, moveSpeed);
+        else {
+            if (zVelocityFactor != 1) velocity.multTo(zVelocityFactor);
+            particle.position.addTo(velocity);
+            if (moveOptions.vibrate) {
+                particle.position.x += Math.sin(particle.position.x * Math.cos(particle.position.y));
+                particle.position.y += Math.cos(particle.position.y * Math.sin(particle.position.x));
+            }
+        }
+        _utils.applyDistance(particle);
+    }
+}
+
+},{"tsparticles-engine":"9BizU","./Utils":"1LKWf","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"1LKWf":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "applyDistance", ()=>applyDistance
+);
+parcelHelpers.export(exports, "spin", ()=>spin
+);
+parcelHelpers.export(exports, "applyPath", ()=>applyPath
+);
+parcelHelpers.export(exports, "getProximitySpeedFactor", ()=>getProximitySpeedFactor
+);
+var _tsparticlesEngine = require("tsparticles-engine");
+function applyDistance(particle) {
+    const initialPosition = particle.initialPosition;
+    const { dx , dy  } = _tsparticlesEngine.getDistances(initialPosition, particle.position);
+    const dxFixed = Math.abs(dx), dyFixed = Math.abs(dy);
+    const hDistance = particle.retina.maxDistance.horizontal;
+    const vDistance = particle.retina.maxDistance.vertical;
+    if (!hDistance && !vDistance) return;
+    if ((hDistance && dxFixed >= hDistance || vDistance && dyFixed >= vDistance) && !particle.misplaced) {
+        particle.misplaced = !!hDistance && dxFixed > hDistance || !!vDistance && dyFixed > vDistance;
+        if (hDistance) particle.velocity.x = particle.velocity.y / 2 - particle.velocity.x;
+        if (vDistance) particle.velocity.y = particle.velocity.x / 2 - particle.velocity.y;
+    } else if ((!hDistance || dxFixed < hDistance) && (!vDistance || dyFixed < vDistance) && particle.misplaced) particle.misplaced = false;
+    else if (particle.misplaced) {
+        const pos = particle.position, vel = particle.velocity;
+        if (hDistance && (pos.x < initialPosition.x && vel.x < 0 || pos.x > initialPosition.x && vel.x > 0)) vel.x *= -Math.random();
+        if (vDistance && (pos.y < initialPosition.y && vel.y < 0 || pos.y > initialPosition.y && vel.y > 0)) vel.y *= -Math.random();
+    }
+}
+function spin(particle, moveSpeed) {
+    const container = particle.container;
+    if (!particle.spin) return;
+    const updateFunc = {
+        x: particle.spin.direction === "clockwise" ? Math.cos : Math.sin,
+        y: particle.spin.direction === "clockwise" ? Math.sin : Math.cos
+    };
+    particle.position.x = particle.spin.center.x + particle.spin.radius * updateFunc.x(particle.spin.angle);
+    particle.position.y = particle.spin.center.y + particle.spin.radius * updateFunc.y(particle.spin.angle);
+    particle.spin.radius += particle.spin.acceleration;
+    const maxCanvasSize = Math.max(container.canvas.size.width, container.canvas.size.height);
+    if (particle.spin.radius > maxCanvasSize / 2) {
+        particle.spin.radius = maxCanvasSize / 2;
+        particle.spin.acceleration *= -1;
+    } else if (particle.spin.radius < 0) {
+        particle.spin.radius = 0;
+        particle.spin.acceleration *= -1;
+    }
+    particle.spin.angle += moveSpeed / 100 * (1 - particle.spin.radius / maxCanvasSize);
+}
+function applyPath(particle, delta) {
+    const particlesOptions = particle.options;
+    const pathOptions = particlesOptions.move.path;
+    const pathEnabled = pathOptions.enable;
+    if (!pathEnabled) return;
+    const container = particle.container;
+    if (particle.lastPathTime <= particle.pathDelay) {
+        particle.lastPathTime += delta.value;
+        return;
+    }
+    const path = container.pathGenerator.generate(particle);
+    particle.velocity.addTo(path);
+    if (pathOptions.clamp) {
+        particle.velocity.x = _tsparticlesEngine.clamp(particle.velocity.x, -1, 1);
+        particle.velocity.y = _tsparticlesEngine.clamp(particle.velocity.y, -1, 1);
+    }
+    particle.lastPathTime -= particle.pathDelay;
+}
+function getProximitySpeedFactor(particle) {
+    const container = particle.container;
+    const options = container.actualOptions;
+    const active = _tsparticlesEngine.isInArray("slow", options.interactivity.events.onHover.mode);
+    if (!active) return 1;
+    const mousePos = particle.container.interactivity.mouse.position;
+    if (!mousePos) return 1;
+    const particlePos = particle.getPosition();
+    const dist = _tsparticlesEngine.getDistance(mousePos, particlePos);
+    const radius = container.retina.slowModeRadius;
+    if (dist > radius) return 1;
+    const proximityFactor = dist / radius || 0;
+    const slowFactor = options.interactivity.modes.slow.factor;
+    return proximityFactor / slowFactor;
+}
+
+},{"tsparticles-engine":"9BizU","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"cYWJW":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "loadCircleShape", ()=>loadCircleShape
+);
+var _circleDrawer = require("./CircleDrawer");
+async function loadCircleShape(engine) {
+    await engine.addShape("circle", new _circleDrawer.CircleDrawer());
+}
+
+},{"./CircleDrawer":"7TRKI","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"7TRKI":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "CircleDrawer", ()=>CircleDrawer
+);
+class CircleDrawer {
+    getSidesCount() {
+        return 12;
+    }
+    draw(context, particle, radius) {
+        context.arc(0, 0, radius, 0, Math.PI * 2, false);
+    }
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"hIGlB":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "loadColorUpdater", ()=>loadColorUpdater
+);
+var _colorUpdater = require("./ColorUpdater");
+async function loadColorUpdater(engine) {
+    await engine.addParticleUpdater("color", (container)=>new _colorUpdater.ColorUpdater(container)
+    );
+}
+
+},{"./ColorUpdater":"91PfO","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"91PfO":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "ColorUpdater", ()=>ColorUpdater
+);
+var _tsparticlesEngine = require("tsparticles-engine");
+function updateColorValue(delta, value, valueAnimation, max, decrease) {
+    var _a;
+    const colorValue = value;
+    if (!colorValue || !valueAnimation.enable) return;
+    const offset = _tsparticlesEngine.randomInRange(valueAnimation.offset);
+    const velocity = ((_a = value.velocity) !== null && _a !== void 0 ? _a : 0) * delta.factor + offset * 3.6;
+    if (!decrease || colorValue.status === 0) {
+        colorValue.value += velocity;
+        if (decrease && colorValue.value > max) {
+            colorValue.status = 1;
+            colorValue.value -= colorValue.value % max;
+        }
+    } else {
+        colorValue.value -= velocity;
+        if (colorValue.value < 0) {
+            colorValue.status = 0;
+            colorValue.value += colorValue.value;
+        }
+    }
+    if (colorValue.value > max) colorValue.value %= max;
+}
+function updateColor(particle, delta) {
+    var _a, _b, _c;
+    const animationOptions = particle.options.color.animation;
+    if (((_a = particle.color) === null || _a === void 0 ? void 0 : _a.h) !== undefined) updateColorValue(delta, particle.color.h, animationOptions.h, 360, false);
+    if (((_b = particle.color) === null || _b === void 0 ? void 0 : _b.s) !== undefined) updateColorValue(delta, particle.color.s, animationOptions.s, 100, true);
+    if (((_c = particle.color) === null || _c === void 0 ? void 0 : _c.l) !== undefined) updateColorValue(delta, particle.color.l, animationOptions.l, 100, true);
+}
+class ColorUpdater {
+    constructor(container){
+        this.container = container;
+    }
+    init(particle) {
+        const hslColor = _tsparticlesEngine.colorToHsl(particle.options.color, particle.id, particle.options.reduceDuplicates);
+        if (hslColor) particle.color = _tsparticlesEngine.getHslAnimationFromHsl(hslColor, particle.options.color.animation, this.container.retina.reduceFactor);
+    }
+    isEnabled(particle) {
+        var _a, _b, _c;
+        const animationOptions = particle.options.color.animation;
+        return !particle.destroyed && !particle.spawning && (((_a = particle.color) === null || _a === void 0 ? void 0 : _a.h.value) !== undefined && animationOptions.h.enable || ((_b = particle.color) === null || _b === void 0 ? void 0 : _b.s.value) !== undefined && animationOptions.s.enable || ((_c = particle.color) === null || _c === void 0 ? void 0 : _c.l.value) !== undefined && animationOptions.l.enable);
+    }
+    update(particle, delta) {
+        updateColor(particle, delta);
+    }
+}
+
+},{"tsparticles-engine":"9BizU","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"cgjW4":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "loadExternalAttractInteraction", ()=>loadExternalAttractInteraction
+);
+var _attractor = require("./Attractor");
+async function loadExternalAttractInteraction(engine) {
+    await engine.addInteractor("externalAttract", (container)=>new _attractor.Attractor(container)
+    );
+}
+
+},{"./Attractor":"e8gPo","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"e8gPo":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "Attractor", ()=>Attractor
+);
+var _tsparticlesEngine = require("tsparticles-engine");
+class Attractor extends _tsparticlesEngine.ExternalInteractorBase {
+    constructor(container){
+        super(container);
+        if (!container.attract) container.attract = {
+            particles: []
+        };
+        this.handleClickMode = (mode)=>{
+            const options = this.container.actualOptions;
+            if (mode !== "attract") return;
+            if (!container.attract) container.attract = {
+                particles: []
+            };
+            container.attract.clicking = true;
+            container.attract.count = 0;
+            for (const particle of container.attract.particles)particle.velocity.setTo(particle.initialVelocity);
+            container.attract.particles = [];
+            container.attract.finish = false;
+            setTimeout(()=>{
+                if (!container.destroyed) {
+                    if (!container.attract) container.attract = {
+                        particles: []
+                    };
+                    container.attract.clicking = false;
+                }
+            }, options.interactivity.modes.attract.duration * 1000);
+        };
+    }
+    isEnabled() {
+        const container = this.container, options = container.actualOptions, mouse = container.interactivity.mouse, events = options.interactivity.events;
+        if ((!mouse.position || !events.onHover.enable) && (!mouse.clickPosition || !events.onClick.enable)) return false;
+        const hoverMode = events.onHover.mode, clickMode = events.onClick.mode;
+        return _tsparticlesEngine.isInArray("attract", hoverMode) || _tsparticlesEngine.isInArray("attract", clickMode);
+    }
+    reset() {}
+    async interact() {
+        const container = this.container, options = container.actualOptions, mouseMoveStatus = container.interactivity.status === _tsparticlesEngine.mouseMoveEvent, events = options.interactivity.events, hoverEnabled = events.onHover.enable, hoverMode = events.onHover.mode, clickEnabled = events.onClick.enable, clickMode = events.onClick.mode;
+        if (mouseMoveStatus && hoverEnabled && _tsparticlesEngine.isInArray("attract", hoverMode)) this.hoverAttract();
+        else if (clickEnabled && _tsparticlesEngine.isInArray("attract", clickMode)) this.clickAttract();
+    }
+    hoverAttract() {
+        const container = this.container;
+        const mousePos = container.interactivity.mouse.position;
+        if (!mousePos) return;
+        const attractRadius = container.retina.attractModeDistance;
+        this.processAttract(mousePos, attractRadius, new _tsparticlesEngine.Circle(mousePos.x, mousePos.y, attractRadius));
+    }
+    processAttract(position, attractRadius, area) {
+        const container = this.container;
+        const attractOptions = container.actualOptions.interactivity.modes.attract;
+        const query = container.particles.quadTree.query(area);
+        for (const particle of query){
+            const { dx , dy , distance  } = _tsparticlesEngine.getDistances(particle.position, position);
+            const velocity = attractOptions.speed * attractOptions.factor;
+            const attractFactor = _tsparticlesEngine.clamp(_tsparticlesEngine.calcEasing(1 - distance / attractRadius, attractOptions.easing) * velocity, 0, attractOptions.maxSpeed);
+            const normVec = _tsparticlesEngine.Vector.create(distance === 0 ? velocity : dx / distance * attractFactor, distance === 0 ? velocity : dy / distance * attractFactor);
+            particle.position.subFrom(normVec);
+        }
+    }
+    clickAttract() {
+        const container = this.container;
+        if (!container.attract) container.attract = {
+            particles: []
+        };
+        if (!container.attract.finish) {
+            if (!container.attract.count) container.attract.count = 0;
+            container.attract.count++;
+            if (container.attract.count === container.particles.count) container.attract.finish = true;
+        }
+        if (container.attract.clicking) {
+            const mousePos = container.interactivity.mouse.clickPosition;
+            if (!mousePos) return;
+            const attractRadius = container.retina.attractModeDistance;
+            this.processAttract(mousePos, attractRadius, new _tsparticlesEngine.Circle(mousePos.x, mousePos.y, attractRadius));
+        } else if (container.attract.clicking === false) container.attract.particles = [];
+        return;
+    }
+}
+
+},{"tsparticles-engine":"9BizU","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"8bSsH":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "loadExternalBounceInteraction", ()=>loadExternalBounceInteraction
+);
+var _bouncer = require("./Bouncer");
+async function loadExternalBounceInteraction(engine) {
+    await engine.addInteractor("externalBounce", (container)=>new _bouncer.Bouncer(container)
+    );
+}
+
+},{"./Bouncer":"lWaRt","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"lWaRt":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "Bouncer", ()=>Bouncer
+);
+var _tsparticlesEngine = require("tsparticles-engine");
+class Bouncer extends _tsparticlesEngine.ExternalInteractorBase {
+    constructor(container){
+        super(container);
+    }
+    isEnabled() {
+        const container = this.container, options = container.actualOptions, mouse = container.interactivity.mouse, events = options.interactivity.events, divs = events.onDiv;
+        return mouse.position && events.onHover.enable && _tsparticlesEngine.isInArray("bounce", events.onHover.mode) || _tsparticlesEngine.isDivModeEnabled("bounce", divs);
+    }
+    async interact() {
+        const container = this.container, options = container.actualOptions, events = options.interactivity.events, mouseMoveStatus = container.interactivity.status === _tsparticlesEngine.mouseMoveEvent, hoverEnabled = events.onHover.enable, hoverMode = events.onHover.mode, divs = events.onDiv;
+        if (mouseMoveStatus && hoverEnabled && _tsparticlesEngine.isInArray("bounce", hoverMode)) this.processMouseBounce();
+        else _tsparticlesEngine.divModeExecute("bounce", divs, (selector, div)=>this.singleSelectorBounce(selector, div)
+        );
+    }
+    reset() {}
+    processMouseBounce() {
+        const container = this.container, pxRatio = container.retina.pixelRatio, tolerance = 10 * pxRatio, mousePos = container.interactivity.mouse.position, radius = container.retina.bounceModeDistance;
+        if (mousePos) this.processBounce(mousePos, radius, new _tsparticlesEngine.Circle(mousePos.x, mousePos.y, radius + tolerance));
+    }
+    singleSelectorBounce(selector, div) {
+        const container = this.container, query = document.querySelectorAll(selector);
+        if (!query.length) return;
+        query.forEach((item)=>{
+            const elem = item, pxRatio = container.retina.pixelRatio, pos = {
+                x: (elem.offsetLeft + elem.offsetWidth / 2) * pxRatio,
+                y: (elem.offsetTop + elem.offsetHeight / 2) * pxRatio
+            }, radius = elem.offsetWidth / 2 * pxRatio, tolerance = 10 * pxRatio, area = div.type === "circle" ? new _tsparticlesEngine.Circle(pos.x, pos.y, radius + tolerance) : new _tsparticlesEngine.Rectangle(elem.offsetLeft * pxRatio - tolerance, elem.offsetTop * pxRatio - tolerance, elem.offsetWidth * pxRatio + tolerance * 2, elem.offsetHeight * pxRatio + tolerance * 2);
+            this.processBounce(pos, radius, area);
+        });
+    }
+    processBounce(position, radius, area) {
+        const query = this.container.particles.quadTree.query(area);
+        for (const particle of query){
+            if (area instanceof _tsparticlesEngine.Circle) _tsparticlesEngine.circleBounce(_tsparticlesEngine.circleBounceDataFromParticle(particle), {
+                position,
+                radius,
+                mass: radius ** 2 * Math.PI / 2,
+                velocity: _tsparticlesEngine.Vector.origin,
+                factor: _tsparticlesEngine.Vector.origin
+            });
+            else if (area instanceof _tsparticlesEngine.Rectangle) _tsparticlesEngine.rectBounce(particle, _tsparticlesEngine.calculateBounds(position, radius));
+        }
+    }
+}
+
+},{"tsparticles-engine":"9BizU","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"13qtF":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "loadExternalBubbleInteraction", ()=>loadExternalBubbleInteraction
+);
+var _bubbler = require("./Bubbler");
+async function loadExternalBubbleInteraction(engine) {
+    await engine.addInteractor("externalBubble", (container)=>new _bubbler.Bubbler(container)
+    );
+}
+
+},{"./Bubbler":"hXDMJ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"hXDMJ":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "Bubbler", ()=>Bubbler
+);
+var _tsparticlesEngine = require("tsparticles-engine");
+function calculateBubbleValue(particleValue, modeValue, optionsValue, ratio) {
+    if (modeValue >= optionsValue) {
+        const value = particleValue + (modeValue - optionsValue) * ratio;
+        return _tsparticlesEngine.clamp(value, particleValue, modeValue);
+    } else if (modeValue < optionsValue) {
+        const value = particleValue - (optionsValue - modeValue) * ratio;
+        return _tsparticlesEngine.clamp(value, modeValue, particleValue);
+    }
+}
+class Bubbler extends _tsparticlesEngine.ExternalInteractorBase {
+    constructor(container){
+        super(container);
+        if (!container.bubble) container.bubble = {};
+        this.handleClickMode = (mode)=>{
+            if (mode !== "bubble") return;
+            if (!container.bubble) container.bubble = {};
+            container.bubble.clicking = true;
+        };
+    }
+    isEnabled() {
+        const container = this.container, options = container.actualOptions, mouse = container.interactivity.mouse, events = options.interactivity.events, divs = events.onDiv, divBubble = _tsparticlesEngine.isDivModeEnabled("bubble", divs);
+        if (!(divBubble || events.onHover.enable && mouse.position || events.onClick.enable && mouse.clickPosition)) return false;
+        const hoverMode = events.onHover.mode;
+        const clickMode = events.onClick.mode;
+        return _tsparticlesEngine.isInArray("bubble", hoverMode) || _tsparticlesEngine.isInArray("bubble", clickMode) || divBubble;
+    }
+    reset(particle, force) {
+        if (!(!particle.bubble.inRange || force)) return;
+        delete particle.bubble.div;
+        delete particle.bubble.opacity;
+        delete particle.bubble.radius;
+        delete particle.bubble.color;
+    }
+    async interact() {
+        const options = this.container.actualOptions, events = options.interactivity.events, onHover = events.onHover, onClick = events.onClick, hoverEnabled = onHover.enable, hoverMode = onHover.mode, clickEnabled = onClick.enable, clickMode = onClick.mode, divs = events.onDiv;
+        if (hoverEnabled && _tsparticlesEngine.isInArray("bubble", hoverMode)) this.hoverBubble();
+        else if (clickEnabled && _tsparticlesEngine.isInArray("bubble", clickMode)) this.clickBubble();
+        else _tsparticlesEngine.divModeExecute("bubble", divs, (selector, div)=>this.singleSelectorHover(selector, div)
+        );
+    }
+    singleSelectorHover(selector, div) {
+        const container = this.container, selectors = document.querySelectorAll(selector);
+        if (!selectors.length) return;
+        selectors.forEach((item)=>{
+            const elem = item, pxRatio = container.retina.pixelRatio, pos = {
+                x: (elem.offsetLeft + elem.offsetWidth / 2) * pxRatio,
+                y: (elem.offsetTop + elem.offsetHeight / 2) * pxRatio
+            }, repulseRadius = elem.offsetWidth / 2 * pxRatio, area = div.type === "circle" ? new _tsparticlesEngine.Circle(pos.x, pos.y, repulseRadius) : new _tsparticlesEngine.Rectangle(elem.offsetLeft * pxRatio, elem.offsetTop * pxRatio, elem.offsetWidth * pxRatio, elem.offsetHeight * pxRatio), query = container.particles.quadTree.query(area);
+            for (const particle of query){
+                if (!area.contains(particle.getPosition())) continue;
+                particle.bubble.inRange = true;
+                const divs = container.actualOptions.interactivity.modes.bubble.divs;
+                const divBubble = _tsparticlesEngine.divMode(divs, elem);
+                if (!particle.bubble.div || particle.bubble.div !== elem) {
+                    this.reset(particle, true);
+                    particle.bubble.div = elem;
+                }
+                this.hoverBubbleSize(particle, 1, divBubble);
+                this.hoverBubbleOpacity(particle, 1, divBubble);
+                this.hoverBubbleColor(particle, 1, divBubble);
+            }
+        });
+    }
+    process(particle, distMouse, timeSpent, data) {
+        const container = this.container, bubbleParam = data.bubbleObj.optValue;
+        if (bubbleParam === undefined) return;
+        const options = container.actualOptions, bubbleDuration = options.interactivity.modes.bubble.duration, bubbleDistance = container.retina.bubbleModeDistance, particlesParam = data.particlesObj.optValue, pObjBubble = data.bubbleObj.value, pObj = data.particlesObj.value || 0, type = data.type;
+        if (bubbleParam === particlesParam) return;
+        if (!container.bubble) container.bubble = {};
+        if (!container.bubble.durationEnd) {
+            if (distMouse <= bubbleDistance) {
+                const obj = pObjBubble !== null && pObjBubble !== void 0 ? pObjBubble : pObj;
+                if (obj !== bubbleParam) {
+                    const value = pObj - timeSpent * (pObj - bubbleParam) / bubbleDuration;
+                    if (type === "size") particle.bubble.radius = value;
+                    if (type === "opacity") particle.bubble.opacity = value;
+                }
+            } else {
+                if (type === "size") delete particle.bubble.radius;
+                if (type === "opacity") delete particle.bubble.opacity;
+            }
+        } else if (pObjBubble) {
+            if (type === "size") delete particle.bubble.radius;
+            if (type === "opacity") delete particle.bubble.opacity;
+        }
+    }
+    clickBubble() {
+        var _a, _b;
+        const container = this.container, options = container.actualOptions, mouseClickPos = container.interactivity.mouse.clickPosition;
+        if (!mouseClickPos) return;
+        if (!container.bubble) container.bubble = {};
+        const distance = container.retina.bubbleModeDistance, query = container.particles.quadTree.queryCircle(mouseClickPos, distance);
+        for (const particle of query){
+            if (!container.bubble.clicking) continue;
+            particle.bubble.inRange = !container.bubble.durationEnd;
+            const pos = particle.getPosition(), distMouse = _tsparticlesEngine.getDistance(pos, mouseClickPos), timeSpent = (new Date().getTime() - (container.interactivity.mouse.clickTime || 0)) / 1000;
+            if (timeSpent > options.interactivity.modes.bubble.duration) container.bubble.durationEnd = true;
+            if (timeSpent > options.interactivity.modes.bubble.duration * 2) {
+                container.bubble.clicking = false;
+                container.bubble.durationEnd = false;
+            }
+            const sizeData = {
+                bubbleObj: {
+                    optValue: container.retina.bubbleModeSize,
+                    value: particle.bubble.radius
+                },
+                particlesObj: {
+                    optValue: _tsparticlesEngine.getRangeMax(particle.options.size.value) * container.retina.pixelRatio,
+                    value: particle.size.value
+                },
+                type: "size"
+            };
+            this.process(particle, distMouse, timeSpent, sizeData);
+            const opacityData = {
+                bubbleObj: {
+                    optValue: options.interactivity.modes.bubble.opacity,
+                    value: particle.bubble.opacity
+                },
+                particlesObj: {
+                    optValue: _tsparticlesEngine.getRangeMax(particle.options.opacity.value),
+                    value: (_b = (_a = particle.opacity) === null || _a === void 0 ? void 0 : _a.value) !== null && _b !== void 0 ? _b : 1
+                },
+                type: "opacity"
+            };
+            this.process(particle, distMouse, timeSpent, opacityData);
+            if (!container.bubble.durationEnd) {
+                if (distMouse <= container.retina.bubbleModeDistance) this.hoverBubbleColor(particle, distMouse);
+                else delete particle.bubble.color;
+            } else delete particle.bubble.color;
+        }
+    }
+    hoverBubble() {
+        const container = this.container, mousePos = container.interactivity.mouse.position;
+        if (mousePos === undefined) return;
+        const distance = container.retina.bubbleModeDistance, query = container.particles.quadTree.queryCircle(mousePos, distance);
+        for (const particle of query){
+            particle.bubble.inRange = true;
+            const pos = particle.getPosition(), pointDistance = _tsparticlesEngine.getDistance(pos, mousePos), ratio = 1 - pointDistance / distance;
+            if (pointDistance <= distance) {
+                if (ratio >= 0 && container.interactivity.status === _tsparticlesEngine.mouseMoveEvent) {
+                    this.hoverBubbleSize(particle, ratio);
+                    this.hoverBubbleOpacity(particle, ratio);
+                    this.hoverBubbleColor(particle, ratio);
+                }
+            } else this.reset(particle);
+            if (container.interactivity.status === _tsparticlesEngine.mouseLeaveEvent) this.reset(particle);
+        }
+    }
+    hoverBubbleSize(particle, ratio, divBubble) {
+        const container = this.container, modeSize = (divBubble === null || divBubble === void 0 ? void 0 : divBubble.size) ? divBubble.size * container.retina.pixelRatio : container.retina.bubbleModeSize;
+        if (modeSize === undefined) return;
+        const optSize = _tsparticlesEngine.getRangeMax(particle.options.size.value) * container.retina.pixelRatio;
+        const pSize = particle.size.value;
+        const size = calculateBubbleValue(pSize, modeSize, optSize, ratio);
+        if (size !== undefined) particle.bubble.radius = size;
+    }
+    hoverBubbleOpacity(particle, ratio, divBubble) {
+        var _a, _b, _c;
+        const container = this.container, options = container.actualOptions, modeOpacity = (_a = divBubble === null || divBubble === void 0 ? void 0 : divBubble.opacity) !== null && _a !== void 0 ? _a : options.interactivity.modes.bubble.opacity;
+        if (!modeOpacity) return;
+        const optOpacity = particle.options.opacity.value;
+        const pOpacity = (_c = (_b = particle.opacity) === null || _b === void 0 ? void 0 : _b.value) !== null && _c !== void 0 ? _c : 1;
+        const opacity = calculateBubbleValue(pOpacity, modeOpacity, _tsparticlesEngine.getRangeMax(optOpacity), ratio);
+        if (opacity !== undefined) particle.bubble.opacity = opacity;
+    }
+    hoverBubbleColor(particle, ratio, divBubble) {
+        const options = this.container.actualOptions;
+        const bubbleOptions = divBubble !== null && divBubble !== void 0 ? divBubble : options.interactivity.modes.bubble;
+        if (!particle.bubble.finalColor) {
+            const modeColor = bubbleOptions.color;
+            if (!modeColor) return;
+            const bubbleColor = modeColor instanceof Array ? _tsparticlesEngine.itemFromArray(modeColor) : modeColor;
+            particle.bubble.finalColor = _tsparticlesEngine.colorToHsl(bubbleColor);
+        }
+        if (!particle.bubble.finalColor) return;
+        if (bubbleOptions.mix) {
+            particle.bubble.color = undefined;
+            const pColor = particle.getFillColor();
+            particle.bubble.color = pColor ? _tsparticlesEngine.rgbToHsl(_tsparticlesEngine.colorMix(pColor, particle.bubble.finalColor, 1 - ratio, ratio)) : particle.bubble.finalColor;
+        } else particle.bubble.color = particle.bubble.finalColor;
+    }
+}
+
+},{"tsparticles-engine":"9BizU","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"380Ww":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "loadExternalConnectInteraction", ()=>loadExternalConnectInteraction
+);
+var _connector = require("./Connector");
+async function loadExternalConnectInteraction(engine) {
+    await engine.addInteractor("externalConnect", (container)=>new _connector.Connector(container)
+    );
+}
+
+},{"./Connector":"e8WOz","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"e8WOz":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "Connector", ()=>Connector
+);
+var _tsparticlesEngine = require("tsparticles-engine");
+class Connector extends _tsparticlesEngine.ExternalInteractorBase {
+    constructor(container){
+        super(container);
+    }
+    isEnabled() {
+        const container = this.container, mouse = container.interactivity.mouse, events = container.actualOptions.interactivity.events;
+        if (!(events.onHover.enable && mouse.position)) return false;
+        return _tsparticlesEngine.isInArray("connect", events.onHover.mode);
+    }
+    reset() {}
+    async interact() {
+        const container = this.container, options = container.actualOptions;
+        if (options.interactivity.events.onHover.enable && container.interactivity.status === "mousemove") {
+            const mousePos = container.interactivity.mouse.position;
+            if (!mousePos) return;
+            const distance = Math.abs(container.retina.connectModeRadius), query = container.particles.quadTree.queryCircle(mousePos, distance);
+            let i = 0;
+            for (const p1 of query){
+                const pos1 = p1.getPosition();
+                for (const p2 of query.slice(i + 1)){
+                    const pos2 = p2.getPosition(), distMax = Math.abs(container.retina.connectModeDistance), xDiff = Math.abs(pos1.x - pos2.x), yDiff = Math.abs(pos1.y - pos2.y);
+                    if (xDiff < distMax && yDiff < distMax) container.canvas.drawConnectLine(p1, p2);
+                }
+                ++i;
+            }
+        }
+    }
+}
+
+},{"tsparticles-engine":"9BizU","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"1M73j":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "loadExternalGrabInteraction", ()=>loadExternalGrabInteraction
+);
+var _grabber = require("./Grabber");
+async function loadExternalGrabInteraction(engine) {
+    await engine.addInteractor("externalGrab", (container)=>new _grabber.Grabber(container)
+    );
+}
+
+},{"./Grabber":"elAEo","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"elAEo":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "Grabber", ()=>Grabber
+);
+var _tsparticlesEngine = require("tsparticles-engine");
+class Grabber extends _tsparticlesEngine.ExternalInteractorBase {
+    constructor(container){
+        super(container);
+    }
+    isEnabled() {
+        const container = this.container, mouse = container.interactivity.mouse, events = container.actualOptions.interactivity.events;
+        return events.onHover.enable && !!mouse.position && _tsparticlesEngine.isInArray("grab", events.onHover.mode);
+    }
+    reset() {}
+    async interact() {
+        var _a;
+        const container = this.container, options = container.actualOptions, interactivity = options.interactivity;
+        if (!interactivity.events.onHover.enable || container.interactivity.status !== _tsparticlesEngine.mouseMoveEvent) return;
+        const mousePos = container.interactivity.mouse.position;
+        if (!mousePos) return;
+        const distance = container.retina.grabModeDistance, query = container.particles.quadTree.queryCircle(mousePos, distance);
+        for (const particle of query){
+            const pos = particle.getPosition(), pointDistance = _tsparticlesEngine.getDistance(pos, mousePos);
+            if (pointDistance > distance) continue;
+            const grabLineOptions = interactivity.modes.grab.links, lineOpacity = grabLineOptions.opacity, opacityLine = lineOpacity - pointDistance * lineOpacity / distance;
+            if (opacityLine <= 0) continue;
+            const optColor = (_a = grabLineOptions.color) !== null && _a !== void 0 ? _a : particle.options.links.color;
+            if (!container.particles.grabLineColor) {
+                const linksOptions = options.interactivity.modes.grab.links;
+                container.particles.grabLineColor = _tsparticlesEngine.getLinkRandomColor(optColor, linksOptions.blink, linksOptions.consent);
+            }
+            const colorLine = _tsparticlesEngine.getLinkColor(particle, undefined, container.particles.grabLineColor);
+            if (!colorLine) return;
+            container.canvas.drawGrabLine(particle, colorLine, opacityLine, mousePos);
+        }
+    }
+}
+
+},{"tsparticles-engine":"9BizU","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"9D7d5":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "loadExternalPauseInteraction", ()=>loadExternalPauseInteraction
+);
+var _pauser = require("./Pauser");
+function loadExternalPauseInteraction(engine) {
+    engine.addInteractor("externalPause", (container)=>new _pauser.Pauser(container)
+    );
+}
+
+},{"./Pauser":"gcpZe","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"gcpZe":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "Pauser", ()=>Pauser
+);
+var _tsparticlesEngine = require("tsparticles-engine");
+class Pauser extends _tsparticlesEngine.ExternalInteractorBase {
+    constructor(container1){
+        super(container1);
+        this.handleClickMode = (mode)=>{
+            if (mode !== "pause") return;
+            const container = this.container;
+            if (container.getAnimationStatus()) container.pause();
+            else container.play();
+        };
+    }
+    isEnabled() {
+        return true;
+    }
+    reset() {}
+    async interact() {}
+}
+
+},{"tsparticles-engine":"9BizU","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"4KnGU":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "loadExternalPushInteraction", ()=>loadExternalPushInteraction
+);
+var _pusher = require("./Pusher");
+async function loadExternalPushInteraction(engine) {
+    await engine.addInteractor("externalPush", (container)=>new _pusher.Pusher(container)
+    );
+}
+
+},{"./Pusher":"2fibs","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"2fibs":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "Pusher", ()=>Pusher
+);
+var _tsparticlesEngine = require("tsparticles-engine");
+class Pusher extends _tsparticlesEngine.ExternalInteractorBase {
+    constructor(container1){
+        super(container1);
+        this.handleClickMode = (mode)=>{
+            if (mode !== "push") return;
+            const container = this.container;
+            const options = container.actualOptions;
+            const pushNb = options.interactivity.modes.push.quantity;
+            if (pushNb <= 0) return;
+            const pushOptions = options.interactivity.modes.push;
+            const group = _tsparticlesEngine.itemFromArray([
+                undefined,
+                ...pushOptions.groups
+            ]);
+            const groupOptions = group !== undefined ? container.actualOptions.particles.groups[group] : undefined;
+            container.particles.push(pushNb, container.interactivity.mouse, groupOptions, group);
+        };
+    }
+    isEnabled() {
+        return true;
+    }
+    reset() {}
+    async interact() {}
+}
+
+},{"tsparticles-engine":"9BizU","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"8Qyy1":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "loadExternalRemoveInteraction", ()=>loadExternalRemoveInteraction
+);
+var _remover = require("./Remover");
+function loadExternalRemoveInteraction(engine) {
+    engine.addInteractor("externalRemove", (container)=>new _remover.Remover(container)
+    );
+}
+
+},{"./Remover":"cHo6N","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"cHo6N":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "Remover", ()=>Remover
+);
+var _tsparticlesEngine = require("tsparticles-engine");
+class Remover extends _tsparticlesEngine.ExternalInteractorBase {
+    constructor(container1){
+        super(container1);
+        this.handleClickMode = (mode)=>{
+            if (mode !== "remove") return;
+            const container = this.container;
+            const options = container.actualOptions;
+            const removeNb = options.interactivity.modes.remove.quantity;
+            container.particles.removeQuantity(removeNb);
+        };
+    }
+    isEnabled() {
+        return true;
+    }
+    reset() {}
+    async interact() {}
+}
+
+},{"tsparticles-engine":"9BizU","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"9n7B3":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "loadExternalRepulseInteraction", ()=>loadExternalRepulseInteraction
+);
+var _repulser = require("./Repulser");
+async function loadExternalRepulseInteraction(engine) {
+    await engine.addInteractor("externalRepulse", (container)=>new _repulser.Repulser(container)
+    );
+}
+
+},{"./Repulser":"fFQe6","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"fFQe6":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "Repulser", ()=>Repulser
+);
+var _tsparticlesEngine = require("tsparticles-engine");
+class Repulser extends _tsparticlesEngine.ExternalInteractorBase {
+    constructor(container){
+        super(container);
+        if (!container.repulse) container.repulse = {
+            particles: []
+        };
+        this.handleClickMode = (mode)=>{
+            const options = this.container.actualOptions;
+            if (mode !== "repulse") return;
+            if (!container.repulse) container.repulse = {
+                particles: []
+            };
+            container.repulse.clicking = true;
+            container.repulse.count = 0;
+            for (const particle of container.repulse.particles)particle.velocity.setTo(particle.initialVelocity);
+            container.repulse.particles = [];
+            container.repulse.finish = false;
+            setTimeout(()=>{
+                if (!container.destroyed) {
+                    if (!container.repulse) container.repulse = {
+                        particles: []
+                    };
+                    container.repulse.clicking = false;
+                }
+            }, options.interactivity.modes.repulse.duration * 1000);
+        };
+    }
+    isEnabled() {
+        const container = this.container, options = container.actualOptions, mouse = container.interactivity.mouse, events = options.interactivity.events, divs = events.onDiv, divRepulse = _tsparticlesEngine.isDivModeEnabled("repulse", divs);
+        if (!(divRepulse || events.onHover.enable && mouse.position || events.onClick.enable && mouse.clickPosition)) return false;
+        const hoverMode = events.onHover.mode, clickMode = events.onClick.mode;
+        return _tsparticlesEngine.isInArray("repulse", hoverMode) || _tsparticlesEngine.isInArray("repulse", clickMode) || divRepulse;
+    }
+    reset() {}
+    async interact() {
+        const container = this.container, options = container.actualOptions, mouseMoveStatus = container.interactivity.status === _tsparticlesEngine.mouseMoveEvent, events = options.interactivity.events, hoverEnabled = events.onHover.enable, hoverMode = events.onHover.mode, clickEnabled = events.onClick.enable, clickMode = events.onClick.mode, divs = events.onDiv;
+        if (mouseMoveStatus && hoverEnabled && _tsparticlesEngine.isInArray("repulse", hoverMode)) this.hoverRepulse();
+        else if (clickEnabled && _tsparticlesEngine.isInArray("repulse", clickMode)) this.clickRepulse();
+        else _tsparticlesEngine.divModeExecute("repulse", divs, (selector, div)=>this.singleSelectorRepulse(selector, div)
+        );
+    }
+    singleSelectorRepulse(selector, div) {
+        const container = this.container, query = document.querySelectorAll(selector);
+        if (!query.length) return;
+        query.forEach((item)=>{
+            const elem = item, pxRatio = container.retina.pixelRatio, pos = {
+                x: (elem.offsetLeft + elem.offsetWidth / 2) * pxRatio,
+                y: (elem.offsetTop + elem.offsetHeight / 2) * pxRatio
+            }, repulseRadius = elem.offsetWidth / 2 * pxRatio, area = div.type === "circle" ? new _tsparticlesEngine.Circle(pos.x, pos.y, repulseRadius) : new _tsparticlesEngine.Rectangle(elem.offsetLeft * pxRatio, elem.offsetTop * pxRatio, elem.offsetWidth * pxRatio, elem.offsetHeight * pxRatio), divs = container.actualOptions.interactivity.modes.repulse.divs, divRepulse = _tsparticlesEngine.divMode(divs, elem);
+            this.processRepulse(pos, repulseRadius, area, divRepulse);
+        });
+    }
+    hoverRepulse() {
+        const container = this.container, mousePos = container.interactivity.mouse.position;
+        if (!mousePos) return;
+        const repulseRadius = container.retina.repulseModeDistance;
+        this.processRepulse(mousePos, repulseRadius, new _tsparticlesEngine.Circle(mousePos.x, mousePos.y, repulseRadius));
+    }
+    processRepulse(position, repulseRadius, area, divRepulse) {
+        var _a;
+        const container = this.container, query = container.particles.quadTree.query(area), repulseOptions = container.actualOptions.interactivity.modes.repulse;
+        for (const particle of query){
+            const { dx , dy , distance  } = _tsparticlesEngine.getDistances(particle.position, position), velocity = ((_a = divRepulse === null || divRepulse === void 0 ? void 0 : divRepulse.speed) !== null && _a !== void 0 ? _a : repulseOptions.speed) * repulseOptions.factor, repulseFactor = _tsparticlesEngine.clamp(_tsparticlesEngine.calcEasing(1 - distance / repulseRadius, repulseOptions.easing) * velocity, 0, repulseOptions.maxSpeed), normVec = _tsparticlesEngine.Vector.create(distance === 0 ? velocity : dx / distance * repulseFactor, distance === 0 ? velocity : dy / distance * repulseFactor);
+            particle.position.addTo(normVec);
+        }
+    }
+    clickRepulse() {
+        const container = this.container;
+        if (!container.repulse) container.repulse = {
+            particles: []
+        };
+        if (!container.repulse.finish) {
+            if (!container.repulse.count) container.repulse.count = 0;
+            container.repulse.count++;
+            if (container.repulse.count === container.particles.count) container.repulse.finish = true;
+        }
+        if (container.repulse.clicking) {
+            const repulseDistance = container.retina.repulseModeDistance, repulseRadius = Math.pow(repulseDistance / 6, 3), mouseClickPos = container.interactivity.mouse.clickPosition;
+            if (mouseClickPos === undefined) return;
+            const range = new _tsparticlesEngine.Circle(mouseClickPos.x, mouseClickPos.y, repulseRadius), query = container.particles.quadTree.query(range);
+            for (const particle of query){
+                const { dx , dy , distance  } = _tsparticlesEngine.getDistances(mouseClickPos, particle.position), d = distance ** 2, velocity = container.actualOptions.interactivity.modes.repulse.speed, force = -repulseRadius * velocity / d;
+                if (d <= repulseRadius) {
+                    container.repulse.particles.push(particle);
+                    const vect = _tsparticlesEngine.Vector.create(dx, dy);
+                    vect.length = force;
+                    particle.velocity.setTo(vect);
+                }
+            }
+        } else if (container.repulse.clicking === false) {
+            for (const particle of container.repulse.particles)particle.velocity.setTo(particle.initialVelocity);
+            container.repulse.particles = [];
+        }
+    }
+}
+
+},{"tsparticles-engine":"9BizU","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"iKDSt":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "loadImageShape", ()=>loadImageShape
+);
+var _imageDrawer = require("./ImageDrawer");
+async function loadImageShape(engine) {
+    const imageDrawer = new _imageDrawer.ImageDrawer();
+    await engine.addShape("image", imageDrawer);
+    await engine.addShape("images", imageDrawer);
+}
+
+},{"./ImageDrawer":"4JsIS","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"4JsIS":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "ImageDrawer", ()=>ImageDrawer
+);
+var _utils = require("./Utils");
+var __classPrivateFieldSet = undefined && undefined.__classPrivateFieldSet || function(receiver, state, value, kind, f) {
+    if (kind === "m") throw new TypeError("Private method is not writable");
+    if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a setter");
+    if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
+    return kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value), value;
+};
+var __classPrivateFieldGet = undefined && undefined.__classPrivateFieldGet || function(receiver, state, kind, f) {
+    if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a getter");
+    if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
+    return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
+};
+var _ImageDrawer_images;
+class ImageDrawer {
+    constructor(){
+        _ImageDrawer_images.set(this, void 0);
+        __classPrivateFieldSet(this, _ImageDrawer_images, [], "f");
+    }
+    getSidesCount() {
+        return 12;
+    }
+    getImages(container) {
+        const containerImages = __classPrivateFieldGet(this, _ImageDrawer_images, "f").find((t)=>t.id === container.id
+        );
+        if (!containerImages) {
+            __classPrivateFieldGet(this, _ImageDrawer_images, "f").push({
+                id: container.id,
+                images: []
+            });
+            return this.getImages(container);
+        } else return containerImages;
+    }
+    addImage(container, image) {
+        const containerImages = this.getImages(container);
+        containerImages === null || containerImages === void 0 || containerImages.images.push(image);
+    }
+    destroy() {
+        __classPrivateFieldSet(this, _ImageDrawer_images, [], "f");
+    }
+    draw(context, particle, radius, opacity) {
+        var _a, _b;
+        const image = particle.image;
+        const element = (_a = image === null || image === void 0 ? void 0 : image.data) === null || _a === void 0 ? void 0 : _a.element;
+        if (!element) return;
+        const ratio = (_b = image === null || image === void 0 ? void 0 : image.ratio) !== null && _b !== void 0 ? _b : 1;
+        const pos = {
+            x: -radius,
+            y: -radius
+        };
+        if (!(image === null || image === void 0 ? void 0 : image.data.svgData) || !(image === null || image === void 0 ? void 0 : image.replaceColor)) context.globalAlpha = opacity;
+        context.drawImage(element, pos.x, pos.y, radius * 2, radius * 2 / ratio);
+        if (!(image === null || image === void 0 ? void 0 : image.data.svgData) || !(image === null || image === void 0 ? void 0 : image.replaceColor)) context.globalAlpha = 1;
+    }
+    loadShape(particle) {
+        var _a, _b, _c;
+        if (particle.shape !== "image" && particle.shape !== "images") return;
+        const images = this.getImages(particle.container).images;
+        const imageData = particle.shapeData;
+        const image = images.find((t)=>t.source === imageData.src
+        );
+        let imageRes;
+        if (!image) {
+            this.loadImageShape(particle.container, imageData).then(()=>{
+                this.loadShape(particle);
+            });
+            return;
+        }
+        if (image.error) return;
+        const color = particle.getFillColor();
+        if (image.svgData && imageData.replaceColor && color) imageRes = _utils.replaceImageColor(image, imageData, color, particle);
+        else imageRes = {
+            data: image,
+            loaded: true,
+            ratio: imageData.width / imageData.height,
+            replaceColor: (_a = imageData.replaceColor) !== null && _a !== void 0 ? _a : imageData.replace_color,
+            source: imageData.src
+        };
+        if (!imageRes.ratio) imageRes.ratio = 1;
+        const fill = (_b = imageData.fill) !== null && _b !== void 0 ? _b : particle.fill;
+        const close = (_c = imageData.close) !== null && _c !== void 0 ? _c : particle.close;
+        const imageShape = {
+            image: imageRes,
+            fill,
+            close
+        };
+        particle.image = imageShape.image;
+        particle.fill = imageShape.fill;
+        particle.close = imageShape.close;
+    }
+    async loadImageShape(container, imageShape) {
+        const source = imageShape.src;
+        if (!source) throw new Error("Error tsParticles - No image.src");
+        try {
+            const image = {
+                source: source,
+                type: source.substr(source.length - 3),
+                error: false,
+                loading: true
+            };
+            this.addImage(container, image);
+            const imageFunc = imageShape.replaceColor ? _utils.downloadSvgImage : _utils.loadImage;
+            await imageFunc(image);
+        } catch (_a) {
+            throw new Error(`tsParticles error - ${imageShape.src} not found`);
+        }
+    }
+}
+_ImageDrawer_images = new WeakMap();
+
+},{"./Utils":"d7bvo","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"d7bvo":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "loadImage", ()=>loadImage
+);
+parcelHelpers.export(exports, "downloadSvgImage", ()=>downloadSvgImage
+);
+parcelHelpers.export(exports, "replaceImageColor", ()=>replaceImageColor
+);
+var _tsparticlesEngine = require("tsparticles-engine");
+const currentColorRegex = /(#(?:[0-9a-f]{2}){2,4}|(#[0-9a-f]{3})|(rgb|hsl)a?\((-?\d+%?[,\s]+){2,3}\s*[\d.]+%?\))|currentcolor/gi;
+function replaceColorSvg(imageShape, color, opacity) {
+    const { svgData  } = imageShape;
+    if (!svgData) return "";
+    const colorStyle = _tsparticlesEngine.getStyleFromHsl(color, opacity);
+    if (svgData.includes("fill")) return svgData.replace(currentColorRegex, ()=>colorStyle
+    );
+    const preFillIndex = svgData.indexOf(">");
+    return `${svgData.substring(0, preFillIndex)} fill="${colorStyle}"${svgData.substring(preFillIndex)}`;
+}
+async function loadImage(image) {
+    return new Promise((resolve)=>{
+        image.loading = true;
+        const img = new Image();
+        img.addEventListener("load", ()=>{
+            image.element = img;
+            image.loading = false;
+            resolve();
+        });
+        img.addEventListener("error", ()=>{
+            image.error = true;
+            image.loading = false;
+            console.error(`Error tsParticles - loading image: ${image.source}`);
+            resolve();
+        });
+        img.src = image.source;
+    });
+}
+async function downloadSvgImage(image) {
+    if (image.type !== "svg") {
+        await loadImage(image);
+        return;
+    }
+    image.loading = true;
+    const response = await fetch(image.source);
+    image.loading = false;
+    if (!response.ok) {
+        console.error("Error tsParticles - Image not found");
+        image.error = true;
+    }
+    if (!image.error) image.svgData = await response.text();
+}
+function replaceImageColor(image, imageData, color, particle) {
+    var _a, _b, _c;
+    const svgColoredData = replaceColorSvg(image, color, (_b = (_a = particle.opacity) === null || _a === void 0 ? void 0 : _a.value) !== null && _b !== void 0 ? _b : 1);
+    const svg = new Blob([
+        svgColoredData
+    ], {
+        type: "image/svg+xml"
+    });
+    const domUrl = URL || window.URL || window.webkitURL || window;
+    const url = domUrl.createObjectURL(svg);
+    const img = new Image();
+    const imageRes = {
+        data: Object.assign(Object.assign({}, image), {
+            svgData: svgColoredData
+        }),
+        ratio: imageData.width / imageData.height,
+        replaceColor: (_c = imageData.replaceColor) !== null && _c !== void 0 ? _c : imageData.replace_color,
+        source: imageData.src
+    };
+    img.addEventListener("load", ()=>{
+        const pImage = particle.image;
+        if (pImage) {
+            pImage.loaded = true;
+            image.element = img;
+        }
+        domUrl.revokeObjectURL(url);
+    });
+    img.addEventListener("error", ()=>{
+        domUrl.revokeObjectURL(url);
+        const img2 = Object.assign(Object.assign({}, image), {
+            error: false,
+            loading: true
+        });
+        loadImage(img2).then(()=>{
+            const pImage = particle.image;
+            if (pImage) {
+                image.element = img2.element;
+                pImage.loaded = true;
+            }
+        });
+    });
+    img.src = url;
+    return imageRes;
+}
+
+},{"tsparticles-engine":"9BizU","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"1rG0O":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "loadLifeUpdater", ()=>loadLifeUpdater
+);
+var _lifeUpdater = require("./LifeUpdater");
+async function loadLifeUpdater(engine) {
+    await engine.addParticleUpdater("life", (container)=>new _lifeUpdater.LifeUpdater(container)
+    );
+}
+
+},{"./LifeUpdater":"38FYu","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"38FYu":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "LifeUpdater", ()=>LifeUpdater
+);
+var _tsparticlesEngine = require("tsparticles-engine");
+class LifeUpdater {
+    constructor(container){
+        this.container = container;
+    }
+    init() {}
+    isEnabled(particle) {
+        return !particle.destroyed;
+    }
+    update(particle, delta) {
+        if (!this.isEnabled(particle)) return;
+        const life = particle.life;
+        let justSpawned = false;
+        if (particle.spawning) {
+            life.delayTime += delta.value;
+            if (life.delayTime >= particle.life.delay) {
+                justSpawned = true;
+                particle.spawning = false;
+                life.delayTime = 0;
+                life.time = 0;
+            } else return;
+        }
+        if (life.duration === -1) return;
+        if (particle.spawning) return;
+        if (justSpawned) life.time = 0;
+        else life.time += delta.value;
+        if (life.time < life.duration) return;
+        life.time = 0;
+        if (particle.life.count > 0) particle.life.count--;
+        if (particle.life.count === 0) {
+            particle.destroy();
+            return;
+        }
+        const canvasSize = this.container.canvas.size, widthRange = _tsparticlesEngine.setRangeValue(0, canvasSize.width), heightRange = _tsparticlesEngine.setRangeValue(0, canvasSize.width);
+        particle.position.x = _tsparticlesEngine.randomInRange(widthRange);
+        particle.position.y = _tsparticlesEngine.randomInRange(heightRange);
+        particle.spawning = true;
+        life.delayTime = 0;
+        life.time = 0;
+        particle.reset();
+        const lifeOptions = particle.options.life;
+        life.delay = _tsparticlesEngine.getRangeValue(lifeOptions.delay.value) * 1000;
+        life.duration = _tsparticlesEngine.getRangeValue(lifeOptions.duration.value) * 1000;
+    }
+}
+
+},{"tsparticles-engine":"9BizU","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"doEvU":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "loadLineShape", ()=>loadLineShape
+);
+var _lineDrawer = require("./LineDrawer");
+async function loadLineShape(engine) {
+    await engine.addShape("line", new _lineDrawer.LineDrawer());
+}
+
+},{"./LineDrawer":"96dCc","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"96dCc":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "LineDrawer", ()=>LineDrawer
+);
+class LineDrawer {
+    getSidesCount() {
+        return 1;
+    }
+    draw(context, particle, radius) {
+        context.moveTo(-radius / 2, 0);
+        context.lineTo(radius / 2, 0);
+    }
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"itAT8":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "loadOpacityUpdater", ()=>loadOpacityUpdater
+);
+var _opacityUpdater = require("./OpacityUpdater");
+async function loadOpacityUpdater(engine) {
+    await engine.addParticleUpdater("opacity", (container)=>new _opacityUpdater.OpacityUpdater(container)
+    );
+}
+
+},{"./OpacityUpdater":"32piZ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"32piZ":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "OpacityUpdater", ()=>OpacityUpdater
+);
+var _tsparticlesEngine = require("tsparticles-engine");
+function checkDestroy(particle, value, minValue, maxValue) {
+    switch(particle.options.opacity.animation.destroy){
+        case "max":
+            if (value >= maxValue) particle.destroy();
+            break;
+        case "min":
+            if (value <= minValue) particle.destroy();
+            break;
+    }
+}
+function updateOpacity(particle, delta) {
+    var _a, _b, _c, _d, _e;
+    if (!particle.opacity) return;
+    const minValue = particle.opacity.min;
+    const maxValue = particle.opacity.max;
+    if (particle.destroyed || !particle.opacity.enable || ((_a = particle.opacity.maxLoops) !== null && _a !== void 0 ? _a : 0) > 0 && ((_b = particle.opacity.loops) !== null && _b !== void 0 ? _b : 0) > ((_c = particle.opacity.maxLoops) !== null && _c !== void 0 ? _c : 0)) return;
+    switch(particle.opacity.status){
+        case 0:
+            if (particle.opacity.value >= maxValue) {
+                particle.opacity.status = 1;
+                if (!particle.opacity.loops) particle.opacity.loops = 0;
+                particle.opacity.loops++;
+            } else particle.opacity.value += ((_d = particle.opacity.velocity) !== null && _d !== void 0 ? _d : 0) * delta.factor;
+            break;
+        case 1:
+            if (particle.opacity.value <= minValue) {
+                particle.opacity.status = 0;
+                if (!particle.opacity.loops) particle.opacity.loops = 0;
+                particle.opacity.loops++;
+            } else particle.opacity.value -= ((_e = particle.opacity.velocity) !== null && _e !== void 0 ? _e : 0) * delta.factor;
+            break;
+    }
+    checkDestroy(particle, particle.opacity.value, minValue, maxValue);
+    if (!particle.destroyed) particle.opacity.value = _tsparticlesEngine.clamp(particle.opacity.value, minValue, maxValue);
+}
+class OpacityUpdater {
+    constructor(container){
+        this.container = container;
+    }
+    init(particle) {
+        const opacityOptions = particle.options.opacity;
+        particle.opacity = {
+            enable: opacityOptions.animation.enable,
+            max: _tsparticlesEngine.getRangeMax(opacityOptions.value),
+            min: _tsparticlesEngine.getRangeMin(opacityOptions.value),
+            value: _tsparticlesEngine.getRangeValue(opacityOptions.value),
+            loops: 0,
+            maxLoops: _tsparticlesEngine.getRangeValue(opacityOptions.animation.count)
+        };
+        const opacityAnimation = opacityOptions.animation;
+        if (opacityAnimation.enable) {
+            particle.opacity.status = 0;
+            const opacityRange = opacityOptions.value;
+            particle.opacity.min = _tsparticlesEngine.getRangeMin(opacityRange);
+            particle.opacity.max = _tsparticlesEngine.getRangeMax(opacityRange);
+            switch(opacityAnimation.startValue){
+                case "min":
+                    particle.opacity.value = particle.opacity.min;
+                    particle.opacity.status = 0;
+                    break;
+                case "random":
+                    particle.opacity.value = _tsparticlesEngine.randomInRange(particle.opacity);
+                    particle.opacity.status = Math.random() >= 0.5 ? 0 : 1;
+                    break;
+                case "max":
+                default:
+                    particle.opacity.value = particle.opacity.max;
+                    particle.opacity.status = 1;
+                    break;
+            }
+            particle.opacity.velocity = _tsparticlesEngine.getRangeValue(opacityAnimation.speed) / 100 * this.container.retina.reduceFactor;
+            if (!opacityAnimation.sync) particle.opacity.velocity *= Math.random();
+        }
+    }
+    isEnabled(particle) {
+        var _a, _b, _c, _d;
+        return !particle.destroyed && !particle.spawning && !!particle.opacity && particle.opacity.enable && (((_a = particle.opacity.maxLoops) !== null && _a !== void 0 ? _a : 0) <= 0 || ((_b = particle.opacity.maxLoops) !== null && _b !== void 0 ? _b : 0) > 0 && ((_c = particle.opacity.loops) !== null && _c !== void 0 ? _c : 0) < ((_d = particle.opacity.maxLoops) !== null && _d !== void 0 ? _d : 0));
+    }
+    update(particle, delta) {
+        if (!this.isEnabled(particle)) return;
+        updateOpacity(particle, delta);
+    }
+}
+
+},{"tsparticles-engine":"9BizU","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"hZ6tz":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "loadOutModesUpdater", ()=>loadOutModesUpdater
+);
+var _outOfCanvasUpdater = require("./OutOfCanvasUpdater");
+async function loadOutModesUpdater(engine) {
+    await engine.addParticleUpdater("outModes", (container)=>new _outOfCanvasUpdater.OutOfCanvasUpdater(container)
+    );
+}
+
+},{"./OutOfCanvasUpdater":"8kY65","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"8kY65":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "OutOfCanvasUpdater", ()=>OutOfCanvasUpdater
+);
+var _bounceOutMode = require("./BounceOutMode");
+var _destroyOutMode = require("./DestroyOutMode");
+var _noneOutMode = require("./NoneOutMode");
+var _outOutMode = require("./OutOutMode");
+class OutOfCanvasUpdater {
+    constructor(container){
+        this.container = container;
+        this.updaters = [
+            new _bounceOutMode.BounceOutMode(container),
+            new _destroyOutMode.DestroyOutMode(container),
+            new _outOutMode.OutOutMode(container),
+            new _noneOutMode.NoneOutMode(container), 
+        ];
+    }
+    init() {}
+    isEnabled(particle) {
+        return !particle.destroyed && !particle.spawning;
+    }
+    update(particle, delta) {
+        var _a, _b, _c, _d;
+        const outModes = particle.options.move.outModes;
+        this.updateOutMode(particle, delta, (_a = outModes.bottom) !== null && _a !== void 0 ? _a : outModes.default, "bottom");
+        this.updateOutMode(particle, delta, (_b = outModes.left) !== null && _b !== void 0 ? _b : outModes.default, "left");
+        this.updateOutMode(particle, delta, (_c = outModes.right) !== null && _c !== void 0 ? _c : outModes.default, "right");
+        this.updateOutMode(particle, delta, (_d = outModes.top) !== null && _d !== void 0 ? _d : outModes.default, "top");
+    }
+    updateOutMode(particle, delta, outMode, direction) {
+        for (const updater of this.updaters)updater.update(particle, direction, delta, outMode);
+    }
+}
+
+},{"./BounceOutMode":"gK2fR","./DestroyOutMode":"cSyB2","./NoneOutMode":"jM0If","./OutOutMode":"dYixE","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"gK2fR":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "BounceOutMode", ()=>BounceOutMode
+);
+var _tsparticlesEngine = require("tsparticles-engine");
+var _utils = require("./Utils");
+class BounceOutMode {
+    constructor(container){
+        this.container = container;
+        this.modes = [
+            "bounce",
+            "bounce-vertical",
+            "bounce-horizontal",
+            "bounceVertical",
+            "bounceHorizontal",
+            "split", 
+        ];
+    }
+    update(particle, direction, delta, outMode) {
+        if (!this.modes.includes(outMode)) return;
+        const container = this.container;
+        let handled = false;
+        for (const [, plugin] of container.plugins){
+            if (plugin.particleBounce !== undefined) handled = plugin.particleBounce(particle, delta, direction);
+            if (handled) break;
+        }
+        if (handled) return;
+        const pos = particle.getPosition(), offset = particle.offset, size = particle.getRadius(), bounds = _tsparticlesEngine.calculateBounds(pos, size), canvasSize = container.canvas.size;
+        _utils.bounceHorizontal({
+            particle,
+            outMode,
+            direction,
+            bounds,
+            canvasSize,
+            offset,
+            size
+        });
+        _utils.bounceVertical({
+            particle,
+            outMode,
+            direction,
+            bounds,
+            canvasSize,
+            offset,
+            size
+        });
+    }
+}
+
+},{"tsparticles-engine":"9BizU","./Utils":"dQee1","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"dQee1":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "bounceHorizontal", ()=>bounceHorizontal
+);
+parcelHelpers.export(exports, "bounceVertical", ()=>bounceVertical
+);
+var _tsparticlesEngine = require("tsparticles-engine");
+function bounceHorizontal(data) {
+    if (!(data.outMode === "bounce" || data.outMode === "bounce-horizontal" || data.outMode === "bounceHorizontal" || data.outMode === "split")) return;
+    const velocity = data.particle.velocity.x;
+    let bounced = false;
+    if (data.direction === "right" && data.bounds.right >= data.canvasSize.width && velocity > 0 || data.direction === "left" && data.bounds.left <= 0 && velocity < 0) {
+        const newVelocity = _tsparticlesEngine.getValue(data.particle.options.bounce.horizontal);
+        data.particle.velocity.x *= -newVelocity;
+        bounced = true;
+    }
+    if (!bounced) return;
+    const minPos = data.offset.x + data.size;
+    if (data.bounds.right >= data.canvasSize.width) data.particle.position.x = data.canvasSize.width - minPos;
+    else if (data.bounds.left <= 0) data.particle.position.x = minPos;
+    if (data.outMode === "split") data.particle.destroy();
+}
+function bounceVertical(data) {
+    if (data.outMode === "bounce" || data.outMode === "bounce-vertical" || data.outMode === "bounceVertical" || data.outMode === "split") {
+        const velocity = data.particle.velocity.y;
+        let bounced = false;
+        if (data.direction === "bottom" && data.bounds.bottom >= data.canvasSize.height && velocity > 0 || data.direction === "top" && data.bounds.top <= 0 && velocity < 0) {
+            const newVelocity = _tsparticlesEngine.getValue(data.particle.options.bounce.vertical);
+            data.particle.velocity.y *= -newVelocity;
+            bounced = true;
+        }
+        if (!bounced) return;
+        const minPos = data.offset.y + data.size;
+        if (data.bounds.bottom >= data.canvasSize.height) data.particle.position.y = data.canvasSize.height - minPos;
+        else if (data.bounds.top <= 0) data.particle.position.y = minPos;
+        if (data.outMode === "split") data.particle.destroy();
+    }
+}
+
+},{"tsparticles-engine":"9BizU","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"cSyB2":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "DestroyOutMode", ()=>DestroyOutMode
+);
+var _tsparticlesEngine = require("tsparticles-engine");
+class DestroyOutMode {
+    constructor(container){
+        this.container = container;
+        this.modes = [
+            "destroy"
+        ];
+    }
+    update(particle, direction, delta, outMode) {
+        if (!this.modes.includes(outMode)) return;
+        const container = this.container;
+        switch(particle.outType){
+            case "normal":
+            case "outside":
+                if (_tsparticlesEngine.isPointInside(particle.position, container.canvas.size, _tsparticlesEngine.Vector.origin, particle.getRadius(), direction)) return;
+                break;
+            case "inside":
+                {
+                    const { dx , dy  } = _tsparticlesEngine.getDistances(particle.position, particle.moveCenter);
+                    const { x: vx , y: vy  } = particle.velocity;
+                    if (vx < 0 && dx > particle.moveCenter.radius || vy < 0 && dy > particle.moveCenter.radius || vx >= 0 && dx < -particle.moveCenter.radius || vy >= 0 && dy < -particle.moveCenter.radius) return;
+                    break;
+                }
+        }
+        container.particles.remove(particle, undefined, true);
+    }
+}
+
+},{"tsparticles-engine":"9BizU","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"jM0If":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "NoneOutMode", ()=>NoneOutMode
+);
+var _tsparticlesEngine = require("tsparticles-engine");
+class NoneOutMode {
+    constructor(container){
+        this.container = container;
+        this.modes = [
+            "none"
+        ];
+    }
+    update(particle, direction, delta, outMode) {
+        if (!this.modes.includes(outMode)) return;
+        if (particle.options.move.distance.horizontal && (direction === "left" || direction === "right") || particle.options.move.distance.vertical && (direction === "top" || direction === "bottom")) return;
+        const gravityOptions = particle.options.move.gravity, container = this.container;
+        const canvasSize = container.canvas.size;
+        const pRadius = particle.getRadius();
+        if (!gravityOptions.enable) {
+            if (particle.velocity.y > 0 && particle.position.y <= canvasSize.height + pRadius || particle.velocity.y < 0 && particle.position.y >= -pRadius || particle.velocity.x > 0 && particle.position.x <= canvasSize.width + pRadius || particle.velocity.x < 0 && particle.position.x >= -pRadius) return;
+            if (!_tsparticlesEngine.isPointInside(particle.position, container.canvas.size, _tsparticlesEngine.Vector.origin, pRadius, direction)) container.particles.remove(particle);
+        } else {
+            const position = particle.position;
+            if (!gravityOptions.inverse && position.y > canvasSize.height + pRadius && direction === "bottom" || gravityOptions.inverse && position.y < -pRadius && direction === "top") container.particles.remove(particle);
+        }
+    }
+}
+
+},{"tsparticles-engine":"9BizU","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"dYixE":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "OutOutMode", ()=>OutOutMode
+);
+var _tsparticlesEngine = require("tsparticles-engine");
+class OutOutMode {
+    constructor(container){
+        this.container = container;
+        this.modes = [
+            "out"
+        ];
+    }
+    update(particle, direction, delta, outMode) {
+        if (!this.modes.includes(outMode)) return;
+        const container = this.container;
+        switch(particle.outType){
+            case "inside":
+                {
+                    const { x: vx , y: vy  } = particle.velocity;
+                    const circVec = _tsparticlesEngine.Vector.origin;
+                    circVec.length = particle.moveCenter.radius;
+                    circVec.angle = particle.velocity.angle + Math.PI;
+                    circVec.addTo(_tsparticlesEngine.Vector.create(particle.moveCenter));
+                    const { dx , dy  } = _tsparticlesEngine.getDistances(particle.position, circVec);
+                    if (vx <= 0 && dx >= 0 || vy <= 0 && dy >= 0 || vx >= 0 && dx <= 0 || vy >= 0 && dy <= 0) return;
+                    particle.position.x = Math.floor(_tsparticlesEngine.randomInRange({
+                        min: 0,
+                        max: container.canvas.size.width
+                    }));
+                    particle.position.y = Math.floor(_tsparticlesEngine.randomInRange({
+                        min: 0,
+                        max: container.canvas.size.height
+                    }));
+                    const { dx: newDx , dy: newDy  } = _tsparticlesEngine.getDistances(particle.position, particle.moveCenter);
+                    particle.direction = Math.atan2(-newDy, -newDx);
+                    particle.velocity.angle = particle.direction;
+                    break;
+                }
+            default:
+                if (_tsparticlesEngine.isPointInside(particle.position, container.canvas.size, _tsparticlesEngine.Vector.origin, particle.getRadius(), direction)) return;
+                switch(particle.outType){
+                    case "outside":
+                        {
+                            particle.position.x = Math.floor(_tsparticlesEngine.randomInRange({
+                                min: -particle.moveCenter.radius,
+                                max: particle.moveCenter.radius
+                            })) + particle.moveCenter.x;
+                            particle.position.y = Math.floor(_tsparticlesEngine.randomInRange({
+                                min: -particle.moveCenter.radius,
+                                max: particle.moveCenter.radius
+                            })) + particle.moveCenter.y;
+                            const { dx , dy  } = _tsparticlesEngine.getDistances(particle.position, particle.moveCenter);
+                            if (particle.moveCenter.radius) {
+                                particle.direction = Math.atan2(dy, dx);
+                                particle.velocity.angle = particle.direction;
+                            }
+                            break;
+                        }
+                    case "normal":
+                        {
+                            const wrap = particle.options.move.warp, canvasSize = container.canvas.size, newPos = {
+                                bottom: canvasSize.height + particle.getRadius() + particle.offset.y,
+                                left: -particle.getRadius() - particle.offset.x,
+                                right: canvasSize.width + particle.getRadius() + particle.offset.x,
+                                top: -particle.getRadius() - particle.offset.y
+                            }, sizeValue = particle.getRadius(), nextBounds = _tsparticlesEngine.calculateBounds(particle.position, sizeValue);
+                            if (direction === "right" && nextBounds.left > canvasSize.width + particle.offset.x) {
+                                particle.position.x = newPos.left;
+                                particle.initialPosition.x = particle.position.x;
+                                if (!wrap) {
+                                    particle.position.y = Math.random() * canvasSize.height;
+                                    particle.initialPosition.y = particle.position.y;
+                                }
+                            } else if (direction === "left" && nextBounds.right < -particle.offset.x) {
+                                particle.position.x = newPos.right;
+                                particle.initialPosition.x = particle.position.x;
+                                if (!wrap) {
+                                    particle.position.y = Math.random() * canvasSize.height;
+                                    particle.initialPosition.y = particle.position.y;
+                                }
+                            }
+                            if (direction === "bottom" && nextBounds.top > canvasSize.height + particle.offset.y) {
+                                if (!wrap) {
+                                    particle.position.x = Math.random() * canvasSize.width;
+                                    particle.initialPosition.x = particle.position.x;
+                                }
+                                particle.position.y = newPos.top;
+                                particle.initialPosition.y = particle.position.y;
+                            } else if (direction === "top" && nextBounds.bottom < -particle.offset.y) {
+                                if (!wrap) {
+                                    particle.position.x = Math.random() * canvasSize.width;
+                                    particle.initialPosition.x = particle.position.x;
+                                }
+                                particle.position.y = newPos.bottom;
+                                particle.initialPosition.y = particle.position.y;
+                            }
+                            break;
+                        }
+                }
+                break;
+        }
+    }
+}
+
+},{"tsparticles-engine":"9BizU","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"gH4Ex":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "loadParallaxMover", ()=>loadParallaxMover
+);
+var _parallaxMover = require("./ParallaxMover");
+async function loadParallaxMover(engine) {
+    engine.addMover("parallax", ()=>new _parallaxMover.ParallaxMover()
+    );
+}
+
+},{"./ParallaxMover":"lPBpQ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"lPBpQ":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "ParallaxMover", ()=>ParallaxMover
+);
+var _tsparticlesEngine = require("tsparticles-engine");
+class ParallaxMover {
+    init() {}
+    isEnabled(particle) {
+        return !_tsparticlesEngine.isSsr() && !particle.destroyed && particle.container.actualOptions.interactivity.events.onHover.parallax.enable;
+    }
+    move(particle) {
+        const container = particle.container, options = container.actualOptions;
+        if (_tsparticlesEngine.isSsr() || !options.interactivity.events.onHover.parallax.enable) return;
+        const parallaxForce = options.interactivity.events.onHover.parallax.force, mousePos = container.interactivity.mouse.position;
+        if (!mousePos) return;
+        const canvasCenter = {
+            x: container.canvas.size.width / 2,
+            y: container.canvas.size.height / 2
+        }, parallaxSmooth = options.interactivity.events.onHover.parallax.smooth, factor = particle.getRadius() / parallaxForce, centerDistance = {
+            x: (mousePos.x - canvasCenter.x) * factor,
+            y: (mousePos.y - canvasCenter.y) * factor
+        };
+        particle.offset.x += (centerDistance.x - particle.offset.x) / parallaxSmooth;
+        particle.offset.y += (centerDistance.y - particle.offset.y) / parallaxSmooth;
+    }
+}
+
+},{"tsparticles-engine":"9BizU","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"74oSv":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "loadParticlesAttractInteraction", ()=>loadParticlesAttractInteraction
+);
+var _attractor = require("./Attractor");
+async function loadParticlesAttractInteraction(engine) {
+    await engine.addInteractor("particlesAttract", (container)=>new _attractor.Attractor(container)
+    );
+}
+
+},{"./Attractor":"dFTVT","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"dFTVT":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "Attractor", ()=>Attractor
+);
+var _tsparticlesEngine = require("tsparticles-engine");
+class Attractor extends _tsparticlesEngine.ParticlesInteractorBase {
+    constructor(container){
+        super(container);
+    }
+    async interact(p1) {
+        var _a;
+        const container = this.container, distance = (_a = p1.retina.attractDistance) !== null && _a !== void 0 ? _a : container.retina.attractDistance, pos1 = p1.getPosition(), query = container.particles.quadTree.queryCircle(pos1, distance);
+        for (const p2 of query){
+            if (p1 === p2 || !p2.options.move.attract.enable || p2.destroyed || p2.spawning) continue;
+            const pos2 = p2.getPosition(), { dx , dy  } = _tsparticlesEngine.getDistances(pos1, pos2), rotate = p1.options.move.attract.rotate, ax = dx / (rotate.x * 1000), ay = dy / (rotate.y * 1000), p1Factor = p2.size.value / p1.size.value, p2Factor = 1 / p1Factor;
+            p1.velocity.x -= ax * p1Factor;
+            p1.velocity.y -= ay * p1Factor;
+            p2.velocity.x += ax * p2Factor;
+            p2.velocity.y += ay * p2Factor;
+        }
+    }
+    isEnabled(particle) {
+        return particle.options.move.attract.enable;
+    }
+    reset() {}
+}
+
+},{"tsparticles-engine":"9BizU","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"37YrZ":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "loadParticlesCollisionsInteraction", ()=>loadParticlesCollisionsInteraction
+);
+var _collider = require("./Collider");
+async function loadParticlesCollisionsInteraction(engine) {
+    await engine.addInteractor("particlesCollisions", (container)=>new _collider.Collider(container)
+    );
+}
+
+},{"./Collider":"ahfhl","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"ahfhl":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "Collider", ()=>Collider
+);
+var _tsparticlesEngine = require("tsparticles-engine");
+var _resolveCollision = require("./ResolveCollision");
+class Collider extends _tsparticlesEngine.ParticlesInteractorBase {
+    constructor(container){
+        super(container);
+    }
+    isEnabled(particle) {
+        return particle.options.collisions.enable;
+    }
+    reset() {}
+    async interact(p1) {
+        const container = this.container, pos1 = p1.getPosition(), radius1 = p1.getRadius(), query = container.particles.quadTree.queryCircle(pos1, radius1 * 2);
+        for (const p2 of query){
+            if (p1 === p2 || !p2.options.collisions.enable || p1.options.collisions.mode !== p2.options.collisions.mode || p2.destroyed || p2.spawning) continue;
+            const pos2 = p2.getPosition();
+            const radius2 = p2.getRadius();
+            if (Math.abs(Math.round(pos1.z) - Math.round(pos2.z)) > radius1 + radius2) continue;
+            const dist = _tsparticlesEngine.getDistance(pos1, pos2);
+            const distP = radius1 + radius2;
+            if (dist > distP) continue;
+            _resolveCollision.resolveCollision(p1, p2, container.fpsLimit / 1000, container.retina.pixelRatio);
+        }
+    }
+}
+
+},{"tsparticles-engine":"9BizU","./ResolveCollision":"goLZG","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"goLZG":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "resolveCollision", ()=>resolveCollision
+);
+var _absorb = require("./Absorb");
+var _bounce = require("./Bounce");
+var _destroy = require("./Destroy");
+function resolveCollision(p1, p2, fps, pixelRatio) {
+    switch(p1.options.collisions.mode){
+        case "absorb":
+            _absorb.absorb(p1, p2, fps, pixelRatio);
+            break;
+        case "bounce":
+            _bounce.bounce(p1, p2);
+            break;
+        case "destroy":
+            _destroy.destroy(p1, p2);
+            break;
+    }
+}
+
+},{"./Absorb":"cXrii","./Bounce":"eWUZL","./Destroy":"b2fS4","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"cXrii":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "absorb", ()=>absorb
+);
+var _tsparticlesEngine = require("tsparticles-engine");
+function absorb(p1, p2, fps, pixelRatio) {
+    if (p1.getRadius() === undefined && p2.getRadius() !== undefined) p1.destroy();
+    else if (p1.getRadius() !== undefined && p2.getRadius() === undefined) p2.destroy();
+    else if (p1.getRadius() !== undefined && p2.getRadius() !== undefined) {
+        if (p1.getRadius() >= p2.getRadius()) {
+            const factor = _tsparticlesEngine.clamp(p1.getRadius() / p2.getRadius(), 0, p2.getRadius()) * fps;
+            p1.size.value += factor;
+            p2.size.value -= factor;
+            if (p2.getRadius() <= pixelRatio) {
+                p2.size.value = 0;
+                p2.destroy();
+            }
+        } else {
+            const factor = _tsparticlesEngine.clamp(p2.getRadius() / p1.getRadius(), 0, p1.getRadius()) * fps;
+            p1.size.value -= factor;
+            p2.size.value += factor;
+            if (p1.getRadius() <= pixelRatio) {
+                p1.size.value = 0;
+                p1.destroy();
+            }
+        }
+    }
+}
+
+},{"tsparticles-engine":"9BizU","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"eWUZL":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "bounce", ()=>bounce
+);
+var _tsparticlesEngine = require("tsparticles-engine");
+function bounce(p1, p2) {
+    _tsparticlesEngine.circleBounce(_tsparticlesEngine.circleBounceDataFromParticle(p1), _tsparticlesEngine.circleBounceDataFromParticle(p2));
+}
+
+},{"tsparticles-engine":"9BizU","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"b2fS4":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "destroy", ()=>destroy
+);
+var _bounce = require("./Bounce");
+function destroy(p1, p2) {
+    if (!p1.unbreakable && !p2.unbreakable) _bounce.bounce(p1, p2);
+    if (p1.getRadius() === undefined && p2.getRadius() !== undefined) p1.destroy();
+    else if (p1.getRadius() !== undefined && p2.getRadius() === undefined) p2.destroy();
+    else if (p1.getRadius() !== undefined && p2.getRadius() !== undefined) {
+        if (p1.getRadius() >= p2.getRadius()) p2.destroy();
+        else p1.destroy();
+    }
+}
+
+},{"./Bounce":"eWUZL","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"029dI":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "loadParticlesLinksInteraction", ()=>loadParticlesLinksInteraction
+);
+var _interaction = require("./interaction");
+var _plugin = require("./plugin");
+async function loadParticlesLinksInteraction(engine) {
+    await _interaction.loadInteraction(engine);
+    await _plugin.loadPlugin(engine);
+}
+
+},{"./interaction":"bKqy5","./plugin":"992Fd","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"bKqy5":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "loadInteraction", ()=>loadInteraction
+);
+var _linker = require("./Linker");
+async function loadInteraction(engine) {
+    await engine.addInteractor("particlesLinks", (container)=>new _linker.Linker(container)
+    );
+}
+
+},{"./Linker":"ixMnk","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"ixMnk":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "Linker", ()=>Linker
+);
+var _tsparticlesEngine = require("tsparticles-engine");
+function getLinkDistance(pos1, pos2, optDistance, canvasSize, warp) {
+    let distance = _tsparticlesEngine.getDistance(pos1, pos2);
+    if (!warp || distance <= optDistance) return distance;
+    const pos2NE = {
+        x: pos2.x - canvasSize.width,
+        y: pos2.y
+    };
+    distance = _tsparticlesEngine.getDistance(pos1, pos2NE);
+    if (distance <= optDistance) return distance;
+    const pos2SE = {
+        x: pos2.x - canvasSize.width,
+        y: pos2.y - canvasSize.height
+    };
+    distance = _tsparticlesEngine.getDistance(pos1, pos2SE);
+    if (distance <= optDistance) return distance;
+    const pos2SW = {
+        x: pos2.x,
+        y: pos2.y - canvasSize.height
+    };
+    distance = _tsparticlesEngine.getDistance(pos1, pos2SW);
+    return distance;
+}
+class Linker extends _tsparticlesEngine.ParticlesInteractorBase {
+    constructor(container){
+        super(container);
+    }
+    isEnabled(particle) {
+        return particle.options.links.enable;
+    }
+    reset() {}
+    async interact(p1) {
+        var _a;
+        p1.links = [];
+        const pos1 = p1.getPosition(), container = this.container, canvasSize = container.canvas.size;
+        if (pos1.x < 0 || pos1.y < 0 || pos1.x > canvasSize.width || pos1.y > canvasSize.height) return;
+        const linkOpt1 = p1.options.links, optOpacity = linkOpt1.opacity, optDistance = (_a = p1.retina.linksDistance) !== null && _a !== void 0 ? _a : container.retina.linksDistance, warp = linkOpt1.warp, range = warp ? new _tsparticlesEngine.CircleWarp(pos1.x, pos1.y, optDistance, canvasSize) : new _tsparticlesEngine.Circle(pos1.x, pos1.y, optDistance), query = container.particles.quadTree.query(range);
+        for (const p2 of query){
+            const linkOpt2 = p2.options.links;
+            if (p1 === p2 || !linkOpt2.enable || linkOpt1.id !== linkOpt2.id || p2.spawning || p2.destroyed || p1.links.map((t)=>t.destination
+            ).indexOf(p2) !== -1 || p2.links.map((t)=>t.destination
+            ).indexOf(p1) !== -1) continue;
+            const pos2 = p2.getPosition();
+            if (pos2.x < 0 || pos2.y < 0 || pos2.x > canvasSize.width || pos2.y > canvasSize.height) continue;
+            const distance = getLinkDistance(pos1, pos2, optDistance, canvasSize, warp && linkOpt2.warp);
+            if (distance > optDistance) return;
+            const opacityLine = (1 - distance / optDistance) * optOpacity;
+            this.setColor(p1);
+            p1.links.push({
+                destination: p2,
+                opacity: opacityLine
+            });
+        }
+    }
+    setColor(p1) {
+        const container = this.container, linksOptions = p1.options.links;
+        let linkColor = linksOptions.id === undefined ? container.particles.linksColor : container.particles.linksColors.get(linksOptions.id);
+        if (!linkColor) {
+            const optColor = linksOptions.color;
+            linkColor = _tsparticlesEngine.getLinkRandomColor(optColor, linksOptions.blink, linksOptions.consent);
+            if (linksOptions.id === undefined) container.particles.linksColor = linkColor;
+            else container.particles.linksColors.set(linksOptions.id, linkColor);
+        }
+    }
+}
+
+},{"tsparticles-engine":"9BizU","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"992Fd":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "loadPlugin", ()=>loadPlugin
+);
+var _linkInstance = require("./LinkInstance");
+class LinksPlugin {
+    constructor(){
+        this.id = "links";
+    }
+    getPlugin(container) {
+        return new _linkInstance.LinkInstance(container);
+    }
+    needsPlugin() {
+        return true;
+    }
+    loadOptions() {}
+}
+async function loadPlugin(engine) {
+    const plugin = new LinksPlugin();
+    await engine.addPlugin(plugin);
+}
+
+},{"./LinkInstance":"2Gkpf","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"2Gkpf":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "LinkInstance", ()=>LinkInstance
+);
+var _tsparticlesEngine = require("tsparticles-engine");
+var _utils = require("./Utils");
+class LinkInstance {
+    constructor(container){
+        this.container = container;
+    }
+    particleCreated(particle) {
+        const linkParticle = particle;
+        linkParticle.links = [];
+    }
+    particleDestroyed(particle) {
+        const linkParticle = particle;
+        linkParticle.links = [];
+    }
+    drawParticle(context, particle) {
+        const linkParticle = particle, container = this.container, particles = container.particles, pOptions = particle.options;
+        if (linkParticle.links.length <= 0) return;
+        context.save();
+        const p1Links = linkParticle.links.filter((l)=>{
+            const linkFreq = container.particles.getLinkFrequency(linkParticle, l.destination);
+            return linkFreq <= pOptions.links.frequency;
+        });
+        for (const link of p1Links){
+            const p2 = link.destination;
+            if (pOptions.links.triangles.enable) {
+                const links = p1Links.map((l)=>l.destination
+                ), vertices = p2.links.filter((t)=>{
+                    const linkFreq = container.particles.getLinkFrequency(p2, t.destination);
+                    return linkFreq <= p2.options.links.frequency && links.indexOf(t.destination) >= 0;
+                });
+                if (vertices.length) for (const vertex of vertices){
+                    const p3 = vertex.destination, triangleFreq = particles.getTriangleFrequency(linkParticle, p2, p3);
+                    if (triangleFreq > pOptions.links.triangles.frequency) continue;
+                    this.drawLinkTriangle(linkParticle, link, vertex);
+                }
+            }
+            if (link.opacity > 0 && container.retina.linksWidth > 0) this.drawLinkLine(linkParticle, link);
+        }
+        context.restore();
+    }
+    drawLinkTriangle(p1, link1, link2) {
+        var _a;
+        const container = this.container, options = container.actualOptions, p2 = link1.destination, p3 = link2.destination, triangleOptions = p1.options.links.triangles, opacityTriangle = (_a = triangleOptions.opacity) !== null && _a !== void 0 ? _a : (link1.opacity + link2.opacity) / 2;
+        if (opacityTriangle <= 0) return;
+        container.canvas.draw((ctx)=>{
+            const pos1 = p1.getPosition();
+            const pos2 = p2.getPosition();
+            const pos3 = p3.getPosition();
+            if (_tsparticlesEngine.getDistance(pos1, pos2) > container.retina.linksDistance || _tsparticlesEngine.getDistance(pos3, pos2) > container.retina.linksDistance || _tsparticlesEngine.getDistance(pos3, pos1) > container.retina.linksDistance) return;
+            let colorTriangle = _tsparticlesEngine.colorToRgb(triangleOptions.color);
+            if (!colorTriangle) {
+                const linksOptions = p1.options.links, linkColor = linksOptions.id !== undefined ? container.particles.linksColors.get(linksOptions.id) : container.particles.linksColor;
+                colorTriangle = _tsparticlesEngine.getLinkColor(p1, p2, linkColor);
+            }
+            if (!colorTriangle) return;
+            _utils.drawLinkTriangle(ctx, pos1, pos2, pos3, options.backgroundMask.enable, options.backgroundMask.composite, colorTriangle, opacityTriangle);
+        });
+    }
+    drawLinkLine(p1, link) {
+        const container = this.container, options = container.actualOptions, p2 = link.destination, pos1 = p1.getPosition(), pos2 = p2.getPosition();
+        let opacity = link.opacity;
+        container.canvas.draw((ctx)=>{
+            var _a, _b;
+            let colorLine;
+            const twinkle = p1.options.twinkle.lines;
+            if (twinkle.enable) {
+                const twinkleFreq = twinkle.frequency, twinkleRgb = _tsparticlesEngine.colorToRgb(twinkle.color), twinkling = Math.random() < twinkleFreq;
+                if (twinkling && twinkleRgb) {
+                    colorLine = twinkleRgb;
+                    opacity = _tsparticlesEngine.getRangeValue(twinkle.opacity);
+                }
+            }
+            if (!colorLine) {
+                const linksOptions = p1.options.links, linkColor = linksOptions.id !== undefined ? container.particles.linksColors.get(linksOptions.id) : container.particles.linksColor;
+                colorLine = _tsparticlesEngine.getLinkColor(p1, p2, linkColor);
+            }
+            if (!colorLine) return;
+            const width = (_a = p1.retina.linksWidth) !== null && _a !== void 0 ? _a : container.retina.linksWidth, maxDistance = (_b = p1.retina.linksDistance) !== null && _b !== void 0 ? _b : container.retina.linksDistance;
+            _utils.drawLinkLine(ctx, width, pos1, pos2, maxDistance, container.canvas.size, p1.options.links.warp, options.backgroundMask.enable, options.backgroundMask.composite, colorLine, opacity, p1.options.links.shadow);
+        });
+    }
+}
+
+},{"tsparticles-engine":"9BizU","./Utils":"dTh4p","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"dTh4p":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "drawLinkLine", ()=>drawLinkLine
+);
+parcelHelpers.export(exports, "drawLinkTriangle", ()=>drawLinkTriangle
+);
+var _tsparticlesEngine = require("tsparticles-engine");
+function drawLinkLine(context, width, begin, end, maxDistance, canvasSize, warp, backgroundMask, composite, colorLine, opacity, shadow) {
+    let drawn = false;
+    if (_tsparticlesEngine.getDistance(begin, end) <= maxDistance) {
+        _tsparticlesEngine.drawLine(context, begin, end);
+        drawn = true;
+    } else if (warp) {
+        let pi1;
+        let pi2;
+        const endNE = {
+            x: end.x - canvasSize.width,
+            y: end.y
+        };
+        const d1 = _tsparticlesEngine.getDistances(begin, endNE);
+        if (d1.distance <= maxDistance) {
+            const yi = begin.y - d1.dy / d1.dx * begin.x;
+            pi1 = {
+                x: 0,
+                y: yi
+            };
+            pi2 = {
+                x: canvasSize.width,
+                y: yi
+            };
+        } else {
+            const endSW = {
+                x: end.x,
+                y: end.y - canvasSize.height
+            };
+            const d2 = _tsparticlesEngine.getDistances(begin, endSW);
+            if (d2.distance <= maxDistance) {
+                const yi = begin.y - d2.dy / d2.dx * begin.x;
+                const xi = -yi / (d2.dy / d2.dx);
+                pi1 = {
+                    x: xi,
+                    y: 0
+                };
+                pi2 = {
+                    x: xi,
+                    y: canvasSize.height
+                };
+            } else {
+                const endSE = {
+                    x: end.x - canvasSize.width,
+                    y: end.y - canvasSize.height
+                };
+                const d3 = _tsparticlesEngine.getDistances(begin, endSE);
+                if (d3.distance <= maxDistance) {
+                    const yi = begin.y - d3.dy / d3.dx * begin.x;
+                    const xi = -yi / (d3.dy / d3.dx);
+                    pi1 = {
+                        x: xi,
+                        y: yi
+                    };
+                    pi2 = {
+                        x: pi1.x + canvasSize.width,
+                        y: pi1.y + canvasSize.height
+                    };
+                }
+            }
+        }
+        if (pi1 && pi2) {
+            _tsparticlesEngine.drawLine(context, begin, pi1);
+            _tsparticlesEngine.drawLine(context, end, pi2);
+            drawn = true;
+        }
+    }
+    if (!drawn) return;
+    context.lineWidth = width;
+    if (backgroundMask) context.globalCompositeOperation = composite;
+    context.strokeStyle = _tsparticlesEngine.getStyleFromRgb(colorLine, opacity);
+    if (shadow.enable) {
+        const shadowColor = _tsparticlesEngine.colorToRgb(shadow.color);
+        if (shadowColor) {
+            context.shadowBlur = shadow.blur;
+            context.shadowColor = _tsparticlesEngine.getStyleFromRgb(shadowColor);
+        }
+    }
+    context.stroke();
+}
+function drawLinkTriangle(context, pos1, pos2, pos3, backgroundMask, composite, colorTriangle, opacityTriangle) {
+    _tsparticlesEngine.drawTriangle(context, pos1, pos2, pos3);
+    if (backgroundMask) context.globalCompositeOperation = composite;
+    context.fillStyle = _tsparticlesEngine.getStyleFromRgb(colorTriangle, opacityTriangle);
+    context.fill();
+}
+
+},{"tsparticles-engine":"9BizU","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"fm2j0":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "loadGenericPolygonShape", ()=>loadGenericPolygonShape
+);
+parcelHelpers.export(exports, "loadTriangleShape", ()=>loadTriangleShape
+);
+parcelHelpers.export(exports, "loadPolygonShape", ()=>loadPolygonShape
+);
+var _polygonDrawer = require("./PolygonDrawer");
+var _triangleDrawer = require("./TriangleDrawer");
+async function loadGenericPolygonShape(engine) {
+    await engine.addShape("polygon", new _polygonDrawer.PolygonDrawer());
+}
+async function loadTriangleShape(engine) {
+    await engine.addShape("triangle", new _triangleDrawer.TriangleDrawer());
+}
+async function loadPolygonShape(engine) {
+    await loadGenericPolygonShape(engine);
+    await loadTriangleShape(engine);
+}
+
+},{"./PolygonDrawer":"bpoIw","./TriangleDrawer":"dM4Ag","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"bpoIw":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "PolygonDrawer", ()=>PolygonDrawer
+);
+var _polygonDrawerBase = require("./PolygonDrawerBase");
+class PolygonDrawer extends _polygonDrawerBase.PolygonDrawerBase {
+    getSidesData(particle, radius) {
+        var _a, _b;
+        const polygon = particle.shapeData;
+        const sides = (_b = (_a = polygon === null || polygon === void 0 ? void 0 : polygon.sides) !== null && _a !== void 0 ? _a : polygon === null || polygon === void 0 ? void 0 : polygon.nb_sides) !== null && _b !== void 0 ? _b : 5;
+        return {
+            count: {
+                denominator: 1,
+                numerator: sides
+            },
+            length: radius * 2.66 / (sides / 3)
+        };
+    }
+    getCenter(particle, radius) {
+        const sides = this.getSidesCount(particle);
+        return {
+            x: -radius / (sides / 3.5),
+            y: -radius / 0.76
+        };
+    }
+}
+
+},{"./PolygonDrawerBase":"haLvf","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"haLvf":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "PolygonDrawerBase", ()=>PolygonDrawerBase
+);
+class PolygonDrawerBase {
+    getSidesCount(particle) {
+        var _a, _b;
+        const polygon = particle.shapeData;
+        return (_b = (_a = polygon === null || polygon === void 0 ? void 0 : polygon.sides) !== null && _a !== void 0 ? _a : polygon === null || polygon === void 0 ? void 0 : polygon.nb_sides) !== null && _b !== void 0 ? _b : 5;
+    }
+    draw(context, particle, radius) {
+        const start = this.getCenter(particle, radius);
+        const side = this.getSidesData(particle, radius);
+        const sideCount = side.count.numerator * side.count.denominator;
+        const decimalSides = side.count.numerator / side.count.denominator;
+        const interiorAngleDegrees = 180 * (decimalSides - 2) / decimalSides;
+        const interiorAngle = Math.PI - Math.PI * interiorAngleDegrees / 180;
+        if (!context) return;
+        context.beginPath();
+        context.translate(start.x, start.y);
+        context.moveTo(0, 0);
+        for(let i = 0; i < sideCount; i++){
+            context.lineTo(side.length, 0);
+            context.translate(side.length, 0);
+            context.rotate(interiorAngle);
+        }
+    }
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"dM4Ag":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "TriangleDrawer", ()=>TriangleDrawer
+);
+var _polygonDrawerBase = require("./PolygonDrawerBase");
+class TriangleDrawer extends _polygonDrawerBase.PolygonDrawerBase {
+    getSidesCount() {
+        return 3;
+    }
+    getSidesData(particle, radius) {
+        return {
+            count: {
+                denominator: 2,
+                numerator: 3
+            },
+            length: radius * 2
+        };
+    }
+    getCenter(particle, radius) {
+        return {
+            x: -radius,
+            y: radius / 1.66
+        };
+    }
+}
+
+},{"./PolygonDrawerBase":"haLvf","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"hOW9I":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "loadSizeUpdater", ()=>loadSizeUpdater
+);
+var _sizeUpdater = require("./SizeUpdater");
+async function loadSizeUpdater(engine) {
+    await engine.addParticleUpdater("size", ()=>new _sizeUpdater.SizeUpdater()
+    );
+}
+
+},{"./SizeUpdater":"kIk58","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"kIk58":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "SizeUpdater", ()=>SizeUpdater
+);
+var _tsparticlesEngine = require("tsparticles-engine");
+function checkDestroy(particle, value, minValue, maxValue) {
+    switch(particle.options.size.animation.destroy){
+        case "max":
+            if (value >= maxValue) particle.destroy();
+            break;
+        case "min":
+            if (value <= minValue) particle.destroy();
+            break;
+    }
+}
+function updateSize(particle, delta) {
+    var _a, _b, _c, _d;
+    const sizeVelocity = ((_a = particle.size.velocity) !== null && _a !== void 0 ? _a : 0) * delta.factor;
+    const minValue = particle.size.min;
+    const maxValue = particle.size.max;
+    if (particle.destroyed || !particle.size.enable || ((_b = particle.size.maxLoops) !== null && _b !== void 0 ? _b : 0) > 0 && ((_c = particle.size.loops) !== null && _c !== void 0 ? _c : 0) > ((_d = particle.size.maxLoops) !== null && _d !== void 0 ? _d : 0)) return;
+    switch(particle.size.status){
+        case 0:
+            if (particle.size.value >= maxValue) {
+                particle.size.status = 1;
+                if (!particle.size.loops) particle.size.loops = 0;
+                particle.size.loops++;
+            } else particle.size.value += sizeVelocity;
+            break;
+        case 1:
+            if (particle.size.value <= minValue) {
+                particle.size.status = 0;
+                if (!particle.size.loops) particle.size.loops = 0;
+                particle.size.loops++;
+            } else particle.size.value -= sizeVelocity;
+    }
+    checkDestroy(particle, particle.size.value, minValue, maxValue);
+    if (!particle.destroyed) particle.size.value = _tsparticlesEngine.clamp(particle.size.value, minValue, maxValue);
+}
+class SizeUpdater {
+    init() {}
+    isEnabled(particle) {
+        var _a, _b, _c, _d;
+        return !particle.destroyed && !particle.spawning && particle.size.enable && (((_a = particle.size.maxLoops) !== null && _a !== void 0 ? _a : 0) <= 0 || ((_b = particle.size.maxLoops) !== null && _b !== void 0 ? _b : 0) > 0 && ((_c = particle.size.loops) !== null && _c !== void 0 ? _c : 0) < ((_d = particle.size.maxLoops) !== null && _d !== void 0 ? _d : 0));
+    }
+    update(particle, delta) {
+        if (!this.isEnabled(particle)) return;
+        updateSize(particle, delta);
+    }
+}
+
+},{"tsparticles-engine":"9BizU","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"k7A7h":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "loadSquareShape", ()=>loadSquareShape
+);
+var _squareDrawer = require("./SquareDrawer");
+async function loadSquareShape(engine) {
+    const drawer = new _squareDrawer.SquareDrawer();
+    await engine.addShape("edge", drawer);
+    await engine.addShape("square", drawer);
+}
+
+},{"./SquareDrawer":"eitMo","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"eitMo":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "SquareDrawer", ()=>SquareDrawer
+);
+const fixFactor = Math.sqrt(2);
+class SquareDrawer {
+    getSidesCount() {
+        return 4;
+    }
+    draw(context, particle, radius) {
+        context.rect(-radius / fixFactor, -radius / fixFactor, radius * 2 / fixFactor, radius * 2 / fixFactor);
+    }
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"7MmRD":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "loadStarShape", ()=>loadStarShape
+);
+var _starDrawer = require("./StarDrawer");
+async function loadStarShape(engine) {
+    await engine.addShape("star", new _starDrawer.StarDrawer());
+}
+
+},{"./StarDrawer":"1lC4w","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"1lC4w":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "StarDrawer", ()=>StarDrawer
+);
+class StarDrawer {
+    getSidesCount(particle) {
+        var _a, _b;
+        const star = particle.shapeData;
+        return (_b = (_a = star === null || star === void 0 ? void 0 : star.sides) !== null && _a !== void 0 ? _a : star === null || star === void 0 ? void 0 : star.nb_sides) !== null && _b !== void 0 ? _b : 5;
+    }
+    draw(context, particle, radius) {
+        var _a;
+        const star = particle.shapeData;
+        const sides = this.getSidesCount(particle);
+        const inset = (_a = star === null || star === void 0 ? void 0 : star.inset) !== null && _a !== void 0 ? _a : 2;
+        context.moveTo(0, 0 - radius);
+        for(let i = 0; i < sides; i++){
+            context.rotate(Math.PI / sides);
+            context.lineTo(0, 0 - radius * inset);
+            context.rotate(Math.PI / sides);
+            context.lineTo(0, 0 - radius);
+        }
+    }
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"8d7rY":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "loadStrokeColorUpdater", ()=>loadStrokeColorUpdater
+);
+var _strokeColorUpdater = require("./StrokeColorUpdater");
+async function loadStrokeColorUpdater(engine) {
+    await engine.addParticleUpdater("strokeColor", (container)=>new _strokeColorUpdater.StrokeColorUpdater(container)
+    );
+}
+
+},{"./StrokeColorUpdater":"4bl97","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"4bl97":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "StrokeColorUpdater", ()=>StrokeColorUpdater
+);
+var _tsparticlesEngine = require("tsparticles-engine");
+function updateColorValue(delta, value, valueAnimation, max, decrease) {
+    var _a;
+    const colorValue = value;
+    if (!colorValue || !colorValue.enable) return;
+    const offset = _tsparticlesEngine.randomInRange(valueAnimation.offset);
+    const velocity = ((_a = value.velocity) !== null && _a !== void 0 ? _a : 0) * delta.factor + offset * 3.6;
+    if (!decrease || colorValue.status === 0) {
+        colorValue.value += velocity;
+        if (decrease && colorValue.value > max) {
+            colorValue.status = 1;
+            colorValue.value -= colorValue.value % max;
+        }
+    } else {
+        colorValue.value -= velocity;
+        if (colorValue.value < 0) {
+            colorValue.status = 0;
+            colorValue.value += colorValue.value;
+        }
+    }
+    if (colorValue.value > max) colorValue.value %= max;
+}
+function updateStrokeColor(particle, delta) {
+    var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k;
+    if (!((_a = particle.stroke) === null || _a === void 0 ? void 0 : _a.color)) return;
+    const animationOptions = particle.stroke.color.animation;
+    const h = (_c = (_b = particle.strokeColor) === null || _b === void 0 ? void 0 : _b.h) !== null && _c !== void 0 ? _c : (_d = particle.color) === null || _d === void 0 ? void 0 : _d.h;
+    if (h) updateColorValue(delta, h, animationOptions.h, 360, false);
+    const s = (_f = (_e = particle.strokeColor) === null || _e === void 0 ? void 0 : _e.s) !== null && _f !== void 0 ? _f : (_g = particle.color) === null || _g === void 0 ? void 0 : _g.s;
+    if (s) updateColorValue(delta, s, animationOptions.s, 100, true);
+    const l = (_j = (_h = particle.strokeColor) === null || _h === void 0 ? void 0 : _h.l) !== null && _j !== void 0 ? _j : (_k = particle.color) === null || _k === void 0 ? void 0 : _k.l;
+    if (l) updateColorValue(delta, l, animationOptions.l, 100, true);
+}
+class StrokeColorUpdater {
+    constructor(container){
+        this.container = container;
+    }
+    init(particle) {
+        var _a, _b;
+        const container = this.container;
+        particle.stroke = particle.options.stroke instanceof Array ? _tsparticlesEngine.itemFromArray(particle.options.stroke, particle.id, particle.options.reduceDuplicates) : particle.options.stroke;
+        particle.strokeWidth = particle.stroke.width * container.retina.pixelRatio;
+        const strokeHslColor = (_a = _tsparticlesEngine.colorToHsl(particle.stroke.color)) !== null && _a !== void 0 ? _a : particle.getFillColor();
+        if (strokeHslColor) particle.strokeColor = _tsparticlesEngine.getHslAnimationFromHsl(strokeHslColor, (_b = particle.stroke.color) === null || _b === void 0 ? void 0 : _b.animation, container.retina.reduceFactor);
+    }
+    isEnabled(particle) {
+        var _a, _b, _c, _d;
+        const color = (_a = particle.stroke) === null || _a === void 0 ? void 0 : _a.color;
+        return !particle.destroyed && !particle.spawning && !!color && (((_b = particle.strokeColor) === null || _b === void 0 ? void 0 : _b.h.value) !== undefined && color.animation.h.enable || ((_c = particle.strokeColor) === null || _c === void 0 ? void 0 : _c.s.value) !== undefined && color.animation.s.enable || ((_d = particle.strokeColor) === null || _d === void 0 ? void 0 : _d.l.value) !== undefined && color.animation.l.enable);
+    }
+    update(particle, delta) {
+        if (!this.isEnabled(particle)) return;
+        updateStrokeColor(particle, delta);
+    }
+}
+
+},{"tsparticles-engine":"9BizU","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"fWfvv":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "loadTextShape", ()=>loadTextShape
+);
+var _textDrawer = require("./TextDrawer");
+async function loadTextShape(engine) {
+    const drawer = new _textDrawer.TextDrawer();
+    for (const type of _textDrawer.validTypes)await engine.addShape(type, drawer);
+}
+
+},{"./TextDrawer":"mDmbE","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"mDmbE":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "validTypes", ()=>validTypes
+);
+parcelHelpers.export(exports, "TextDrawer", ()=>TextDrawer
+);
+var _tsparticlesEngine = require("tsparticles-engine");
+const validTypes = [
+    "text",
+    "character",
+    "char"
+];
+class TextDrawer {
+    getSidesCount() {
+        return 12;
+    }
+    async init(container) {
+        const options = container.actualOptions;
+        if (validTypes.find((t)=>_tsparticlesEngine.isInArray(t, options.particles.shape.type)
+        )) {
+            const shapeOptions = validTypes.map((t)=>options.particles.shape.options[t]
+            ).find((t)=>!!t
+            );
+            if (shapeOptions instanceof Array) {
+                const promises = [];
+                for (const character of shapeOptions){
+                    const charShape = character;
+                    promises.push(_tsparticlesEngine.loadFont(charShape.font, charShape.weight));
+                }
+                await Promise.allSettled(promises);
+            } else if (shapeOptions !== undefined) {
+                const charShape = shapeOptions;
+                await _tsparticlesEngine.loadFont(charShape.font, charShape.weight);
+            }
+        }
+    }
+    draw(context, particle, radius, opacity) {
+        var _a, _b, _c;
+        const character = particle.shapeData;
+        if (character === undefined) return;
+        const textData = character.value;
+        if (textData === undefined) return;
+        const textParticle = particle;
+        if (textParticle.text === undefined) textParticle.text = textData instanceof Array ? _tsparticlesEngine.itemFromArray(textData, particle.randomIndexData) : textData;
+        const text = textParticle.text;
+        const style = (_a = character.style) !== null && _a !== void 0 ? _a : "";
+        const weight = (_b = character.weight) !== null && _b !== void 0 ? _b : "400";
+        const size = Math.round(radius) * 2;
+        const font = (_c = character.font) !== null && _c !== void 0 ? _c : "Verdana";
+        const fill = particle.fill;
+        const offsetX = text.length * radius / 2;
+        context.font = `${style} ${weight} ${size}px "${font}"`;
+        const pos = {
+            x: -offsetX,
+            y: radius / 2
+        };
+        context.globalAlpha = opacity;
+        if (fill) context.fillText(text, pos.x, pos.y);
+        else context.strokeText(text, pos.x, pos.y);
+        context.globalAlpha = 1;
+    }
+}
+
+},{"tsparticles-engine":"9BizU","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"dcD6p":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "loadTiltUpdater", ()=>loadTiltUpdater
+);
+var _tiltUpdater = require("./TiltUpdater");
+async function loadTiltUpdater(engine) {
+    await engine.addParticleUpdater("tilt", (container)=>new _tiltUpdater.TiltUpdater(container)
+    );
+}
+
+},{"./TiltUpdater":"3JnnI","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"3JnnI":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "TiltUpdater", ()=>TiltUpdater
+);
+var _tsparticlesEngine = require("tsparticles-engine");
+function updateTilt(particle, delta) {
+    var _a;
+    if (!particle.tilt) return;
+    const tilt = particle.options.tilt;
+    const tiltAnimation = tilt.animation;
+    const speed = ((_a = particle.tilt.velocity) !== null && _a !== void 0 ? _a : 0) * delta.factor;
+    const max = 2 * Math.PI;
+    if (!tiltAnimation.enable) return;
+    switch(particle.tilt.status){
+        case 0:
+            particle.tilt.value += speed;
+            if (particle.tilt.value > max) particle.tilt.value -= max;
+            break;
+        case 1:
+        default:
+            particle.tilt.value -= speed;
+            if (particle.tilt.value < 0) particle.tilt.value += max;
+            break;
+    }
+}
+class TiltUpdater {
+    constructor(container){
+        this.container = container;
+    }
+    init(particle) {
+        const tiltOptions = particle.options.tilt;
+        particle.tilt = {
+            enable: tiltOptions.enable,
+            value: _tsparticlesEngine.getRangeValue(tiltOptions.value) * Math.PI / 180,
+            sinDirection: Math.random() >= 0.5 ? 1 : -1,
+            cosDirection: Math.random() >= 0.5 ? 1 : -1
+        };
+        let tiltDirection = tiltOptions.direction;
+        if (tiltDirection === "random") {
+            const index = Math.floor(Math.random() * 2);
+            tiltDirection = index > 0 ? "counter-clockwise" : "clockwise";
+        }
+        switch(tiltDirection){
+            case "counter-clockwise":
+            case "counterClockwise":
+                particle.tilt.status = 1;
+                break;
+            case "clockwise":
+                particle.tilt.status = 0;
+                break;
+        }
+        const tiltAnimation = particle.options.tilt.animation;
+        if (tiltAnimation.enable) {
+            particle.tilt.velocity = _tsparticlesEngine.getRangeValue(tiltAnimation.speed) / 360 * this.container.retina.reduceFactor;
+            if (!tiltAnimation.sync) particle.tilt.velocity *= Math.random();
+        }
+    }
+    isEnabled(particle) {
+        const tilt = particle.options.tilt;
+        const tiltAnimation = tilt.animation;
+        return !particle.destroyed && !particle.spawning && tiltAnimation.enable;
+    }
+    update(particle, delta) {
+        if (!this.isEnabled(particle)) return;
+        updateTilt(particle, delta);
+    }
+}
+
+},{"tsparticles-engine":"9BizU","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"8JpXR":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "loadTwinkleUpdater", ()=>loadTwinkleUpdater
+);
+var _twinkleUpdater = require("./TwinkleUpdater");
+async function loadTwinkleUpdater(engine) {
+    await engine.addParticleUpdater("twinkle", ()=>new _twinkleUpdater.TwinkleUpdater()
+    );
+}
+
+},{"./TwinkleUpdater":"iJKZq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"iJKZq":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "TwinkleUpdater", ()=>TwinkleUpdater
+);
+var _tsparticlesEngine = require("tsparticles-engine");
+class TwinkleUpdater {
+    getColorStyles(particle, context, radius, opacity) {
+        const pOptions = particle.options, twinkle = pOptions.twinkle.particles, twinkling = twinkle.enable && Math.random() < twinkle.frequency, zIndexOptions = particle.options.zIndex, zOpacityFactor = (1 - particle.zIndexFactor) ** zIndexOptions.opacityRate, twinklingOpacity = twinkling ? _tsparticlesEngine.getRangeValue(twinkle.opacity) * zOpacityFactor : opacity, twinkleRgb = _tsparticlesEngine.colorToHsl(twinkle.color), twinkleStyle = twinkleRgb ? _tsparticlesEngine.getStyleFromHsl(twinkleRgb, twinklingOpacity) : undefined, res = {}, needsTwinkle = twinkling && twinkleStyle;
+        res.fill = needsTwinkle ? twinkleStyle : undefined;
+        res.stroke = needsTwinkle ? twinkleStyle : undefined;
+        return res;
+    }
+    init() {}
+    isEnabled(particle) {
+        return particle.options.twinkle.particles.enable;
+    }
+    update() {}
+}
+
+},{"tsparticles-engine":"9BizU","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"9Uagp":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "loadWobbleUpdater", ()=>loadWobbleUpdater
+);
+var _wobbleUpdater = require("./WobbleUpdater");
+async function loadWobbleUpdater(engine) {
+    await engine.addParticleUpdater("wobble", (container)=>new _wobbleUpdater.WobbleUpdater(container)
+    );
+}
+
+},{"./WobbleUpdater":"gQVsw","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"gQVsw":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "WobbleUpdater", ()=>WobbleUpdater
+);
+var _tsparticlesEngine = require("tsparticles-engine");
+function updateWobble(particle, delta) {
+    var _a;
+    const wobble = particle.options.wobble;
+    if (!wobble.enable || !particle.wobble) return;
+    const speed = particle.wobble.speed * delta.factor;
+    const distance = ((_a = particle.retina.wobbleDistance) !== null && _a !== void 0 ? _a : 0) * delta.factor / (1000 / 60);
+    const max = 2 * Math.PI;
+    particle.wobble.angle += speed;
+    if (particle.wobble.angle > max) particle.wobble.angle -= max;
+    particle.position.x += distance * Math.cos(particle.wobble.angle);
+    particle.position.y += distance * Math.abs(Math.sin(particle.wobble.angle));
+}
+class WobbleUpdater {
+    constructor(container){
+        this.container = container;
+    }
+    init(particle) {
+        const wobbleOpt = particle.options.wobble;
+        if (wobbleOpt.enable) particle.wobble = {
+            angle: Math.random() * Math.PI * 2,
+            speed: _tsparticlesEngine.getRangeValue(wobbleOpt.speed) / 360
+        };
+        else particle.wobble = {
+            angle: 0,
+            speed: 0
+        };
+        particle.retina.wobbleDistance = _tsparticlesEngine.getRangeValue(wobbleOpt.distance) * this.container.retina.pixelRatio;
+    }
+    isEnabled(particle) {
+        return !particle.destroyed && !particle.spawning && particle.options.wobble.enable;
+    }
+    update(particle, delta) {
+        if (!this.isEnabled(particle)) return;
+        updateWobble(particle, delta);
+    }
+}
+
+},{"tsparticles-engine":"9BizU","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"iL8Ng":[function(require,module,exports) {
+var $parcel$ReactRefreshHelpers$5d2f = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+$parcel$ReactRefreshHelpers$5d2f.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "FallingElements", ()=>FallingElements
+);
+var _jsxDevRuntime = require("react/jsx-dev-runtime");
+var _fallingElementsScss = require("./falling-elements.scss");
+var _seedrandom = require("seedrandom");
+var _seedrandomDefault = parcelHelpers.interopDefault(_seedrandom);
+const FallingElements = (props)=>{
+    const { elements , seed  } = props;
+    const rng = _seedrandomDefault.default(seed);
+    return /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
+        className: "falling-elements",
+        children: elements.map((element, index)=>/*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
+                className: "falling-elements__leaf",
+                style: {
+                    left: `${rng() * 120 - 20}%`,
+                    top: `-${rng() * 800}px`,
+                    animationDuration: `${4 + rng() * 4}s`
+                },
+                children: /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
+                    className: "falling-elements__leaf-content",
+                    style: {
+                        transform: `scale(0.5) rotate(${rng() * 16 - 8}deg)`
+                    },
+                    children: element
+                }, void 0, false, {
+                    fileName: "src/components/falling-elements/falling-elements.tsx",
+                    lineNumber: 21,
+                    columnNumber: 7
+                }, undefined)
+            }, void 0, false, {
+                fileName: "src/components/falling-elements/falling-elements.tsx",
+                lineNumber: 17,
+                columnNumber: 39
+            }, undefined)
+        )
+    }, void 0, false, {
+        fileName: "src/components/falling-elements/falling-elements.tsx",
+        lineNumber: 16,
+        columnNumber: 10
+    }, undefined);
+};
+_c = FallingElements;
+var _c;
+$RefreshReg$(_c, "FallingElements");
+
+  $parcel$ReactRefreshHelpers$5d2f.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-dev-runtime":"iTorj","./falling-elements.scss":"lpxYX","seedrandom":"acqQZ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"lpxYX":[function() {},{}],"kB4dJ":[function(require,module,exports) {
+var $parcel$ReactRefreshHelpers$076b = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+$parcel$ReactRefreshHelpers$076b.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "WinningElement", ()=>WinningElement
+);
+var _jsxDevRuntime = require("react/jsx-dev-runtime");
+var _winningElementScss = require("./winning-element.scss");
+var _seedrandom = require("seedrandom");
+var _seedrandomDefault = parcelHelpers.interopDefault(_seedrandom);
+const WinningElement = (props)=>{
+    const { element , seed  } = props;
+    const rng = _seedrandomDefault.default(seed);
+    return /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
+        className: "winning-element",
+        children: /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
+            className: "winning-element__wrapper",
+            children: element
+        }, void 0, false, {
+            fileName: "src/components/winning-element/winning-element.tsx",
+            lineNumber: 16,
+            columnNumber: 3
+        }, undefined)
+    }, void 0, false, {
+        fileName: "src/components/winning-element/winning-element.tsx",
+        lineNumber: 15,
+        columnNumber: 10
+    }, undefined);
+};
+_c = WinningElement;
+var _c;
+$RefreshReg$(_c, "WinningElement");
+
+  $parcel$ReactRefreshHelpers$076b.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-dev-runtime":"iTorj","./winning-element.scss":"6mp8O","seedrandom":"acqQZ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"6mp8O":[function() {},{}],"8HsNm":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "employees", ()=>employees
+);
+const employees = [
+    {
+        id: "1",
+        name: "Julia",
+        image: new URL(require("9c7bcb686f108800")),
+        confetti: [
+            "🐕",
+            "🦴"
+        ],
+        gender: 'female'
+    },
+    {
+        id: "2",
+        name: "Andi",
+        image: new URL(require("b926d32f3d2438a7")),
+        confetti: [
+            "🚀",
+            "⭐",
+            "🪐"
+        ],
+        gender: 'male'
+    },
+    {
+        id: "3",
+        name: "Alex",
+        image: new URL(require("cb1eb9a8cd4706a0")),
+        gender: 'male'
+    },
+    {
+        id: "4",
+        name: "Jan",
+        image: new URL(require("cd10a16ba2f72627")),
+        confetti: [
+            "⚔️",
+            "🛡️"
+        ],
+        gender: 'male'
+    },
+    {
+        id: "5",
+        name: "Johanna",
+        image: new URL(require("514e5d2ebb02ae2d")),
+        gender: 'female'
+    },
+    {
+        id: "6",
+        name: "Kim",
+        image: new URL(require("833e6aa52031324f")),
+        confetti: [
+            "🍷"
+        ],
+        gender: 'female'
+    },
+    {
+        id: "7",
+        name: "Kolja",
+        image: new URL(require("29116727b0c96f77")),
+        gender: 'male'
+    },
+    {
+        id: "8",
+        name: "Lena",
+        image: new URL(require("3ade115a9bfefee3")),
+        gender: 'female'
+    },
+    {
+        id: "9",
+        name: "Michael",
+        image: new URL(require("c4de1d6b2ee0d624")),
+        gender: 'male'
+    },
+    {
+        id: "10",
+        name: "Norma",
+        image: new URL(require("b19dfaa2518070f7")),
+        confetti: [
+            "🐴",
+            "🐎"
+        ],
+        gender: 'female'
+    },
+    {
+        id: "11",
+        name: "Oskar",
+        image: new URL(require("200013b9c272a469")),
+        gender: 'male'
+    },
+    {
+        id: "12",
+        name: "Pabu",
+        image: new URL(require("89d682caff438bbc")),
+        confetti: [
+            "🐕",
+            "🦴"
+        ],
+        gender: 'male'
+    },
+    {
+        id: "13",
+        name: "Raul",
+        image: new URL(require("88a6c2b0d87e29ec")),
+        confetti: [
+            "🇲🇽",
+            "Taco"
+        ],
+        gender: 'male'
+    },
+    {
+        id: "14",
+        name: "Verena",
+        image: new URL(require("8369fc7d5a8741bc")),
+        gender: 'female'
+    }
+];
+
+},{"b926d32f3d2438a7":"bxlGC","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","cb1eb9a8cd4706a0":"1ZhLb","cd10a16ba2f72627":"6knJn","514e5d2ebb02ae2d":"fbMhW","833e6aa52031324f":"3eUlr","29116727b0c96f77":"kYWNA","3ade115a9bfefee3":"8TjeE","c4de1d6b2ee0d624":"l2y2I","b19dfaa2518070f7":"3oCiV","200013b9c272a469":"lQ6rF","89d682caff438bbc":"iTkfv","88a6c2b0d87e29ec":"7ct8t","8369fc7d5a8741bc":"jnvpn","9c7bcb686f108800":"6wm0i"}],"bxlGC":[function(require,module,exports) {
+module.exports = require('./helpers/bundle-url').getBundleURL('bLxZJ') + "andi.6c8f2183.webp" + "?" + Date.now();
+
+},{"./helpers/bundle-url":"lgJ39"}],"1ZhLb":[function(require,module,exports) {
+module.exports = require('./helpers/bundle-url').getBundleURL('bLxZJ') + "alex.114f926f.webp" + "?" + Date.now();
+
+},{"./helpers/bundle-url":"lgJ39"}],"6knJn":[function(require,module,exports) {
+module.exports = require('./helpers/bundle-url').getBundleURL('bLxZJ') + "jan.e645b3a4.webp" + "?" + Date.now();
+
+},{"./helpers/bundle-url":"lgJ39"}],"fbMhW":[function(require,module,exports) {
+module.exports = require('./helpers/bundle-url').getBundleURL('bLxZJ') + "johanna.81e273fd.webp" + "?" + Date.now();
+
+},{"./helpers/bundle-url":"lgJ39"}],"3eUlr":[function(require,module,exports) {
+module.exports = require('./helpers/bundle-url').getBundleURL('bLxZJ') + "kim.cc9c23c7.webp" + "?" + Date.now();
+
+},{"./helpers/bundle-url":"lgJ39"}],"kYWNA":[function(require,module,exports) {
+module.exports = require('./helpers/bundle-url').getBundleURL('bLxZJ') + "kolja.900e3485.webp" + "?" + Date.now();
+
+},{"./helpers/bundle-url":"lgJ39"}],"8TjeE":[function(require,module,exports) {
+module.exports = require('./helpers/bundle-url').getBundleURL('bLxZJ') + "lena.9ea885d1.webp" + "?" + Date.now();
+
+},{"./helpers/bundle-url":"lgJ39"}],"l2y2I":[function(require,module,exports) {
+module.exports = require('./helpers/bundle-url').getBundleURL('bLxZJ') + "michael.c323cd35.webp" + "?" + Date.now();
+
+},{"./helpers/bundle-url":"lgJ39"}],"3oCiV":[function(require,module,exports) {
+module.exports = require('./helpers/bundle-url').getBundleURL('bLxZJ') + "norma.a193d7dd.webp" + "?" + Date.now();
+
+},{"./helpers/bundle-url":"lgJ39"}],"lQ6rF":[function(require,module,exports) {
+module.exports = require('./helpers/bundle-url').getBundleURL('bLxZJ') + "oskar.8f11574d.webp" + "?" + Date.now();
+
+},{"./helpers/bundle-url":"lgJ39"}],"iTkfv":[function(require,module,exports) {
+module.exports = require('./helpers/bundle-url').getBundleURL('bLxZJ') + "pabu.8b1b6c8a.webp" + "?" + Date.now();
+
+},{"./helpers/bundle-url":"lgJ39"}],"7ct8t":[function(require,module,exports) {
+module.exports = require('./helpers/bundle-url').getBundleURL('bLxZJ') + "raul.bb96b6db.webp" + "?" + Date.now();
+
+},{"./helpers/bundle-url":"lgJ39"}],"jnvpn":[function(require,module,exports) {
+module.exports = require('./helpers/bundle-url').getBundleURL('bLxZJ') + "verena.ffb35970.webp" + "?" + Date.now();
+
+},{"./helpers/bundle-url":"lgJ39"}],"6wm0i":[function(require,module,exports) {
+module.exports = require('./helpers/bundle-url').getBundleURL('bLxZJ') + "julia.513b4086.webp" + "?" + Date.now();
+
+},{"./helpers/bundle-url":"lgJ39"}],"9kiBP":[function(require,module,exports) {
+var $parcel$ReactRefreshHelpers$4dd5 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+$parcel$ReactRefreshHelpers$4dd5.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "Title", ()=>Title
+);
+var _jsxDevRuntime = require("react/jsx-dev-runtime");
+var _titleScss = require("./title.scss");
+const Title = (props)=>{
+    return /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
+        className: "title",
+        children: /*#__PURE__*/ _jsxDevRuntime.jsxDEV("h1", {
+            className: "title__text",
+            children: props.children
+        }, void 0, false, {
+            fileName: "src/components/title/title.tsx",
+            lineNumber: 5,
+            columnNumber: 5
+        }, undefined)
+    }, void 0, false, {
+        fileName: "src/components/title/title.tsx",
+        lineNumber: 4,
+        columnNumber: 10
+    }, undefined);
+};
+_c = Title;
+var _c;
+$RefreshReg$(_c, "Title");
+
+  $parcel$ReactRefreshHelpers$4dd5.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-dev-runtime":"iTorj","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","./title.scss":"73VY4"}],"73VY4":[function() {},{}],"8NBDM":[function(require,module,exports) {
+var $parcel$ReactRefreshHelpers$b0a4 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+$parcel$ReactRefreshHelpers$b0a4.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "Confetti", ()=>Confetti
+);
+var _jsxDevRuntime = require("react/jsx-dev-runtime");
+var _react = require("react");
+var _reactDefault = parcelHelpers.interopDefault(_react);
+var _reactTsparticles = require("react-tsparticles");
+var _reactTsparticlesDefault = parcelHelpers.interopDefault(_reactTsparticles);
+var _tsparticles = require("tsparticles");
+var _confettiScss = require("./confetti.scss");
+var _s = $RefreshSig$();
+const Confetti = (props)=>{
+    _s();
+    const { confettiCharacters =[
+        "💩",
+        "🤡",
+        "🍀",
+        "🍙",
+        "🦄",
+        "⭐️"
+    ]  } = props;
+    const [confettiContainer, setConfettiContainer] = _reactDefault.default.useState();
+    const particlesInit = async (main)=>{
+        console.log(main);
+        // you can initialize the tsParticles instance (main) here, adding custom shapes or presets
+        // this loads the tsparticles package bundle, it's the easiest method for getting everything ready
+        // starting from v2 you can add only the features you need reducing the bundle size
+        await _tsparticles.loadFull(main);
+    };
+    const particlesLoaded = (container)=>{
+        container.stop();
+        if (!confettiContainer) {
+            setConfettiContainer(container);
+            setTimeout(()=>{
+                container.start();
+            }, 4000);
+        }
+    };
+    return /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
+        className: "confetti",
+        children: /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_reactTsparticlesDefault.default, {
+            id: "confetti-particles",
+            init: particlesInit,
+            loaded: particlesLoaded,
+            options: {
+                fpsLimit: 60,
+                background: {
+                    color: {
+                        value: "#000000"
+                    }
+                },
+                fullScreen: {
+                    enable: true,
+                    zIndex: -1
+                },
+                interactivity: {
+                    detectsOn: "window"
+                },
+                emitters: {
+                    position: {
+                        x: 50,
+                        y: 50
+                    },
+                    rate: {
+                        quantity: 10,
+                        delay: 0.25
+                    }
+                },
+                particles: {
+                    color: {
+                        value: [
+                            "#e6007e",
+                            "#c3a815",
+                            "#009fe3",
+                            "#FFFFFF"
+                        ]
+                    },
+                    move: {
+                        decay: 0.05,
+                        direction: "top",
+                        enable: true,
+                        gravity: {
+                            enable: true,
+                            maxSpeed: 150
+                        },
+                        outModes: {
+                            top: "none",
+                            default: "destroy"
+                        },
+                        speed: {
+                            min: 25,
+                            max: 80
+                        }
+                    },
+                    number: {
+                        value: 0
+                    },
+                    opacity: {
+                        value: 1
+                    },
+                    rotate: {
+                        value: {
+                            min: 0,
+                            max: 360
+                        },
+                        direction: "random",
+                        animation: {
+                            enable: true,
+                            speed: 30
+                        }
+                    },
+                    tilt: {
+                        direction: "random",
+                        enable: true,
+                        value: {
+                            min: 0,
+                            max: 360
+                        },
+                        animation: {
+                            enable: true,
+                            speed: 30
+                        }
+                    },
+                    size: {
+                        value: 9
+                    },
+                    roll: {
+                        darken: {
+                            enable: true,
+                            value: 25
+                        },
+                        enable: true,
+                        speed: {
+                            min: 5,
+                            max: 15
+                        }
+                    },
+                    wobble: {
+                        distance: 30,
+                        enable: true,
+                        speed: {
+                            min: -7,
+                            max: 7
+                        }
+                    },
+                    shape: {
+                        type: [
+                            "circle",
+                            "square",
+                            "polygon",
+                            "character",
+                            "character",
+                            "character"
+                        ],
+                        options: {
+                            polygon: [
+                                {
+                                    sides: 5
+                                },
+                                {
+                                    sides: 6
+                                }
+                            ],
+                            character: [
+                                {
+                                    fill: true,
+                                    font: "Verdana",
+                                    value: confettiCharacters,
+                                    weight: 800,
+                                    style: ""
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        }, void 0, false, {
+            fileName: "src/components/confetti/confetti.tsx",
+            lineNumber: 32,
+            columnNumber: 5
+        }, undefined)
+    }, void 0, false, {
+        fileName: "src/components/confetti/confetti.tsx",
+        lineNumber: 31,
+        columnNumber: 5
+    }, undefined);
+};
+_s(Confetti, "mNpHRkNvz1ksUwQrz/Jh0abn0Yk=");
+_c = Confetti;
+var _c;
+$RefreshReg$(_c, "Confetti");
+
+  $parcel$ReactRefreshHelpers$b0a4.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","react-tsparticles":"6yNHG","tsparticles":"9YC3G","./confetti.scss":"59L3M","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"59L3M":[function() {},{}],"5Tzuk":[function(require,module,exports) {
+var $parcel$ReactRefreshHelpers$50b6 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+$parcel$ReactRefreshHelpers$50b6.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "Feedback", ()=>Feedback
+);
+var _jsxDevRuntime = require("react/jsx-dev-runtime");
+var _feedbackScss = require("./feedback.scss");
+var _seedrandom = require("seedrandom");
+var _seedrandomDefault = parcelHelpers.interopDefault(_seedrandom);
+var _skills = require("../../data/skills");
+const personImages = [
+    new URL(require("d179ed91c85601b1")),
+    new URL(require("e52c8649a9c5d948")),
+    new URL(require("37ee7c65861f3dd8")),
+    new URL(require("b132f2e69b5ca15")),
+    new URL(require("c417205b1209d3d8")),
+    new URL(require("ecbb694eaa3b7c00")),
+    new URL(require("4be841a48c21c7ae")),
+    new URL(require("bbb327dae82d9c07")),
+    new URL(require("416c314262fe08a7")),
+    new URL(require("7560e2a62c78ca34")),
+    new URL(require("3ff6a802397d032f")),
+    new URL(require("c10beb5307925b40")),
+    new URL(require("36660bc58589c908")), 
+];
+const article = {
+    'male': 'his',
+    'female': 'her',
+    'other': 'its'
+};
+const article2 = {
+    'male': 'him',
+    'female': 'her',
+    'other': 'it'
+};
+const Feedback = (props)=>{
+    const { seed , employee  } = props;
+    const rng = _seedrandomDefault.default(seed);
+    const personImage = personImages[Math.floor(rng() * personImages.length)];
+    const skill = _skills.skills[Math.floor(rng() * _skills.skills.length)].replace('$1', article[employee.gender]).replace('$2', article2[employee.gender]);
+    return /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
+        className: "feedback",
+        children: [
+            /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
+                className: "feedback__bubble",
+                children: /*#__PURE__*/ _jsxDevRuntime.jsxDEV("h1", {
+                    className: "feedback__text",
+                    children: [
+                        '"',
+                        skill,
+                        '"'
+                    ]
+                }, void 0, true, {
+                    fileName: "src/components/feedback/feedback.tsx",
+                    lineNumber: 68,
+                    columnNumber: 7
+                }, undefined)
+            }, void 0, false, {
+                fileName: "src/components/feedback/feedback.tsx",
+                lineNumber: 67,
+                columnNumber: 5
+            }, undefined),
+            /*#__PURE__*/ _jsxDevRuntime.jsxDEV("img", {
+                className: "feedback__image",
+                src: personImage
+            }, void 0, false, {
+                fileName: "src/components/feedback/feedback.tsx",
+                lineNumber: 71,
+                columnNumber: 5
+            }, undefined)
+        ]
+    }, void 0, true, {
+        fileName: "src/components/feedback/feedback.tsx",
+        lineNumber: 66,
+        columnNumber: 10
+    }, undefined);
+};
+_c = Feedback;
+var _c;
+$RefreshReg$(_c, "Feedback");
+
+  $parcel$ReactRefreshHelpers$50b6.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-dev-runtime":"iTorj","./feedback.scss":"fYAGJ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","seedrandom":"acqQZ","d179ed91c85601b1":"cFstg","e52c8649a9c5d948":"6yXxV","37ee7c65861f3dd8":"1xMKq","b132f2e69b5ca15":"l39SM","c417205b1209d3d8":"f85I4","ecbb694eaa3b7c00":"8UulX","4be841a48c21c7ae":"6iC05","bbb327dae82d9c07":"5kHe6","416c314262fe08a7":"jOpTR","7560e2a62c78ca34":"DkaMq","3ff6a802397d032f":"28z0Q","c10beb5307925b40":"cD9Ko","36660bc58589c908":"3LiwF","../../data/skills":"lwYHa"}],"fYAGJ":[function() {},{}],"cFstg":[function(require,module,exports) {
+module.exports = require('./helpers/bundle-url').getBundleURL('bLxZJ') + "ariel.4cf3b765.webp" + "?" + Date.now();
+
+},{"./helpers/bundle-url":"lgJ39"}],"6yXxV":[function(require,module,exports) {
+module.exports = require('./helpers/bundle-url').getBundleURL('bLxZJ') + "bean.5f17642d.webp" + "?" + Date.now();
+
+},{"./helpers/bundle-url":"lgJ39"}],"1xMKq":[function(require,module,exports) {
+module.exports = require('./helpers/bundle-url').getBundleURL('bLxZJ') + "elmo.9f9844df.webp" + "?" + Date.now();
+
+},{"./helpers/bundle-url":"lgJ39"}],"l39SM":[function(require,module,exports) {
+module.exports = require('./helpers/bundle-url').getBundleURL('bLxZJ') + "gandih.5951b38d.webp" + "?" + Date.now();
+
+},{"./helpers/bundle-url":"lgJ39"}],"f85I4":[function(require,module,exports) {
+module.exports = require('./helpers/bundle-url').getBundleURL('bLxZJ') + "hulk.366af9d1.webp" + "?" + Date.now();
+
+},{"./helpers/bundle-url":"lgJ39"}],"8UulX":[function(require,module,exports) {
+module.exports = require('./helpers/bundle-url').getBundleURL('bLxZJ') + "marilyn.9967e0f0.webp" + "?" + Date.now();
+
+},{"./helpers/bundle-url":"lgJ39"}],"6iC05":[function(require,module,exports) {
+module.exports = require('./helpers/bundle-url').getBundleURL('bLxZJ') + "nibbler.52841ed8.webp" + "?" + Date.now();
+
+},{"./helpers/bundle-url":"lgJ39"}],"5kHe6":[function(require,module,exports) {
+module.exports = require('./helpers/bundle-url').getBundleURL('bLxZJ') + "obama.50163d86.webp" + "?" + Date.now();
+
+},{"./helpers/bundle-url":"lgJ39"}],"jOpTR":[function(require,module,exports) {
+module.exports = require('./helpers/bundle-url').getBundleURL('bLxZJ') + "penguin.fe717d2e.webp" + "?" + Date.now();
+
+},{"./helpers/bundle-url":"lgJ39"}],"DkaMq":[function(require,module,exports) {
+module.exports = require('./helpers/bundle-url').getBundleURL('bLxZJ') + "pitt.486627db.webp" + "?" + Date.now();
+
+},{"./helpers/bundle-url":"lgJ39"}],"28z0Q":[function(require,module,exports) {
+module.exports = require('./helpers/bundle-url').getBundleURL('bLxZJ') + "spongebob.76dfce42.webp" + "?" + Date.now();
+
+},{"./helpers/bundle-url":"lgJ39"}],"cD9Ko":[function(require,module,exports) {
+module.exports = require('./helpers/bundle-url').getBundleURL('bLxZJ') + "un.9d1ff14c.webp" + "?" + Date.now();
+
+},{"./helpers/bundle-url":"lgJ39"}],"3LiwF":[function(require,module,exports) {
+module.exports = require('./helpers/bundle-url').getBundleURL('bLxZJ') + "zucker.7ba6cad5.webp" + "?" + Date.now();
+
+},{"./helpers/bundle-url":"lgJ39"}],"lwYHa":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "skills", ()=>skills
+);
+const skills = [
+    "washed $1 Hands at least 2 times this Week",
+    "showed up to a Meeting",
+    "is stunning",
+    "drunk enough Water today",
+    "made it to Work",
+    "can stand on one Leg",
+    "is so talented",
+    "voted in the last Election",
+    "is against liquorice",
+    "knows how to use a Mouse",
+    "opened Excel, once",
+    "is able to catch a Ball (60% of the time)",
+    "made diva-e hire $2",
+    "Party Animal!!!", 
+];
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["kn9T2","7fmqN","8lqZg"], "8lqZg", "parcelRequire2037")
 
 //# sourceMappingURL=index.975ef6c8.js.map

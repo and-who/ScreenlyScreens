@@ -23,7 +23,7 @@
   bottom: 0px;
   right: -1000px;
   animation: entrance-animation 2s ease-in-out forwards;
-  animation-delay: 6s;
+  animation-delay: 15s;
 
   &__text {
     font-size: 3rem;
@@ -43,7 +43,7 @@
     margin-bottom: 2rem;
     opacity: 0;
     animation: speech-animation 2s ease-in-out forwards;
-    animation-delay: 8s;
+    animation-delay: 17s;
     border-radius: 0.5rem;
     font-style: italic;
 

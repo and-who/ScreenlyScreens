@@ -9,8 +9,8 @@ export const skills = [
   "voted in the last Election",
   "is against liquorice",
   "knows how to use a Mouse",
-  "opened Excel, once",
   "is able to catch a Ball (60% of the time)",
   "made diva-e hire $2",
+  "opened Excel, once",
   "Party Animal!!!",
 ]

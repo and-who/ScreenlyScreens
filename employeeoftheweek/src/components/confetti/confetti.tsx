@@ -22,7 +22,7 @@ export const Confetti = (props :{confettiCharacters:string[]}) => {
       setConfettiContainer(container);
       setTimeout(() => {
         container.start();
-      }, 4000)
+      }, 10000)
     }
     
   };
@@ -53,7 +53,7 @@ export const Confetti = (props :{confettiCharacters:string[]}) => {
             y: 50
           },
           rate: {
-            quantity: 10,
+            quantity: 8,
             delay: 0.25
           }
         },

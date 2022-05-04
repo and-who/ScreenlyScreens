@@ -25079,7 +25079,6 @@ parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "App", ()=>App
 );
 var _jsxDevRuntime = require("react/jsx-dev-runtime");
-var _background = require("./components/background/background");
 var _confetti = require("./components/confetti/confetti");
 var _employeeCard = require("./components/employee-card/employee-card");
 var _fallingElements = require("./components/falling-elements/falling-elements");
@@ -25111,11 +25110,6 @@ const App = ()=>{
     const employeeOfTheWeek = _employees.employees[Math.floor(rng() * _employees.employees.length)];
     return /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
         children: [
-            /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_background.Background, {}, void 0, false, {
-                fileName: "src/app.tsx",
-                lineNumber: 39,
-                columnNumber: 7
-            }, undefined),
             /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_confetti.Confetti, {
                 confettiCharacters: employeeOfTheWeek.confetti
             }, void 0, false, {
@@ -25177,7 +25171,7 @@ $RefreshReg$(_c, "App");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","./components/employee-card/employee-card":"i06vG","./components/background/background":"1xj6i","./components/falling-elements/falling-elements":"iL8Ng","./components/winning-element/winning-element":"kB4dJ","./data/employees":"8HsNm","./components/title/title":"9kiBP","./components/confetti/confetti":"8NBDM","seedrandom":"acqQZ","./components/feedback/feedback":"5Tzuk"}],"gkKU3":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","./components/employee-card/employee-card":"i06vG","./components/falling-elements/falling-elements":"iL8Ng","./components/winning-element/winning-element":"kB4dJ","./data/employees":"8HsNm","./components/title/title":"9kiBP","./components/confetti/confetti":"8NBDM","seedrandom":"acqQZ","./components/feedback/feedback":"5Tzuk"}],"gkKU3":[function(require,module,exports) {
 exports.interopDefault = function(a) {
     return a && a.__esModule ? a : {
         default: a
@@ -26197,16 +26191,353 @@ typeof self !== 'undefined' ? self : this, [], Math // math: package containing 
 },{"crypto":"jhUEF"}],"jhUEF":[function(require,module,exports) {
 "use strict";
 
-},{}],"1xj6i":[function(require,module,exports) {
-var $parcel$ReactRefreshHelpers$4102 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+},{}],"iL8Ng":[function(require,module,exports) {
+var $parcel$ReactRefreshHelpers$5d2f = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
-$parcel$ReactRefreshHelpers$4102.prelude(module);
+$parcel$ReactRefreshHelpers$5d2f.prelude(module);
 
 try {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "Background", ()=>Background
+parcelHelpers.export(exports, "FallingElements", ()=>FallingElements
+);
+var _jsxDevRuntime = require("react/jsx-dev-runtime");
+var _fallingElementsScss = require("./falling-elements.scss");
+var _seedrandom = require("seedrandom");
+var _seedrandomDefault = parcelHelpers.interopDefault(_seedrandom);
+const FallingElements = (props)=>{
+    const { elements , seed  } = props;
+    const rng = _seedrandomDefault.default(seed);
+    return /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
+        className: "falling-elements",
+        children: elements.map((element, index)=>/*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
+                className: "falling-elements__leaf",
+                style: {
+                    left: `${rng() * 120 - 20}%`,
+                    top: `-${rng() * 800}px`,
+                    animationDuration: `${12 + rng() * 7}s`
+                },
+                children: /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
+                    className: "falling-elements__leaf-content",
+                    style: {
+                        transform: `scale(0.5) rotate(${rng() * 16 - 8}deg)`
+                    },
+                    children: element
+                }, void 0, false, {
+                    fileName: "src/components/falling-elements/falling-elements.tsx",
+                    lineNumber: 21,
+                    columnNumber: 7
+                }, undefined)
+            }, void 0, false, {
+                fileName: "src/components/falling-elements/falling-elements.tsx",
+                lineNumber: 17,
+                columnNumber: 39
+            }, undefined)
+        )
+    }, void 0, false, {
+        fileName: "src/components/falling-elements/falling-elements.tsx",
+        lineNumber: 16,
+        columnNumber: 10
+    }, undefined);
+};
+_c = FallingElements;
+var _c;
+$RefreshReg$(_c, "FallingElements");
+
+  $parcel$ReactRefreshHelpers$5d2f.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-dev-runtime":"iTorj","./falling-elements.scss":"lpxYX","seedrandom":"acqQZ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"lpxYX":[function() {},{}],"kB4dJ":[function(require,module,exports) {
+var $parcel$ReactRefreshHelpers$076b = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+$parcel$ReactRefreshHelpers$076b.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "WinningElement", ()=>WinningElement
+);
+var _jsxDevRuntime = require("react/jsx-dev-runtime");
+var _winningElementScss = require("./winning-element.scss");
+var _seedrandom = require("seedrandom");
+var _seedrandomDefault = parcelHelpers.interopDefault(_seedrandom);
+const WinningElement = (props)=>{
+    const { element , seed  } = props;
+    const rng = _seedrandomDefault.default(seed);
+    return /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
+        className: "winning-element",
+        children: /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
+            className: "winning-element__wrapper",
+            children: element
+        }, void 0, false, {
+            fileName: "src/components/winning-element/winning-element.tsx",
+            lineNumber: 16,
+            columnNumber: 3
+        }, undefined)
+    }, void 0, false, {
+        fileName: "src/components/winning-element/winning-element.tsx",
+        lineNumber: 15,
+        columnNumber: 10
+    }, undefined);
+};
+_c = WinningElement;
+var _c;
+$RefreshReg$(_c, "WinningElement");
+
+  $parcel$ReactRefreshHelpers$076b.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-dev-runtime":"iTorj","./winning-element.scss":"6mp8O","seedrandom":"acqQZ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"6mp8O":[function() {},{}],"8HsNm":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "employees", ()=>employees
+);
+const employees = [
+    {
+        id: "1",
+        name: "Julia",
+        image: new URL(require("9c7bcb686f108800")),
+        confetti: [
+            "🐕",
+            "🦴"
+        ],
+        gender: 'female'
+    },
+    {
+        id: "2",
+        name: "Andi",
+        image: new URL(require("b926d32f3d2438a7")),
+        confetti: [
+            "🚀",
+            "⭐",
+            "🪐"
+        ],
+        gender: 'male'
+    },
+    {
+        id: "3",
+        name: "Alex",
+        image: new URL(require("cb1eb9a8cd4706a0")),
+        gender: 'male'
+    },
+    {
+        id: "4",
+        name: "Jan",
+        image: new URL(require("cd10a16ba2f72627")),
+        confetti: [
+            "⚔️",
+            "🛡️"
+        ],
+        gender: 'male'
+    },
+    {
+        id: "5",
+        name: "Johanna",
+        image: new URL(require("514e5d2ebb02ae2d")),
+        gender: 'female'
+    },
+    {
+        id: "6",
+        name: "Kim",
+        image: new URL(require("833e6aa52031324f")),
+        confetti: [
+            "🍷"
+        ],
+        gender: 'female'
+    },
+    {
+        id: "7",
+        name: "Kolja",
+        image: new URL(require("29116727b0c96f77")),
+        gender: 'male'
+    },
+    {
+        id: "8",
+        name: "Lena",
+        image: new URL(require("3ade115a9bfefee3")),
+        gender: 'female'
+    },
+    {
+        id: "9",
+        name: "Michael",
+        image: new URL(require("c4de1d6b2ee0d624")),
+        gender: 'male'
+    },
+    {
+        id: "10",
+        name: "Norma",
+        image: new URL(require("b19dfaa2518070f7")),
+        confetti: [
+            "🐴",
+            "🐎"
+        ],
+        gender: 'female'
+    },
+    {
+        id: "11",
+        name: "Oskar",
+        image: new URL(require("200013b9c272a469")),
+        gender: 'male'
+    },
+    {
+        id: "12",
+        name: "Pabu",
+        image: new URL(require("89d682caff438bbc")),
+        confetti: [
+            "🐕",
+            "🦴"
+        ],
+        gender: 'male'
+    },
+    {
+        id: "13",
+        name: "Raul",
+        image: new URL(require("88a6c2b0d87e29ec")),
+        confetti: [
+            "🇲🇽",
+            "Taco"
+        ],
+        gender: 'male'
+    },
+    {
+        id: "14",
+        name: "Verena",
+        image: new URL(require("8369fc7d5a8741bc")),
+        gender: 'female'
+    }
+];
+
+},{"b926d32f3d2438a7":"bxlGC","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","cb1eb9a8cd4706a0":"1ZhLb","cd10a16ba2f72627":"6knJn","514e5d2ebb02ae2d":"fbMhW","833e6aa52031324f":"3eUlr","29116727b0c96f77":"kYWNA","3ade115a9bfefee3":"8TjeE","c4de1d6b2ee0d624":"l2y2I","b19dfaa2518070f7":"3oCiV","200013b9c272a469":"lQ6rF","89d682caff438bbc":"iTkfv","88a6c2b0d87e29ec":"7ct8t","8369fc7d5a8741bc":"jnvpn","9c7bcb686f108800":"6wm0i"}],"bxlGC":[function(require,module,exports) {
+module.exports = require('./helpers/bundle-url').getBundleURL('bLxZJ') + "andi.6c8f2183.webp" + "?" + Date.now();
+
+},{"./helpers/bundle-url":"lgJ39"}],"lgJ39":[function(require,module,exports) {
+"use strict";
+var bundleURL = {};
+function getBundleURLCached(id) {
+    var value = bundleURL[id];
+    if (!value) {
+        value = getBundleURL();
+        bundleURL[id] = value;
+    }
+    return value;
+}
+function getBundleURL() {
+    try {
+        throw new Error();
+    } catch (err) {
+        var matches = ('' + err.stack).match(/(https?|file|ftp|(chrome|moz)-extension):\/\/[^)\n]+/g);
+        if (matches) // The first two stack frames will be this function and getBundleURLCached.
+        // Use the 3rd one, which will be a runtime in the original bundle.
+        return getBaseURL(matches[2]);
+    }
+    return '/';
+}
+function getBaseURL(url) {
+    return ('' + url).replace(/^((?:https?|file|ftp|(chrome|moz)-extension):\/\/.+)\/[^/]+$/, '$1') + '/';
+} // TODO: Replace uses with `new URL(url).origin` when ie11 is no longer supported.
+function getOrigin(url) {
+    var matches = ('' + url).match(/(https?|file|ftp|(chrome|moz)-extension):\/\/[^/]+/);
+    if (!matches) throw new Error('Origin not found');
+    return matches[0];
+}
+exports.getBundleURL = getBundleURLCached;
+exports.getBaseURL = getBaseURL;
+exports.getOrigin = getOrigin;
+
+},{}],"1ZhLb":[function(require,module,exports) {
+module.exports = require('./helpers/bundle-url').getBundleURL('bLxZJ') + "alex.114f926f.webp" + "?" + Date.now();
+
+},{"./helpers/bundle-url":"lgJ39"}],"6knJn":[function(require,module,exports) {
+module.exports = require('./helpers/bundle-url').getBundleURL('bLxZJ') + "jan.e645b3a4.webp" + "?" + Date.now();
+
+},{"./helpers/bundle-url":"lgJ39"}],"fbMhW":[function(require,module,exports) {
+module.exports = require('./helpers/bundle-url').getBundleURL('bLxZJ') + "johanna.81e273fd.webp" + "?" + Date.now();
+
+},{"./helpers/bundle-url":"lgJ39"}],"3eUlr":[function(require,module,exports) {
+module.exports = require('./helpers/bundle-url').getBundleURL('bLxZJ') + "kim.cc9c23c7.webp" + "?" + Date.now();
+
+},{"./helpers/bundle-url":"lgJ39"}],"kYWNA":[function(require,module,exports) {
+module.exports = require('./helpers/bundle-url').getBundleURL('bLxZJ') + "kolja.900e3485.webp" + "?" + Date.now();
+
+},{"./helpers/bundle-url":"lgJ39"}],"8TjeE":[function(require,module,exports) {
+module.exports = require('./helpers/bundle-url').getBundleURL('bLxZJ') + "lena.9ea885d1.webp" + "?" + Date.now();
+
+},{"./helpers/bundle-url":"lgJ39"}],"l2y2I":[function(require,module,exports) {
+module.exports = require('./helpers/bundle-url').getBundleURL('bLxZJ') + "michael.c323cd35.webp" + "?" + Date.now();
+
+},{"./helpers/bundle-url":"lgJ39"}],"3oCiV":[function(require,module,exports) {
+module.exports = require('./helpers/bundle-url').getBundleURL('bLxZJ') + "norma.a193d7dd.webp" + "?" + Date.now();
+
+},{"./helpers/bundle-url":"lgJ39"}],"lQ6rF":[function(require,module,exports) {
+module.exports = require('./helpers/bundle-url').getBundleURL('bLxZJ') + "oskar.8f11574d.webp" + "?" + Date.now();
+
+},{"./helpers/bundle-url":"lgJ39"}],"iTkfv":[function(require,module,exports) {
+module.exports = require('./helpers/bundle-url').getBundleURL('bLxZJ') + "pabu.8b1b6c8a.webp" + "?" + Date.now();
+
+},{"./helpers/bundle-url":"lgJ39"}],"7ct8t":[function(require,module,exports) {
+module.exports = require('./helpers/bundle-url').getBundleURL('bLxZJ') + "raul.bb96b6db.webp" + "?" + Date.now();
+
+},{"./helpers/bundle-url":"lgJ39"}],"jnvpn":[function(require,module,exports) {
+module.exports = require('./helpers/bundle-url').getBundleURL('bLxZJ') + "verena.ffb35970.webp" + "?" + Date.now();
+
+},{"./helpers/bundle-url":"lgJ39"}],"6wm0i":[function(require,module,exports) {
+module.exports = require('./helpers/bundle-url').getBundleURL('bLxZJ') + "julia.513b4086.webp" + "?" + Date.now();
+
+},{"./helpers/bundle-url":"lgJ39"}],"9kiBP":[function(require,module,exports) {
+var $parcel$ReactRefreshHelpers$4dd5 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+$parcel$ReactRefreshHelpers$4dd5.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "Title", ()=>Title
+);
+var _jsxDevRuntime = require("react/jsx-dev-runtime");
+var _titleScss = require("./title.scss");
+const Title = (props)=>{
+    return /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
+        className: "title",
+        children: /*#__PURE__*/ _jsxDevRuntime.jsxDEV("h1", {
+            className: "title__text",
+            children: props.children
+        }, void 0, false, {
+            fileName: "src/components/title/title.tsx",
+            lineNumber: 5,
+            columnNumber: 5
+        }, undefined)
+    }, void 0, false, {
+        fileName: "src/components/title/title.tsx",
+        lineNumber: 4,
+        columnNumber: 10
+    }, undefined);
+};
+_c = Title;
+var _c;
+$RefreshReg$(_c, "Title");
+
+  $parcel$ReactRefreshHelpers$4dd5.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-dev-runtime":"iTorj","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","./title.scss":"73VY4"}],"73VY4":[function() {},{}],"8NBDM":[function(require,module,exports) {
+var $parcel$ReactRefreshHelpers$b0a4 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+$parcel$ReactRefreshHelpers$b0a4.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "Confetti", ()=>Confetti
 );
 var _jsxDevRuntime = require("react/jsx-dev-runtime");
 var _react = require("react");
@@ -26214,110 +26545,195 @@ var _reactDefault = parcelHelpers.interopDefault(_react);
 var _reactTsparticles = require("react-tsparticles");
 var _reactTsparticlesDefault = parcelHelpers.interopDefault(_reactTsparticles);
 var _tsparticles = require("tsparticles");
-var _backgroundScss = require("./background.scss");
+var _confettiScss = require("./confetti.scss");
 var _s = $RefreshSig$();
-const Background = ()=>{
+const Confetti = (props)=>{
     _s();
-    const [backgroundContainer, setBackgroundContainer] = _reactDefault.default.useState();
+    const { confettiCharacters =[
+        "💩",
+        "🤡",
+        "🍀",
+        "🍙",
+        "🦄",
+        "⭐️"
+    ]  } = props;
+    const [confettiContainer, setConfettiContainer] = _reactDefault.default.useState();
     const particlesInit = async (main)=>{
+        console.log(main);
         // you can initialize the tsParticles instance (main) here, adding custom shapes or presets
         // this loads the tsparticles package bundle, it's the easiest method for getting everything ready
         // starting from v2 you can add only the features you need reducing the bundle size
         await _tsparticles.loadFull(main);
     };
     const particlesLoaded = (container)=>{
-        if (!backgroundContainer) {
-            setBackgroundContainer(container);
+        container.stop();
+        if (!confettiContainer) {
+            setConfettiContainer(container);
             setTimeout(()=>{
-                console.log('StopBackground');
-                container.stop();
-            }, 4000);
+                container.start();
+            }, 10000);
         }
     };
     return /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
-        className: "background",
+        className: "confetti",
         children: /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_reactTsparticlesDefault.default, {
-            id: "background-particles",
+            id: "confetti-particles",
             init: particlesInit,
             loaded: particlesLoaded,
             options: {
-                duration: 5000,
                 fpsLimit: 60,
+                background: {
+                    color: {
+                        value: "#000000"
+                    }
+                },
+                fullScreen: {
+                    enable: true,
+                    zIndex: -1
+                },
                 interactivity: {
-                    events: {
-                        resize: true
+                    detectsOn: "window"
+                },
+                emitters: {
+                    position: {
+                        x: 50,
+                        y: 50
                     },
-                    modes: {
-                        push: {
-                            quantity: 4
-                        },
-                        repulse: {
-                            distance: 200,
-                            duration: 0.4
-                        }
+                    rate: {
+                        quantity: 8,
+                        delay: 0.25
                     }
                 },
                 particles: {
                     color: {
-                        value: "#ffffff"
-                    },
-                    collisions: {
-                        enable: false
+                        value: [
+                            "#e6007e",
+                            "#c3a815",
+                            "#009fe3",
+                            "#FFFFFF"
+                        ]
                     },
                     move: {
-                        direction: "down",
+                        decay: 0.05,
+                        direction: "top",
                         enable: true,
-                        outModes: {
-                            default: "bounce"
+                        gravity: {
+                            enable: true,
+                            maxSpeed: 150
                         },
-                        random: false,
-                        speed: 4,
-                        straight: false
+                        outModes: {
+                            top: "none",
+                            default: "destroy"
+                        },
+                        speed: {
+                            min: 25,
+                            max: 80
+                        }
                     },
                     number: {
-                        density: {
-                            enable: true,
-                            area: 800
-                        },
-                        value: 80
+                        value: 0
                     },
                     opacity: {
-                        value: 0.5
+                        value: 1
                     },
-                    shape: {
-                        type: "circle"
+                    rotate: {
+                        value: {
+                            min: 0,
+                            max: 360
+                        },
+                        direction: "random",
+                        animation: {
+                            enable: true,
+                            speed: 30
+                        }
+                    },
+                    tilt: {
+                        direction: "random",
+                        enable: true,
+                        value: {
+                            min: 0,
+                            max: 360
+                        },
+                        animation: {
+                            enable: true,
+                            speed: 30
+                        }
                     },
                     size: {
-                        value: {
-                            min: 1,
-                            max: 5
+                        value: 9
+                    },
+                    roll: {
+                        darken: {
+                            enable: true,
+                            value: 25
+                        },
+                        enable: true,
+                        speed: {
+                            min: 5,
+                            max: 15
+                        }
+                    },
+                    wobble: {
+                        distance: 30,
+                        enable: true,
+                        speed: {
+                            min: -7,
+                            max: 7
+                        }
+                    },
+                    shape: {
+                        type: [
+                            "circle",
+                            "square",
+                            "polygon",
+                            "character",
+                            "character",
+                            "character"
+                        ],
+                        options: {
+                            polygon: [
+                                {
+                                    sides: 5
+                                },
+                                {
+                                    sides: 6
+                                }
+                            ],
+                            character: [
+                                {
+                                    fill: true,
+                                    font: "Verdana",
+                                    value: confettiCharacters,
+                                    weight: 800,
+                                    style: ""
+                                }
+                            ]
                         }
                     }
-                },
-                detectRetina: true
+                }
             }
         }, void 0, false, {
-            fileName: "src/components/background/background.tsx",
-            lineNumber: 27,
+            fileName: "src/components/confetti/confetti.tsx",
+            lineNumber: 32,
             columnNumber: 5
         }, undefined)
     }, void 0, false, {
-        fileName: "src/components/background/background.tsx",
-        lineNumber: 26,
+        fileName: "src/components/confetti/confetti.tsx",
+        lineNumber: 31,
         columnNumber: 5
     }, undefined);
 };
-_s(Background, "Eekb8qjIUnBXhdmBgUycz5h+cEA=");
-_c = Background;
+_s(Confetti, "mNpHRkNvz1ksUwQrz/Jh0abn0Yk=");
+_c = Confetti;
 var _c;
-$RefreshReg$(_c, "Background");
+$RefreshReg$(_c, "Confetti");
 
-  $parcel$ReactRefreshHelpers$4102.postlude(module);
+  $parcel$ReactRefreshHelpers$b0a4.postlude(module);
 } finally {
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","./background.scss":"2DbMK","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","react-tsparticles":"6yNHG","tsparticles":"9YC3G"}],"2DbMK":[function() {},{}],"6yNHG":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","react-tsparticles":"6yNHG","tsparticles":"9YC3G","./confetti.scss":"59L3M","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"6yNHG":[function(require,module,exports) {
 const ReactParticles = require("./cjs/particles");
 for(let key in ReactParticles)ReactParticles.default[key] = ReactParticles[key];
 module.exports = ReactParticles.default;
@@ -36006,40 +36422,6 @@ module.exports = function(loader, type) {
     };
 };
 
-},{}],"lgJ39":[function(require,module,exports) {
-"use strict";
-var bundleURL = {};
-function getBundleURLCached(id) {
-    var value = bundleURL[id];
-    if (!value) {
-        value = getBundleURL();
-        bundleURL[id] = value;
-    }
-    return value;
-}
-function getBundleURL() {
-    try {
-        throw new Error();
-    } catch (err) {
-        var matches = ('' + err.stack).match(/(https?|file|ftp|(chrome|moz)-extension):\/\/[^)\n]+/g);
-        if (matches) // The first two stack frames will be this function and getBundleURLCached.
-        // Use the 3rd one, which will be a runtime in the original bundle.
-        return getBaseURL(matches[2]);
-    }
-    return '/';
-}
-function getBaseURL(url) {
-    return ('' + url).replace(/^((?:https?|file|ftp|(chrome|moz)-extension):\/\/.+)\/[^/]+$/, '$1') + '/';
-} // TODO: Replace uses with `new URL(url).origin` when ie11 is no longer supported.
-function getOrigin(url) {
-    var matches = ('' + url).match(/(https?|file|ftp|(chrome|moz)-extension):\/\/[^/]+/);
-    if (!matches) throw new Error('Origin not found');
-    return matches[0];
-}
-exports.getBundleURL = getBundleURLCached;
-exports.getBaseURL = getBaseURL;
-exports.getOrigin = getOrigin;
-
 },{}],"7MZdO":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
@@ -38972,515 +39354,7 @@ class WobbleUpdater {
     }
 }
 
-},{"tsparticles-engine":"9BizU","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"iL8Ng":[function(require,module,exports) {
-var $parcel$ReactRefreshHelpers$5d2f = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
-var prevRefreshReg = window.$RefreshReg$;
-var prevRefreshSig = window.$RefreshSig$;
-$parcel$ReactRefreshHelpers$5d2f.prelude(module);
-
-try {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "FallingElements", ()=>FallingElements
-);
-var _jsxDevRuntime = require("react/jsx-dev-runtime");
-var _fallingElementsScss = require("./falling-elements.scss");
-var _seedrandom = require("seedrandom");
-var _seedrandomDefault = parcelHelpers.interopDefault(_seedrandom);
-const FallingElements = (props)=>{
-    const { elements , seed  } = props;
-    const rng = _seedrandomDefault.default(seed);
-    return /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
-        className: "falling-elements",
-        children: elements.map((element, index)=>/*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
-                className: "falling-elements__leaf",
-                style: {
-                    left: `${rng() * 120 - 20}%`,
-                    top: `-${rng() * 800}px`,
-                    animationDuration: `${4 + rng() * 4}s`
-                },
-                children: /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
-                    className: "falling-elements__leaf-content",
-                    style: {
-                        transform: `scale(0.5) rotate(${rng() * 16 - 8}deg)`
-                    },
-                    children: element
-                }, void 0, false, {
-                    fileName: "src/components/falling-elements/falling-elements.tsx",
-                    lineNumber: 21,
-                    columnNumber: 7
-                }, undefined)
-            }, void 0, false, {
-                fileName: "src/components/falling-elements/falling-elements.tsx",
-                lineNumber: 17,
-                columnNumber: 39
-            }, undefined)
-        )
-    }, void 0, false, {
-        fileName: "src/components/falling-elements/falling-elements.tsx",
-        lineNumber: 16,
-        columnNumber: 10
-    }, undefined);
-};
-_c = FallingElements;
-var _c;
-$RefreshReg$(_c, "FallingElements");
-
-  $parcel$ReactRefreshHelpers$5d2f.postlude(module);
-} finally {
-  window.$RefreshReg$ = prevRefreshReg;
-  window.$RefreshSig$ = prevRefreshSig;
-}
-},{"react/jsx-dev-runtime":"iTorj","./falling-elements.scss":"lpxYX","seedrandom":"acqQZ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"lpxYX":[function() {},{}],"kB4dJ":[function(require,module,exports) {
-var $parcel$ReactRefreshHelpers$076b = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
-var prevRefreshReg = window.$RefreshReg$;
-var prevRefreshSig = window.$RefreshSig$;
-$parcel$ReactRefreshHelpers$076b.prelude(module);
-
-try {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "WinningElement", ()=>WinningElement
-);
-var _jsxDevRuntime = require("react/jsx-dev-runtime");
-var _winningElementScss = require("./winning-element.scss");
-var _seedrandom = require("seedrandom");
-var _seedrandomDefault = parcelHelpers.interopDefault(_seedrandom);
-const WinningElement = (props)=>{
-    const { element , seed  } = props;
-    const rng = _seedrandomDefault.default(seed);
-    return /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
-        className: "winning-element",
-        children: /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
-            className: "winning-element__wrapper",
-            children: element
-        }, void 0, false, {
-            fileName: "src/components/winning-element/winning-element.tsx",
-            lineNumber: 16,
-            columnNumber: 3
-        }, undefined)
-    }, void 0, false, {
-        fileName: "src/components/winning-element/winning-element.tsx",
-        lineNumber: 15,
-        columnNumber: 10
-    }, undefined);
-};
-_c = WinningElement;
-var _c;
-$RefreshReg$(_c, "WinningElement");
-
-  $parcel$ReactRefreshHelpers$076b.postlude(module);
-} finally {
-  window.$RefreshReg$ = prevRefreshReg;
-  window.$RefreshSig$ = prevRefreshSig;
-}
-},{"react/jsx-dev-runtime":"iTorj","./winning-element.scss":"6mp8O","seedrandom":"acqQZ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"6mp8O":[function() {},{}],"8HsNm":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "employees", ()=>employees
-);
-const employees = [
-    {
-        id: "1",
-        name: "Julia",
-        image: new URL(require("9c7bcb686f108800")),
-        confetti: [
-            "🐕",
-            "🦴"
-        ],
-        gender: 'female'
-    },
-    {
-        id: "2",
-        name: "Andi",
-        image: new URL(require("b926d32f3d2438a7")),
-        confetti: [
-            "🚀",
-            "⭐",
-            "🪐"
-        ],
-        gender: 'male'
-    },
-    {
-        id: "3",
-        name: "Alex",
-        image: new URL(require("cb1eb9a8cd4706a0")),
-        gender: 'male'
-    },
-    {
-        id: "4",
-        name: "Jan",
-        image: new URL(require("cd10a16ba2f72627")),
-        confetti: [
-            "⚔️",
-            "🛡️"
-        ],
-        gender: 'male'
-    },
-    {
-        id: "5",
-        name: "Johanna",
-        image: new URL(require("514e5d2ebb02ae2d")),
-        gender: 'female'
-    },
-    {
-        id: "6",
-        name: "Kim",
-        image: new URL(require("833e6aa52031324f")),
-        confetti: [
-            "🍷"
-        ],
-        gender: 'female'
-    },
-    {
-        id: "7",
-        name: "Kolja",
-        image: new URL(require("29116727b0c96f77")),
-        gender: 'male'
-    },
-    {
-        id: "8",
-        name: "Lena",
-        image: new URL(require("3ade115a9bfefee3")),
-        gender: 'female'
-    },
-    {
-        id: "9",
-        name: "Michael",
-        image: new URL(require("c4de1d6b2ee0d624")),
-        gender: 'male'
-    },
-    {
-        id: "10",
-        name: "Norma",
-        image: new URL(require("b19dfaa2518070f7")),
-        confetti: [
-            "🐴",
-            "🐎"
-        ],
-        gender: 'female'
-    },
-    {
-        id: "11",
-        name: "Oskar",
-        image: new URL(require("200013b9c272a469")),
-        gender: 'male'
-    },
-    {
-        id: "12",
-        name: "Pabu",
-        image: new URL(require("89d682caff438bbc")),
-        confetti: [
-            "🐕",
-            "🦴"
-        ],
-        gender: 'male'
-    },
-    {
-        id: "13",
-        name: "Raul",
-        image: new URL(require("88a6c2b0d87e29ec")),
-        confetti: [
-            "🇲🇽",
-            "Taco"
-        ],
-        gender: 'male'
-    },
-    {
-        id: "14",
-        name: "Verena",
-        image: new URL(require("8369fc7d5a8741bc")),
-        gender: 'female'
-    }
-];
-
-},{"b926d32f3d2438a7":"bxlGC","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","cb1eb9a8cd4706a0":"1ZhLb","cd10a16ba2f72627":"6knJn","514e5d2ebb02ae2d":"fbMhW","833e6aa52031324f":"3eUlr","29116727b0c96f77":"kYWNA","3ade115a9bfefee3":"8TjeE","c4de1d6b2ee0d624":"l2y2I","b19dfaa2518070f7":"3oCiV","200013b9c272a469":"lQ6rF","89d682caff438bbc":"iTkfv","88a6c2b0d87e29ec":"7ct8t","8369fc7d5a8741bc":"jnvpn","9c7bcb686f108800":"6wm0i"}],"bxlGC":[function(require,module,exports) {
-module.exports = require('./helpers/bundle-url').getBundleURL('bLxZJ') + "andi.6c8f2183.webp" + "?" + Date.now();
-
-},{"./helpers/bundle-url":"lgJ39"}],"1ZhLb":[function(require,module,exports) {
-module.exports = require('./helpers/bundle-url').getBundleURL('bLxZJ') + "alex.114f926f.webp" + "?" + Date.now();
-
-},{"./helpers/bundle-url":"lgJ39"}],"6knJn":[function(require,module,exports) {
-module.exports = require('./helpers/bundle-url').getBundleURL('bLxZJ') + "jan.e645b3a4.webp" + "?" + Date.now();
-
-},{"./helpers/bundle-url":"lgJ39"}],"fbMhW":[function(require,module,exports) {
-module.exports = require('./helpers/bundle-url').getBundleURL('bLxZJ') + "johanna.81e273fd.webp" + "?" + Date.now();
-
-},{"./helpers/bundle-url":"lgJ39"}],"3eUlr":[function(require,module,exports) {
-module.exports = require('./helpers/bundle-url').getBundleURL('bLxZJ') + "kim.cc9c23c7.webp" + "?" + Date.now();
-
-},{"./helpers/bundle-url":"lgJ39"}],"kYWNA":[function(require,module,exports) {
-module.exports = require('./helpers/bundle-url').getBundleURL('bLxZJ') + "kolja.900e3485.webp" + "?" + Date.now();
-
-},{"./helpers/bundle-url":"lgJ39"}],"8TjeE":[function(require,module,exports) {
-module.exports = require('./helpers/bundle-url').getBundleURL('bLxZJ') + "lena.9ea885d1.webp" + "?" + Date.now();
-
-},{"./helpers/bundle-url":"lgJ39"}],"l2y2I":[function(require,module,exports) {
-module.exports = require('./helpers/bundle-url').getBundleURL('bLxZJ') + "michael.c323cd35.webp" + "?" + Date.now();
-
-},{"./helpers/bundle-url":"lgJ39"}],"3oCiV":[function(require,module,exports) {
-module.exports = require('./helpers/bundle-url').getBundleURL('bLxZJ') + "norma.a193d7dd.webp" + "?" + Date.now();
-
-},{"./helpers/bundle-url":"lgJ39"}],"lQ6rF":[function(require,module,exports) {
-module.exports = require('./helpers/bundle-url').getBundleURL('bLxZJ') + "oskar.8f11574d.webp" + "?" + Date.now();
-
-},{"./helpers/bundle-url":"lgJ39"}],"iTkfv":[function(require,module,exports) {
-module.exports = require('./helpers/bundle-url').getBundleURL('bLxZJ') + "pabu.8b1b6c8a.webp" + "?" + Date.now();
-
-},{"./helpers/bundle-url":"lgJ39"}],"7ct8t":[function(require,module,exports) {
-module.exports = require('./helpers/bundle-url').getBundleURL('bLxZJ') + "raul.bb96b6db.webp" + "?" + Date.now();
-
-},{"./helpers/bundle-url":"lgJ39"}],"jnvpn":[function(require,module,exports) {
-module.exports = require('./helpers/bundle-url').getBundleURL('bLxZJ') + "verena.ffb35970.webp" + "?" + Date.now();
-
-},{"./helpers/bundle-url":"lgJ39"}],"6wm0i":[function(require,module,exports) {
-module.exports = require('./helpers/bundle-url').getBundleURL('bLxZJ') + "julia.513b4086.webp" + "?" + Date.now();
-
-},{"./helpers/bundle-url":"lgJ39"}],"9kiBP":[function(require,module,exports) {
-var $parcel$ReactRefreshHelpers$4dd5 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
-var prevRefreshReg = window.$RefreshReg$;
-var prevRefreshSig = window.$RefreshSig$;
-$parcel$ReactRefreshHelpers$4dd5.prelude(module);
-
-try {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "Title", ()=>Title
-);
-var _jsxDevRuntime = require("react/jsx-dev-runtime");
-var _titleScss = require("./title.scss");
-const Title = (props)=>{
-    return /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
-        className: "title",
-        children: /*#__PURE__*/ _jsxDevRuntime.jsxDEV("h1", {
-            className: "title__text",
-            children: props.children
-        }, void 0, false, {
-            fileName: "src/components/title/title.tsx",
-            lineNumber: 5,
-            columnNumber: 5
-        }, undefined)
-    }, void 0, false, {
-        fileName: "src/components/title/title.tsx",
-        lineNumber: 4,
-        columnNumber: 10
-    }, undefined);
-};
-_c = Title;
-var _c;
-$RefreshReg$(_c, "Title");
-
-  $parcel$ReactRefreshHelpers$4dd5.postlude(module);
-} finally {
-  window.$RefreshReg$ = prevRefreshReg;
-  window.$RefreshSig$ = prevRefreshSig;
-}
-},{"react/jsx-dev-runtime":"iTorj","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","./title.scss":"73VY4"}],"73VY4":[function() {},{}],"8NBDM":[function(require,module,exports) {
-var $parcel$ReactRefreshHelpers$b0a4 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
-var prevRefreshReg = window.$RefreshReg$;
-var prevRefreshSig = window.$RefreshSig$;
-$parcel$ReactRefreshHelpers$b0a4.prelude(module);
-
-try {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "Confetti", ()=>Confetti
-);
-var _jsxDevRuntime = require("react/jsx-dev-runtime");
-var _react = require("react");
-var _reactDefault = parcelHelpers.interopDefault(_react);
-var _reactTsparticles = require("react-tsparticles");
-var _reactTsparticlesDefault = parcelHelpers.interopDefault(_reactTsparticles);
-var _tsparticles = require("tsparticles");
-var _confettiScss = require("./confetti.scss");
-var _s = $RefreshSig$();
-const Confetti = (props)=>{
-    _s();
-    const { confettiCharacters =[
-        "💩",
-        "🤡",
-        "🍀",
-        "🍙",
-        "🦄",
-        "⭐️"
-    ]  } = props;
-    const [confettiContainer, setConfettiContainer] = _reactDefault.default.useState();
-    const particlesInit = async (main)=>{
-        console.log(main);
-        // you can initialize the tsParticles instance (main) here, adding custom shapes or presets
-        // this loads the tsparticles package bundle, it's the easiest method for getting everything ready
-        // starting from v2 you can add only the features you need reducing the bundle size
-        await _tsparticles.loadFull(main);
-    };
-    const particlesLoaded = (container)=>{
-        container.stop();
-        if (!confettiContainer) {
-            setConfettiContainer(container);
-            setTimeout(()=>{
-                container.start();
-            }, 4000);
-        }
-    };
-    return /*#__PURE__*/ _jsxDevRuntime.jsxDEV("div", {
-        className: "confetti",
-        children: /*#__PURE__*/ _jsxDevRuntime.jsxDEV(_reactTsparticlesDefault.default, {
-            id: "confetti-particles",
-            init: particlesInit,
-            loaded: particlesLoaded,
-            options: {
-                fpsLimit: 60,
-                background: {
-                    color: {
-                        value: "#000000"
-                    }
-                },
-                fullScreen: {
-                    enable: true,
-                    zIndex: -1
-                },
-                interactivity: {
-                    detectsOn: "window"
-                },
-                emitters: {
-                    position: {
-                        x: 50,
-                        y: 50
-                    },
-                    rate: {
-                        quantity: 10,
-                        delay: 0.25
-                    }
-                },
-                particles: {
-                    color: {
-                        value: [
-                            "#e6007e",
-                            "#c3a815",
-                            "#009fe3",
-                            "#FFFFFF"
-                        ]
-                    },
-                    move: {
-                        decay: 0.05,
-                        direction: "top",
-                        enable: true,
-                        gravity: {
-                            enable: true,
-                            maxSpeed: 150
-                        },
-                        outModes: {
-                            top: "none",
-                            default: "destroy"
-                        },
-                        speed: {
-                            min: 25,
-                            max: 80
-                        }
-                    },
-                    number: {
-                        value: 0
-                    },
-                    opacity: {
-                        value: 1
-                    },
-                    rotate: {
-                        value: {
-                            min: 0,
-                            max: 360
-                        },
-                        direction: "random",
-                        animation: {
-                            enable: true,
-                            speed: 30
-                        }
-                    },
-                    tilt: {
-                        direction: "random",
-                        enable: true,
-                        value: {
-                            min: 0,
-                            max: 360
-                        },
-                        animation: {
-                            enable: true,
-                            speed: 30
-                        }
-                    },
-                    size: {
-                        value: 9
-                    },
-                    roll: {
-                        darken: {
-                            enable: true,
-                            value: 25
-                        },
-                        enable: true,
-                        speed: {
-                            min: 5,
-                            max: 15
-                        }
-                    },
-                    wobble: {
-                        distance: 30,
-                        enable: true,
-                        speed: {
-                            min: -7,
-                            max: 7
-                        }
-                    },
-                    shape: {
-                        type: [
-                            "circle",
-                            "square",
-                            "polygon",
-                            "character",
-                            "character",
-                            "character"
-                        ],
-                        options: {
-                            polygon: [
-                                {
-                                    sides: 5
-                                },
-                                {
-                                    sides: 6
-                                }
-                            ],
-                            character: [
-                                {
-                                    fill: true,
-                                    font: "Verdana",
-                                    value: confettiCharacters,
-                                    weight: 800,
-                                    style: ""
-                                }
-                            ]
-                        }
-                    }
-                }
-            }
-        }, void 0, false, {
-            fileName: "src/components/confetti/confetti.tsx",
-            lineNumber: 32,
-            columnNumber: 5
-        }, undefined)
-    }, void 0, false, {
-        fileName: "src/components/confetti/confetti.tsx",
-        lineNumber: 31,
-        columnNumber: 5
-    }, undefined);
-};
-_s(Confetti, "mNpHRkNvz1ksUwQrz/Jh0abn0Yk=");
-_c = Confetti;
-var _c;
-$RefreshReg$(_c, "Confetti");
-
-  $parcel$ReactRefreshHelpers$b0a4.postlude(module);
-} finally {
-  window.$RefreshReg$ = prevRefreshReg;
-  window.$RefreshSig$ = prevRefreshSig;
-}
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","react-tsparticles":"6yNHG","tsparticles":"9YC3G","./confetti.scss":"59L3M","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"59L3M":[function() {},{}],"5Tzuk":[function(require,module,exports) {
+},{"tsparticles-engine":"9BizU","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"59L3M":[function() {},{}],"5Tzuk":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$50b6 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -39627,9 +39501,9 @@ const skills = [
     "voted in the last Election",
     "is against liquorice",
     "knows how to use a Mouse",
-    "opened Excel, once",
     "is able to catch a Ball (60% of the time)",
     "made diva-e hire $2",
+    "opened Excel, once",
     "Party Animal!!!", 
 ];
 

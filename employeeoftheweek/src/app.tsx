@@ -36,7 +36,7 @@ export const App = () => {
 
   return (
     <div>
-      <Background/>
+      {/* <Background/> */}
       <Confetti confettiCharacters={employeeOfTheWeek.confetti}/>
       <WinningElement element={<EmployeeCard {...employeeOfTheWeek}/>}/>
       <Feedback seed={rng()} employee={employeeOfTheWeek}/>

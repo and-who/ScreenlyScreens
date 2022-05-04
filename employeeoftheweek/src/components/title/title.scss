@@ -12,8 +12,10 @@
   position: absolute;
   top: 6vh;
   left: 3vw;
+  transform: translateY(-100vh) rotate(10deg);
 
   animation: fall-down-title-animation 3s linear forwards;
+  animation-delay: 5s;
 
   transform: rotate(-15deg);
 

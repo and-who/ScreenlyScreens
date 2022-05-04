@@ -131,9 +131,6 @@ export const Confetti = (props :{confettiCharacters:string[]}) => {
               "circle",
               "square",
               "polygon",
-              "character",
-              "character",
-              "character"
             ],
             options: {
               polygon: [

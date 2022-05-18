@@ -91,5 +91,11 @@ export const employees: Employee[] = [
     name: "Verena",
     image: new URL('../assets/images/verena.jpg?as=webp&width=500', import.meta.url),
     gender: 'female'
+  },
+  {
+    id: "15",
+    name: "Holger",
+    image: new URL('../assets/images/holger.jpg?as=webp&width=500', import.meta.url),
+    gender: 'female'
   }
 ];

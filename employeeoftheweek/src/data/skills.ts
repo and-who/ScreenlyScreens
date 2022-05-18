@@ -13,4 +13,6 @@ export const skills = [
   "made diva-e hire $2",
   "opened Excel, once",
   "Party Animal!!!",
+  "booked $1 hours last Week",
+  "can run kind of fast",
 ]

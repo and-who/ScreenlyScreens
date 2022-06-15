@@ -96,6 +96,30 @@ export const employees: Employee[] = [
     id: "15",
     name: "Holger",
     image: new URL('../assets/images/holger.jpg?as=webp&width=500', import.meta.url),
+    gender: 'male'
+  },
+  {
+    id: "16",
+    name: "Rene",
+    image: new URL('../assets/images/rene.jpg?as=webp&width=500', import.meta.url),
+    gender: 'male'
+  },
+  {
+    id: "17",
+    name: "Kristina",
+    image: new URL('../assets/images/kristina.jpg?as=webp&width=500', import.meta.url),
+    gender: 'female'
+  },
+  {
+    id: "18",
+    name: "Tanja",
+    image: new URL('../assets/images/tanja.jpg?as=webp&width=500', import.meta.url),
+    gender: 'female'
+  },
+  {
+    id: "19",
+    name: "Lisa",
+    image: new URL('../assets/images/lisa.jpg?as=webp&width=500', import.meta.url),
     gender: 'female'
   }
 ];

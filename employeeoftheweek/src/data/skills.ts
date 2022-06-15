@@ -15,4 +15,9 @@ export const skills = [
   "Party Animal!!!",
   "booked $1 hours last Week",
   "can run kind of fast",
+  "promised to bake a Cake for the Team",
+  "belives in mankind",
+  "is emtying the Dishwasher reguarly",
+  "has watered the Plants in the Office, perhaps once",
+  "shurely refils the frige some time ;)"
 ]

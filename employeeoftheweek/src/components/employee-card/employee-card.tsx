@@ -2,7 +2,6 @@ import './employee-card.scss';
 import seedrandom from 'seedrandom';
 
 export interface Employee {
-  id: string;
   name: string;
   image: string|URL;
   confetti?: string[];
@@ -20,9 +19,9 @@ const fontFamilys = [
 ];
 
 export const EmployeeCard = (props: Employee) => {
-  const {id, name, image} = props;
+  const {name, image} = props;
 
-  const rng = seedrandom(id);
+  const rng = seedrandom(name);
   const turn = (rng() * 30) - 10;
   
   return <div className="employee-card">

@@ -16,7 +16,6 @@ export const Background = () => {
     if(!backgroundContainer) {
       setBackgroundContainer(container);
       setTimeout(() => {
-        console.log('StopBackground')
         container.stop();
       }, 4000)
     }

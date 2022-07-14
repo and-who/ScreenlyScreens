@@ -9,8 +9,6 @@ export const Confetti = (props :{confettiCharacters:string[]}) => {
 
   const [confettiContainer, setConfettiContainer] = React.useState();
   const particlesInit = async (main) => {
-    console.log(main);
-
     // you can initialize the tsParticles instance (main) here, adding custom shapes or presets
     // this loads the tsparticles package bundle, it's the easiest method for getting everything ready
     // starting from v2 you can add only the features you need reducing the bundle size
@@ -34,7 +32,7 @@ export const Confetti = (props :{confettiCharacters:string[]}) => {
           init={particlesInit}
           loaded={particlesLoaded}
       options={{
-        fpsLimit: 60,
+        fpsLimit: 40,
         background: {
           color: {
             value: "#000000"
@@ -43,9 +41,6 @@ export const Confetti = (props :{confettiCharacters:string[]}) => {
         fullScreen: {
           enable: true,
           zIndex: -1
-        },
-        interactivity: {
-          detectsOn: "window"
         },
         emitters: {
           position: {

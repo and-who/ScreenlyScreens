@@ -40,7 +40,7 @@ export const App = () => {
       <Confetti confettiCharacters={employeeOfTheWeek.confetti}/>
       <WinningElement element={<EmployeeCard {...employeeOfTheWeek}/>}/>
       <Feedback seed={rng()} employee={employeeOfTheWeek}/>
-      <FallingElements elements={[...employees,...employees].map((employee, index) => <EmployeeCard key={index} {...employee}/>)} seed={rng()}/>
+      <FallingElements elements={[...employees].map((employee, index) => <EmployeeCard key={index} {...employee}/>)} seed={rng()}/>
       <Title>Employee of the Week:</Title>
     </div>
   );

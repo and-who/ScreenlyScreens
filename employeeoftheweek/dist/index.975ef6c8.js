@@ -1024,7 +1024,7 @@ root.render(/*#__PURE__*/ _jsxDevRuntime.jsxDEV(_appTsx.App, {}, void 0, false, 
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react-dom":"j6uA9","./app.tsx":"41oNQ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","react-dom/client":"lOjBx"}],"iTorj":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","react-dom":"j6uA9","./app.tsx":"41oNQ","react-dom/client":"lOjBx","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"iTorj":[function(require,module,exports) {
 'use strict';
 module.exports = require('./cjs/react-jsx-dev-runtime.development.js');
 
@@ -39117,7 +39117,7 @@ $RefreshReg$(_c, "FallingElements");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","./falling-elements.scss":"lpxYX","seedrandom":"acqQZ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","react":"21dqq"}],"lpxYX":[function() {},{}],"9kiBP":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","./falling-elements.scss":"lpxYX","seedrandom":"acqQZ","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"lpxYX":[function() {},{}],"9kiBP":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$4dd5 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -39314,11 +39314,6 @@ const employees = [
         gender: 'male'
     },
     {
-        name: "Kristina",
-        image: new URL(require("36936d6349f8c37d")),
-        gender: 'female'
-    },
-    {
         name: "Tanja",
         image: new URL(require("4ae2211246c0318b")),
         gender: 'female'
@@ -39349,13 +39344,33 @@ const employees = [
         gender: 'male'
     },
     {
+        name: "Kristina",
+        image: new URL(require("36936d6349f8c37d")),
+        gender: 'female'
+    },
+    {
         name: "Annika",
         image: new URL(require("6ac304c96fa43ce")),
         gender: 'female'
+    },
+    {
+        name: "Lulu",
+        image: new URL(require("34fbd3d2937dafff")),
+        gender: 'female'
+    },
+    {
+        name: "Denise",
+        image: new URL(require("5caf2bbda720302a")),
+        gender: 'female'
+    },
+    {
+        name: "Jan S.",
+        image: new URL(require("db5bbb16194cb925")),
+        gender: 'male'
     }, 
 ];
 
-},{"9c7bcb686f108800":"6wm0i","b926d32f3d2438a7":"bxlGC","cb1eb9a8cd4706a0":"1ZhLb","cd10a16ba2f72627":"6knJn","514e5d2ebb02ae2d":"fbMhW","833e6aa52031324f":"3eUlr","29116727b0c96f77":"kYWNA","3ade115a9bfefee3":"8TjeE","c4de1d6b2ee0d624":"l2y2I","b19dfaa2518070f7":"3oCiV","200013b9c272a469":"lQ6rF","89d682caff438bbc":"iTkfv","88a6c2b0d87e29ec":"7ct8t","8369fc7d5a8741bc":"jnvpn","869d911cbd16cb52":"c6QQR","ec7b3cb8c6037e4a":"jLtzC","36936d6349f8c37d":"7dSf5","4ae2211246c0318b":"7PFCT","f7579d7d19ca1a28":"dcWJ9","5244aa357f62f247":"bMlas","b4f2e2fc275d77a4":"d2CSg","15dee4294772c9c0":"4GpFt","95c1e16a365dd77d":"jt6gM","6ac304c96fa43ce":"dUczr","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"6wm0i":[function(require,module,exports) {
+},{"9c7bcb686f108800":"6wm0i","b926d32f3d2438a7":"bxlGC","cb1eb9a8cd4706a0":"1ZhLb","cd10a16ba2f72627":"6knJn","514e5d2ebb02ae2d":"fbMhW","833e6aa52031324f":"3eUlr","29116727b0c96f77":"kYWNA","3ade115a9bfefee3":"8TjeE","c4de1d6b2ee0d624":"l2y2I","b19dfaa2518070f7":"3oCiV","200013b9c272a469":"lQ6rF","89d682caff438bbc":"iTkfv","88a6c2b0d87e29ec":"7ct8t","8369fc7d5a8741bc":"jnvpn","869d911cbd16cb52":"c6QQR","ec7b3cb8c6037e4a":"jLtzC","36936d6349f8c37d":"7dSf5","4ae2211246c0318b":"7PFCT","f7579d7d19ca1a28":"dcWJ9","5244aa357f62f247":"bMlas","b4f2e2fc275d77a4":"d2CSg","15dee4294772c9c0":"4GpFt","95c1e16a365dd77d":"jt6gM","6ac304c96fa43ce":"dUczr","34fbd3d2937dafff":"dQFxb","5caf2bbda720302a":"hVidZ","db5bbb16194cb925":"a1bvT","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"6wm0i":[function(require,module,exports) {
 module.exports = require('./helpers/bundle-url').getBundleURL('bLxZJ') + "julia.513b4086.webp" + "?" + Date.now();
 
 },{"./helpers/bundle-url":"lgJ39"}],"bxlGC":[function(require,module,exports) {
@@ -39426,6 +39441,15 @@ module.exports = require('./helpers/bundle-url').getBundleURL('bLxZJ') + "serhii
 
 },{"./helpers/bundle-url":"lgJ39"}],"dUczr":[function(require,module,exports) {
 module.exports = require('./helpers/bundle-url').getBundleURL('bLxZJ') + "annika.b1f00954.webp" + "?" + Date.now();
+
+},{"./helpers/bundle-url":"lgJ39"}],"dQFxb":[function(require,module,exports) {
+module.exports = require('./helpers/bundle-url').getBundleURL('bLxZJ') + "lulu.6356f181.webp" + "?" + Date.now();
+
+},{"./helpers/bundle-url":"lgJ39"}],"hVidZ":[function(require,module,exports) {
+module.exports = require('./helpers/bundle-url').getBundleURL('bLxZJ') + "denise.3ecef629.webp" + "?" + Date.now();
+
+},{"./helpers/bundle-url":"lgJ39"}],"a1bvT":[function(require,module,exports) {
+module.exports = require('./helpers/bundle-url').getBundleURL('bLxZJ') + "jan_s.b2c555d4.webp" + "?" + Date.now();
 
 },{"./helpers/bundle-url":"lgJ39"}],"5Tzuk":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$50b6 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
@@ -39536,7 +39560,6 @@ const skills = [
     "is against liquorice",
     "knows how to use a Mouse",
     "is able to catch a Ball (60% of the time)",
-    "made diva-e hire $2",
     "opened Excel, once",
     "Party Animal!!!",
     "booked $1 hours last Week",

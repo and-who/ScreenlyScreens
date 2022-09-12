@@ -90,11 +90,6 @@ export const employees: Employee[] = [
     gender: 'male'
   },
   {
-    name: "Kristina",
-    image: new URL('../assets/images/kristina.jpg?as=webp&width=500', import.meta.url),
-    gender: 'female'
-  },
-  {
     name: "Tanja",
     image: new URL('../assets/images/tanja.jpg?as=webp&width=500', import.meta.url),
     gender: 'female'
@@ -125,8 +120,28 @@ export const employees: Employee[] = [
     gender: 'male'
   },
   {
+    name: "Kristina",
+    image: new URL('../assets/images/kristina.jpg?as=webp&width=500', import.meta.url),
+    gender: 'female'
+  },
+  {
     name: "Annika",
     image: new URL('../assets/images/annika.jpeg?as=webp&width=500', import.meta.url),
     gender: 'female'
+  },
+  {
+    name: "Lulu",
+    image: new URL('../assets/images/lulu.jpg?as=webp&width=500', import.meta.url),
+    gender: 'female'
+  },
+  {
+    name: "Denise",
+    image: new URL('../assets/images/denise.jpg?as=webp&width=500', import.meta.url),
+    gender: 'female'
+  },
+  {
+    name: "Jan S.",
+    image: new URL('../assets/images/jan_s.jpg?as=webp&width=500', import.meta.url),
+    gender: 'male'
   },
 ];

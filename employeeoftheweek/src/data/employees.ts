@@ -69,12 +69,6 @@ export const employees: Employee[] = [
     gender: 'male'
   },
   {
-    name: "Raul",
-    image: new URL('../assets/images/raul.jpg?as=webp&width=500', import.meta.url),
-    confetti: ["🇲🇽", "Taco"],
-    gender: 'male'
-  },
-  {
     name: "Verena",
     image: new URL('../assets/images/verena.jpg?as=webp&width=500', import.meta.url),
     gender: 'female'
@@ -132,7 +126,8 @@ export const employees: Employee[] = [
   {
     name: "Lulu",
     image: new URL('../assets/images/lulu.jpg?as=webp&width=500', import.meta.url),
-    gender: 'female'
+    gender: 'female',
+    confetti: ["🐕", "🦴"]
   },
   {
     name: "Denise",
@@ -143,5 +138,41 @@ export const employees: Employee[] = [
     name: "Jan S.",
     image: new URL('../assets/images/jan_s.jpg?as=webp&width=500', import.meta.url),
     gender: 'male'
+  },
+  {
+    name: "Fionn",
+    image: new URL('../assets/images/fionn.jpg?as=webp&width=500', import.meta.url),
+    gender: 'male'
+  },
+  {
+    name: "Sonja",
+    image: new URL('../assets/images/sonja.jpg?as=webp&width=500', import.meta.url),
+    gender: 'female'
+  },
+  {
+    name: "Stella",
+    image: new URL('../assets/images/stella.jpg?as=webp&width=500', import.meta.url),
+    gender: 'female'
+  },
+  {
+    name: "Iris",
+    image: new URL('../assets/images/iris.jpg?as=webp&width=500', import.meta.url),
+    gender: 'female'
+  },
+  {
+    name: "Rasti",
+    image: new URL('../assets/images/rasti.jpg?as=webp&width=500', import.meta.url),
+    gender: 'female',
+    confetti: ["🐕", "🦴"]
+  },
+  {
+    name: "Ralph",
+    image: new URL('../assets/images/ralph.jpg?as=webp&width=500', import.meta.url),
+    gender: 'female'
+  },
+  {
+    name: "Noel",
+    image: new URL('../assets/images/noel.jpg?as=webp&width=500', import.meta.url),
+    gender: 'female'
   },
 ];

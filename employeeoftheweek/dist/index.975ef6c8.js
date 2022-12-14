@@ -25194,12 +25194,7 @@ var _s = $RefreshSig$();
 const Confetti = (props)=>{
     _s();
     const { confettiCharacters =[
-        "💩",
-        "🤡",
-        "🍀",
-        "🍙",
-        "🦄",
-        "⭐️"
+        "diva-e"
     ]  } = props;
     const [confettiContainer, setConfettiContainer] = _reactDefault.default.useState();
     const particlesInit = async (main)=>{
@@ -25325,7 +25320,8 @@ const Confetti = (props)=>{
                         type: [
                             "circle",
                             "square",
-                            "polygon", 
+                            "polygon",
+                            "character"
                         ],
                         options: {
                             polygon: [
@@ -39290,15 +39286,6 @@ const employees = [
         gender: 'male'
     },
     {
-        name: "Raul",
-        image: new URL(require("88a6c2b0d87e29ec")),
-        confetti: [
-            "🇲🇽",
-            "Taco"
-        ],
-        gender: 'male'
-    },
-    {
         name: "Verena",
         image: new URL(require("8369fc7d5a8741bc")),
         gender: 'female'
@@ -39356,7 +39343,11 @@ const employees = [
     {
         name: "Lulu",
         image: new URL(require("34fbd3d2937dafff")),
-        gender: 'female'
+        gender: 'female',
+        confetti: [
+            "🐕",
+            "🦴"
+        ]
     },
     {
         name: "Denise",
@@ -39367,10 +39358,49 @@ const employees = [
         name: "Jan S.",
         image: new URL(require("db5bbb16194cb925")),
         gender: 'male'
+    },
+    {
+        name: "Fionn",
+        image: new URL(require("cee111fd6a1484dd")),
+        gender: 'male'
+    },
+    {
+        name: "Sonja",
+        image: new URL(require("b445aef509de42bb")),
+        gender: 'female'
+    },
+    {
+        name: "Stella",
+        image: new URL(require("2737e67fb689a069")),
+        gender: 'female'
+    },
+    {
+        name: "Iris",
+        image: new URL(require("4df0701e5c176b5d")),
+        gender: 'female'
+    },
+    {
+        name: "Rasti",
+        image: new URL(require("5f54f6582611fc57")),
+        gender: 'female',
+        confetti: [
+            "🐕",
+            "🦴"
+        ]
+    },
+    {
+        name: "Ralph",
+        image: new URL(require("7ccb011827a73088")),
+        gender: 'female'
+    },
+    {
+        name: "Noel",
+        image: new URL(require("4e2b31cddb1abd64")),
+        gender: 'female'
     }, 
 ];
 
-},{"9c7bcb686f108800":"6wm0i","b926d32f3d2438a7":"bxlGC","cb1eb9a8cd4706a0":"1ZhLb","cd10a16ba2f72627":"6knJn","514e5d2ebb02ae2d":"fbMhW","833e6aa52031324f":"3eUlr","29116727b0c96f77":"kYWNA","3ade115a9bfefee3":"8TjeE","c4de1d6b2ee0d624":"l2y2I","b19dfaa2518070f7":"3oCiV","200013b9c272a469":"lQ6rF","89d682caff438bbc":"iTkfv","88a6c2b0d87e29ec":"7ct8t","8369fc7d5a8741bc":"jnvpn","869d911cbd16cb52":"c6QQR","ec7b3cb8c6037e4a":"jLtzC","36936d6349f8c37d":"7dSf5","4ae2211246c0318b":"7PFCT","f7579d7d19ca1a28":"dcWJ9","5244aa357f62f247":"bMlas","b4f2e2fc275d77a4":"d2CSg","15dee4294772c9c0":"4GpFt","95c1e16a365dd77d":"jt6gM","6ac304c96fa43ce":"dUczr","34fbd3d2937dafff":"dQFxb","5caf2bbda720302a":"hVidZ","db5bbb16194cb925":"a1bvT","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"6wm0i":[function(require,module,exports) {
+},{"9c7bcb686f108800":"6wm0i","b926d32f3d2438a7":"bxlGC","cb1eb9a8cd4706a0":"1ZhLb","cd10a16ba2f72627":"6knJn","514e5d2ebb02ae2d":"fbMhW","833e6aa52031324f":"3eUlr","29116727b0c96f77":"kYWNA","3ade115a9bfefee3":"8TjeE","c4de1d6b2ee0d624":"l2y2I","b19dfaa2518070f7":"3oCiV","200013b9c272a469":"lQ6rF","89d682caff438bbc":"iTkfv","8369fc7d5a8741bc":"jnvpn","869d911cbd16cb52":"c6QQR","ec7b3cb8c6037e4a":"jLtzC","4ae2211246c0318b":"7PFCT","f7579d7d19ca1a28":"dcWJ9","5244aa357f62f247":"bMlas","b4f2e2fc275d77a4":"d2CSg","15dee4294772c9c0":"4GpFt","95c1e16a365dd77d":"jt6gM","36936d6349f8c37d":"7dSf5","6ac304c96fa43ce":"dUczr","34fbd3d2937dafff":"dQFxb","5caf2bbda720302a":"hVidZ","db5bbb16194cb925":"a1bvT","cee111fd6a1484dd":"iRt7B","b445aef509de42bb":"93oT4","2737e67fb689a069":"18Ava","4df0701e5c176b5d":"i3nyh","5f54f6582611fc57":"hu0Yf","7ccb011827a73088":"iGmYz","4e2b31cddb1abd64":"3rwD2","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"6wm0i":[function(require,module,exports) {
 module.exports = require('./helpers/bundle-url').getBundleURL('bLxZJ') + "julia.513b4086.webp" + "?" + Date.now();
 
 },{"./helpers/bundle-url":"lgJ39"}],"bxlGC":[function(require,module,exports) {
@@ -39406,9 +39436,6 @@ module.exports = require('./helpers/bundle-url').getBundleURL('bLxZJ') + "oskar.
 },{"./helpers/bundle-url":"lgJ39"}],"iTkfv":[function(require,module,exports) {
 module.exports = require('./helpers/bundle-url').getBundleURL('bLxZJ') + "pabu.8b1b6c8a.webp" + "?" + Date.now();
 
-},{"./helpers/bundle-url":"lgJ39"}],"7ct8t":[function(require,module,exports) {
-module.exports = require('./helpers/bundle-url').getBundleURL('bLxZJ') + "raul.bb96b6db.webp" + "?" + Date.now();
-
 },{"./helpers/bundle-url":"lgJ39"}],"jnvpn":[function(require,module,exports) {
 module.exports = require('./helpers/bundle-url').getBundleURL('bLxZJ') + "verena.ffb35970.webp" + "?" + Date.now();
 
@@ -39417,9 +39444,6 @@ module.exports = require('./helpers/bundle-url').getBundleURL('bLxZJ') + "holger
 
 },{"./helpers/bundle-url":"lgJ39"}],"jLtzC":[function(require,module,exports) {
 module.exports = require('./helpers/bundle-url').getBundleURL('bLxZJ') + "rene.381dd994.webp" + "?" + Date.now();
-
-},{"./helpers/bundle-url":"lgJ39"}],"7dSf5":[function(require,module,exports) {
-module.exports = require('./helpers/bundle-url').getBundleURL('bLxZJ') + "kristina.f0a52283.webp" + "?" + Date.now();
 
 },{"./helpers/bundle-url":"lgJ39"}],"7PFCT":[function(require,module,exports) {
 module.exports = require('./helpers/bundle-url').getBundleURL('bLxZJ') + "tanja.01d9f54d.webp" + "?" + Date.now();
@@ -39439,6 +39463,9 @@ module.exports = require('./helpers/bundle-url').getBundleURL('bLxZJ') + "lukas.
 },{"./helpers/bundle-url":"lgJ39"}],"jt6gM":[function(require,module,exports) {
 module.exports = require('./helpers/bundle-url').getBundleURL('bLxZJ') + "serhii.27ed2e1a.webp" + "?" + Date.now();
 
+},{"./helpers/bundle-url":"lgJ39"}],"7dSf5":[function(require,module,exports) {
+module.exports = require('./helpers/bundle-url').getBundleURL('bLxZJ') + "kristina.f0a52283.webp" + "?" + Date.now();
+
 },{"./helpers/bundle-url":"lgJ39"}],"dUczr":[function(require,module,exports) {
 module.exports = require('./helpers/bundle-url').getBundleURL('bLxZJ') + "annika.b1f00954.webp" + "?" + Date.now();
 
@@ -39450,6 +39477,27 @@ module.exports = require('./helpers/bundle-url').getBundleURL('bLxZJ') + "denise
 
 },{"./helpers/bundle-url":"lgJ39"}],"a1bvT":[function(require,module,exports) {
 module.exports = require('./helpers/bundle-url').getBundleURL('bLxZJ') + "jan_s.b2c555d4.webp" + "?" + Date.now();
+
+},{"./helpers/bundle-url":"lgJ39"}],"iRt7B":[function(require,module,exports) {
+module.exports = require('./helpers/bundle-url').getBundleURL('bLxZJ') + "fionn.1bf280d8.webp" + "?" + Date.now();
+
+},{"./helpers/bundle-url":"lgJ39"}],"93oT4":[function(require,module,exports) {
+module.exports = require('./helpers/bundle-url').getBundleURL('bLxZJ') + "sonja.c68fbb69.webp" + "?" + Date.now();
+
+},{"./helpers/bundle-url":"lgJ39"}],"18Ava":[function(require,module,exports) {
+module.exports = require('./helpers/bundle-url').getBundleURL('bLxZJ') + "stella.4a6d2145.webp" + "?" + Date.now();
+
+},{"./helpers/bundle-url":"lgJ39"}],"i3nyh":[function(require,module,exports) {
+module.exports = require('./helpers/bundle-url').getBundleURL('bLxZJ') + "iris.3026f629.webp" + "?" + Date.now();
+
+},{"./helpers/bundle-url":"lgJ39"}],"hu0Yf":[function(require,module,exports) {
+module.exports = require('./helpers/bundle-url').getBundleURL('bLxZJ') + "rasti.10811f40.webp" + "?" + Date.now();
+
+},{"./helpers/bundle-url":"lgJ39"}],"iGmYz":[function(require,module,exports) {
+module.exports = require('./helpers/bundle-url').getBundleURL('bLxZJ') + "ralph.8725d926.webp" + "?" + Date.now();
+
+},{"./helpers/bundle-url":"lgJ39"}],"3rwD2":[function(require,module,exports) {
+module.exports = require('./helpers/bundle-url').getBundleURL('bLxZJ') + "noel.17e950b4.webp" + "?" + Date.now();
 
 },{"./helpers/bundle-url":"lgJ39"}],"5Tzuk":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$50b6 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");

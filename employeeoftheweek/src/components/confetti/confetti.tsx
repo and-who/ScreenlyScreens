@@ -5,7 +5,7 @@ import "./confetti.scss";
 
 export const Confetti = (props :{confettiCharacters:string[]}) => {
 
-  const {confettiCharacters=["💩", "🤡", "🍀", "🍙", "🦄", "⭐️"]} = props;
+  const {confettiCharacters=["diva-e"]} = props;
 
   const [confettiContainer, setConfettiContainer] = React.useState();
   const particlesInit = async (main) => {
@@ -125,8 +125,8 @@ export const Confetti = (props :{confettiCharacters:string[]}) => {
             type: [
               "circle",
               "square",
-              "polygon",
-            ],
+              "polygon", 
+              "character"],
             options: {
               polygon: [
                 {

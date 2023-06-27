@@ -31,12 +31,6 @@ export const employees: Employee[] = [
     gender: 'female'
   },
   {
-    name: "Kim",
-    image: new URL('../assets/images/kim.jpg?as=webp&width=500', import.meta.url),
-    confetti: ["🍷"],
-    gender: 'female'
-  },
-  {
     name: "Kolja",
     image: new URL('../assets/images/kolja.jpg?as=webp&width=500', import.meta.url),
     gender: 'male'
@@ -94,23 +88,8 @@ export const employees: Employee[] = [
     gender: 'female'
   },
   {
-    name: "Jan-Lasse",
-    image: new URL('../assets/images/jan-lasse.jpeg?as=webp&width=500', import.meta.url),
-    gender: 'male'
-  },
-  {
-    name: "Stephan",
-    image: new URL('../assets/images/stephan.jpeg?as=webp&width=500', import.meta.url),
-    gender: 'male'
-  },
-  {
     name: "Lukas",
     image: new URL('../assets/images/lukas.jpeg?as=webp&width=500', import.meta.url),
-    gender: 'male'
-  },
-  {
-    name: "Serhii",
-    image: new URL('../assets/images/serhii.jpeg?as=webp&width=500', import.meta.url),
     gender: 'male'
   },
   {
@@ -128,11 +107,6 @@ export const employees: Employee[] = [
     image: new URL('../assets/images/lulu.jpg?as=webp&width=500', import.meta.url),
     gender: 'female',
     confetti: ["🐕", "🦴"]
-  },
-  {
-    name: "Denise",
-    image: new URL('../assets/images/denise.jpg?as=webp&width=500', import.meta.url),
-    gender: 'female'
   },
   {
     name: "Jan S.",
@@ -173,6 +147,26 @@ export const employees: Employee[] = [
   {
     name: "Noel",
     image: new URL('../assets/images/noel.jpg?as=webp&width=500', import.meta.url),
+    gender: 'female'
+  },
+  {
+    name: "Kris",
+    image: new URL('../assets/images/kris.jpg?as=webp&width=500', import.meta.url),
+    gender: 'female'
+  },
+  {
+    name: "Christian",
+    image: new URL('../assets/images/christian.jpg?as=webp&width=500', import.meta.url),
+    gender: 'female'
+  },
+  {
+    name: "Christoph",
+    image: new URL('../assets/images/christoph.jpg?as=webp&width=500', import.meta.url),
+    gender: 'female'
+  },
+  {
+    name: "Jan",
+    image: new URL('../assets/images/jan_sc.jpg?as=webp&width=500', import.meta.url),
     gender: 'female'
   },
 ];

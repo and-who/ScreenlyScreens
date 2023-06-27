@@ -142,12 +142,12 @@ export const employees: Employee[] = [
   {
     name: "Ralph",
     image: new URL('../assets/images/ralph.jpg?as=webp&width=500', import.meta.url),
-    gender: 'female'
+    gender: 'male'
   },
   {
     name: "Noel",
     image: new URL('../assets/images/noel.jpg?as=webp&width=500', import.meta.url),
-    gender: 'female'
+    gender: 'male'
   },
   {
     name: "Kris",
@@ -157,16 +157,16 @@ export const employees: Employee[] = [
   {
     name: "Christian",
     image: new URL('../assets/images/christian.jpg?as=webp&width=500', import.meta.url),
-    gender: 'female'
+    gender: 'male'
   },
   {
     name: "Christoph",
     image: new URL('../assets/images/christoph.jpg?as=webp&width=500', import.meta.url),
-    gender: 'female'
+    gender: 'male'
   },
   {
     name: "Jan",
     image: new URL('../assets/images/jan_sc.jpg?as=webp&width=500', import.meta.url),
-    gender: 'female'
+    gender: 'male'
   },
 ];

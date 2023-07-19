@@ -27,7 +27,7 @@
 
   &__text {
     font-size: 3rem;
-    color:black;
+    color: var(--main-dark);;
     margin: 0px;
     max-width: 25vw;
     text-align: right;
@@ -37,7 +37,7 @@
   &__bubble {
     position:relative;
     width: fit-content;
-    background-color: white;
+    background-color: var(--main-light);;
     right: 2rem;
     padding: 1rem;
     margin-bottom: 2rem;

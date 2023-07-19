@@ -33,11 +33,6 @@ export const Confetti = (props :{confettiCharacters:string[]}) => {
           loaded={particlesLoaded}
       options={{
         fpsLimit: 40,
-        background: {
-          color: {
-            value: "#000000"
-          }
-        },
         fullScreen: {
           enable: true,
           zIndex: -1
@@ -54,7 +49,7 @@ export const Confetti = (props :{confettiCharacters:string[]}) => {
         },
         particles: {
           color: {
-            value: ["#e6007e", "#c3a815", "#009fe3", "#FFFFFF"]
+            value: ["#1831FF", "#EDF0FB", "#1831FF", "#EDF0FB", "#A7FF71", "#9C73F3"]
           },
           move: {
             decay: 0.05,
@@ -125,7 +120,6 @@ export const Confetti = (props :{confettiCharacters:string[]}) => {
             type: [
               "circle",
               "square",
-              "polygon", 
               "character"],
             options: {
               polygon: [

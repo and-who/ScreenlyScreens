@@ -25172,7 +25172,7 @@ $RefreshReg$(_c, "App");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","./components/confetti/confetti":"8NBDM","./components/employee-card/employee-card":"i06vG","./components/falling-elements/falling-elements":"iL8Ng","./components/title/title":"9kiBP","./components/winning-element/winning-element":"kB4dJ","./data/employees":"8HsNm","seedrandom":"acqQZ","./components/feedback/feedback":"5Tzuk","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"8NBDM":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","./components/confetti/confetti":"8NBDM","./components/employee-card/employee-card":"i06vG","./components/falling-elements/falling-elements":"iL8Ng","./components/title/title":"9kiBP","./components/winning-element/winning-element":"kB4dJ","./data/employees":"8HsNm","seedrandom":"kcfU7","./components/feedback/feedback":"5Tzuk","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"8NBDM":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$b0a4 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -25220,11 +25220,6 @@ const Confetti = (props)=>{
             loaded: particlesLoaded,
             options: {
                 fpsLimit: 40,
-                background: {
-                    color: {
-                        value: "#000000"
-                    }
-                },
                 fullScreen: {
                     enable: true,
                     zIndex: -1
@@ -25242,10 +25237,12 @@ const Confetti = (props)=>{
                 particles: {
                     color: {
                         value: [
-                            "#e6007e",
-                            "#c3a815",
-                            "#009fe3",
-                            "#FFFFFF"
+                            "#1831FF",
+                            "#EDF0FB",
+                            "#1831FF",
+                            "#EDF0FB",
+                            "#A7FF71",
+                            "#9C73F3"
                         ]
                     },
                     move: {
@@ -25320,7 +25317,6 @@ const Confetti = (props)=>{
                         type: [
                             "circle",
                             "square",
-                            "polygon",
                             "character"
                         ],
                         options: {
@@ -34438,12 +34434,12 @@ class PolygonMaskPlugin {
 }
 _PolygonMaskPlugin_engine = new WeakMap();
 async function loadPolygonMaskPlugin(engine) {
-    if (!_tsparticlesEngine.isSsr() && !("SVGPathSeg" in window)) await require("4193c9beef6e2bb6");
+    if (!_tsparticlesEngine.isSsr() && !("SVGPathSeg" in window)) await require("2ab731b0f7957177");
     const plugin = new PolygonMaskPlugin(engine);
     await engine.addPlugin(plugin);
 }
 
-},{"./Options/Classes/PolygonMask":"7PFsE","./PolygonMaskInstance":"2EQLb","tsparticles-engine":"9BizU","4193c9beef6e2bb6":"4BKvA","./Enums/PolygonMaskInlineArrangement":"7MZdO","./Enums/PolygonMaskMoveType":"5XDur","./Enums/PolygonMaskType":"1zoOs","./Options/Interfaces/IPolygonMaskOptions":"lOj4p","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"7PFsE":[function(require,module,exports) {
+},{"./Options/Classes/PolygonMask":"7PFsE","./PolygonMaskInstance":"2EQLb","tsparticles-engine":"9BizU","2ab731b0f7957177":"4BKvA","./Enums/PolygonMaskInlineArrangement":"7MZdO","./Enums/PolygonMaskMoveType":"5XDur","./Enums/PolygonMaskType":"1zoOs","./Options/Interfaces/IPolygonMaskOptions":"lOj4p","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"7PFsE":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "PolygonMask", ()=>PolygonMask
@@ -38245,7 +38241,7 @@ $RefreshReg$(_c, "EmployeeCard");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","./employee-card.scss":"f5ngU","seedrandom":"acqQZ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"f5ngU":[function() {},{}],"acqQZ":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","./employee-card.scss":"f5ngU","seedrandom":"kcfU7","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"f5ngU":[function() {},{}],"kcfU7":[function(require,module,exports) {
 // A library of seedable RNGs implemented in Javascript.
 //
 // Usage:
@@ -38298,7 +38294,7 @@ sr.xor4096 = xor4096;
 sr.tychei = tychei;
 module.exports = sr;
 
-},{"./lib/alea":"b8TZ2","./lib/xor128":"3Rxxq","./lib/xorwow":"1Ri3g","./lib/xorshift7":"eF8eN","./lib/xor4096":"2wdfl","./lib/tychei":"anavj","./seedrandom":"i1vhZ"}],"b8TZ2":[function(require,module,exports) {
+},{"./lib/alea":"c47hP","./lib/xor128":"hy9Go","./lib/xorwow":"8ktBo","./lib/xorshift7":"i5aBa","./lib/xor4096":"7tXtZ","./lib/tychei":"eVmNr","./seedrandom":"lbeKh"}],"c47hP":[function(require,module,exports) {
 // A port of an algorithm by Johannes Baagøe <baagoe@baagoe.com>, 2010
 // http://baagoe.com/en/RandomMusings/javascript/
 // https://github.com/nquinlan/better-random-numbers-for-javascript-mirror
@@ -38394,7 +38390,7 @@ module.exports = sr;
 })(this, module, typeof define == 'function' && define // present with an AMD loader
 );
 
-},{}],"3Rxxq":[function(require,module,exports) {
+},{}],"hy9Go":[function(require,module,exports) {
 // A Javascript implementaion of the "xor128" prng algorithm by
 // George Marsaglia.  See http://www.jstatsoft.org/v08/i14/paper
 (function(global, module, define) {
@@ -38456,7 +38452,7 @@ module.exports = sr;
 })(this, module, typeof define == 'function' && define // present with an AMD loader
 );
 
-},{}],"1Ri3g":[function(require,module,exports) {
+},{}],"8ktBo":[function(require,module,exports) {
 // A Javascript implementaion of the "xorwow" prng algorithm by
 // George Marsaglia.  See http://www.jstatsoft.org/v08/i14/paper
 (function(global, module, define) {
@@ -38523,7 +38519,7 @@ module.exports = sr;
 })(this, module, typeof define == 'function' && define // present with an AMD loader
 );
 
-},{}],"eF8eN":[function(require,module,exports) {
+},{}],"i5aBa":[function(require,module,exports) {
 // A Javascript implementaion of the "xorshift7" algorithm by
 // François Panneton and Pierre L'ecuyer:
 // "On the Xorgshift Random Number Generators"
@@ -38605,7 +38601,7 @@ module.exports = sr;
 })(this, module, typeof define == 'function' && define // present with an AMD loader
 );
 
-},{}],"2wdfl":[function(require,module,exports) {
+},{}],"7tXtZ":[function(require,module,exports) {
 // A Javascript implementaion of Richard Brent's Xorgens xor4096 algorithm.
 //
 // This fast non-cryptographic random number generator is designed for
@@ -38735,7 +38731,7 @@ module.exports = sr;
 })(this, module, typeof define == 'function' && define // present with an AMD loader
 );
 
-},{}],"anavj":[function(require,module,exports) {
+},{}],"eVmNr":[function(require,module,exports) {
 // A Javascript implementaion of the "Tyche-i" prng algorithm by
 // Samuel Neves and Filipe Araujo.
 // See https://eden.dei.uc.pt/~sneves/pubs/2011-snfa2.pdf
@@ -38818,7 +38814,7 @@ module.exports = sr;
 })(this, module, typeof define == 'function' && define // present with an AMD loader
 );
 
-},{}],"i1vhZ":[function(require,module,exports) {
+},{}],"lbeKh":[function(require,module,exports) {
 /*
 Copyright 2019 David Bau.
 
@@ -39113,7 +39109,7 @@ $RefreshReg$(_c, "FallingElements");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","./falling-elements.scss":"lpxYX","seedrandom":"acqQZ","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"lpxYX":[function() {},{}],"9kiBP":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","./falling-elements.scss":"lpxYX","seedrandom":"kcfU7","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"lpxYX":[function() {},{}],"9kiBP":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$4dd5 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -39195,7 +39191,7 @@ $RefreshReg$(_c, "WinningElement");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","./winning-element.scss":"6mp8O","seedrandom":"acqQZ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"6mp8O":[function() {},{}],"8HsNm":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","./winning-element.scss":"6mp8O","seedrandom":"kcfU7","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"6mp8O":[function() {},{}],"8HsNm":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "employees", ()=>employees
@@ -39203,7 +39199,7 @@ parcelHelpers.export(exports, "employees", ()=>employees
 const employees = [
     {
         name: "Julia",
-        image: new URL(require("9c7bcb686f108800")),
+        image: new URL(require("778379cb12c32d4b")),
         confetti: [
             "🐕",
             "🦴"
@@ -39212,7 +39208,7 @@ const employees = [
     },
     {
         name: "Andi",
-        image: new URL(require("b926d32f3d2438a7")),
+        image: new URL(require("313ad5e0792cb6a3")),
         confetti: [
             "🚀",
             "⭐",
@@ -39222,12 +39218,12 @@ const employees = [
     },
     {
         name: "Alex",
-        image: new URL(require("cb1eb9a8cd4706a0")),
+        image: new URL(require("2099f82b60f06878")),
         gender: 'male'
     },
     {
         name: "Jan",
-        image: new URL(require("cd10a16ba2f72627")),
+        image: new URL(require("8043103e561cf3b6")),
         confetti: [
             "⚔️",
             "🛡️"
@@ -39236,35 +39232,27 @@ const employees = [
     },
     {
         name: "Johanna",
-        image: new URL(require("514e5d2ebb02ae2d")),
-        gender: 'female'
-    },
-    {
-        name: "Kim",
-        image: new URL(require("833e6aa52031324f")),
-        confetti: [
-            "🍷"
-        ],
+        image: new URL(require("23d38c6b83b4c40c")),
         gender: 'female'
     },
     {
         name: "Kolja",
-        image: new URL(require("29116727b0c96f77")),
+        image: new URL(require("baacfdcf9a5836a2")),
         gender: 'male'
     },
     {
         name: "Lena",
-        image: new URL(require("3ade115a9bfefee3")),
+        image: new URL(require("a925a923eeba5051")),
         gender: 'female'
     },
     {
         name: "Michael",
-        image: new URL(require("c4de1d6b2ee0d624")),
+        image: new URL(require("f8d6fff5f26a89b7")),
         gender: 'male'
     },
     {
         name: "Norma",
-        image: new URL(require("b19dfaa2518070f7")),
+        image: new URL(require("6ebca49c70dc3173")),
         confetti: [
             "🐴",
             "🐎"
@@ -39273,12 +39261,12 @@ const employees = [
     },
     {
         name: "Oskar",
-        image: new URL(require("200013b9c272a469")),
+        image: new URL(require("2f703eaef952ea50")),
         gender: 'male'
     },
     {
         name: "Pabu",
-        image: new URL(require("89d682caff438bbc")),
+        image: new URL(require("832e6cbad64aabe6")),
         confetti: [
             "🐕",
             "🦴"
@@ -39287,62 +39275,47 @@ const employees = [
     },
     {
         name: "Verena",
-        image: new URL(require("8369fc7d5a8741bc")),
+        image: new URL(require("e59bc2ee66fc9c")),
         gender: 'female'
     },
     {
         name: "Holger",
-        image: new URL(require("869d911cbd16cb52")),
+        image: new URL(require("12ebc60549895f7d")),
         gender: 'male'
     },
     {
         name: "Rene",
-        image: new URL(require("ec7b3cb8c6037e4a")),
+        image: new URL(require("b934562a2d96d63d")),
         gender: 'male'
     },
     {
         name: "Tanja",
-        image: new URL(require("4ae2211246c0318b")),
+        image: new URL(require("f5e4f7ff9baa3ae2")),
         gender: 'female'
     },
     {
         name: "Lisa",
-        image: new URL(require("f7579d7d19ca1a28")),
+        image: new URL(require("dc1fc3d4ab8d5930")),
         gender: 'female'
     },
     {
-        name: "Jan-Lasse",
-        image: new URL(require("5244aa357f62f247")),
-        gender: 'male'
-    },
-    {
-        name: "Stephan",
-        image: new URL(require("b4f2e2fc275d77a4")),
-        gender: 'male'
-    },
-    {
         name: "Lukas",
-        image: new URL(require("15dee4294772c9c0")),
-        gender: 'male'
-    },
-    {
-        name: "Serhii",
-        image: new URL(require("95c1e16a365dd77d")),
+        image: new URL(require("86df76b22767c594")),
         gender: 'male'
     },
     {
         name: "Kristina",
-        image: new URL(require("36936d6349f8c37d")),
+        image: new URL(require("4003a2bbe5bd1a43")),
         gender: 'female'
     },
     {
         name: "Annika",
-        image: new URL(require("6ac304c96fa43ce")),
+        image: new URL(require("75ab1dd557e5b04c")),
         gender: 'female'
     },
     {
         name: "Lulu",
-        image: new URL(require("34fbd3d2937dafff")),
+        image: new URL(require("ae781f51a98a38c0")),
         gender: 'female',
         confetti: [
             "🐕",
@@ -39350,38 +39323,33 @@ const employees = [
         ]
     },
     {
-        name: "Denise",
-        image: new URL(require("5caf2bbda720302a")),
-        gender: 'female'
-    },
-    {
         name: "Jan S.",
-        image: new URL(require("db5bbb16194cb925")),
+        image: new URL(require("77f807496ddb9855")),
         gender: 'male'
     },
     {
         name: "Fionn",
-        image: new URL(require("cee111fd6a1484dd")),
+        image: new URL(require("973c5893682f8735")),
         gender: 'male'
     },
     {
         name: "Sonja",
-        image: new URL(require("b445aef509de42bb")),
+        image: new URL(require("85b886eacbc5041c")),
         gender: 'female'
     },
     {
         name: "Stella",
-        image: new URL(require("2737e67fb689a069")),
+        image: new URL(require("598b8d04cb587cda")),
         gender: 'female'
     },
     {
         name: "Iris",
-        image: new URL(require("4df0701e5c176b5d")),
+        image: new URL(require("77c2c2d07612a6c0")),
         gender: 'female'
     },
     {
         name: "Rasti",
-        image: new URL(require("5f54f6582611fc57")),
+        image: new URL(require("f71204ed3af55176")),
         gender: 'female',
         confetti: [
             "🐕",
@@ -39390,17 +39358,37 @@ const employees = [
     },
     {
         name: "Ralph",
-        image: new URL(require("7ccb011827a73088")),
-        gender: 'female'
+        image: new URL(require("e9a55182765e6557")),
+        gender: 'male'
     },
     {
         name: "Noel",
-        image: new URL(require("4e2b31cddb1abd64")),
+        image: new URL(require("5a8c5849921e6793")),
+        gender: 'male'
+    },
+    {
+        name: "Kris",
+        image: new URL(require("64684304e2393823")),
         gender: 'female'
+    },
+    {
+        name: "Christian",
+        image: new URL(require("4a4094616184e591")),
+        gender: 'male'
+    },
+    {
+        name: "Christoph",
+        image: new URL(require("b7a2057e8bb11880")),
+        gender: 'male'
+    },
+    {
+        name: "Jan",
+        image: new URL(require("fa157278d1461232")),
+        gender: 'male'
     }, 
 ];
 
-},{"9c7bcb686f108800":"6wm0i","b926d32f3d2438a7":"bxlGC","cb1eb9a8cd4706a0":"1ZhLb","cd10a16ba2f72627":"6knJn","514e5d2ebb02ae2d":"fbMhW","833e6aa52031324f":"3eUlr","29116727b0c96f77":"kYWNA","3ade115a9bfefee3":"8TjeE","c4de1d6b2ee0d624":"l2y2I","b19dfaa2518070f7":"3oCiV","200013b9c272a469":"lQ6rF","89d682caff438bbc":"iTkfv","8369fc7d5a8741bc":"jnvpn","869d911cbd16cb52":"c6QQR","ec7b3cb8c6037e4a":"jLtzC","4ae2211246c0318b":"7PFCT","f7579d7d19ca1a28":"dcWJ9","5244aa357f62f247":"bMlas","b4f2e2fc275d77a4":"d2CSg","15dee4294772c9c0":"4GpFt","95c1e16a365dd77d":"jt6gM","36936d6349f8c37d":"7dSf5","6ac304c96fa43ce":"dUczr","34fbd3d2937dafff":"dQFxb","5caf2bbda720302a":"hVidZ","db5bbb16194cb925":"a1bvT","cee111fd6a1484dd":"iRt7B","b445aef509de42bb":"93oT4","2737e67fb689a069":"18Ava","4df0701e5c176b5d":"i3nyh","5f54f6582611fc57":"hu0Yf","7ccb011827a73088":"iGmYz","4e2b31cddb1abd64":"3rwD2","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"6wm0i":[function(require,module,exports) {
+},{"778379cb12c32d4b":"6wm0i","313ad5e0792cb6a3":"bxlGC","2099f82b60f06878":"1ZhLb","8043103e561cf3b6":"6knJn","23d38c6b83b4c40c":"fbMhW","baacfdcf9a5836a2":"kYWNA","a925a923eeba5051":"8TjeE","f8d6fff5f26a89b7":"l2y2I","6ebca49c70dc3173":"3oCiV","2f703eaef952ea50":"lQ6rF","832e6cbad64aabe6":"iTkfv","e59bc2ee66fc9c":"jnvpn","12ebc60549895f7d":"c6QQR","b934562a2d96d63d":"jLtzC","f5e4f7ff9baa3ae2":"7PFCT","dc1fc3d4ab8d5930":"dcWJ9","86df76b22767c594":"4GpFt","4003a2bbe5bd1a43":"7dSf5","75ab1dd557e5b04c":"dUczr","ae781f51a98a38c0":"dQFxb","77f807496ddb9855":"a1bvT","973c5893682f8735":"iRt7B","85b886eacbc5041c":"93oT4","598b8d04cb587cda":"18Ava","77c2c2d07612a6c0":"i3nyh","f71204ed3af55176":"hu0Yf","e9a55182765e6557":"iGmYz","5a8c5849921e6793":"3rwD2","64684304e2393823":"3tVKs","4a4094616184e591":"4amAY","b7a2057e8bb11880":"g610p","fa157278d1461232":"9OFzv","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"6wm0i":[function(require,module,exports) {
 module.exports = require('./helpers/bundle-url').getBundleURL('bLxZJ') + "julia.513b4086.webp" + "?" + Date.now();
 
 },{"./helpers/bundle-url":"lgJ39"}],"bxlGC":[function(require,module,exports) {
@@ -39414,9 +39402,6 @@ module.exports = require('./helpers/bundle-url').getBundleURL('bLxZJ') + "jan.e6
 
 },{"./helpers/bundle-url":"lgJ39"}],"fbMhW":[function(require,module,exports) {
 module.exports = require('./helpers/bundle-url').getBundleURL('bLxZJ') + "johanna.81e273fd.webp" + "?" + Date.now();
-
-},{"./helpers/bundle-url":"lgJ39"}],"3eUlr":[function(require,module,exports) {
-module.exports = require('./helpers/bundle-url').getBundleURL('bLxZJ') + "kim.cc9c23c7.webp" + "?" + Date.now();
 
 },{"./helpers/bundle-url":"lgJ39"}],"kYWNA":[function(require,module,exports) {
 module.exports = require('./helpers/bundle-url').getBundleURL('bLxZJ') + "kolja.900e3485.webp" + "?" + Date.now();
@@ -39451,17 +39436,8 @@ module.exports = require('./helpers/bundle-url').getBundleURL('bLxZJ') + "tanja.
 },{"./helpers/bundle-url":"lgJ39"}],"dcWJ9":[function(require,module,exports) {
 module.exports = require('./helpers/bundle-url').getBundleURL('bLxZJ') + "lisa.600b4b9f.webp" + "?" + Date.now();
 
-},{"./helpers/bundle-url":"lgJ39"}],"bMlas":[function(require,module,exports) {
-module.exports = require('./helpers/bundle-url').getBundleURL('bLxZJ') + "jan-lasse.4c112035.webp" + "?" + Date.now();
-
-},{"./helpers/bundle-url":"lgJ39"}],"d2CSg":[function(require,module,exports) {
-module.exports = require('./helpers/bundle-url').getBundleURL('bLxZJ') + "stephan.72df33aa.webp" + "?" + Date.now();
-
 },{"./helpers/bundle-url":"lgJ39"}],"4GpFt":[function(require,module,exports) {
 module.exports = require('./helpers/bundle-url').getBundleURL('bLxZJ') + "lukas.60615c21.webp" + "?" + Date.now();
-
-},{"./helpers/bundle-url":"lgJ39"}],"jt6gM":[function(require,module,exports) {
-module.exports = require('./helpers/bundle-url').getBundleURL('bLxZJ') + "serhii.27ed2e1a.webp" + "?" + Date.now();
 
 },{"./helpers/bundle-url":"lgJ39"}],"7dSf5":[function(require,module,exports) {
 module.exports = require('./helpers/bundle-url').getBundleURL('bLxZJ') + "kristina.f0a52283.webp" + "?" + Date.now();
@@ -39471,9 +39447,6 @@ module.exports = require('./helpers/bundle-url').getBundleURL('bLxZJ') + "annika
 
 },{"./helpers/bundle-url":"lgJ39"}],"dQFxb":[function(require,module,exports) {
 module.exports = require('./helpers/bundle-url').getBundleURL('bLxZJ') + "lulu.6356f181.webp" + "?" + Date.now();
-
-},{"./helpers/bundle-url":"lgJ39"}],"hVidZ":[function(require,module,exports) {
-module.exports = require('./helpers/bundle-url').getBundleURL('bLxZJ') + "denise.3ecef629.webp" + "?" + Date.now();
 
 },{"./helpers/bundle-url":"lgJ39"}],"a1bvT":[function(require,module,exports) {
 module.exports = require('./helpers/bundle-url').getBundleURL('bLxZJ') + "jan_s.b2c555d4.webp" + "?" + Date.now();
@@ -39499,6 +39472,18 @@ module.exports = require('./helpers/bundle-url').getBundleURL('bLxZJ') + "ralph.
 },{"./helpers/bundle-url":"lgJ39"}],"3rwD2":[function(require,module,exports) {
 module.exports = require('./helpers/bundle-url').getBundleURL('bLxZJ') + "noel.17e950b4.webp" + "?" + Date.now();
 
+},{"./helpers/bundle-url":"lgJ39"}],"3tVKs":[function(require,module,exports) {
+module.exports = require('./helpers/bundle-url').getBundleURL('bLxZJ') + "kris.11ed264a.webp" + "?" + Date.now();
+
+},{"./helpers/bundle-url":"lgJ39"}],"4amAY":[function(require,module,exports) {
+module.exports = require('./helpers/bundle-url').getBundleURL('bLxZJ') + "christian.f3f50319.webp" + "?" + Date.now();
+
+},{"./helpers/bundle-url":"lgJ39"}],"g610p":[function(require,module,exports) {
+module.exports = require('./helpers/bundle-url').getBundleURL('bLxZJ') + "christoph.96ed3859.webp" + "?" + Date.now();
+
+},{"./helpers/bundle-url":"lgJ39"}],"9OFzv":[function(require,module,exports) {
+module.exports = require('./helpers/bundle-url').getBundleURL('bLxZJ') + "jan_sc.40b150c9.webp" + "?" + Date.now();
+
 },{"./helpers/bundle-url":"lgJ39"}],"5Tzuk":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$50b6 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
@@ -39516,19 +39501,19 @@ var _seedrandom = require("seedrandom");
 var _seedrandomDefault = parcelHelpers.interopDefault(_seedrandom);
 var _skills = require("../../data/skills");
 const personImages = [
-    new URL(require("d179ed91c85601b1")),
-    new URL(require("e52c8649a9c5d948")),
-    new URL(require("37ee7c65861f3dd8")),
-    new URL(require("b132f2e69b5ca15")),
-    new URL(require("c417205b1209d3d8")),
-    new URL(require("ecbb694eaa3b7c00")),
-    new URL(require("4be841a48c21c7ae")),
-    new URL(require("bbb327dae82d9c07")),
-    new URL(require("416c314262fe08a7")),
-    new URL(require("7560e2a62c78ca34")),
-    new URL(require("3ff6a802397d032f")),
-    new URL(require("c10beb5307925b40")),
-    new URL(require("36660bc58589c908")), 
+    new URL(require("2b8018df3561392e")),
+    new URL(require("f5e675fae3a95e0a")),
+    new URL(require("21f87c4aee84dc3c")),
+    new URL(require("85f51413ac949f84")),
+    new URL(require("215764831f0d1f91")),
+    new URL(require("f93d625d9bdc45f2")),
+    new URL(require("d7614f1093f9c5b8")),
+    new URL(require("9eef6321b684d7fe")),
+    new URL(require("b134867eeb614437")),
+    new URL(require("20c801cd4b22a713")),
+    new URL(require("ac6a129985dcda48")),
+    new URL(require("74f5b8682107bb54")),
+    new URL(require("5aae92659ecc5b49")), 
 ];
 const article = {
     'male': 'his',
@@ -39591,7 +39576,7 @@ $RefreshReg$(_c, "Feedback");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","./feedback.scss":"fYAGJ","seedrandom":"acqQZ","../../data/skills":"lwYHa","d179ed91c85601b1":"cFstg","e52c8649a9c5d948":"6yXxV","37ee7c65861f3dd8":"1xMKq","b132f2e69b5ca15":"l39SM","c417205b1209d3d8":"f85I4","ecbb694eaa3b7c00":"8UulX","4be841a48c21c7ae":"6iC05","bbb327dae82d9c07":"5kHe6","416c314262fe08a7":"jOpTR","7560e2a62c78ca34":"DkaMq","3ff6a802397d032f":"28z0Q","c10beb5307925b40":"cD9Ko","36660bc58589c908":"3LiwF","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"fYAGJ":[function() {},{}],"lwYHa":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","./feedback.scss":"fYAGJ","seedrandom":"kcfU7","../../data/skills":"lwYHa","2b8018df3561392e":"cFstg","f5e675fae3a95e0a":"6yXxV","21f87c4aee84dc3c":"1xMKq","85f51413ac949f84":"l39SM","215764831f0d1f91":"f85I4","f93d625d9bdc45f2":"8UulX","d7614f1093f9c5b8":"6iC05","9eef6321b684d7fe":"5kHe6","b134867eeb614437":"jOpTR","20c801cd4b22a713":"DkaMq","ac6a129985dcda48":"28z0Q","74f5b8682107bb54":"cD9Ko","5aae92659ecc5b49":"3LiwF","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"fYAGJ":[function() {},{}],"lwYHa":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "skills", ()=>skills

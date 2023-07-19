@@ -1,10 +1,28 @@
 @import url('https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+
+@font-face {
+  font-family: 'GT-Planer';
+  font-style: italic;
+  font-display: swap;
+  src: url(./assets/fonts/GT-Planar-Italic-30-Regular.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'GT-Planer';
+  font-style: normal;
+  font-display: swap;
+  src: url(./assets/fonts/GT-Planar-Regular.woff2) format('woff2');
+}
 
 :root {
-  --main-background-color: black;
+  --main-dark: #081235;
+  --main-light: #EDF0FB;
+  --color-blue: #1831FF;
+  --color-green: #A7FF71;
+  --color-puple: #9C73F3;
 }
 
 body {
-  font-family: 'Fira Sans', sans-serif;
-  background-color: var(--main-background-color);
+  font-family: 'GT-Planer', 'Inter', 'Fira Sans', sans-serif;
+  background-color: var(--main-dark);
 }

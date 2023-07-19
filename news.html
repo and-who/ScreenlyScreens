@@ -1,6 +1,32 @@
 <html>
   <head>
     <style>
+      @import url('https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+      @import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+
+      @font-face {
+        font-family: 'GT-Planer';
+        font-style: normal;
+        font-display: swap;
+        src: url(https://and-who.github.io/ScreenlyScreens/employeeoftheweek/dist/GT-Planar-Regular.049f403e.woff2) format('woff2');
+      }
+
+      :root {
+        --main-dark: #081235;
+        --main-dark-transparent: #08123570;
+        --main-dark-gradient-top: linear-gradient(180deg, rgba(8,18,53,0.9) 35%, rgba(8,18,53,0.7) 70%, rgba(8,18,53,0) 100%);;
+        --main-dark-gradient-bottom: linear-gradient(0deg, rgba(8,18,53,0.9) 35%, rgba(8,18,53,0.7) 70%, rgba(8,18,53,0) 100%);;
+        --main-light: #EDF0FB;
+        --color-blue: #1831FF;
+        --color-green: #A7FF71;
+        --color-puple: #9C73F3;
+      }
+
+      body {
+        font-family: 'GT-Planer', 'Inter', 'Fira Sans', sans-serif;
+        background-color: var(--main-light);
+      }
+
       #newsContainer {
         display:flex;
         flex-wrap: wrap;
@@ -8,21 +34,20 @@
       }
 
       .article {
-        font-family: Arial, Helvetica, sans-serif;
         width: 46vw;
         height: 46vh;
         margin: 15px;
-        color:white;
-        border: 4px solid white;
+        color:var(--main-light);
+        border: 4px solid var(--main-light);
       }
       .article:nth-child(3n) {  
-        border-color: #e6007e;
+        border-color: var(--color-blue);
       }
       .article:nth-child(3n+1) {  
-        border-color: rgb(195, 168, 21);
+        border-color: var(--color-blue);
       }
       .article:nth-child(3n+2) {  
-        border-color: #009fe3;
+        border-color: var(--color-blue);
       }
 
       .image {
@@ -34,24 +59,25 @@
       }
 
       .headline {
-        padding: 5px 40px;
+        padding: 20px 40px;
         margin-top: 0;
         font-size: 40px;
-        background-color: rgba(0,0,0,0.7);
+        background: var(--main-dark-gradient-top);
       }
 
       .description {
-        padding: 5px 40px;
+        font-family: 'Inter', 'Fira Sans', sans-serif;
+        padding: 20px 40px;
         font-size: 27px;
         position: absolute;
         bottom: 0px;
-        background-color: rgba(0,0,0,0.7);
+        background: var(--main-dark-gradient-bottom);
         margin-bottom: 0px;
       }
 
     </style>
   </head>
-  <body style="margin: 0; background-color: black;">
+  <body style="margin: 0;">
     <div id="newsContainer"></div>
 
     <script>

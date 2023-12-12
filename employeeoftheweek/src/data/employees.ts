@@ -78,14 +78,6 @@ export const employees: Employee[] = [
     gender: "female",
   },
   {
-    name: "Oskar",
-    image: new URL(
-      "../assets/images/oskar.jpg?as=webp&width=500",
-      import.meta.url
-    ),
-    gender: "male",
-  },
-  {
     name: "Pabu",
     image: new URL(
       "../assets/images/pabu.jpg?as=webp&width=500",
